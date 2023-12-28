@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import { Header, PageHome, PageLocation } from './Containers';
+import { Header, PageHome, PageLocation } from "./Containers";
+import AppContextProvider from "./context";
 import "./App.css";
 
 function App() {
@@ -8,13 +9,15 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
-        <Header />
-        <Routes>
-          <Route path="/" element={<PageHome />} />
-          <Route path="/location" element={<PageLocation />} />
-        </Routes>
-      </div>
+      <AppContextProvider>
+        <div className="App">
+          <Header />
+          <Routes>
+            <Route path="/" element={<PageHome />} />
+            <Route path="/location" element={<PageLocation />} />
+          </Routes>
+        </div>
+      </AppContextProvider>
     </Router>
   );
 }
