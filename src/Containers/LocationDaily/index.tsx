@@ -1,9 +1,9 @@
+import { LocationTabContainer } from "../../Components";
+
 function LocationDaily() {
   //
 
-  return (
-    <div>LocationDaily</div>
-  );
+  return <LocationTabContainer>LocationDaily</LocationTabContainer>;
 }
 
 export default LocationDaily;

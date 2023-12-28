@@ -1,9 +1,9 @@
+import { LocationTabContainer } from "../../Components";
+
 function LocationHourly() {
   //
 
-  return (
-    <div>LocationHourly</div>
-  );
+  return <LocationTabContainer>LocationHourly</LocationTabContainer>;
 }
 
 export default LocationHourly;

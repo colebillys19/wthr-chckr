@@ -1,9 +1,9 @@
+import { HomeSectionContainer } from "../../Components";
+
 function HomeCities() {
   //
 
-  return (
-    <div>HomeCities</div>
-  );
+  return <HomeSectionContainer>HomeCities</HomeSectionContainer>;
 }
 
 export default HomeCities;

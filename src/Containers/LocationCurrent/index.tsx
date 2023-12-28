@@ -1,9 +1,9 @@
+import { LocationTabContainer } from "../../Components";
+
 function LocationCurrent() {
   //
 
-  return (
-    <div>LocationCurrent</div>
-  );
+  return <LocationTabContainer>LocationCurrent</LocationTabContainer>;
 }
 
 export default LocationCurrent;

@@ -1,11 +1,16 @@
-import { MouseEvent, useState } from 'react';
+import { MouseEvent, useState } from "react";
 
-import LocationCurrent from '../LocationCurrent';
-import LocationDaily from '../LocationDaily';
-import LocationHourly from '../LocationHourly';
+import LocationCurrent from "../LocationCurrent";
+import LocationDaily from "../LocationDaily";
+import LocationHourly from "../LocationHourly";
+
+const tempStylesA = {
+  display: "flex",
+  columnGap: "10px",
+};
 
 function PageLocation() {
-  const [activeTab, setActiveTab] = useState('current');
+  const [activeTab, setActiveTab] = useState("current");
 
   const handleLinkClick = (e: MouseEvent) => {
     e.preventDefault();
@@ -19,21 +24,27 @@ function PageLocation() {
   return (
     <div>
       <div>
-        <ul>
+        <ul style={tempStylesA}>
           <li>
-            <a onClick={handleLinkClick} href="#" id="current">Current</a>
+            <a onClick={handleLinkClick} href="#" id="current">
+              Current
+            </a>
           </li>
           <li>
-            <a onClick={handleLinkClick} href="#" id="hourly">Hourly</a>
+            <a onClick={handleLinkClick} href="#" id="hourly">
+              Hourly
+            </a>
           </li>
           <li>
-            <a onClick={handleLinkClick} href="#" id="daily">Daily</a>
+            <a onClick={handleLinkClick} href="#" id="daily">
+              Daily
+            </a>
           </li>
         </ul>
       </div>
-      {activeTab === 'current' && <LocationCurrent />}
-      {activeTab === 'hourly' && <LocationHourly />}
-      {activeTab === 'daily' && <LocationDaily />}
+      {activeTab === "current" && <LocationCurrent />}
+      {activeTab === "hourly" && <LocationHourly />}
+      {activeTab === "daily" && <LocationDaily />}
     </div>
   );
 }
