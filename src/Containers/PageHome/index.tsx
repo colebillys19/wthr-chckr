@@ -1,7 +1,7 @@
-import HomeCities from '../HomeCities';
-import HomeLocation from '../HomeLocation';
-import HomeMap from '../HomeMap';
-import HomeNews from '../HomeNews';
+import HomeCities from "../HomeCities";
+import HomeLocation from "../HomeLocation";
+import HomeMap from "../HomeMap";
+import HomeNews from "../HomeNews";
 
 function PageHome() {
   //

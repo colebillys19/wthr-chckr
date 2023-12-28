@@ -1,12 +1,12 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
 type AppContextProps = {
-  areBrowserLocationServicesEnabled: boolean;
+  canUseBrowserLocationServices: boolean;
   isDarkMode: boolean;
   unitType: string;
   userLocation: string;
   userPrefersNoLocation: boolean;
-  setAreBrowserLocationServicesEnabled: (value: boolean) => void;
+  setCanUseBrowserLocationServices: (value: boolean) => void;
   setIsDarkMode: (value: boolean) => void;
   setUnitType: (value: string) => void;
   setUserLocation: (value: string) => void;
@@ -24,22 +24,20 @@ export const useAppContext = () => {
 };
 
 const AppContextProvider = ({ children }: { children: ReactNode }) => {
-  const [
-    areBrowserLocationServicesEnabled,
-    setAreBrowserLocationServicesEnabled,
-  ] = useState(false);
+  const [canUseBrowserLocationServices, setCanUseBrowserLocationServices] =
+    useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [unitType, setUnitType] = useState('imperial');
-  const [userLocation, setUserLocation] = useState('');
+  const [unitType, setUnitType] = useState("imperial");
+  const [userLocation, setUserLocation] = useState("");
   const [userPrefersNoLocation, setUserPrefersNoLocation] = useState(false);
 
   const value = {
-    areBrowserLocationServicesEnabled,
+    canUseBrowserLocationServices,
     isDarkMode,
     unitType,
     userLocation,
     userPrefersNoLocation,
-    setAreBrowserLocationServicesEnabled,
+    setCanUseBrowserLocationServices,
     setIsDarkMode,
     setUnitType,
     setUserLocation,
