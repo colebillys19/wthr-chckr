@@ -1,50 +1,29 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
-type AppContextProps = {
-  canUseBrowserLocationServices: boolean;
+type GlobalStateProps = {
   isDarkMode: boolean;
   unitType: string;
-  userLocation: string;
-  userPrefersNoLocation: boolean;
-  setCanUseBrowserLocationServices: (value: boolean) => void;
   setIsDarkMode: (value: boolean) => void;
   setUnitType: (value: string) => void;
-  setUserLocation: (value: string) => void;
-  setUserPrefersNoLocation: (value: boolean) => void;
 };
 
-const AppContext = createContext<Partial<AppContextProps>>({});
+const GlobalState = createContext<Partial<GlobalStateProps>>({});
 
-export const useAppContext = () => {
-  const context = useContext(AppContext);
+export const useGlobalState = () => {
+  const context = useContext(GlobalState);
   if (!context) {
-    throw new Error("useAppContext must be used within a ContextProvider");
+    throw new Error("useGlobalState must be used within a Provider");
   }
-  return context as AppContextProps;
+  return context as GlobalStateProps;
 };
 
-const AppContextProvider = ({ children }: { children: ReactNode }) => {
-  const [canUseBrowserLocationServices, setCanUseBrowserLocationServices] =
-    useState(false);
+const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [unitType, setUnitType] = useState("imperial");
-  const [userLocation, setUserLocation] = useState("");
-  const [userPrefersNoLocation, setUserPrefersNoLocation] = useState(false);
 
-  const value = {
-    canUseBrowserLocationServices,
-    isDarkMode,
-    unitType,
-    userLocation,
-    userPrefersNoLocation,
-    setCanUseBrowserLocationServices,
-    setIsDarkMode,
-    setUnitType,
-    setUserLocation,
-    setUserPrefersNoLocation,
-  };
+  const value = { isDarkMode, setIsDarkMode, setUnitType, unitType };
 
-  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+  return <GlobalState.Provider value={value}>{children}</GlobalState.Provider>;
 };
 
-export default AppContextProvider;
+export default GlobalStateProvider;
