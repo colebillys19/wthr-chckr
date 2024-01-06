@@ -17,12 +17,12 @@ function PageHome({ googleMapsApi }: PageHomeProps) {
   }, [googleMapsApi]);
 
   return (
-    <div>
+    <main>
       <HomeUser />
       <HomeMap />
       <HomeCities />
       <HomeNews />
-    </div>
+    </main>
   );
 }
 

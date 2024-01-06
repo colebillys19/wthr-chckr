@@ -1,15 +1,14 @@
 import { useGlobalState } from "../../../context";
-import { WeatherUiMed } from "../../../Components";
-import SetLocation from "./SetLocation";
+import { SetLocationFlow, WeatherDisplayMed } from "../../../Components";
 
-function UserLocaiton() {
+function UserLocation() {
   const { userLocation } = useGlobalState();
 
   return userLocation ? (
-    <WeatherUiMed location={userLocation} />
+    <WeatherDisplayMed location={userLocation} />
   ) : (
-    <SetLocation />
+    <SetLocationFlow />
   );
 }
 
-export default UserLocaiton;
+export default UserLocation;

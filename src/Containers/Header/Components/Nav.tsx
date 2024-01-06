@@ -1,7 +1,7 @@
-import { MouseEvent } from "react";
+import { CSSProperties, MouseEvent } from "react";
 import { NavLink } from "react-router-dom";
 
-const tempStyles = {
+const tempStyles: CSSProperties = {
   columnGap: "10px",
   display: "flex",
 };

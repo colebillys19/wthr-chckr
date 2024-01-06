@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
+import { CSSProperties, ReactNode } from "react";
 
-const tempStyles = {
+const tempStyles: CSSProperties = {
   margin: "20px",
   minHeight: "200px",
   outline: "3px solid purple",

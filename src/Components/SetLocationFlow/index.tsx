@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import EnterLocation from "./EnterLocation";
-import SetLocationOptions from "./SetLocationOptions";
+import EnterLocation from "./Components/EnterLocation";
+import SetLocationOptions from "./Components/SetLocationOptions";
 
 function SetLocation() {
   const [isEnteringLocation, setIsEnteringLocation] = useState(false);

@@ -4,20 +4,21 @@ type SetLocationOptionsProps = {
   setIsEnteringLocation: (value: boolean) => void;
 };
 
-function SetLocationOptions({
-  setIsEnteringLocation,
-}: SetLocationOptionsProps) {
-  const { setUserPrefersNoLocation } = useGlobalState();
-  //
+function SetLocationOptions({ setIsEnteringLocation }: SetLocationOptionsProps) {
+  const { activeModal, setActiveModal, setUserPrefersNoLocation } = useGlobalState();
+
   const handleGetLocation = () => {};
 
-  //
+
   const handleEnterLocation = () => {
     setIsEnteringLocation(true);
   };
 
   const handleDontSet = () => {
     setUserPrefersNoLocation(true);
+    if (activeModal === 'setLocation') {
+      setActiveModal('');
+    }
   };
 
   return (
