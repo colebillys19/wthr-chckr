@@ -1,6 +1,6 @@
 import { useGlobalState } from "../../../context";
 import { WeatherUiMed } from "../../../Components";
-import SetLocationOptions from "./SetLocationOptions";
+import SetLocation from "./SetLocation";
 
 function UserLocaiton() {
   const { userLocation } = useGlobalState();
@@ -8,7 +8,7 @@ function UserLocaiton() {
   return userLocation ? (
     <WeatherUiMed location={userLocation} />
   ) : (
-    <SetLocationOptions />
+    <SetLocation />
   );
 }
 

@@ -31,8 +31,6 @@ function App() {
     }
   }, []);
 
-  const googleMapsApi = googleMapsRef.current;
-
   return (
     <Router>
       <GlobalStateProvider>
@@ -41,7 +39,7 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={<PageHome googleMapsApi={googleMapsApi} />}
+              element={<PageHome googleMapsApi={googleMapsRef.current} />}
             />
             <Route path="/location" element={<PageLocation />} />
           </Routes>

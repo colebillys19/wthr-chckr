@@ -1,13 +1,20 @@
 import { useGlobalState } from "../../../context";
 
-function SetLocationOptions() {
-  const { setUserPrefersNoLocation } = useGlobalState();
+type SetLocationOptionsProps = {
+  setIsEnteringLocation: (value: boolean) => void;
+};
 
+function SetLocationOptions({
+  setIsEnteringLocation,
+}: SetLocationOptionsProps) {
+  const { setUserPrefersNoLocation } = useGlobalState();
   //
   const handleGetLocation = () => {};
 
   //
-  const handleEnterLocation = () => {};
+  const handleEnterLocation = () => {
+    setIsEnteringLocation(true);
+  };
 
   const handleDontSet = () => {
     setUserPrefersNoLocation(true);

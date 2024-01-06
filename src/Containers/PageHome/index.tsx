@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { useEffect } from "react";
 
 import HomeCities from "../HomeCities";
 import HomeUser from "../HomeUser";
@@ -9,9 +9,11 @@ type PageHomeProps = {
   googleMapsApi: typeof google.maps | null;
 };
 
-const PageHome: FC<PageHomeProps> = ({ googleMapsApi }) => {
+function PageHome({ googleMapsApi }: PageHomeProps) {
   useEffect(() => {
-    console.log(googleMapsApi);
+    if (googleMapsApi) {
+      console.log(googleMapsApi);
+    }
   }, [googleMapsApi]);
 
   return (
@@ -22,6 +24,6 @@ const PageHome: FC<PageHomeProps> = ({ googleMapsApi }) => {
       <HomeNews />
     </div>
   );
-};
+}
 
 export default PageHome;
