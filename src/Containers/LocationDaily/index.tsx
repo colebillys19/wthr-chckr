@@ -1,4 +1,4 @@
-import { LocationTabContainer } from "../../Components";
+import { LocationTabContainer } from "../../AuxComponents";
 
 function LocationDaily() {
   //

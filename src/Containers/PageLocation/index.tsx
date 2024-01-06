@@ -5,8 +5,8 @@ import LocationDaily from "../LocationDaily";
 import LocationHourly from "../LocationHourly";
 
 const tempStylesA = {
-  display: "flex",
   columnGap: "10px",
+  display: "flex",
 };
 
 function PageLocation() {

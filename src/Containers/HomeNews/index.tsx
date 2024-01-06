@@ -1,4 +1,4 @@
-import { HomeSectionContainer } from "../../Components";
+import { HomeSectionContainer } from "../../AuxComponents";
 
 function HomeNews() {
   //

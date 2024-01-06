@@ -1,9 +1,9 @@
 import { ReactNode } from "react";
 
 const tempStyles = {
+  margin: "20px",
   minHeight: "200px",
   outline: "3px solid purple",
-  margin: "20px",
   padding: "10px",
 };
 
