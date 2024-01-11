@@ -1,13 +1,22 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { Loader } from "@googlemaps/js-api-loader";
 
 type GlobalStateProps = {
   activeModal: string;
+  googleMaps: typeof google.maps | null;
   isDarkMode: boolean;
   recentLocations: string[];
   unitType: string;
   userLocation: string;
   userPrefersNoLocation: boolean;
   setActiveModal: (value: string) => void;
+  setGoogleMaps: (value: typeof google.maps | null) => void;
   setIsDarkMode: (value: boolean) => void;
   setRecentLocations: (value: []) => void;
   setUnitType: (value: string) => void;
@@ -27,20 +36,42 @@ export const useGlobalState = () => {
 
 const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
   const [activeModal, setActiveModal] = useState("");
+  const [googleMaps, setGoogleMaps] = useState<typeof google.maps | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [recentLocations, setRecentLocations] = useState([]);
   const [unitType, setUnitType] = useState("imperial");
   const [userLocation, setUserLocation] = useState("");
   const [userPrefersNoLocation, setUserPrefersNoLocation] = useState(false);
 
+  /*
+   *
+   */
+  useEffect(() => {
+    const googleApiInit = async () => {
+      const loader = new Loader({
+        apiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY || "",
+        libraries: ["places"],
+      });
+      try {
+        const google = await loader.load();
+        setGoogleMaps(google.maps);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    googleApiInit();
+  }, []);
+
   const value = {
     activeModal,
+    googleMaps,
     isDarkMode,
     recentLocations,
     unitType,
     userLocation,
     userPrefersNoLocation,
     setActiveModal,
+    // setGoogleMaps,
     setIsDarkMode,
     setRecentLocations,
     setUnitType,

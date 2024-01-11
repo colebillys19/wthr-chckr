@@ -10,7 +10,7 @@ const tempStyles: CSSProperties = {
   top: 0,
 };
 
-function SetLocationModal() {
+function ModalSetLocation() {
   const { setActiveModal } = useGlobalState();
   
   const handleClose = () => {
@@ -27,4 +27,4 @@ function SetLocationModal() {
   );
 }
 
-export default SetLocationModal;
+export default ModalSetLocation;

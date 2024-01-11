@@ -3,7 +3,7 @@ import UserLocationEnabledSet from "./UserLocationEnabledSet";
 import UserLocationEnabledNotSet from "./UserLocationEnabledNotSet";
 import UserLocationDisabled from "./UserLocationDisabled";
 
-function UserLocationOff() {
+function UserLocation() {
   const { userLocation, userPrefersNoLocation } = useGlobalState();
 
   if (userPrefersNoLocation) {
@@ -17,4 +17,4 @@ function UserLocationOff() {
   );
 }
 
-export default UserLocationOff;
+export default UserLocation;

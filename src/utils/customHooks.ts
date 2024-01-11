@@ -1,5 +1,8 @@
 import { useGlobalState } from "../context";
 
+/*
+ *
+ */
 export const useUpdateUserLocation = () => {
   const { setUserLocation } = useGlobalState();
 
@@ -11,6 +14,9 @@ export const useUpdateUserLocation = () => {
   return updateUserLocation;
 };
 
+/*
+ *
+ */
 export const useUpdateRecentLocations = () => {
   const { setRecentLocations } = useGlobalState();
 

@@ -1,8 +1,8 @@
 import { CSSProperties, MouseEvent, useEffect } from "react";
 
 import { useGlobalState } from "../../context";
-import SetLocationModal from "./SetLocationModal";
-import TempModal from "./TempModal";
+import ModalSetLocation from "./ModalSetLocation";
+import ModalTemp from "./ModalTemp";
 
 const tempStyles: CSSProperties = {
   alignItems: "center",
@@ -17,11 +17,11 @@ const tempStyles: CSSProperties = {
   zIndex: 1,
 };
 
-type ModalProps = {
+type ModalDisplayProps = {
   activeModal: string;
 };
 
-function ModalDisplay({ activeModal }: ModalProps) {
+function ModalDisplay({ activeModal }: ModalDisplayProps) {
   const { setActiveModal } = useGlobalState();
 
   useEffect(() => {
@@ -46,8 +46,8 @@ function ModalDisplay({ activeModal }: ModalProps) {
 
   return (
     <div id="deed" onClick={handleBackdropClick} style={tempStyles}>
-      {activeModal === "setLocation" && <SetLocationModal />}
-      {activeModal === "temp" && <TempModal />}
+      {activeModal === "setLocation" && <ModalSetLocation />}
+      {activeModal === "temp" && <ModalTemp />}
     </div>
   );
 }

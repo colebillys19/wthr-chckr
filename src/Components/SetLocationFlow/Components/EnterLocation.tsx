@@ -15,9 +15,11 @@ function EnterLocation({ setIsEnteringLocation }: EnterLocationProps) {
       {isCoordsEntry ? (
         <EnterLocationCoords setIsCoordsEntry={setIsCoordsEntry} />
       ) : (
-        <EnterLocationDefault setIsCoordsEntry={setIsCoordsEntry} setIsEnteringLocation={setIsEnteringLocation} />
+        <EnterLocationDefault
+          setIsCoordsEntry={setIsCoordsEntry}
+          setIsEnteringLocation={setIsEnteringLocation}
+        />
       )}
-      
     </>
   );
 }

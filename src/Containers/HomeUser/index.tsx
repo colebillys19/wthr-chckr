@@ -9,7 +9,11 @@ function HomeUser() {
 
   return (
     <HomeSectionContainer>
-      {userPrefersNoLocation ? <UserLocationOff /> : <UserLocation />}
+      {userPrefersNoLocation ? (
+        <UserLocationOff />
+      ) : (
+        <UserLocation />
+      )}
       {!!recentLocations.length && <RecentLocations />}
     </HomeSectionContainer>
   );
