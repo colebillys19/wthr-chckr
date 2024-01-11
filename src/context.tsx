@@ -11,6 +11,7 @@ type GlobalStateProps = {
   activeModal: string;
   googleMaps: typeof google.maps | null;
   isDarkMode: boolean;
+  isVerifyingAddress: boolean;
   recentLocations: string[];
   unitType: string;
   userLocation: string;
@@ -18,6 +19,7 @@ type GlobalStateProps = {
   setActiveModal: (value: string) => void;
   setGoogleMaps: (value: typeof google.maps | null) => void;
   setIsDarkMode: (value: boolean) => void;
+  setIsVerifyingAddress: (value: boolean) => void;
   setRecentLocations: (value: []) => void;
   setUnitType: (value: string) => void;
   setUserLocation: (value: string) => void;
@@ -38,6 +40,7 @@ const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
   const [activeModal, setActiveModal] = useState("");
   const [googleMaps, setGoogleMaps] = useState<typeof google.maps | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isVerifyingAddress, setIsVerifyingAddress] = useState(false);
   const [recentLocations, setRecentLocations] = useState([]);
   const [unitType, setUnitType] = useState("imperial");
   const [userLocation, setUserLocation] = useState("");
@@ -62,17 +65,40 @@ const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
     googleApiInit();
   }, []);
 
+  /*
+   *
+   */
+  useEffect(() => {
+    const storageUserLocation = localStorage.getItem("userLocation");
+
+    if (storageUserLocation) {
+      setUserLocation(storageUserLocation);
+    }
+  }, []);
+
+  /*
+   *
+   */
+  useEffect(() => {
+    const storageRecentLocations = localStorage.getItem("recentLocations");
+
+    if (storageRecentLocations) {
+      setRecentLocations(JSON.parse(storageRecentLocations));
+    }
+  }, []);
+
   const value = {
     activeModal,
     googleMaps,
     isDarkMode,
+    isVerifyingAddress,
     recentLocations,
     unitType,
     userLocation,
     userPrefersNoLocation,
     setActiveModal,
-    // setGoogleMaps,
     setIsDarkMode,
+    setIsVerifyingAddress,
     setRecentLocations,
     setUnitType,
     setUserLocation,

@@ -8,7 +8,11 @@ export const useUpdateUserLocation = () => {
 
   const updateUserLocation = (userLocation: string) => {
     setUserLocation(userLocation);
-    localStorage.setItem("userLocation", userLocation);
+    if (userLocation === "") {
+      localStorage.removeItem("userLocation");
+    } else {
+      localStorage.setItem("userLocation", userLocation);
+    }
   };
 
   return updateUserLocation;

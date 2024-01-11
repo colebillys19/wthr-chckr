@@ -1,11 +1,12 @@
 import { useGlobalState } from "../../../context";
-import { SetLocationFlow, WeatherDisplayMed } from "../../../Components";
+import { SetLocationFlow } from "../../../Components";
+import UserLocationDisplay from './UserLocationDisplay';
 
 function UserLocation() {
   const { userLocation } = useGlobalState();
 
   return userLocation ? (
-    <WeatherDisplayMed location={userLocation} />
+    <UserLocationDisplay />
   ) : (
     <SetLocationFlow />
   );

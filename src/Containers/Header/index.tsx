@@ -13,32 +13,14 @@ const tempStyles: CSSProperties = {
 };
 
 function Header() {
-  const { userPrefersNoLocation } = useGlobalState();
-
   const location = useLocation();
 
-  const { setRecentLocations, setUserLocation } = useGlobalState();
-
-  useEffect(() => {
-    const storageUserLocation = localStorage.getItem("userLocation");
-
-    if (storageUserLocation) {
-      setUserLocation(storageUserLocation);
-    }
-  }, []);
-
-  useEffect(() => {
-    const storageRecentLocations = localStorage.getItem("recentLocations");
-
-    if (storageRecentLocations) {
-      setRecentLocations(JSON.parse(storageRecentLocations));
-    }
-  }, []);
+  const { userPrefersNoLocation } = useGlobalState();
 
   return (
     <header style={tempStyles}>
       <Nav />
-      {location.pathname === "/location" && <UserLocation />}
+      {location.pathname === "/location" && !userPrefersNoLocation && <UserLocation />}
       <SelectUnits />
     </header>
   );

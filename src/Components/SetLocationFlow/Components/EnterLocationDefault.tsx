@@ -1,6 +1,7 @@
 import { FormEvent, MouseEvent, useEffect, useRef, useState } from "react";
 
 import { useGlobalState } from "../../../context";
+import { useUpdateUserLocation } from "../../../utils/customHooks";
 
 type EnterLocationDefaultProps = {
   setIsCoordsEntry: (value: boolean) => void;
@@ -11,12 +12,16 @@ function EnterLocationDefault({
   setIsCoordsEntry,
   setIsEnteringLocation,
 }: EnterLocationDefaultProps) {
-  const [isInputDisabled, setIsInputDisabled] = useState(true);
+  const [inputError, setInputError] = useState("");
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
 
   const autoCompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const { googleMaps } = useGlobalState();
+  const { activeModal, googleMaps, setActiveModal, setIsVerifyingAddress } =
+    useGlobalState();
+
+  const updateUserLocation = useUpdateUserLocation();
 
   /*
    *
@@ -28,7 +33,9 @@ function EnterLocationDefault({
           inputRef.current
         );
       } else {
-        console.error("EnterLocationDefault autocomplete initialization error.");
+        console.error(
+          "EnterLocationDefault autocomplete initialization error."
+        );
       }
     };
 
@@ -47,13 +54,52 @@ function EnterLocationDefault({
    *
    */
   const handleChange = () => {
-    setIsInputDisabled(!inputRef.current || inputRef.current.value === "");
+    if (inputError) {
+      setInputError("");
+    }
+    setIsSubmitDisabled(!inputRef.current || inputRef.current.value === "");
   };
 
   /*
    *
    */
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {};
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsVerifyingAddress(true);
+
+    try {
+      if (googleMaps !== null) {
+        const geocoder = new googleMaps.Geocoder();
+        new Promise((resolve, reject) => {
+          geocoder.geocode(
+            { address: inputRef.current?.value },
+            (
+              results: google.maps.GeocoderResult[],
+              status: google.maps.GeocoderStatus
+            ) => {
+              if (status === googleMaps.GeocoderStatus.OK) {
+                const location = results[0].geometry.location;
+                const locationStr = `${location.lat()},${location.lng()}`;
+                updateUserLocation(locationStr);
+                if (activeModal === "setLocation") {
+                  setActiveModal("");
+                }
+              } else {
+                setInputError("Invalid coordinates");
+                console.error("Promise rejected:", status);
+              }
+              resolve(true);
+              setIsVerifyingAddress(false);
+            }
+          );
+        });
+      }
+    } catch (error) {
+      setInputError("Invalid coordinates");
+      console.error("Error:", error);
+      setIsVerifyingAddress(false);
+    }
+  };
 
   /*
    *
@@ -72,8 +118,7 @@ function EnterLocationDefault({
   };
 
   return (
-    <div>
-      EnterLocationDefault
+    <>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="address">Enter address, city, or zip: </label>
@@ -87,11 +132,12 @@ function EnterLocationDefault({
             type="text"
           />
         </div>
+        {inputError && <div>{inputError}</div>}
         <div>
           <input
             type="submit"
             value="Set Location"
-            disabled={isInputDisabled}
+            disabled={isSubmitDisabled}
           />
         </div>
       </form>
@@ -105,7 +151,7 @@ function EnterLocationDefault({
           back
         </a>
       </div>
-    </div>
+    </>
   );
 }
 

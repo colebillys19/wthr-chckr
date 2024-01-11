@@ -1,19 +1,14 @@
 import { useGlobalState } from "../../../context";
-import UserLocationEnabledSet from "./UserLocationEnabledSet";
-import UserLocationEnabledNotSet from "./UserLocationEnabledNotSet";
-import UserLocationDisabled from "./UserLocationDisabled";
+import UserLocationSet from "./UserLocationSet";
+import UserLocationNotSet from "./UserLocationNotSet";
 
 function UserLocation() {
-  const { userLocation, userPrefersNoLocation } = useGlobalState();
-
-  if (userPrefersNoLocation) {
-    return <UserLocationDisabled />;
-  }
+  const { userLocation } = useGlobalState();
 
   return userLocation ? (
-    <UserLocationEnabledSet userLocation={userLocation} />
+    <UserLocationSet userLocation={userLocation} />
   ) : (
-    <UserLocationEnabledNotSet />
+    <UserLocationNotSet />
   );
 }
 
