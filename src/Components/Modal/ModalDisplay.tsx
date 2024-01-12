@@ -17,12 +17,8 @@ const tempStyles: CSSProperties = {
   zIndex: 1,
 };
 
-type ModalDisplayProps = {
-  activeModal: string;
-};
-
-function ModalDisplay({ activeModal }: ModalDisplayProps) {
-  const { setActiveModal } = useGlobalState();
+function ModalDisplay() {
+  const { activeModal, setActiveModal } = useGlobalState();
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {

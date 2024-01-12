@@ -6,7 +6,7 @@ function UserLocation() {
   const { userLocation } = useGlobalState();
 
   return userLocation ? (
-    <UserLocationSet userLocation={userLocation} />
+    <UserLocationSet />
   ) : (
     <UserLocationNotSet />
   );

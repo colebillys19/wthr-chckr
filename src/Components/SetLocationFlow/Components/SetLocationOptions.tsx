@@ -1,14 +1,51 @@
+import { useState } from "react";
+
 import { useGlobalState } from "../../../context";
+import { useUpdateUserLocation } from "../../../utils/customHooks";
 
 type SetLocationOptionsProps = {
   setIsEnteringLocation: (value: boolean) => void;
+  setIsGeolocating: (value: boolean) => void;
 };
 
-function SetLocationOptions({ setIsEnteringLocation }: SetLocationOptionsProps) {
-  const { activeModal, setActiveModal, setUserPrefersNoLocation } = useGlobalState();
+function SetLocationOptions({
+  setIsEnteringLocation,
+  setIsGeolocating,
+}: SetLocationOptionsProps) {
+  const [geolocateError, setGeolocateError] = useState('');
 
-  const handleGetLocation = () => {};
+  const {
+    activeModal,
+    setActiveModal,
+    setUserPrefersNoLocation,
+  } = useGlobalState();
 
+  const updateUserLocation = useUpdateUserLocation();
+
+  const handleGetLocation = () => {
+    setIsGeolocating(true);
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const locationStr = `${position.coords.latitude},${position.coords.longitude}`;
+        updateUserLocation(locationStr);
+        if (activeModal === "setLocation") {
+          setActiveModal("");
+        }
+        setIsGeolocating(false);
+      },
+      (error) => {
+        console.error("Error:", error);
+        if (error.code === 1) {
+          setGeolocateError(
+            "It looks like your settings are preventing us from finding your location automatically."
+          );
+        } else {
+          setGeolocateError("There was an issue finding your location.");
+        }
+        setIsGeolocating(false);
+      }
+    );
+  };
 
   const handleEnterLocation = () => {
     setIsEnteringLocation(true);
@@ -16,16 +53,17 @@ function SetLocationOptions({ setIsEnteringLocation }: SetLocationOptionsProps) 
 
   const handleDontSet = () => {
     setUserPrefersNoLocation(true);
-    if (activeModal === 'setLocation') {
-      setActiveModal('');
+    if (activeModal === "setLocation") {
+      setActiveModal("");
     }
   };
 
   return (
     <>
       <div>
-        <button onClick={handleGetLocation}>find my location</button>
+        <button onClick={handleGetLocation} disabled={!!geolocateError}>find my location</button>
       </div>
+      {!!geolocateError && <div>{geolocateError}</div>}
       <div>
         <button onClick={handleEnterLocation}>enter location</button>
       </div>

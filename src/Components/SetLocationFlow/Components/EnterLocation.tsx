@@ -5,19 +5,27 @@ import EnterLocationCoords from "./EnterLocationCoords";
 
 type EnterLocationProps = {
   setIsEnteringLocation: (value: boolean) => void;
+  setIsVerifyingAddress: (value: boolean) => void;
 };
 
-function EnterLocation({ setIsEnteringLocation }: EnterLocationProps) {
+function EnterLocation({
+  setIsEnteringLocation,
+  setIsVerifyingAddress,
+}: EnterLocationProps) {
   const [isCoordsEntry, setIsCoordsEntry] = useState(false);
 
   return (
     <>
       {isCoordsEntry ? (
-        <EnterLocationCoords setIsCoordsEntry={setIsCoordsEntry} />
+        <EnterLocationCoords
+          setIsCoordsEntry={setIsCoordsEntry}
+          setIsVerifyingAddress={setIsVerifyingAddress}
+        />
       ) : (
         <EnterLocationDefault
           setIsCoordsEntry={setIsCoordsEntry}
           setIsEnteringLocation={setIsEnteringLocation}
+          setIsVerifyingAddress={setIsVerifyingAddress}
         />
       )}
     </>

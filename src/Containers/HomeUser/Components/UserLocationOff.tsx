@@ -12,7 +12,7 @@ function UserLocationOff() {
 
   return (
     <div>
-      <span>You've chosen not to set your location.</span>&nbsp;
+      <span>You've chosen not to set your location</span>&nbsp;
       <a onClick={handleSetLocation} href="#">set location</a>
     </div>
   );

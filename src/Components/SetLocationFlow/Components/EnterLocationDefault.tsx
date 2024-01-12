@@ -6,11 +6,13 @@ import { useUpdateUserLocation } from "../../../utils/customHooks";
 type EnterLocationDefaultProps = {
   setIsCoordsEntry: (value: boolean) => void;
   setIsEnteringLocation: (value: boolean) => void;
+  setIsVerifyingAddress: (value: boolean) => void;
 };
 
 function EnterLocationDefault({
   setIsCoordsEntry,
   setIsEnteringLocation,
+  setIsVerifyingAddress,
 }: EnterLocationDefaultProps) {
   const [inputError, setInputError] = useState("");
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
@@ -18,8 +20,7 @@ function EnterLocationDefault({
   const autoCompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const { activeModal, googleMaps, setActiveModal, setIsVerifyingAddress } =
-    useGlobalState();
+  const { activeModal, googleMaps, setActiveModal } = useGlobalState();
 
   const updateUserLocation = useUpdateUserLocation();
 

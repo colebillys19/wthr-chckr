@@ -1,19 +1,19 @@
 import { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
 
 import { useGlobalState } from "../../../context";
-import { useUpdateUserLocation } from '../../../utils/customHooks';
+import { useUpdateUserLocation } from "../../../utils/customHooks";
 
 type EnterLocationCoordsProps = {
   setIsCoordsEntry: (value: boolean) => void;
+  setIsVerifyingAddress: (value: boolean) => void;
 };
 
-function EnterLocationCoords({ setIsCoordsEntry }: EnterLocationCoordsProps) {
+function EnterLocationCoords({ setIsCoordsEntry, setIsVerifyingAddress }: EnterLocationCoordsProps) {
   const [inputError, setInputError] = useState("");
   const [latValue, setLatValue] = useState("");
   const [lonValue, setLonValue] = useState("");
 
-  const { activeModal, googleMaps, setActiveModal, setIsVerifyingAddress } =
-    useGlobalState();
+  const { activeModal, googleMaps, setActiveModal } = useGlobalState();
 
   const updateUserLocation = useUpdateUserLocation();
 
