@@ -1,35 +1,86 @@
-type Weather = {
+export type WeatherType = {
   id: number;
   main: string;
   description: string;
   icon: string;
 };
 
-type Minutely = {
+export type CurrentType = {
+  dt: number;
+  sunrise: number;
+  sunset: number;
+  temp: number;
+  feels_like: number;
+  pressure: number;
+  humidity: number;
+  dew_point: number;
+  uvi: number;
+  clouds: number;
+  visibility: number;
+  wind_speed: number;
+  wind_deg: number;
+  weather: WeatherType[];
+};
+
+export type TemperatureType = {
+  day: number;
+  min: number;
+  max: number;
+  night: number;
+  eve: number;
+  morn: number;
+};
+
+export type FeelsLikeType = {
+  day: number;
+  night: number;
+  eve: number;
+  morn: number;
+};
+
+export type DailyType = {
+  dt: number;
+  sunrise: number;
+  sunset: number;
+  moonrise: number;
+  moonset: number;
+  moon_phase: number;
+  summary: string;
+  temp: TemperatureType;
+  feels_like: FeelsLikeType;
+  pressure: number;
+  humidity: number;
+};
+
+export type HourlyType = {
+  dt: number;
+  temp: number;
+  feels_like: number;
+  pressure: number;
+  humidity: number;
+  dew_point: number;
+  uvi: number;
+  clouds: number;
+  visibility: number;
+  wind_speed: number;
+  wind_deg: number;
+  wind_gust: number;
+  weather: WeatherType[];
+  pop: number;
+};
+
+export type MinutelyType = {
   dt: number;
   precipitation: number;
 };
 
 export type OpenWeatherMapDataType = {
+  current: CurrentType;
+  daily: DailyType[];
+  hourly: HourlyType[];
   lat: number;
   lon: number;
-  timezone: string;
+  minutely: MinutelyType[];
   timezone_offset: number;
-  current: {
-    dt: number;
-    sunrise: number;
-    sunset: number;
-    temp: number;
-    feels_like: number;
-    pressure: number;
-    humidity: number;
-    dew_point: number;
-    uvi: number;
-    clouds: number;
-    visibility: number;
-    wind_speed: number;
-    wind_deg: number;
-    weather: Weather[];
-  };
-  minutely: Minutely[];
+  timezone: string;
 };

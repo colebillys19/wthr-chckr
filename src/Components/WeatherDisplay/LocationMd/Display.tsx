@@ -1,7 +1,7 @@
-import { OpenWeatherMapDataType } from "../../utils/types/openWeatherMap";
+import { LocationMdDataType } from "./types";
 
 type DisplayProps = {
-  data: OpenWeatherMapDataType;
+  data: LocationMdDataType;
 };
 
 function Display({ data }: DisplayProps) {

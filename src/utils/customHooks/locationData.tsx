@@ -3,10 +3,6 @@ import { useEffect, useState } from "react";
 import { useGlobalState } from "../../context";
 
 const emptyData = {
-  lat: 0,
-  lon: 0,
-  timezone: "",
-  timezone_offset: 0,
   current: {
     dt: 0,
     sunrise: 0,
@@ -23,7 +19,13 @@ const emptyData = {
     wind_deg: 0,
     weather: [],
   },
+  daily: [],
+  hourly: [],
+  lat: 0,
+  lon: 0,
   minutely: [],
+  timezone_offset: 0,
+  timezone: "",
 };
 
 export const useFetchLocationData = (location: string) => {

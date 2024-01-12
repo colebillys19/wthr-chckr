@@ -1,9 +1,11 @@
 import { useGlobalState } from "../../../context";
-import { WeatherDisplayMed } from "../../../Components";
+import { WeatherDisplayHome } from "../../../Components";
 import { useUpdateUserLocation } from "../../../utils/customHooks/localStorage";
+import { useFetchLocationData } from "../../../utils/customHooks/locationData";
 
 function UserLocationDisplay() {
   const { userLocation } = useGlobalState();
+  const { data, error, isLoading } = useFetchLocationData(userLocation);
 
   const updateUserLocation = useUpdateUserLocation();
 
@@ -13,7 +15,7 @@ function UserLocationDisplay() {
 
   return (
     <>
-      <WeatherDisplayMed location={userLocation} />
+      <WeatherDisplayHome data={data} error={error} isLoading={isLoading} />
       <button onClick={handleChangeLocation}>change location</button>
     </>
   );
