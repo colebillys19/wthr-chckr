@@ -67,20 +67,16 @@ const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
    */
   useEffect(() => {
     const storageUserLocation = localStorage.getItem("userLocation");
-
     if (storageUserLocation) {
       setUserLocation(storageUserLocation);
     }
-  }, []);
-
-  /*
-   *
-   */
-  useEffect(() => {
     const storageRecentLocations = localStorage.getItem("recentLocations");
-
     if (storageRecentLocations) {
       setRecentLocations(JSON.parse(storageRecentLocations));
+    }
+    const storageUserPrefersNoLocation = localStorage.getItem("userPrefersNoLocation");
+    if (storageUserPrefersNoLocation) {
+      setUserPrefersNoLocation(true);
     }
   }, []);
 

@@ -1,19 +1,21 @@
-import { MouseEvent } from 'react';
+import { MouseEvent } from "react";
 
-import { useGlobalState } from "../../../context";
+import { useUpdateUserPrefersNoLocation } from "../../../utils/customHooks";
 
 function UserLocationOff() {
-  const { setUserPrefersNoLocation } = useGlobalState();
+  const updateUserPrefersNoLocation = useUpdateUserPrefersNoLocation();
 
   const handleSetLocation = (e: MouseEvent) => {
     e.preventDefault();
-    setUserPrefersNoLocation(false);
+    updateUserPrefersNoLocation(false);
   };
 
   return (
     <div>
       <span>You've chosen not to set your location</span>&nbsp;
-      <a onClick={handleSetLocation} href="#">set location</a>
+      <a onClick={handleSetLocation} href="#">
+        set location
+      </a>
     </div>
   );
 }

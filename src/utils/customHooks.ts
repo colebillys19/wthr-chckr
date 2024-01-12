@@ -31,3 +31,21 @@ export const useUpdateRecentLocations = () => {
 
   return updateRecentLocations;
 };
+
+/*
+ *
+ */
+export const useUpdateUserPrefersNoLocation = () => {
+  const { setUserPrefersNoLocation } = useGlobalState();
+
+  const updateUserPrefersNoLocation = (value: boolean) => {
+    setUserPrefersNoLocation(value);
+    if (!value) {
+      localStorage.removeItem("userPrefersNoLocation");
+    } else {
+      localStorage.setItem("userPrefersNoLocation", 'true');
+    }
+  };
+
+  return updateUserPrefersNoLocation;
+};

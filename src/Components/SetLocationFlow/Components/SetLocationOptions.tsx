@@ -1,7 +1,10 @@
 import { useState } from "react";
 
 import { useGlobalState } from "../../../context";
-import { useUpdateUserLocation } from "../../../utils/customHooks";
+import {
+  useUpdateUserLocation,
+  useUpdateUserPrefersNoLocation,
+} from "../../../utils/customHooks";
 
 type SetLocationOptionsProps = {
   setIsEnteringLocation: (value: boolean) => void;
@@ -12,15 +15,12 @@ function SetLocationOptions({
   setIsEnteringLocation,
   setIsGeolocating,
 }: SetLocationOptionsProps) {
-  const [geolocateError, setGeolocateError] = useState('');
+  const [geolocateError, setGeolocateError] = useState("");
 
-  const {
-    activeModal,
-    setActiveModal,
-    setUserPrefersNoLocation,
-  } = useGlobalState();
+  const { activeModal, setActiveModal } = useGlobalState();
 
   const updateUserLocation = useUpdateUserLocation();
+  const updateUserPrefersNoLocation = useUpdateUserPrefersNoLocation();
 
   const handleGetLocation = () => {
     setIsGeolocating(true);
@@ -52,7 +52,7 @@ function SetLocationOptions({
   };
 
   const handleDontSet = () => {
-    setUserPrefersNoLocation(true);
+    updateUserPrefersNoLocation(true);
     if (activeModal === "setLocation") {
       setActiveModal("");
     }
@@ -61,7 +61,9 @@ function SetLocationOptions({
   return (
     <>
       <div>
-        <button onClick={handleGetLocation} disabled={!!geolocateError}>find my location</button>
+        <button onClick={handleGetLocation} disabled={!!geolocateError}>
+          find my location
+        </button>
       </div>
       {!!geolocateError && <div>{geolocateError}</div>}
       <div>
