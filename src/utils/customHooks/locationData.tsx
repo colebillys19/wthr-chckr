@@ -36,8 +36,10 @@ export const useFetchLocationData = (location: string) => {
   const { unitType } = useGlobalState();
 
   useEffect(() => {
+    if (!isLoading) {
+      setIsLoading(true);
+    }
     const [lat, lon] = location.split(",");
-
     try {
       fetch(
         `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=${unitType}&appid=${process.env.REACT_APP_OWM_KEY}`
@@ -58,7 +60,7 @@ export const useFetchLocationData = (location: string) => {
       setError("Issue fetching location data.");
       setIsLoading(false);
     }
-  }, []);
+  }, [unitType, location]);
 
   return { data, error, isLoading };
 };
