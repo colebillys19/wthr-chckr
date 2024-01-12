@@ -1,9 +1,9 @@
-import { CSSProperties } from 'react';
+import { CSSProperties } from "react";
 
-import { useGlobalState } from '../../../context';
-import { useUpdateUserLocation } from '../../../utils/customHooks';
+import { useGlobalState } from "../../../context";
+import { useUpdateUserLocation } from "../../../utils/customHooks/localStorage";
 
-const tempStyles: CSSProperties = { display: 'flex' };
+const tempStyles: CSSProperties = { display: "flex" };
 
 function UserLocationEnabledSet() {
   const { setActiveModal, userLocation } = useGlobalState();
@@ -11,8 +11,8 @@ function UserLocationEnabledSet() {
   const updateUserLocation = useUpdateUserLocation();
 
   const handleChangeLocation = () => {
-    updateUserLocation('');
-    setActiveModal('setLocation');
+    updateUserLocation("");
+    setActiveModal("setLocation");
   };
 
   return (

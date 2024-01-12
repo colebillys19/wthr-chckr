@@ -1,6 +1,6 @@
 import { MouseEvent } from "react";
 
-import { useUpdateUserPrefersNoLocation } from "../../../utils/customHooks";
+import { useUpdateUserPrefersNoLocation } from "../../../utils/customHooks/localStorage";
 
 function UserLocationOff() {
   const updateUserPrefersNoLocation = useUpdateUserPrefersNoLocation();

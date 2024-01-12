@@ -1,5 +1,5 @@
 import { useGlobalState } from "../../../context";
-import { useUpdateUnitType } from "../../../utils/customHooks";
+import { useUpdateUnitType } from "../../../utils/customHooks/localStorage";
 
 function SelectUnits() {
   const { unitType } = useGlobalState();

@@ -1,6 +1,6 @@
 import { useGlobalState } from "../../../context";
 import { WeatherDisplayMed } from "../../../Components";
-import { useUpdateUserLocation } from '../../../utils/customHooks';
+import { useUpdateUserLocation } from "../../../utils/customHooks/localStorage";
 
 function UserLocationDisplay() {
   const { userLocation } = useGlobalState();

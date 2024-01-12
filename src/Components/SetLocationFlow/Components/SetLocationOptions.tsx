@@ -4,7 +4,7 @@ import { useGlobalState } from "../../../context";
 import {
   useUpdateUserLocation,
   useUpdateUserPrefersNoLocation,
-} from "../../../utils/customHooks";
+} from "../../../utils/customHooks/localStorage";
 
 type SetLocationOptionsProps = {
   setIsEnteringLocation: (value: boolean) => void;

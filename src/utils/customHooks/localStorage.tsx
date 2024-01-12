@@ -1,4 +1,4 @@
-import { useGlobalState } from "../context";
+import { useGlobalState } from "../../context";
 
 /*
  *
@@ -43,7 +43,7 @@ export const useUpdateUserPrefersNoLocation = () => {
     if (!value) {
       localStorage.removeItem("userPrefersNoLocation");
     } else {
-      localStorage.setItem("userPrefersNoLocation", 'true');
+      localStorage.setItem("userPrefersNoLocation", "true");
     }
   };
 
