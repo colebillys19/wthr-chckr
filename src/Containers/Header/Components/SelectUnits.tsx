@@ -1,17 +1,32 @@
-import { MouseEvent } from "react";
+import { useGlobalState } from "../../../context";
+import { useUpdateUnitType } from "../../../utils/customHooks";
 
 function SelectUnits() {
-  const handleUnitClick = (e: MouseEvent) => {
-    e.preventDefault();
+  const { unitType } = useGlobalState();
+
+  const updateUnitType = useUpdateUnitType();
+
+  const handleUnitClick = (type: string) => {
+    updateUnitType(type);
   };
 
   return (
     <div>
       <span>
         Units:&nbsp;
-        <button onClick={handleUnitClick}>Imperial</button>
+        <button
+          onClick={() => handleUnitClick("imperial")}
+          disabled={unitType === "imperial"}
+        >
+          Imperial
+        </button>
         &nbsp;|&nbsp;
-        <button onClick={handleUnitClick}>Metric</button>
+        <button
+          onClick={() => handleUnitClick("metric")}
+          disabled={unitType === "metric"}
+        >
+          Metric
+        </button>
       </span>
     </div>
   );

@@ -49,3 +49,21 @@ export const useUpdateUserPrefersNoLocation = () => {
 
   return updateUserPrefersNoLocation;
 };
+
+/*
+ *
+ */
+export const useUpdateUnitType = () => {
+  const { setUnitType } = useGlobalState();
+
+  const updateUnitType = (unitType: string) => {
+    setUnitType(unitType);
+    if (unitType === "") {
+      localStorage.removeItem("unitType");
+    } else {
+      localStorage.setItem("unitType", unitType);
+    }
+  };
+
+  return updateUnitType;
+};

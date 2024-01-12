@@ -78,6 +78,10 @@ const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
     if (storageUserPrefersNoLocation) {
       setUserPrefersNoLocation(true);
     }
+    const storageUnitType = localStorage.getItem("unitType");
+    if (storageUnitType) {
+      setUnitType(storageUnitType);
+    }
   }, []);
 
   const value = {
