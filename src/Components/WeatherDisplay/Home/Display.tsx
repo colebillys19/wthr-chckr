@@ -2,17 +2,21 @@ import { CSSProperties } from "react";
 
 import { HomeDataType } from "./types";
 
-const tempStyles: CSSProperties = {
+const tempStylesA: CSSProperties = {
   outline: "3px solid orange",
   display: "inline-block",
 };
 
-type DisplayProps = {
-  data: HomeDataType;
-  name: string;
+const tempStylesB: CSSProperties = {
+  color: "purple",
 };
 
-function Display({ data, name }: DisplayProps) {
+type DisplayProps = {
+  data: HomeDataType;
+  nameData: { label: string; value: string }[];
+};
+
+function Display({ data, nameData }: DisplayProps) {
   const { current } = data;
   const { temp, feels_like, weather, humidity, wind_speed } = current;
   const dataArr = [
@@ -24,15 +28,18 @@ function Display({ data, name }: DisplayProps) {
   ];
 
   return (
-    <div style={tempStyles}>
-      <div>
-        <b>{name}</b>
-      </div>
+    <div style={tempStylesA}>
       <ul>
+        {nameData.map(({ label, value }) => (
+          <li key={label} style={tempStylesB}>
+            <span>{label}:&nbsp;</span>
+            <b>{value}</b>
+          </li>
+        ))}
         {dataArr.map(({ label, value }) => (
           <li key={label}>
             <span>{label}:&nbsp;</span>
-            <span>{value}</span>
+            <b>{value}</b>
           </li>
         ))}
       </ul>

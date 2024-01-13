@@ -11,7 +11,7 @@ function SelectUnits() {
   };
 
   return (
-    <div>
+    <>
       <span>
         Units:&nbsp;
         <button
@@ -28,7 +28,7 @@ function SelectUnits() {
           Metric
         </button>
       </span>
-    </div>
+    </>
   );
 }
 

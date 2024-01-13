@@ -41,7 +41,7 @@ function ModalDisplay() {
   };
 
   return (
-    <div id="deed" onClick={handleBackdropClick} style={tempStyles}>
+    <div onClick={handleBackdropClick} style={tempStyles}>
       {activeModal === "setLocation" && <ModalSetLocation />}
       {activeModal === "temp" && <ModalTemp />}
     </div>

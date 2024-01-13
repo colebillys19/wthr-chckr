@@ -1,14 +1,14 @@
-import { useFetchLocationData } from "../../utils/customHooks/locationData";
-import { WeatherDisplayHome } from "../../Components";
 import { HomeSectionContainer } from "../../AuxComponents";
+import City from "./Components/City";
 
 function HomeCities() {
-  const { data, error, isLoading, name } = useFetchLocationData('34.05551316016374,-118.243613');
-
+  //
   return (
     <HomeSectionContainer>
       <div>HomeCities</div>
-      <WeatherDisplayHome data={data} error={error} isLoading={isLoading} name={name} />
+      <City location="34.04127848077994,-118.24741869520864" />
+      <City location="41.87826763372753,-87.62939343536833" />
+      <City location="32.77812051838209,-96.79616206703409" />
     </HomeSectionContainer>
   );
 }

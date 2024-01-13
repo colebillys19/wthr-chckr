@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { useGlobalState } from "../../context";
-import { formatLocationName } from '../helpers';
+import { getLocationNameData } from '../helpers';
 
 const emptyData = {
   current: {
@@ -29,12 +29,14 @@ const emptyData = {
   timezone: "",
 };
 
+type NameDataType = { label: string; value: string }[];
+
 export const useFetchLocationData = (location: string) => {
   const [data, setData] = useState(emptyData);
   const [error, setError] = useState("");
   const [isFetchingData, setIsFetchingData] = useState(true);
   const [isFetchingName, setIsFetchingName] = useState(true);
-  const [name, setName] = useState("");
+  const [nameData, setNameData] = useState<NameDataType>([]);
 
   const { googleMaps, unitType } = useGlobalState();
 
@@ -93,7 +95,7 @@ export const useFetchLocationData = (location: string) => {
         );
       })
         .then((results: google.maps.GeocoderResult[]) => {
-          setName(formatLocationName(results));
+          setNameData(getLocationNameData(results));
           setIsFetchingName(false);
         })
         .catch((error: any) => {
@@ -104,5 +106,5 @@ export const useFetchLocationData = (location: string) => {
     }
   }, [googleMaps, location]);
 
-  return { data, error, isLoading: isFetchingData || isFetchingName, name };
+  return { data, error, isLoading: isFetchingData || isFetchingName, nameData };
 };

@@ -5,7 +5,8 @@ import { useFetchLocationData } from "../../../utils/customHooks/locationData";
 
 function UserLocationDisplay() {
   const { userLocation } = useGlobalState();
-  const { data, error, isLoading, name } = useFetchLocationData(userLocation);
+  const { data, error, isLoading, nameData } =
+    useFetchLocationData(userLocation);
 
   const updateUserLocation = useUpdateUserLocation();
 
@@ -15,8 +16,15 @@ function UserLocationDisplay() {
 
   return (
     <>
-      <WeatherDisplayHome data={data} error={error} isLoading={isLoading} name={name} />
-      <button onClick={handleChangeLocation}>change location</button>
+      <WeatherDisplayHome
+        data={data}
+        error={error}
+        isLoading={isLoading}
+        nameData={nameData}
+      />
+      <div>
+        <button onClick={handleChangeLocation}>change location</button>
+      </div>
     </>
   );
 }

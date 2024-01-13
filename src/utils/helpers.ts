@@ -1,43 +1,26 @@
-export const formatLocationName = (results: google.maps.GeocoderResult[]) => {
-  //
-  const adminLevel2Res = results.find((result) =>
-    result.types.includes("administrative_area_level_2")
-  );
-  const adminLevel2Obj = adminLevel2Res?.address_components.find((result) =>
-    result.types.includes("administrative_area_level_2")
-  );
-  const adminLevel2 = adminLevel2Obj?.short_name || "";
+const locationTypes = [
+  "neighborhood",
+  "sublocality",
+  "locality",
+  "administrative_area_level_2",
+  "administrative_area_level_1",
+  "country",
+];
 
-  //
-  const adminLevel1Res = results.find((result) =>
-    result.types.includes("administrative_area_level_1")
-  );
-  const adminLevel1Obj = adminLevel1Res?.address_components.find((result) =>
-    result.types.includes("administrative_area_level_1")
-  );
-  const adminLevel1 = adminLevel1Obj?.short_name || "";
+type NameDataType = { label: string; value: string }[];
 
-  //
-  const localityRes = results.find((result) =>
-    result.types.includes("locality")
-  );
-  const localityObj = localityRes?.address_components.find((result) =>
-    result.types.includes("locality")
-  );
-  const locality = localityObj?.short_name || "";
+export const getLocationNameData = (results: google.maps.GeocoderResult[]) => {
+  const dataArr: NameDataType = [];
 
-  //
-  const neighborhoodRes = results.find((result) =>
-    result.types.includes("neighborhood")
-  );
-  const neighborhoodObj = neighborhoodRes?.address_components.find((result) =>
-    result.types.includes("neighborhood")
-  );
-  const neighborhood = neighborhoodObj?.short_name || "";
+  locationTypes.forEach((locationType) => {
+    const res = results.find((result) => result.types.includes(locationType));
+    const obj = res?.address_components.find((result) =>
+      result.types.includes(locationType)
+    );
+    if (obj?.short_name) {
+      dataArr.push({ label: locationType, value: obj?.short_name });
+    }
+  });
 
-  if (neighborhood) {
-    return `${neighborhood}, ${locality}, ${adminLevel1}`;
-  }
-
-  return `${locality || adminLevel2}, ${adminLevel1}`;
+  return dataArr;
 };

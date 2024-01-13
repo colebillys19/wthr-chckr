@@ -7,7 +7,7 @@ type DisplayProps = {
 function Display({ data }: DisplayProps) {
   console.log(data);
 
-  return <div>med</div>;
+  return <div>lg</div>;
 }
 
 export default Display;
