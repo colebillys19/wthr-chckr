@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { useGlobalState } from "../../context";
+import { formatLocationName } from '../helpers';
 
 const emptyData = {
   current: {
@@ -30,14 +31,19 @@ const emptyData = {
 
 export const useFetchLocationData = (location: string) => {
   const [data, setData] = useState(emptyData);
-  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
+  const [isFetchingData, setIsFetchingData] = useState(true);
+  const [isFetchingName, setIsFetchingName] = useState(true);
+  const [name, setName] = useState("");
 
-  const { unitType } = useGlobalState();
+  const { googleMaps, unitType } = useGlobalState();
 
+  /*
+   *
+   */
   useEffect(() => {
-    if (!isLoading) {
-      setIsLoading(true);
+    if (!isFetchingData) {
+      setIsFetchingData(true);
     }
     const [lat, lon] = location.split(",");
     try {
@@ -47,20 +53,56 @@ export const useFetchLocationData = (location: string) => {
         .then((res) => {
           if (!res.ok) {
             setError("Issue fetching location data.");
-            setIsLoading(false);
+            setIsFetchingData(false);
           }
           return res.json();
         })
         .then((resData) => {
           setData(resData);
-          setIsLoading(false);
+          setIsFetchingData(false);
         });
     } catch (error: any) {
       console.error(error);
       setError("Issue fetching location data.");
-      setIsLoading(false);
+      setIsFetchingData(false);
     }
   }, [unitType, location]);
 
-  return { data, error, isLoading };
+  /*
+   *
+   */
+  useEffect(() => {
+    if (googleMaps !== null) {
+      if (!isFetchingName) {
+        setIsFetchingName(true);
+      }
+      const [lat, lon] = location.split(",");
+      new Promise<google.maps.GeocoderResult[]>((resolve, reject) => {
+        const geocoder = new googleMaps.Geocoder();
+        geocoder.geocode(
+          { address: `${lat}, ${lon}` },
+          (results: google.maps.GeocoderResult[], status: string) => {
+            if (status === "OK") {
+              resolve(results);
+            } else {
+              reject(
+                "Geocode was not successful for the following reason: " + status
+              );
+            }
+          }
+        );
+      })
+        .then((results: google.maps.GeocoderResult[]) => {
+          setName(formatLocationName(results));
+          setIsFetchingName(false);
+        })
+        .catch((error: any) => {
+          console.error(error);
+          setError("Issue fetching location name.");
+          setIsFetchingName(false);
+        });
+    }
+  }, [googleMaps, location]);
+
+  return { data, error, isLoading: isFetchingData || isFetchingName, name };
 };

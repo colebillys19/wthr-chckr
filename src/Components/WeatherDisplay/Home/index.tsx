@@ -7,14 +7,15 @@ type WeatherDisplayLgProps = {
   data: HomeDataType;
   error: string;
   isLoading: boolean;
+  name: string;
 };
 
-function WeatherDisplayLg({ data, error, isLoading }: WeatherDisplayLgProps) {
+function WeatherDisplayLg({ data, error, isLoading, name }: WeatherDisplayLgProps) {
   if (isLoading) {
     return <Skeleton />;
   }
 
-  return error ? <Error /> : <Display data={data} />;
+  return error ? <Error /> : <Display data={data} name={name} />;
 }
 
 export default WeatherDisplayLg;

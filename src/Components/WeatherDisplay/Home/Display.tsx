@@ -9,9 +9,10 @@ const tempStyles: CSSProperties = {
 
 type DisplayProps = {
   data: HomeDataType;
+  name: string;
 };
 
-function Display({ data }: DisplayProps) {
+function Display({ data, name }: DisplayProps) {
   const { current } = data;
   const { temp, feels_like, weather, humidity, wind_speed } = current;
   const dataArr = [
@@ -24,7 +25,9 @@ function Display({ data }: DisplayProps) {
 
   return (
     <div style={tempStyles}>
-      <h4>name</h4>
+      <div>
+        <b>{name}</b>
+      </div>
       <ul>
         {dataArr.map(({ label, value }) => (
           <li key={label}>
