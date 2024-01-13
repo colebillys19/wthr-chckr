@@ -45,41 +45,36 @@ function EnterLocationCoords({
    */
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    try {
+    if (googleMaps !== null) {
       setIsVerifyingAddress(true);
-
-      if (googleMaps !== null) {
-        const geocoder = new googleMaps.Geocoder();
-
-        new Promise((resolve, reject) => {
-          geocoder.geocode(
-            { address: `${latValue}, ${lonValue}` },
-            (
-              results: google.maps.GeocoderResult[],
-              status: google.maps.GeocoderStatus
-            ) => {
-              if (status === google.maps.GeocoderStatus.OK) {
-                const location = results[0].geometry.location;
-                const locationStr = `${location.lat()},${location.lng()}`;
-                updateUserLocation(locationStr);
-                if (activeModal === "setLocation") {
-                  setActiveModal("");
-                }
-              } else {
-                setInputError("Invalid coordinates");
-                console.error("Promise rejected:", status);
+      const geocoder = new googleMaps.Geocoder();
+      new Promise((resolve, reject) => {
+        geocoder.geocode(
+          { address: `${latValue}, ${lonValue}` },
+          (
+            results: google.maps.GeocoderResult[],
+            status: google.maps.GeocoderStatus
+          ) => {
+            if (status === googleMaps.GeocoderStatus.OK) {
+              const location = results[0].geometry.location;
+              const locationStr = `${location.lat()},${location.lng()}`;
+              updateUserLocation(locationStr);
+              if (activeModal === "setLocation") {
+                setActiveModal("");
               }
               resolve(true);
-              setIsVerifyingAddress(false);
+            } else {
+              setInputError("Invalid coordinates");
+              console.error("Promise rejected:", status);
+              reject(false);
             }
-          );
-        });
-      }
-    } catch (error) {
-      setInputError("Invalid coordinates");
-      console.error("Error:", error);
-      setIsVerifyingAddress(false);
+            setIsVerifyingAddress(false);
+          }
+        );
+      }).catch((error) => {
+        console.error(error);
+        setIsVerifyingAddress(false);
+      });
     }
   };
 

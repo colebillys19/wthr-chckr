@@ -2,6 +2,7 @@ import Header from "./Header";
 import HomeCities from "./HomeCities";
 import HomeMap from "./HomeMap";
 import HomeNews from "./HomeNews";
+import HomeSearch from "./HomeSearch";
 import HomeUser from "./HomeUser";
 import LocationCurrent from "./LocationCurrent";
 import LocationDaily from "./LocationDaily";
@@ -14,6 +15,7 @@ export {
   HomeCities,
   HomeMap,
   HomeNews,
+  HomeSearch,
   HomeUser,
   LocationCurrent,
   LocationDaily,

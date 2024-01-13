@@ -1,7 +1,18 @@
-import { FormEvent, MouseEvent, useEffect, useRef, useState } from "react";
+import {
+  CSSProperties,
+  FormEvent,
+  MouseEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import { useGlobalState } from "../../../context";
 import { useUpdateUserLocation } from "../../../utils/customHooks/localStorage";
+
+const tempStyles: CSSProperties = {
+  minWidth: "240px",
+};
 
 type EnterLocationDefaultProps = {
   setIsCoordsEntry: (value: boolean) => void;
@@ -24,9 +35,6 @@ function EnterLocationDefault({
 
   const updateUserLocation = useUpdateUserLocation();
 
-  /*
-   *
-   */
   useEffect(() => {
     const googleApiInit = async () => {
       if (inputRef.current && googleMaps !== null) {
@@ -66,39 +74,36 @@ function EnterLocationDefault({
    */
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsVerifyingAddress(true);
-
-    try {
-      if (googleMaps !== null) {
-        const geocoder = new googleMaps.Geocoder();
-        new Promise((resolve, reject) => {
-          geocoder.geocode(
-            { address: inputRef.current?.value },
-            (
-              results: google.maps.GeocoderResult[],
-              status: google.maps.GeocoderStatus
-            ) => {
-              if (status === googleMaps.GeocoderStatus.OK) {
-                const location = results[0].geometry.location;
-                const locationStr = `${location.lat()},${location.lng()}`;
-                updateUserLocation(locationStr);
-                if (activeModal === "setLocation") {
-                  setActiveModal("");
-                }
-              } else {
-                setInputError("Invalid coordinates");
-                console.error("Promise rejected:", status);
+    if (googleMaps !== null) {
+      setIsVerifyingAddress(true);
+      const geocoder = new googleMaps.Geocoder();
+      new Promise((resolve, reject) => {
+        geocoder.geocode(
+          { address: inputRef.current?.value },
+          (
+            results: google.maps.GeocoderResult[],
+            status: google.maps.GeocoderStatus
+          ) => {
+            if (status === googleMaps.GeocoderStatus.OK) {
+              const location = results[0].geometry.location;
+              const locationStr = `${location.lat()},${location.lng()}`;
+              updateUserLocation(locationStr);
+              if (activeModal === "setLocation") {
+                setActiveModal("");
               }
               resolve(true);
-              setIsVerifyingAddress(false);
+            } else {
+              setInputError("Invalid location");
+              console.error("Promise rejected:", status);
+              reject(false);
             }
-          );
-        });
-      }
-    } catch (error) {
-      setInputError("Invalid coordinates");
-      console.error("Error:", error);
-      setIsVerifyingAddress(false);
+            setIsVerifyingAddress(false);
+          }
+        );
+      }).catch((error) => {
+        console.error(error);
+        setIsVerifyingAddress(false);
+      });
     }
   };
 
@@ -124,12 +129,12 @@ function EnterLocationDefault({
         <div>
           <label htmlFor="address">Enter address, city, or zip: </label>
           <input
-            className="address-search-field"
             id="address"
             onChange={handleChange}
             placeholder=""
             ref={inputRef}
             required
+            style={tempStyles}
             type="text"
           />
         </div>

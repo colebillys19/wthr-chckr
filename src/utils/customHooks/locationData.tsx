@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { useGlobalState } from "../../context";
-import { getLocationNameData } from '../helpers';
+import { getLocationNameData } from "../helpers";
 
 const emptyData = {
   current: {
@@ -48,26 +48,25 @@ export const useFetchLocationData = (location: string) => {
       setIsFetchingData(true);
     }
     const [lat, lon] = location.split(",");
-    try {
-      fetch(
-        `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=${unitType}&appid=${process.env.REACT_APP_OWM_KEY}`
-      )
-        .then((res) => {
-          if (!res.ok) {
-            setError("Issue fetching location data.");
-            setIsFetchingData(false);
-          }
-          return res.json();
-        })
-        .then((resData) => {
-          setData(resData);
+    fetch(
+      `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=${unitType}&appid=${process.env.REACT_APP_OWM_KEY}`
+    )
+      .then((res) => {
+        if (!res.ok) {
+          setError("Issue fetching location data.");
           setIsFetchingData(false);
-        });
-    } catch (error: any) {
-      console.error(error);
-      setError("Issue fetching location data.");
-      setIsFetchingData(false);
-    }
+        }
+        return res.json();
+      })
+      .then((resData) => {
+        setData(resData);
+        setIsFetchingData(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setError("Issue fetching location data.");
+        setIsFetchingData(false);
+      });
   }, [unitType, location]);
 
   /*
