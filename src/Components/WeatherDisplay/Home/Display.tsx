@@ -1,4 +1,5 @@
 import { CSSProperties } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { WeatherSvg } from "../../../AuxComponents";
 import { HomeDataType } from "./types";
@@ -18,7 +19,9 @@ type DisplayPropsType = {
 };
 
 function Display({ data, nameData }: DisplayPropsType) {
-  const { current, timezone_offset } = data;
+  const navigate = useNavigate();
+
+  const { current, timezone_offset, lat, lon } = data;
   const { temp, feels_like, weather, humidity, wind_speed } = current;
 
   const dataArr = [
@@ -28,6 +31,13 @@ function Display({ data, nameData }: DisplayPropsType) {
     { label: "Humidity", value: humidity },
     { label: "Wind speed", value: wind_speed },
   ];
+
+  /*
+   *
+   */
+  const handleSeeMore = () => {
+    navigate(`/location?location=${lat},${lon}`);
+  };
 
   return (
     <div style={tempStylesA}>
@@ -45,11 +55,16 @@ function Display({ data, nameData }: DisplayPropsType) {
           </li>
         ))}
       </ul>
-      <WeatherSvg
-        id={weather[0].id}
-        timezoneOffset={timezone_offset}
-        size={120}
-      />
+      <div>
+        <WeatherSvg
+          id={weather[0].id}
+          timezoneOffset={timezone_offset}
+          size={120}
+        />
+      </div>
+      <div>
+        <button onClick={handleSeeMore}>see more</button>
+      </div>
     </div>
   );
 }

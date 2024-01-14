@@ -15,18 +15,9 @@ function Nav() {
 
   return (
     <nav>
-      <ul style={tempStyles}>
-        <li>
-          <NavLink to="/" onClick={handleNavLinkClick}>
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/location" onClick={handleNavLinkClick}>
-            Location
-          </NavLink>
-        </li>
-      </ul>
+      <NavLink to="/" onClick={handleNavLinkClick}>
+        Home
+      </NavLink>
     </nav>
   );
 }
