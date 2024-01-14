@@ -14,7 +14,7 @@ import {
   WeatherSvgM,
   WeatherSvgN,
   WeatherSvgO,
-} from "./Componentsss";
+} from "./Components";
 
 type WeatherSvgDictType = {
   [key: number | string]: any;

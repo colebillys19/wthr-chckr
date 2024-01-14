@@ -25,6 +25,12 @@ function HomeSearch() {
       autoCompleteRef.current = new googleMaps.places.Autocomplete(
         inputRef.current
       );
+      // autoCompleteRef.current.addListener("place_changed", (e) => {
+      //   const place = autoCompleteRef.current?.getPlace();
+      //   if (place) {
+      //     console.log(place);
+      //   }
+      // });
     }
     return () => {
       if (googleMaps !== null && autoCompleteRef.current) {
@@ -50,7 +56,7 @@ function HomeSearch() {
           ) => {
             if (status === googleMaps.GeocoderStatus.OK) {
               const location = results[0].geometry.location;
-              console.log('*');
+              console.log("*");
               console.log(location);
               // const locationStr = `${location.lat()},${location.lng()}`;
               //
