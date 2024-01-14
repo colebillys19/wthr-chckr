@@ -2,37 +2,11 @@ import { useEffect, useState } from "react";
 
 import { useGlobalState } from "../../context";
 import { getLocationNameData } from "../helpers";
-
-const emptyData = {
-  current: {
-    dt: 0,
-    sunrise: 0,
-    sunset: 0,
-    temp: 0,
-    feels_like: 0,
-    pressure: 0,
-    humidity: 0,
-    dew_point: 0,
-    uvi: 0,
-    clouds: 0,
-    visibility: 0,
-    wind_speed: 0,
-    wind_deg: 0,
-    weather: [],
-  },
-  daily: [],
-  hourly: [],
-  lat: 0,
-  lon: 0,
-  minutely: [],
-  timezone_offset: 0,
-  timezone: "",
-};
-
-type NameDataType = { label: string; value: string }[];
+import { locationDataEmpty } from '../constants';
+import { NameDataType } from "../types/geocoder";
 
 export const useFetchLocationData = (location: string) => {
-  const [data, setData] = useState(emptyData);
+  const [data, setData] = useState(locationDataEmpty);
   const [error, setError] = useState("");
   const [isFetchingData, setIsFetchingData] = useState(true);
   const [isFetchingName, setIsFetchingName] = useState(true);

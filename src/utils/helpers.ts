@@ -32,3 +32,19 @@ export const getIsDayTime = (timezoneOffset: number) => {
   const localHours = localDate.getHours();
   return localHours > 6 && localHours < 18;
 }
+
+export const getIsValidCoordinatesStr = (coordsStr: string) => {
+  if (!coordsStr.includes(",")) {
+    return false;
+  }
+  const [latStr, lonStr] = coordsStr.split(",");
+  const latNum = Number(latStr);
+  const lonNum = Number(lonStr);
+  if (isNaN(latNum) || isNaN(lonNum)) {
+    return false;
+  }
+  if (latNum > 90 || latNum < -90 || lonNum > 180 || lonNum < -180) {
+    return false;
+  }
+  return true;
+};
