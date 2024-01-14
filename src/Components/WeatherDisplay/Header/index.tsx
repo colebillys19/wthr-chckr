@@ -3,13 +3,13 @@ import Skeleton from "./Skeleton";
 import Error from "./Error";
 import { HeaderDataType } from "./types";
 
-type HeaderProps = {
+type WeatherDisplayHeaderPropsType = {
   data: HeaderDataType;
   error: string;
   isLoading: boolean;
 };
 
-function Header({ data, error, isLoading }: HeaderProps) {
+function WeatherDisplayHeader({ data, error, isLoading }: WeatherDisplayHeaderPropsType) {
   if (isLoading) {
     return <Skeleton />;
   }
@@ -17,4 +17,4 @@ function Header({ data, error, isLoading }: HeaderProps) {
   return error ? <Error /> : <Display data={data} />;
 }
 
-export default Header;
+export default WeatherDisplayHeader;

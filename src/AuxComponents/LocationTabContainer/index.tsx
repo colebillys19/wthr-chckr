@@ -7,11 +7,11 @@ const tempStyles: CSSProperties = {
   padding: "10px",
 };
 
-type LocationTabContainerProps = {
+type LocationTabContainerPropsType = {
   children: ReactNode;
 };
 
-function LocationTabContainer({ children }: LocationTabContainerProps) {
+function LocationTabContainer({ children }: LocationTabContainerPropsType) {
   //
 
   return <div style={tempStyles}>{children}</div>;

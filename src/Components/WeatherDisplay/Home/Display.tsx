@@ -12,12 +12,12 @@ const tempStylesB: CSSProperties = {
   color: "purple",
 };
 
-type DisplayProps = {
+type DisplayPropsType = {
   data: HomeDataType;
   nameData: { label: string; value: string }[];
 };
 
-function Display({ data, nameData }: DisplayProps) {
+function Display({ data, nameData }: DisplayPropsType) {
   const { current, timezone_offset } = data;
   const { temp, feels_like, weather, humidity, wind_speed } = current;
 
@@ -45,7 +45,11 @@ function Display({ data, nameData }: DisplayProps) {
           </li>
         ))}
       </ul>
-      <WeatherSvg id={weather[0].id} timezoneOffset={timezone_offset} />
+      <WeatherSvg
+        id={weather[0].id}
+        timezoneOffset={timezone_offset}
+        size="sm"
+      />
     </div>
   );
 }

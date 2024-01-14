@@ -3,13 +3,13 @@ import Skeleton from "./Skeleton";
 import Error from "./Error";
 import { LocationSmDataType } from "./types";
 
-type WeatherDisplayLgProps = {
+type WeatherDisplaySmPropsType = {
   data: LocationSmDataType;
   error: string;
   isLoading: boolean;
 };
 
-function WeatherDisplayLg({ data, error, isLoading }: WeatherDisplayLgProps) {
+function WeatherDisplaySm({ data, error, isLoading }: WeatherDisplaySmPropsType) {
   if (isLoading) {
     return <Skeleton />;
   }
@@ -17,4 +17,4 @@ function WeatherDisplayLg({ data, error, isLoading }: WeatherDisplayLgProps) {
   return error ? <Error /> : <Display data={data} />;
 }
 
-export default WeatherDisplayLg;
+export default WeatherDisplaySm;

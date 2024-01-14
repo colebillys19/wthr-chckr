@@ -1,12 +1,13 @@
 import { SVGProps } from 'react';
 
-const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
+type SvgComponentPropsType = SVGProps<SVGSVGElement>;
+
+const SvgComponent = ({ width, height }: SvgComponentPropsType) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width={240}
-    height={240}
+    width={width}
+    height={height}
     fill="none"
-    {...props}
   >
     <path
       fill="url(#a)"

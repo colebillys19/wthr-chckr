@@ -10,11 +10,11 @@ const tempStyles: CSSProperties = {
   position: 'relative',
 };
 
-type ModalContainerProps = {
+type ModalContainerPropsType = {
   children: ReactNode;
 };
 
-function ModalContainer({ children }: ModalContainerProps) {
+function ModalContainer({ children }: ModalContainerPropsType) {
   //
 
   return <div style={tempStyles}>{children}</div>;

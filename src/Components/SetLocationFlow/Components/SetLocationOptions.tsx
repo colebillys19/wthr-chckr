@@ -6,7 +6,7 @@ import {
   useUpdateUserPrefersNoLocation,
 } from "../../../utils/customHooks/localStorage";
 
-type SetLocationOptionsProps = {
+type SetLocationOptionsPropsType = {
   setIsEnteringLocation: (value: boolean) => void;
   setIsGeolocating: (value: boolean) => void;
 };
@@ -14,7 +14,7 @@ type SetLocationOptionsProps = {
 function SetLocationOptions({
   setIsEnteringLocation,
   setIsGeolocating,
-}: SetLocationOptionsProps) {
+}: SetLocationOptionsPropsType) {
   const [geolocateError, setGeolocateError] = useState("");
 
   const { activeModal, setActiveModal } = useGlobalState();

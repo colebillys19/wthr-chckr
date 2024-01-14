@@ -3,7 +3,7 @@ import { MouseEvent, useState } from "react";
 import EnterLocationDefault from "./EnterLocationDefault";
 import EnterLocationCoords from "./EnterLocationCoords";
 
-type EnterLocationProps = {
+type EnterLocationPropsType = {
   setIsEnteringLocation: (value: boolean) => void;
   setIsVerifyingAddress: (value: boolean) => void;
 };
@@ -11,7 +11,7 @@ type EnterLocationProps = {
 function EnterLocation({
   setIsEnteringLocation,
   setIsVerifyingAddress,
-}: EnterLocationProps) {
+}: EnterLocationPropsType) {
   const [isCoordsEntry, setIsCoordsEntry] = useState(false);
 
   return (

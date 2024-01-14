@@ -1,10 +1,10 @@
 import { HeaderDataType } from "./types";
 
-type DisplayProps = {
+type DisplayPropsType = {
   data: HeaderDataType;
 };
 
-function Display({ data }: DisplayProps) {
+function Display({ data }: DisplayPropsType) {
   console.log(data);
 
   return <div>header</div>;

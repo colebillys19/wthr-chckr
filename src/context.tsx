@@ -7,7 +7,7 @@ import {
 } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
 
-type GlobalStateProps = {
+type GlobalStatePropsType = {
   activeModal: string;
   googleMaps: typeof google.maps | null;
   isDarkMode: boolean;
@@ -24,14 +24,14 @@ type GlobalStateProps = {
   setUserPrefersNoLocation: (value: boolean) => void;
 };
 
-const GlobalState = createContext<Partial<GlobalStateProps>>({});
+const GlobalState = createContext<Partial<GlobalStatePropsType>>({});
 
 export const useGlobalState = () => {
   const context = useContext(GlobalState);
   if (!context) {
     throw new Error("useGlobalState must be used within a Provider");
   }
-  return context as GlobalStateProps;
+  return context as GlobalStatePropsType;
 };
 
 const GlobalStateProvider = ({ children }: { children: ReactNode }) => {

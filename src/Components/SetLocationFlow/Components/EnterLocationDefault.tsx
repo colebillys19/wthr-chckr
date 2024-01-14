@@ -14,7 +14,7 @@ const tempStyles: CSSProperties = {
   minWidth: "240px",
 };
 
-type EnterLocationDefaultProps = {
+type EnterLocationDefaultPropsType = {
   setIsCoordsEntry: (value: boolean) => void;
   setIsEnteringLocation: (value: boolean) => void;
   setIsVerifyingAddress: (value: boolean) => void;
@@ -24,7 +24,7 @@ function EnterLocationDefault({
   setIsCoordsEntry,
   setIsEnteringLocation,
   setIsVerifyingAddress,
-}: EnterLocationDefaultProps) {
+}: EnterLocationDefaultPropsType) {
   const [inputError, setInputError] = useState("");
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
 

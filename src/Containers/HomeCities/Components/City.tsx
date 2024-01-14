@@ -1,9 +1,9 @@
 import { useFetchLocationData } from "../../../utils/customHooks/locationData";
 import { WeatherDisplayHome } from "../../../Components";
 
-type CityProps = { location: string };
+type CityPropsType = { location: string };
 
-function City({ location }: CityProps) {
+function City({ location }: CityPropsType) {
   const { data, error, isLoading, nameData } = useFetchLocationData(location);
 
   return (

@@ -3,14 +3,14 @@ import Skeleton from "./Skeleton";
 import Error from "./Error";
 import { HomeDataType } from "./types";
 
-type WeatherDisplayLgProps = {
+type WeatherDisplayHomePropsType = {
   data: HomeDataType;
   error: string;
   isLoading: boolean;
   nameData: { label: string; value: string }[];
 };
 
-function WeatherDisplayLg({ data, error, isLoading, nameData }: WeatherDisplayLgProps) {
+function WeatherDisplayHome({ data, error, isLoading, nameData }: WeatherDisplayHomePropsType) {
   if (isLoading) {
     return <Skeleton />;
   }
@@ -18,4 +18,4 @@ function WeatherDisplayLg({ data, error, isLoading, nameData }: WeatherDisplayLg
   return error ? <Error /> : <Display data={data} nameData={nameData} />;
 }
 
-export default WeatherDisplayLg;
+export default WeatherDisplayHome;

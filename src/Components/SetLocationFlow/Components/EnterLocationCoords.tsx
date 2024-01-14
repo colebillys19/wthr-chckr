@@ -3,7 +3,7 @@ import { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
 import { useGlobalState } from "../../../context";
 import { useUpdateUserLocation } from "../../../utils/customHooks/localStorage";
 
-type EnterLocationCoordsProps = {
+type EnterLocationCoordsPropsType = {
   setIsCoordsEntry: (value: boolean) => void;
   setIsVerifyingAddress: (value: boolean) => void;
 };
@@ -11,7 +11,7 @@ type EnterLocationCoordsProps = {
 function EnterLocationCoords({
   setIsCoordsEntry,
   setIsVerifyingAddress,
-}: EnterLocationCoordsProps) {
+}: EnterLocationCoordsPropsType) {
   const [inputError, setInputError] = useState("");
   const [latValue, setLatValue] = useState("");
   const [lonValue, setLonValue] = useState("");

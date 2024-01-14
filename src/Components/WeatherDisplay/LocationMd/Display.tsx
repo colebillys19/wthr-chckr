@@ -1,10 +1,10 @@
 import { LocationMdDataType } from "./types";
 
-type DisplayProps = {
+type DisplayPropsType = {
   data: LocationMdDataType;
 };
 
-function Display({ data }: DisplayProps) {
+function Display({ data }: DisplayPropsType) {
   console.log(data);
 
   return <div>md</div>;

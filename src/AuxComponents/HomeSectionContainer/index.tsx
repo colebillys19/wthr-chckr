@@ -7,11 +7,11 @@ const tempStyles: CSSProperties = {
   padding: "10px",
 };
 
-type HomeSectionContainerProps = {
+type HomeSectionContainerPropsType = {
   children: ReactNode;
 };
 
-function HomeSectionContainer({ children }: HomeSectionContainerProps) {
+function HomeSectionContainer({ children }: HomeSectionContainerPropsType) {
   //
 
   return <div style={tempStyles}>{children}</div>;
