@@ -24,3 +24,11 @@ export const getLocationNameData = (results: google.maps.GeocoderResult[]) => {
 
   return dataArr;
 };
+
+export const getIsDayTime = (timezoneOffset: number) => {
+  const utcDate = new Date().getTime();
+  const offsetMilliseconds = timezoneOffset * 1000;
+  const localDate = new Date(utcDate + offsetMilliseconds);
+  const localHours = localDate.getHours();
+  return localHours > 6 && localHours < 18;
+}

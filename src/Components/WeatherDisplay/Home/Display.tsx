@@ -1,5 +1,6 @@
 import { CSSProperties } from "react";
 
+import { WeatherSvg } from "../../../AuxComponents";
 import { HomeDataType } from "./types";
 
 const tempStylesA: CSSProperties = {
@@ -17,8 +18,9 @@ type DisplayProps = {
 };
 
 function Display({ data, nameData }: DisplayProps) {
-  const { current } = data;
+  const { current, timezone_offset } = data;
   const { temp, feels_like, weather, humidity, wind_speed } = current;
+
   const dataArr = [
     { label: "Temperature", value: temp },
     { label: "Feels like", value: feels_like },
@@ -43,6 +45,7 @@ function Display({ data, nameData }: DisplayProps) {
           </li>
         ))}
       </ul>
+      <WeatherSvg id={weather[0].id} timezoneOffset={timezone_offset} />
     </div>
   );
 }
