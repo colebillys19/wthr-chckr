@@ -48,7 +48,7 @@ function Display({ data, nameData }: DisplayPropsType) {
       <WeatherSvg
         id={weather[0].id}
         timezoneOffset={timezone_offset}
-        size="sm"
+        size={120}
       />
     </div>
   );
