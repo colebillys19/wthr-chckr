@@ -30,41 +30,38 @@ function EnterLocationDefault({
 
   const autoCompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const inputErrorRef = useRef("");
 
   const { activeModal, googleMaps, setActiveModal } = useGlobalState();
 
   const updateUserLocation = useUpdateUserLocation();
 
   useEffect(() => {
-    const googleApiInit = async () => {
-      if (inputRef.current && googleMaps !== null) {
-        autoCompleteRef.current = new googleMaps.places.Autocomplete(
-          inputRef.current
-        );
-      } else {
-        console.error(
-          "EnterLocationDefault autocomplete initialization error."
-        );
-      }
-    };
-
-    googleApiInit();
-
+    if (googleMaps !== null && inputRef.current) {
+      autoCompleteRef.current = new googleMaps.places.Autocomplete(
+        inputRef.current
+      );
+      autoCompleteRef.current.addListener("place_changed", () => {
+        if (inputErrorRef.current !== "") {
+          inputErrorRef.current = "";
+          setInputError('');
+        }
+      });
+    }
     return () => {
-      if (autoCompleteRef.current && googleMaps !== null) {
+      if (googleMaps !== null && autoCompleteRef.current) {
         googleMaps.event.clearInstanceListeners(autoCompleteRef.current);
-      } else {
-        console.error("EnterLocationDefault autocomplete clean-up error.");
       }
     };
-  }, []);
+  }, [googleMaps]);
 
   /*
    *
    */
   const handleChange = () => {
-    if (inputError) {
-      setInputError("");
+    if (inputErrorRef.current !== "") {
+      inputErrorRef.current = "";
+      setInputError('');
     }
     setIsSubmitDisabled(!inputRef.current || inputRef.current.value === "");
   };
@@ -93,6 +90,7 @@ function EnterLocationDefault({
               }
               resolve(true);
             } else {
+              inputErrorRef.current = "Invalid location";
               setInputError("Invalid location");
               console.error("Promise rejected:", status);
               reject(false);

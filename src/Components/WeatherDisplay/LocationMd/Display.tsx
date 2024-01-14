@@ -5,7 +5,7 @@ type DisplayPropsType = {
 };
 
 function Display({ data }: DisplayPropsType) {
-  console.log(data);
+  //
 
   return <div>md</div>;
 }

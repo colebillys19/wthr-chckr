@@ -1,22 +1,31 @@
 import { CSSProperties, FormEvent, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { useGlobalState } from "../../context";
 import { HomeSectionContainer } from "../../AuxComponents";
 
 const tempStylesA: CSSProperties = {
-  display: "none",
+  opacity: 0.1,
 };
 
 const tempStylesB: CSSProperties = {
+  display: "none",
+};
+
+const tempStylesC: CSSProperties = {
   minWidth: "360px",
 };
 
 function HomeSearch() {
   const [inputError, setInputError] = useState("");
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+  const [isVerifyingAddress, setIsVerifyingAddress] = useState(false);
 
   const autoCompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const inputErrorRef = useRef("");
+
+  const navigate = useNavigate();
 
   const { googleMaps } = useGlobalState();
 
@@ -25,12 +34,12 @@ function HomeSearch() {
       autoCompleteRef.current = new googleMaps.places.Autocomplete(
         inputRef.current
       );
-      // autoCompleteRef.current.addListener("place_changed", (e) => {
-      //   const place = autoCompleteRef.current?.getPlace();
-      //   if (place) {
-      //     console.log(place);
-      //   }
-      // });
+      autoCompleteRef.current.addListener("place_changed", () => {
+        if (inputErrorRef.current !== "") {
+          inputErrorRef.current = "";
+          setInputError("");
+        }
+      });
     }
     return () => {
       if (googleMaps !== null && autoCompleteRef.current) {
@@ -42,10 +51,21 @@ function HomeSearch() {
   /*
    *
    */
+  const handleChange = () => {
+    if (inputErrorRef.current !== "") {
+      inputErrorRef.current = "";
+      setInputError("");
+    }
+    setIsSubmitDisabled(!inputRef.current || inputRef.current.value === "");
+  };
+
+  /*
+   *
+   */
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (googleMaps !== null) {
-      // setIsVerifyingAddress(true);
+      setIsVerifyingAddress(true);
       const geocoder = new googleMaps.Geocoder();
       new Promise((resolve, reject) => {
         geocoder.geocode(
@@ -56,43 +76,33 @@ function HomeSearch() {
           ) => {
             if (status === googleMaps.GeocoderStatus.OK) {
               const location = results[0].geometry.location;
-              console.log("*");
-              console.log(location);
-              // const locationStr = `${location.lat()},${location.lng()}`;
-              //
-              //
-              //
+              const locationStr = `${location.lat()},${location.lng()}`;
+              navigate(`/location?location=${locationStr}`);
               resolve(true);
             } else {
+              inputErrorRef.current = "Invalid location";
               setInputError("Invalid location");
               console.error("Promise rejected:", status);
               reject(false);
             }
-            // setIsVerifyingAddress(false);
+            setIsVerifyingAddress(false);
           }
         );
       }).catch((error) => {
         console.error(error);
-        // setIsVerifyingAddress(false);
+        setIsVerifyingAddress(false);
       });
     }
-  };
-
-  /*
-   *
-   */
-  const handleChange = () => {
-    if (inputError) {
-      setInputError("");
-    }
-    setIsSubmitDisabled(!inputRef.current || inputRef.current.value === "");
   };
 
   return (
     <HomeSectionContainer>
       <div>HomeSearch</div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="search" style={tempStylesA}>
+      <form
+        onSubmit={handleSubmit}
+        style={isVerifyingAddress ? tempStylesA : {}}
+      >
+        <label htmlFor="search" style={tempStylesB}>
           Search
         </label>
         <input
@@ -101,12 +111,12 @@ function HomeSearch() {
           placeholder=""
           ref={inputRef}
           required
-          style={tempStylesB}
+          style={tempStylesC}
           type="text"
         />
-        {inputError && <span>{inputError}</span>}
-        <input type="submit" value="Search" disabled={isSubmitDisabled} />
+        <input type="submit" value="Go" disabled={isSubmitDisabled} />
       </form>
+      {inputError && <div>{inputError}</div>}
     </HomeSectionContainer>
   );
 }
