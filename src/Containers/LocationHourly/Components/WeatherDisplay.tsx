@@ -1,21 +1,25 @@
 import { CSSProperties } from "react";
 
 import { HourlyType } from "../../../utils/types/openWeatherMap";
+import { getTimeData } from "../../../utils/helpers";
 
 const tempStyles: CSSProperties = {
   outline: "3px solid orange",
   display: "inline-block",
 };
 
-type WeatherDisplayLocationHourlyPropsType = {
+type WeatherDisplayPropsType = {
   data: HourlyType;
+  timezoneOffset: number;
 };
 
-function WeatherDisplayLocationHourly({ data }: WeatherDisplayLocationHourlyPropsType) {
+function WeatherDisplay({ data, timezoneOffset }: WeatherDisplayPropsType) {
   const { dt, temp, feels_like, weather, humidity, wind_speed } = data;
 
+  const { timeStandard } = getTimeData(dt, timezoneOffset);
+
   const dataArr = [
-    { label: "Dt", value: dt },
+    { label: "Time", value: timeStandard },
     { label: "Temperature", value: temp },
     { label: "Feels like", value: feels_like },
     { label: "Weather", value: weather[0].main },
@@ -37,7 +41,7 @@ function WeatherDisplayLocationHourly({ data }: WeatherDisplayLocationHourlyProp
   );
 }
 
-export default WeatherDisplayLocationHourly;
+export default WeatherDisplay;
 
 /*
 

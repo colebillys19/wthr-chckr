@@ -1,6 +1,6 @@
-import { CurrentType } from "../../utils/types/openWeatherMap";
 import { LocationTabContainer } from "../../AuxComponents";
-import { WeatherDisplayLocationCurrent } from "../../Components";
+import { CurrentType } from "../../utils/types/openWeatherMap";
+import WeatherDisplay from "./Components/WeatherDisplay";
 
 type LocationCurrentPropsType = {
   data: CurrentType;
@@ -13,10 +13,7 @@ function LocationCurrent({ data, timezoneOffset }: LocationCurrentPropsType) {
   return (
     <LocationTabContainer>
       <div>LocationCurrent</div>
-      <WeatherDisplayLocationCurrent
-        data={data}
-        timezoneOffset={timezoneOffset}
-      />
+      <WeatherDisplay data={data} timezoneOffset={timezoneOffset} />
     </LocationTabContainer>
   );
 }

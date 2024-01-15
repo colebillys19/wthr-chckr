@@ -1,13 +1,14 @@
 import { LocationTabContainer } from "../../AuxComponents";
-import { WeatherDisplayLocationHourly } from "../../Components";
 import { HourlyType } from "../../utils/types/openWeatherMap";
+import WeatherDisplay from "./Components/WeatherDisplay";
 
 type LocationHourlyPropsType = {
   data: HourlyType[];
+  timezoneOffset: number;
 };
 
-function LocationHourly({ data }: LocationHourlyPropsType) {
-  const dataToUse = data.slice(0, 12);
+function LocationHourly({ data, timezoneOffset }: LocationHourlyPropsType) {
+  const dataToUse = data.slice(1, 13);
 
   return (
     <LocationTabContainer>
@@ -15,7 +16,7 @@ function LocationHourly({ data }: LocationHourlyPropsType) {
       <ul>
         {dataToUse.map((hourlyData) => (
           <li>
-            <WeatherDisplayLocationHourly data={hourlyData} />
+            <WeatherDisplay data={hourlyData} timezoneOffset={timezoneOffset} />
           </li>
         ))}
       </ul>

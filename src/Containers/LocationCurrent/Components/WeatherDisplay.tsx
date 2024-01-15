@@ -2,24 +2,26 @@ import { CSSProperties } from "react";
 
 import { WeatherSvg } from "../../../AuxComponents";
 import { CurrentType } from "../../../utils/types/openWeatherMap";
+import { getTimeData } from "../../../utils/helpers";
 
 const tempStylesA: CSSProperties = {
   outline: "3px solid orange",
   display: "inline-block",
 };
 
-type WeatherDisplayLocationCurrentPropsType = {
+type WeatherDisplayPropsType = {
   data: CurrentType;
   timezoneOffset: number;
 };
 
-function WeatherDisplayLocationCurrent({
-  data,
-  timezoneOffset,
-}: WeatherDisplayLocationCurrentPropsType) {
-  const { temp, feels_like, weather, humidity, wind_speed } = data;
+function WeatherDisplay({ data, timezoneOffset }: WeatherDisplayPropsType) {
+  const { dt, temp, feels_like, weather, humidity, wind_speed } = data;
+
+  const { day, timeStandard } = getTimeData(dt, timezoneOffset);
 
   const dataArr = [
+    { label: "Day", value: day },
+    { label: "Time", value: timeStandard },
     { label: "Temperature", value: temp },
     { label: "Feels like", value: feels_like },
     { label: "Weather", value: weather[0].main },
@@ -48,4 +50,4 @@ function WeatherDisplayLocationCurrent({
   );
 }
 
-export default WeatherDisplayLocationCurrent;
+export default WeatherDisplay;

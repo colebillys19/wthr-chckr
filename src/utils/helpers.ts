@@ -6,6 +6,15 @@ const locationTypes = [
   "administrative_area_level_1",
   "country",
 ];
+const days = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
 
 type NameDataType = { label: string; value: string }[];
 
@@ -31,7 +40,7 @@ export const getIsDayTime = (timezoneOffset: number) => {
   const localDate = new Date(utcDate + offsetMilliseconds);
   const localHours = localDate.getHours();
   return localHours > 6 && localHours < 18;
-}
+};
 
 export const getIsValidCoordinatesStr = (coordsStr: string) => {
   if (!coordsStr.includes(",")) {
@@ -47,4 +56,21 @@ export const getIsValidCoordinatesStr = (coordsStr: string) => {
     return false;
   }
   return true;
+};
+
+export const getTimeData = (unixTime: number, timezoneOffset: number) => {
+  const utcMs = (unixTime + 18000) * 1000; // TODO
+  const offsetMs = timezoneOffset * 1000;
+  const localTimeMs = utcMs + offsetMs;
+  const date = new Date(localTimeMs);
+  const day = days[date.getDay()];
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const timeStandard = `${hours % 12 || 12}:${
+    minutes < 10 ? "0" : ""
+  }${minutes} ${hours < 12 ? "AM" : "PM"}`;
+  const timeMilitary = `${hours < 10 ? "0" : ""}${hours}:${
+    minutes < 10 ? "0" : ""
+  }${minutes}`;
+  return { day, timeStandard, timeMilitary };
 };

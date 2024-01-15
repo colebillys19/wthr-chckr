@@ -1,10 +1,10 @@
 import Display from "./Display";
 import Skeleton from "./Skeleton";
 import Error from "./Error";
-import { HomeDataType } from "./types";
+import { OpenWeatherMapDataType } from "../../../utils/types/openWeatherMap";
 
 type WeatherDisplayHomePropsType = {
-  data: HomeDataType;
+  data: OpenWeatherMapDataType;
   error: string;
   isLoading: boolean;
   nameData: { label: string; value: string }[];

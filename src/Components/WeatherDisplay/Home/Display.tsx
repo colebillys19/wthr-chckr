@@ -2,7 +2,8 @@ import { CSSProperties } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { WeatherSvg } from "../../../AuxComponents";
-import { HomeDataType } from "./types";
+import { OpenWeatherMapDataType } from "../../../utils/types/openWeatherMap";
+import { getTimeData } from "../../../utils/helpers";
 
 const tempStylesA: CSSProperties = {
   outline: "3px solid orange",
@@ -14,7 +15,7 @@ const tempStylesB: CSSProperties = {
 };
 
 type DisplayPropsType = {
-  data: HomeDataType;
+  data: OpenWeatherMapDataType;
   nameData: { label: string; value: string }[];
 };
 
@@ -22,9 +23,13 @@ function Display({ data, nameData }: DisplayPropsType) {
   const navigate = useNavigate();
 
   const { current, timezone_offset, lat, lon } = data;
-  const { temp, feels_like, weather, humidity, wind_speed } = current;
+  const { dt, temp, feels_like, weather, humidity, wind_speed } = current;
+
+  const { day, timeStandard } = getTimeData(dt, timezone_offset);
 
   const dataArr = [
+    { label: "Day", value: day },
+    { label: "Time", value: timeStandard },
     { label: "Temperature", value: temp },
     { label: "Feels like", value: feels_like },
     { label: "Weather", value: weather[0].main },

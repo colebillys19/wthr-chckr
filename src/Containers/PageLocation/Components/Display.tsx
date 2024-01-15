@@ -117,8 +117,12 @@ function Display({ location }: DisplayPropsType) {
       {activeTab === "current" && (
         <LocationCurrent data={current} timezoneOffset={timezone_offset} />
       )}
-      {activeTab === "hourly" && <LocationHourly data={hourly} />}
-      {activeTab === "daily" && <LocationDaily data={daily} />}
+      {activeTab === "hourly" && (
+        <LocationHourly data={hourly} timezoneOffset={timezone_offset} />
+      )}
+      {activeTab === "daily" && (
+        <LocationDaily data={daily} timezoneOffset={timezone_offset} />
+      )}
     </>
   );
 }
