@@ -50,6 +50,15 @@ export type DailyType = {
   feels_like: FeelsLikeType;
   pressure: number;
   humidity: number;
+  dew_point: number;
+  wind_speed: number;
+  wind_deg: number;
+  wind_gust: number;
+  weather: WeatherType[];
+  clouds: number;
+  pop: number;
+  snow: number;
+  uvi: number;
 };
 
 export type HourlyType = {

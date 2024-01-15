@@ -2,16 +2,16 @@ import Modal from "./Modal";
 import SetLocationFlow from "./SetLocationFlow";
 import WeatherDisplayHeader from "./WeatherDisplay/Header";
 import WeatherDisplayHome from "./WeatherDisplay/Home";
-import WeatherDisplayLocationLg from "./WeatherDisplay/LocationLg";
-import WeatherDisplayLocationMd from "./WeatherDisplay/LocationMd";
-import WeatherDisplayLocationSm from "./WeatherDisplay/LocationSm";
+import WeatherDisplayLocationCurrent from "./WeatherDisplay/LocationCurrent";
+import WeatherDisplayLocationHourly from "./WeatherDisplay/LocationHourly";
+import WeatherDisplayLocationDaily from "./WeatherDisplay/LocationDaily";
 
 export {
   Modal,
   SetLocationFlow,
   WeatherDisplayHeader,
   WeatherDisplayHome,
-  WeatherDisplayLocationLg,
-  WeatherDisplayLocationMd,
-  WeatherDisplayLocationSm,
+  WeatherDisplayLocationCurrent,
+  WeatherDisplayLocationHourly,
+  WeatherDisplayLocationDaily,
 };

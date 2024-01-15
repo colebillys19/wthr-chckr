@@ -1,20 +1,22 @@
-import { OpenWeatherMapDataType } from "../../utils/types/openWeatherMap";
-import { NameDataType } from "../../utils/types/geocoder";
+import { CurrentType } from "../../utils/types/openWeatherMap";
 import { LocationTabContainer } from "../../AuxComponents";
-import { WeatherDisplayLocationLg } from "../../Components";
+import { WeatherDisplayLocationCurrent } from "../../Components";
 
 type LocationCurrentPropsType = {
-  data: OpenWeatherMapDataType;
-  nameData: NameDataType;
+  data: CurrentType;
+  timezoneOffset: number;
 };
 
-function LocationCurrent({ data, nameData }: LocationCurrentPropsType) {
+function LocationCurrent({ data, timezoneOffset }: LocationCurrentPropsType) {
   //
 
   return (
     <LocationTabContainer>
       <div>LocationCurrent</div>
-      <WeatherDisplayLocationLg data={data} nameData={nameData} />
+      <WeatherDisplayLocationCurrent
+        data={data}
+        timezoneOffset={timezoneOffset}
+      />
     </LocationTabContainer>
   );
 }

@@ -101,14 +101,24 @@ function Display({ location }: DisplayPropsType) {
     return <Error error={error} />;
   }
 
+  const { current, daily, hourly, timezone_offset } = data;
+
   return (
     <>
+      <ul>
+        {nameData.map(({ label, value }) => (
+          <li key={label}>
+            <span>{label}:&nbsp;</span>
+            <b>{value}</b>
+          </li>
+        ))}
+      </ul>
       <TabNav activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === "current" && (
-        <LocationCurrent data={data} nameData={nameData} />
+        <LocationCurrent data={current} timezoneOffset={timezone_offset} />
       )}
-      {activeTab === "hourly" && <LocationHourly />}
-      {activeTab === "daily" && <LocationDaily />}
+      {activeTab === "hourly" && <LocationHourly data={hourly} />}
+      {activeTab === "daily" && <LocationDaily data={daily} />}
     </>
   );
 }
