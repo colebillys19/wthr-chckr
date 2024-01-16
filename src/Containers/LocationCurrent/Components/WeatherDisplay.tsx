@@ -1,13 +1,6 @@
-import { CSSProperties } from "react";
-
 import { WeatherSvg } from "../../../SharedComponentsAux";
 import { CurrentType } from "../../../utils/types/openWeatherMap";
 import { getTimeData } from "../../../utils/helpers";
-
-const tempStylesA: CSSProperties = {
-  outline: "3px solid orange",
-  display: "inline-block",
-};
 
 type WeatherDisplayPropsType = {
   data: CurrentType;
@@ -30,7 +23,7 @@ function WeatherDisplay({ data, timezoneOffset }: WeatherDisplayPropsType) {
   ];
 
   return (
-    <div style={tempStylesA}>
+    <div>
       <ul>
         {dataArr.map(({ label, value }) => (
           <li key={label}>

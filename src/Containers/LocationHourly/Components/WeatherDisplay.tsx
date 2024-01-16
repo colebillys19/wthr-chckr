@@ -1,5 +1,6 @@
 import { CSSProperties } from "react";
 
+import { WeatherSvg } from "../../../SharedComponentsAux";
 import { HourlyType } from "../../../utils/types/openWeatherMap";
 import { getTimeData } from "../../../utils/helpers";
 
@@ -14,9 +15,10 @@ type WeatherDisplayPropsType = {
 };
 
 function WeatherDisplay({ data, timezoneOffset }: WeatherDisplayPropsType) {
-  const { dt, temp, feels_like, weather, humidity, wind_speed } = data;
+  const { dt, temp, feels_like, weather, humidity, wind_speed, rain, snow } =
+    data;
 
-  const { timeStandard } = getTimeData(dt, timezoneOffset);
+  const { timeStandard, isDayTime } = getTimeData(dt, timezoneOffset);
 
   const dataArr = [
     { label: "Time", value: timeStandard },
@@ -26,6 +28,14 @@ function WeatherDisplay({ data, timezoneOffset }: WeatherDisplayPropsType) {
     { label: "Humidity", value: humidity },
     { label: "Wind speed", value: wind_speed },
   ];
+
+  if (rain && rain["1h"]) {
+    dataArr.push({ label: "Rain (inches)", value: rain["1h"] });
+  }
+
+  if (snow && snow["1h"]) {
+    dataArr.push({ label: "Snow (inches)", value: snow["1h"] });
+  }
 
   return (
     <div style={tempStyles}>
@@ -37,6 +47,9 @@ function WeatherDisplay({ data, timezoneOffset }: WeatherDisplayPropsType) {
           </li>
         ))}
       </ul>
+      <div>
+        <WeatherSvg id={weather[0].id} isDayTime={isDayTime} size={120} />
+      </div>
     </div>
   );
 }

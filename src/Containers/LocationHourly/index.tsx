@@ -1,6 +1,14 @@
+import { CSSProperties } from "react";
+import { v4 as uuidv4 } from 'uuid';
+
 import { LocationTabContainer } from "../../SharedComponentsAux";
 import { HourlyType } from "../../utils/types/openWeatherMap";
 import WeatherDisplay from "./Components/WeatherDisplay";
+
+const tempStyles: CSSProperties = {
+  display: "flex",
+  flexWrap: "wrap",
+};
 
 type LocationHourlyPropsType = {
   data: HourlyType[];
@@ -13,9 +21,9 @@ function LocationHourly({ data, timezoneOffset }: LocationHourlyPropsType) {
   return (
     <LocationTabContainer>
       <div>LocationHourly</div>
-      <ul>
+      <ul style={tempStyles}>
         {dataToUse.map((hourlyData) => (
-          <li>
+          <li key={uuidv4()}>
             <WeatherDisplay data={hourlyData} timezoneOffset={timezoneOffset} />
           </li>
         ))}

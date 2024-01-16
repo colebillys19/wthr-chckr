@@ -50,3 +50,16 @@ export const getTimeData = (unixTime: number, timezoneOffset: number) => {
   const isDayTime = hours > 6 && hours < 18;
   return { day, timeStandard, timeMilitary, isDayTime };
 };
+
+type NumObjType = {
+  [key: string]: number;
+};
+
+export const getHighLow = (numObj: NumObjType): { high: number; low: number } => {
+  const values = Object.keys(numObj).map(key => numObj[key]);
+
+  const high = values.reduce((a, b) => Math.max(a, b));
+  const low = values.reduce((a, b) => Math.min(a, b));
+
+  return { high, low };
+};

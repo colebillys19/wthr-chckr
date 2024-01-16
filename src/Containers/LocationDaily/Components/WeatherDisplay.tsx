@@ -1,7 +1,8 @@
 import { CSSProperties } from "react";
 
+import { WeatherSvg } from "../../../SharedComponentsAux";
 import { DailyType } from "../../../utils/types/openWeatherMap";
-import { getTimeData } from "../../../utils/helpers";
+import { getHighLow, getTimeData } from "../../../utils/helpers";
 
 const tempStyles: CSSProperties = {
   outline: "3px solid orange",
@@ -14,18 +15,41 @@ type WeatherDisplayPropsType = {
 };
 
 function WeatherDisplay({ data, timezoneOffset }: WeatherDisplayPropsType) {
-  const { dt, temp, feels_like, weather, humidity, wind_speed } = data;
+  const {
+    dt,
+    temp,
+    feels_like,
+    weather,
+    humidity,
+    rain,
+    snow,
+    summary,
+    wind_speed,
+  } = data;
 
-  const { day } = getTimeData(dt, timezoneOffset);
+  const { day, isDayTime } = getTimeData(dt, timezoneOffset);
+
+  const { high: feelsLikeHigh, low: feelsLikeLow } = getHighLow(feels_like);
 
   const dataArr = [
     { label: "Day", value: day },
-    { label: "Temperature", value: temp.day },
-    { label: "Feels like", value: feels_like.day },
+    { label: "Summary", value: summary },
+    { label: "Temperature (high)", value: temp.max },
+    { label: "Temperature (low)", value: temp.min },
+    { label: "Feels like (high)", value: feelsLikeHigh },
+    { label: "Feels like (low)", value: feelsLikeLow },
     { label: "Weather", value: weather[0].main },
     { label: "Humidity", value: humidity },
     { label: "Wind speed", value: wind_speed },
   ];
+
+  if (typeof rain === "number" && rain > 0) {
+    dataArr.push({ label: "Rain (inches)", value: rain });
+  }
+
+  if (typeof snow === "number" && snow > 0) {
+    dataArr.push({ label: "Snow (inches)", value: snow });
+  }
 
   return (
     <div style={tempStyles}>
@@ -37,6 +61,9 @@ function WeatherDisplay({ data, timezoneOffset }: WeatherDisplayPropsType) {
           </li>
         ))}
       </ul>
+      <div>
+        <WeatherSvg id={weather[0].id} isDayTime={isDayTime} size={120} />
+      </div>
     </div>
   );
 }

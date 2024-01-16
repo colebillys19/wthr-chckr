@@ -1,3 +1,7 @@
+type NumObjType = {
+  [key: string]: number;
+};
+
 export type WeatherType = {
   id: number;
   main: string;
@@ -57,6 +61,7 @@ export type DailyType = {
   weather: WeatherType[];
   clouds: number;
   pop: number;
+  rain: number;
   snow: number;
   uvi: number;
 };
@@ -76,6 +81,8 @@ export type HourlyType = {
   wind_gust: number;
   weather: WeatherType[];
   pop: number;
+  rain: NumObjType;
+  snow: NumObjType;
 };
 
 export type MinutelyType = {
