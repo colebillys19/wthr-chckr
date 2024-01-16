@@ -42,7 +42,7 @@ function Display({ data, nameData }: DisplayPropsType) {
    */
   const handleSeeMore = () => {
     const locationStr = `${lat},${lon}`;
-    navigate(`/location?location=${locationStr}`);
+    navigate(`/location/current?location=${locationStr}`);
   };
 
   return (

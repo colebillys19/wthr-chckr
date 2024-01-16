@@ -1,10 +1,5 @@
-import { CSSProperties, MouseEvent } from "react";
+import { MouseEvent } from "react";
 import { NavLink } from "react-router-dom";
-
-const tempStyles: CSSProperties = {
-  columnGap: "10px",
-  display: "flex",
-};
 
 function Nav() {
   const handleNavLinkClick = (event: MouseEvent) => {

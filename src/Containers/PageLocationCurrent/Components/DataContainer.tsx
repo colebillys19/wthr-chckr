@@ -4,24 +4,21 @@ import { useGlobalState } from "../../../context";
 import { getLocationNameData } from "../../../utils/helpers";
 import { locationDataEmpty } from "../../../utils/constants";
 import { NameDataType } from "../../../utils/types/geocoder";
-import LocationCurrent from "../../LocationCurrent";
-import LocationDaily from "../../LocationDaily";
-import LocationHourly from "../../LocationHourly";
-import TabNav from "./TabNav";
+import { TabNav } from "../../../SharedComponentsAux";
+import WeatherDisplayContainer from "./WeatherDisplayContainer";
 import Error from "./Error";
 import Skeleton from "./Skeleton";
 
-type DisplayPropsType = {
+type DataContainerPropsType = {
   location: string;
 };
 
-function Display({ location }: DisplayPropsType) {
+function DataContainer({ location }: DataContainerPropsType) {
   const [data, setData] = useState(locationDataEmpty);
   const [error, setError] = useState("");
   const [isFetchingData, setIsFetchingData] = useState(true);
   const [isFetchingName, setIsFetchingName] = useState(true);
   const [nameData, setNameData] = useState<NameDataType[]>([]);
-  const [activeTab, setActiveTab] = useState("current");
 
   const { googleMaps, unitType } = useGlobalState();
 
@@ -101,7 +98,7 @@ function Display({ location }: DisplayPropsType) {
     return <Error error={error} />;
   }
 
-  const { current, daily, hourly, timezone_offset } = data;
+  const { current, timezone_offset } = data;
 
   return (
     <>
@@ -113,18 +110,17 @@ function Display({ location }: DisplayPropsType) {
           </li>
         ))}
       </ul>
-      <TabNav activeTab={activeTab} setActiveTab={setActiveTab} />
-      {activeTab === "current" && (
-        <LocationCurrent data={current} timezoneOffset={timezone_offset} />
-      )}
-      {activeTab === "hourly" && (
-        <LocationHourly data={hourly} timezoneOffset={timezone_offset} />
-      )}
-      {activeTab === "daily" && (
-        <LocationDaily data={daily} timezoneOffset={timezone_offset} />
-      )}
+      <br />
+      <TabNav location={location} />
+      <br />
+      <h3>current</h3>
+      <br />
+      <WeatherDisplayContainer
+        data={current}
+        timezoneOffset={timezone_offset}
+      />
     </>
   );
 }
 
-export default Display;
+export default DataContainer;
