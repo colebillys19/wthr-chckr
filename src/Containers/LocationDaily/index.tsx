@@ -1,4 +1,4 @@
-import { LocationTabContainer } from "../../AuxComponents";
+import { LocationTabContainer } from "../../SharedComponentsAux";
 import { DailyType } from "../../utils/types/openWeatherMap";
 import WeatherDisplay from "./Components/WeatherDisplay";
 

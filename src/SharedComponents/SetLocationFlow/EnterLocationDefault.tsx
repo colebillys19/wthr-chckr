@@ -7,8 +7,8 @@ import {
   useState,
 } from "react";
 
-import { useGlobalState } from "../../../context";
-import { useUpdateUserLocation } from "../../../utils/customHooks/localStorage";
+import { useGlobalState } from "../../context";
+import { useUpdateUserLocation } from "../../utils/customHooks/localStorage";
 
 const tempStyles: CSSProperties = {
   minWidth: "240px",

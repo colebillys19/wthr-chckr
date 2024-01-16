@@ -1,5 +1,5 @@
 import { useGlobalState } from "../../context";
-import { HomeSectionContainer } from "../../AuxComponents";
+import { HomeSectionContainer } from "../../SharedComponentsAux";
 import UserLocation from "./Components/UserLocation";
 import UserLocationOff from "./Components/UserLocationOff";
 import RecentLocations from "./Components/RecentLocations";

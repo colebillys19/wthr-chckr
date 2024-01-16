@@ -2,7 +2,7 @@ import { CSSProperties, FormEvent, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useGlobalState } from "../../context";
-import { HomeSectionContainer } from "../../AuxComponents";
+import { HomeSectionContainer } from "../../SharedComponentsAux";
 
 const tempStylesA: CSSProperties = {
   opacity: 0.1,

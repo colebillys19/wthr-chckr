@@ -1,5 +1,5 @@
 import { useFetchLocationData } from "../../../utils/customHooks/locationData";
-import { WeatherDisplayHome } from "../../../Components";
+import { WeatherDisplayHome } from "../../../SharedComponents";
 
 type CityDisplayPropsType = { location: string };
 

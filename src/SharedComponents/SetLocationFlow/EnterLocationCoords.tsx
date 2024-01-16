@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
 
-import { useGlobalState } from "../../../context";
-import { useUpdateUserLocation } from "../../../utils/customHooks/localStorage";
+import { useGlobalState } from "../../context";
+import { useUpdateUserLocation } from "../../utils/customHooks/localStorage";
 
 type EnterLocationCoordsPropsType = {
   setIsCoordsEntry: (value: boolean) => void;

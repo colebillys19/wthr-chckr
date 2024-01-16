@@ -1,7 +1,7 @@
 import { CSSProperties } from "react";
 
 import { useGlobalState } from "../../context";
-import { ModalContainer } from "../../AuxComponents";
+import { ModalContainer } from "../../SharedComponentsAux";
 import SetLocationFlow from "../SetLocationFlow";
 
 const tempStyles: CSSProperties = {

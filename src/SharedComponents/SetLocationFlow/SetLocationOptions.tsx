@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-import { useGlobalState } from "../../../context";
+import { useGlobalState } from "../../context";
 import {
   useUpdateUserLocation,
   useUpdateUserPrefersNoLocation,
-} from "../../../utils/customHooks/localStorage";
+} from "../../utils/customHooks/localStorage";
 
 type SetLocationOptionsPropsType = {
   setIsEnteringLocation: (value: boolean) => void;

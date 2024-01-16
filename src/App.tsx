@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { Header, PageHome, PageLocation } from "./Containers";
-import { Modal } from "./Components";
+import { Modal } from "./SharedComponents";
 import GlobalStateProvider from "./context";
 import "./App.css";
 

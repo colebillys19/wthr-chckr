@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 
-import { WeatherSvg } from "../../../AuxComponents";
+import { WeatherSvg } from "../../../SharedComponentsAux";
 import { CurrentType } from "../../../utils/types/openWeatherMap";
 import { getTimeData } from "../../../utils/helpers";
 

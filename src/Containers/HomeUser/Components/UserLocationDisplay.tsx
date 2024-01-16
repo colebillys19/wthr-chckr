@@ -1,5 +1,5 @@
 import { useGlobalState } from "../../../context";
-import { WeatherDisplayHome } from "../../../Components";
+import { WeatherDisplayHome } from "../../../SharedComponents";
 import { useUpdateUserLocation } from "../../../utils/customHooks/localStorage";
 import { useFetchLocationData } from "../../../utils/customHooks/locationData";
 

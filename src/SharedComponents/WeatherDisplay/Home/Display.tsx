@@ -1,7 +1,7 @@
 import { CSSProperties } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { WeatherSvg } from "../../../AuxComponents";
+import { WeatherSvg } from "../../../SharedComponentsAux";
 import { OpenWeatherMapDataType } from "../../../utils/types/openWeatherMap";
 import { getTimeData } from "../../../utils/helpers";
 

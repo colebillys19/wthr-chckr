@@ -1,7 +1,7 @@
 import { CSSProperties, useState } from "react";
 
-import EnterLocation from "./Components/EnterLocation";
-import SetLocationOptions from "./Components/SetLocationOptions";
+import EnterLocation from "./EnterLocation";
+import SetLocationOptions from "./SetLocationOptions";
 
 const tempStyles: CSSProperties = { opacity: 0.1 };
 

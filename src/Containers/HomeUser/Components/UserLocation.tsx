@@ -1,5 +1,5 @@
 import { useGlobalState } from "../../../context";
-import { SetLocationFlow } from "../../../Components";
+import { SetLocationFlow } from "../../../SharedComponents";
 import UserLocationDisplay from './UserLocationDisplay';
 
 function UserLocation() {
