@@ -41,7 +41,8 @@ function Display({ data, nameData }: DisplayPropsType) {
    *
    */
   const handleSeeMore = () => {
-    navigate(`/location?location=${lat},${lon}`);
+    const locationStr = `${lat},${lon}`;
+    navigate(`/location?location=${locationStr}`);
   };
 
   return (
