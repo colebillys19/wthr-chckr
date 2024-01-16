@@ -20,7 +20,7 @@ function Display({ location }: DisplayPropsType) {
   const [error, setError] = useState("");
   const [isFetchingData, setIsFetchingData] = useState(true);
   const [isFetchingName, setIsFetchingName] = useState(true);
-  const [nameData, setNameData] = useState<NameDataType>([]);
+  const [nameData, setNameData] = useState<NameDataType[]>([]);
   const [activeTab, setActiveTab] = useState("current");
 
   const { googleMaps, unitType } = useGlobalState();

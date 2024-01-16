@@ -1,16 +1,14 @@
-import { getIsDayTime } from "../../utils/helpers";
 import weatherSvgDict from "../../svg/weatherSvgDict";
 
 type WeatherSvgPropsType = {
   id: number;
-  timezoneOffset: number;
+  isDayTime: boolean;
   size: number;
 };
 
-function WeatherSvg({ id, timezoneOffset, size }: WeatherSvgPropsType) {
+function WeatherSvg({ id, isDayTime, size }: WeatherSvgPropsType) {
   let idToUse: number | string = id;
   if ([800, 801, 802, 803, 804].includes(id)) {
-    const isDayTime = getIsDayTime(timezoneOffset);
     idToUse = `${id}${isDayTime ? "d" : "n"}`;
   }
   const SvgComponent = weatherSvgDict[idToUse];

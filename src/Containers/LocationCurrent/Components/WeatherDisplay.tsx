@@ -17,7 +17,7 @@ type WeatherDisplayPropsType = {
 function WeatherDisplay({ data, timezoneOffset }: WeatherDisplayPropsType) {
   const { dt, temp, feels_like, weather, humidity, wind_speed } = data;
 
-  const { day, timeStandard } = getTimeData(dt, timezoneOffset);
+  const { day, isDayTime, timeStandard } = getTimeData(dt, timezoneOffset);
 
   const dataArr = [
     { label: "Day", value: day },
@@ -42,7 +42,7 @@ function WeatherDisplay({ data, timezoneOffset }: WeatherDisplayPropsType) {
       <div>
         <WeatherSvg
           id={weather[0].id}
-          timezoneOffset={timezoneOffset}
+          isDayTime={isDayTime}
           size={120}
         />
       </div>

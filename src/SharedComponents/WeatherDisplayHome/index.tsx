@@ -1,7 +1,7 @@
 import Display from "./Display";
 import Skeleton from "./Skeleton";
 import Error from "./Error";
-import { OpenWeatherMapDataType } from "../../../utils/types/openWeatherMap";
+import { OpenWeatherMapDataType } from "../../utils/types/openWeatherMap";
 
 type WeatherDisplayHomePropsType = {
   data: OpenWeatherMapDataType;

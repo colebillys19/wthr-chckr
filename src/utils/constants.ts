@@ -23,3 +23,22 @@ export const locationDataEmpty = {
   timezone_offset: 0,
   timezone: "",
 };
+
+export const geocoderLocationTypes = [
+  "neighborhood",
+  "sublocality",
+  "locality",
+  "administrative_area_level_2",
+  "administrative_area_level_1",
+  "country",
+];
+
+export const daysOfWeek = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];

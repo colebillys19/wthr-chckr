@@ -1,27 +1,10 @@
-const locationTypes = [
-  "neighborhood",
-  "sublocality",
-  "locality",
-  "administrative_area_level_2",
-  "administrative_area_level_1",
-  "country",
-];
-const days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-
-type NameDataType = { label: string; value: string }[];
+import { NameDataType } from './types/geocoder';
+import { geocoderLocationTypes, daysOfWeek } from './constants';
 
 export const getLocationNameData = (results: google.maps.GeocoderResult[]) => {
-  const dataArr: NameDataType = [];
+  const dataArr: NameDataType[] = [];
 
-  locationTypes.forEach((locationType) => {
+  geocoderLocationTypes.forEach((locationType) => {
     const res = results.find((result) => result.types.includes(locationType));
     const obj = res?.address_components.find((result) =>
       result.types.includes(locationType)
@@ -32,14 +15,6 @@ export const getLocationNameData = (results: google.maps.GeocoderResult[]) => {
   });
 
   return dataArr;
-};
-
-export const getIsDayTime = (timezoneOffset: number) => {
-  const utcDate = new Date().getTime();
-  const offsetMilliseconds = timezoneOffset * 1000;
-  const localDate = new Date(utcDate + offsetMilliseconds);
-  const localHours = localDate.getHours();
-  return localHours > 6 && localHours < 18;
 };
 
 export const getIsValidCoordinatesStr = (coordsStr: string) => {
@@ -63,7 +38,7 @@ export const getTimeData = (unixTime: number, timezoneOffset: number) => {
   const offsetMs = timezoneOffset * 1000;
   const localTimeMs = utcMs + offsetMs;
   const date = new Date(localTimeMs);
-  const day = days[date.getDay()];
+  const day = daysOfWeek[date.getDay()];
   const hours = date.getHours();
   const minutes = date.getMinutes();
   const timeStandard = `${hours % 12 || 12}:${
@@ -72,5 +47,6 @@ export const getTimeData = (unixTime: number, timezoneOffset: number) => {
   const timeMilitary = `${hours < 10 ? "0" : ""}${hours}:${
     minutes < 10 ? "0" : ""
   }${minutes}`;
-  return { day, timeStandard, timeMilitary };
+  const isDayTime = hours > 6 && hours < 18;
+  return { day, timeStandard, timeMilitary, isDayTime };
 };

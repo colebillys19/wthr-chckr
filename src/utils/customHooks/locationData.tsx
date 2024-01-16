@@ -10,7 +10,7 @@ export const useFetchLocationData = (location: string) => {
   const [error, setError] = useState("");
   const [isFetchingData, setIsFetchingData] = useState(true);
   const [isFetchingName, setIsFetchingName] = useState(true);
-  const [nameData, setNameData] = useState<NameDataType>([]);
+  const [nameData, setNameData] = useState<NameDataType[]>([]);
 
   const { googleMaps, unitType } = useGlobalState();
 

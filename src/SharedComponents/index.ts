@@ -1,6 +1,5 @@
 import Modal from "./Modal";
 import SetLocationFlow from "./SetLocationFlow";
-import WeatherDisplayHeader from "./WeatherDisplay/Header";
-import WeatherDisplayHome from "./WeatherDisplay/Home";
+import WeatherDisplayHome from "./WeatherDisplayHome";
 
-export { Modal, SetLocationFlow, WeatherDisplayHeader, WeatherDisplayHome };
+export { Modal, SetLocationFlow, WeatherDisplayHome };

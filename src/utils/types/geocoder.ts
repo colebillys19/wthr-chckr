@@ -33,4 +33,4 @@ export type ResultType = {
 
 export type ResultsType = ResultType[];
 
-export type NameDataType = { label: string; value: string }[];
+export type NameDataType = { label: string; value: string };

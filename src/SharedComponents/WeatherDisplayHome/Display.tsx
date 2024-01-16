@@ -1,9 +1,9 @@
 import { CSSProperties } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { WeatherSvg } from "../../../SharedComponentsAux";
-import { OpenWeatherMapDataType } from "../../../utils/types/openWeatherMap";
-import { getTimeData } from "../../../utils/helpers";
+import { WeatherSvg } from "../../SharedComponentsAux";
+import { OpenWeatherMapDataType } from "../../utils/types/openWeatherMap";
+import { getTimeData } from "../../utils/helpers";
 
 const tempStylesA: CSSProperties = {
   outline: "3px solid orange",
@@ -25,7 +25,7 @@ function Display({ data, nameData }: DisplayPropsType) {
   const { current, timezone_offset, lat, lon } = data;
   const { dt, temp, feels_like, weather, humidity, wind_speed } = current;
 
-  const { day, timeStandard } = getTimeData(dt, timezone_offset);
+  const { day, isDayTime, timeStandard } = getTimeData(dt, timezone_offset);
 
   const dataArr = [
     { label: "Day", value: day },
@@ -61,11 +61,7 @@ function Display({ data, nameData }: DisplayPropsType) {
         ))}
       </ul>
       <div>
-        <WeatherSvg
-          id={weather[0].id}
-          timezoneOffset={timezone_offset}
-          size={120}
-        />
+        <WeatherSvg id={weather[0].id} isDayTime={isDayTime} size={120} />
       </div>
       <div>
         <button onClick={handleSeeMore}>see more</button>
