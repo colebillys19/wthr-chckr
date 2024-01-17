@@ -45,7 +45,7 @@ function SvgComponent({ size = 240 }: SvgComponentPropsType) {
           gradientUnits="userSpaceOnUse"
         >
           <stop stopColor="#1E2121" />
-          <stop offset="1" stopColor="#1E2121" stop-opacity="0" />
+          <stop offset="1" stopColor="#1E2121" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint2_linear_4_82"

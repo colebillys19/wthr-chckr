@@ -24,7 +24,7 @@ export const useUpdateUserLocation = () => {
 export const useUpdateRecentLocations = () => {
   const { setRecentLocations } = useGlobalState();
 
-  const updateRecentLocations = (recentLocations: []) => {
+  const updateRecentLocations = (recentLocations: string[]) => {
     setRecentLocations(recentLocations);
     localStorage.setItem("recentLocations", JSON.stringify(recentLocations));
   };

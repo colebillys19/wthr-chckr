@@ -18,7 +18,7 @@ type GlobalStatePropsType = {
   setActiveModal: (value: string) => void;
   setGoogleMaps: (value: typeof google.maps | null) => void;
   setIsDarkMode: (value: boolean) => void;
-  setRecentLocations: (value: []) => void;
+  setRecentLocations: (value: string[]) => void;
   setUnitType: (value: string) => void;
   setUserLocation: (value: string) => void;
   setUserPrefersNoLocation: (value: boolean) => void;
@@ -38,7 +38,7 @@ const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
   const [activeModal, setActiveModal] = useState("");
   const [googleMaps, setGoogleMaps] = useState<typeof google.maps | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [recentLocations, setRecentLocations] = useState([]);
+  const [recentLocations, setRecentLocations] = useState<string[]>([]);
   const [unitType, setUnitType] = useState("imperial");
   const [userLocation, setUserLocation] = useState("");
   const [userPrefersNoLocation, setUserPrefersNoLocation] = useState(false);

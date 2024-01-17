@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
 
 import { useGlobalState } from "../../../context";
+import { useUpdateRecentLocations } from "../../../utils/customHooks/localStorage";
 import { getLocationNameData } from "../../../utils/helpers";
 import { locationDataEmpty } from "../../../utils/constants";
 import { NameDataType } from "../../../utils/types/geocoder";
@@ -21,7 +21,16 @@ function DataContainer({ location }: DataContainerPropsType) {
   const [isFetchingName, setIsFetchingName] = useState(true);
   const [nameData, setNameData] = useState<NameDataType[]>([]);
 
-  const { googleMaps, unitType } = useGlobalState();
+  const { googleMaps, recentLocations, unitType } = useGlobalState();
+
+  const updateRecentLocations = useUpdateRecentLocations();
+
+  useEffect(() => {
+    const isRecent = recentLocations.some((loc) => loc === location);
+    if (!isRecent) {
+      updateRecentLocations([location, ...recentLocations.slice(0, 2)]);
+    }
+  }, []);
 
   /*
    *
