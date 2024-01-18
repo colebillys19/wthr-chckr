@@ -1,6 +1,7 @@
 import { CSSProperties } from 'react';
 
 import { useGlobalState } from '../../../context';
+import { useUpdateRecentLocations } from "../../../utils/customHooks/localStorage";
 import RecentLocationDisplay from './RecentLocationDisplay';
 
 const tempStyles: CSSProperties = {
@@ -10,6 +11,12 @@ const tempStyles: CSSProperties = {
 
 function RecentLocations() {
   const { recentLocations } = useGlobalState();
+
+  const updateRecentLocations = useUpdateRecentLocations();
+
+  const handleClearRecent = () => {
+    updateRecentLocations([]);
+  };
 
   if (!recentLocations.length) {
     return null;
@@ -27,6 +34,8 @@ function RecentLocations() {
           </li>
         ))}
       </ul>
+      <br />
+      <button onClick={handleClearRecent}>clear recent</button>
     </>
   );
 }
