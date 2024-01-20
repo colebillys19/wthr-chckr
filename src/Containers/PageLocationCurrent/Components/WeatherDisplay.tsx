@@ -13,7 +13,7 @@ function WeatherDisplay({ data, timezoneOffset }: WeatherDisplayPropsType) {
   const { day, isDayTime, timeStandard } = getTimeData(dt, timezoneOffset);
 
   const dataArr = [
-    { label: "Day", value: day },
+    { label: "Day/Time", value: `${day}, ${timeStandard}` },
     { label: "Time", value: timeStandard },
     { label: "Temperature", value: temp },
     { label: "Feels like", value: feels_like },

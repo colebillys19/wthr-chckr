@@ -1,13 +1,13 @@
-import { CSSProperties } from 'react';
+import { CSSProperties } from "react";
 
-import { useGlobalState } from '../../../context';
+import { useGlobalState } from "../../../context";
 import { useUpdateRecentLocations } from "../../../utils/customHooks/localStorage";
-import RecentLocationDisplay from './RecentLocationDisplay';
+import RecentLocationDisplay from "./RecentLocationDisplay";
 
 const tempStyles: CSSProperties = {
   display: "flex",
+  gap: "16px",
 };
-
 
 function RecentLocations() {
   const { recentLocations } = useGlobalState();
@@ -28,7 +28,7 @@ function RecentLocations() {
       <h3>recently viewed</h3>
       <br />
       <ul style={tempStyles}>
-        {recentLocations.map(location => (
+        {recentLocations.map((location) => (
           <li key={location}>
             <RecentLocationDisplay location={location} />
           </li>

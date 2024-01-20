@@ -7,15 +7,15 @@ type WeatherDisplayHomePropsType = {
   data: OpenWeatherMapDataType;
   error: string;
   isLoading: boolean;
-  nameData: { label: string; value: string }[];
+  name: string;
 };
 
-function WeatherDisplayHome({ data, error, isLoading, nameData }: WeatherDisplayHomePropsType) {
+function WeatherDisplayHome({ data, error, isLoading, name }: WeatherDisplayHomePropsType) {
   if (isLoading) {
     return <Skeleton />;
   }
 
-  return error ? <Error /> : <Display data={data} nameData={nameData} />;
+  return error ? <Error /> : <Display data={data} name={name} />;
 }
 
 export default WeatherDisplayHome;

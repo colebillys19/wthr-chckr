@@ -25,7 +25,6 @@ export const locationDataEmpty = {
 };
 
 export const geocoderLocationTypes = [
-  "neighborhood",
   "sublocality",
   "locality",
   "administrative_area_level_2",

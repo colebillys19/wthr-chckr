@@ -1,8 +1,9 @@
-import { NameDataType } from './types/geocoder';
-import { geocoderLocationTypes, daysOfWeek } from './constants';
+import { geocoderLocationTypes, daysOfWeek } from "./constants";
 
-export const getLocationNameData = (results: google.maps.GeocoderResult[]) => {
-  const dataArr: NameDataType[] = [];
+const getPreferredLocationNameData = (
+  results: google.maps.GeocoderResult[]
+) => {
+  const data: Record<string, string> = {};
 
   geocoderLocationTypes.forEach((locationType) => {
     const res = results.find((result) => result.types.includes(locationType));
@@ -10,11 +11,32 @@ export const getLocationNameData = (results: google.maps.GeocoderResult[]) => {
       result.types.includes(locationType)
     );
     if (obj?.short_name) {
-      dataArr.push({ label: locationType, value: obj?.short_name });
+      data[locationType] = obj?.short_name;
     }
   });
+  return data;
+};
 
-  return dataArr;
+export const getFormattedLocationName = (
+  results: google.maps.GeocoderResult[]
+) => {
+  const {
+    sublocality,
+    locality,
+    administrative_area_level_1,
+    administrative_area_level_2,
+    country,
+  } = getPreferredLocationNameData(results);
+  if (sublocality) {
+    return `${sublocality}, ${administrative_area_level_1}`;
+  }
+  if (locality) {
+    return `${locality}, ${administrative_area_level_1}`;
+  }
+  if (administrative_area_level_2) {
+    return `${administrative_area_level_2}, ${administrative_area_level_1}`;
+  }
+  return `${administrative_area_level_1}, ${country}`;
 };
 
 export const getIsValidCoordinatesStr = (coordsStr: string) => {
@@ -55,8 +77,10 @@ type NumObjType = {
   [key: string]: number;
 };
 
-export const getHighLow = (numObj: NumObjType): { high: number; low: number } => {
-  const values = Object.keys(numObj).map(key => numObj[key]);
+export const getHighLow = (
+  numObj: NumObjType
+): { high: number; low: number } => {
+  const values = Object.keys(numObj).map((key) => numObj[key]);
 
   const high = values.reduce((a, b) => Math.max(a, b));
   const low = values.reduce((a, b) => Math.min(a, b));

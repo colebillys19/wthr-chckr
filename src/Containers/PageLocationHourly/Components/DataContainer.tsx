@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 
 import { useGlobalState } from "../../../context";
 import { useUpdateRecentLocations } from "../../../utils/customHooks/localStorage";
-import { getLocationNameData } from "../../../utils/helpers";
+import { getFormattedLocationName } from "../../../utils/helpers";
 import { locationDataEmpty } from "../../../utils/constants";
-import { NameDataType } from "../../../utils/types/geocoder";
 import { TabNav } from "../../../SharedComponentsAux";
 import WeatherDisplayContainer from "./WeatherDisplayContainer";
 import Error from "./Error";
@@ -19,7 +18,7 @@ function DataContainer({ location }: DataContainerPropsType) {
   const [error, setError] = useState("");
   const [isFetchingData, setIsFetchingData] = useState(true);
   const [isFetchingName, setIsFetchingName] = useState(true);
-  const [nameData, setNameData] = useState<NameDataType[]>([]);
+  const [name, setName] = useState('');
 
   const { googleMaps, recentLocations, unitType } = useGlobalState();
 
@@ -89,7 +88,7 @@ function DataContainer({ location }: DataContainerPropsType) {
         );
       })
         .then((results: google.maps.GeocoderResult[]) => {
-          setNameData(getLocationNameData(results));
+          setName(getFormattedLocationName(results));
           setIsFetchingName(false);
         })
         .catch((error: any) => {
@@ -112,14 +111,7 @@ function DataContainer({ location }: DataContainerPropsType) {
 
   return (
     <>
-      <ul>
-        {nameData.map(({ label, value }) => (
-          <li key={label}>
-            <span>{label}:&nbsp;</span>
-            <b>{value}</b>
-          </li>
-        ))}
-      </ul>
+      <div>{name}</div>
       <br />
       <TabNav location={location} />
       <br />
