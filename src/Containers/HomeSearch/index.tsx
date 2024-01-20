@@ -77,7 +77,7 @@ function HomeSearch() {
             if (status === googleMaps.GeocoderStatus.OK) {
               const location = results[0].geometry.location;
               const locationStr = `${location.lat()},${location.lng()}`;
-              navigate(`/location?location=${locationStr}`);
+              navigate(`/location/current?location=${locationStr}`);
               resolve(true);
             } else {
               inputErrorRef.current = "Invalid location";

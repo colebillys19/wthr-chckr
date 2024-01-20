@@ -1,9 +1,9 @@
 import { useFetchLocationData } from "../../../utils/customHooks/locationData";
 import { WeatherDisplayHome } from "../../../SharedComponents";
 
-type CityDisplayPropsType = { location: string };
+type RecentLocationDisplayPropsType = { location: string };
 
-function CityDisplay({ location }: CityDisplayPropsType) {
+function RecentLocationDisplay({ location }: RecentLocationDisplayPropsType) {
   const { data, error, isLoading, name } = useFetchLocationData(location);
 
   return (
@@ -16,4 +16,4 @@ function CityDisplay({ location }: CityDisplayPropsType) {
   );
 }
 
-export default CityDisplay;
+export default RecentLocationDisplay;

@@ -1,11 +1,11 @@
 import HomeSectionContainer from "./HomeSectionContainer";
-import LocationTabContainer from "./LocationTabContainer";
 import ModalContainer from "./ModalContainer";
 import WeatherSvg from "./WeatherSvg";
+import TabNav from "./TabNav";
 
 export {
   HomeSectionContainer,
-  LocationTabContainer,
   ModalContainer,
   WeatherSvg,
+  TabNav,
 };

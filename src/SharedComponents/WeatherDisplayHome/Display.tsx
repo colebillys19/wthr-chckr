@@ -6,20 +6,23 @@ import { OpenWeatherMapDataType } from "../../utils/types/openWeatherMap";
 import { getTimeData } from "../../utils/helpers";
 
 const tempStylesA: CSSProperties = {
-  outline: "3px solid orange",
+  border: "1px solid black",
   display: "inline-block",
+  width: "240px",
+  height: "360px",
+  padding: "16px",
 };
 
 const tempStylesB: CSSProperties = {
-  color: "purple",
+  color: 'grey',
 };
 
 type DisplayPropsType = {
   data: OpenWeatherMapDataType;
-  nameData: { label: string; value: string }[];
+  name: string;
 };
 
-function Display({ data, nameData }: DisplayPropsType) {
+function Display({ data, name }: DisplayPropsType) {
   const navigate = useNavigate();
 
   const { current, timezone_offset, lat, lon } = data;
@@ -28,8 +31,6 @@ function Display({ data, nameData }: DisplayPropsType) {
   const { day, isDayTime, timeStandard } = getTimeData(dt, timezone_offset);
 
   const dataArr = [
-    { label: "Day", value: day },
-    { label: "Time", value: timeStandard },
     { label: "Temperature", value: temp },
     { label: "Feels like", value: feels_like },
     { label: "Weather", value: weather[0].main },
@@ -42,28 +43,26 @@ function Display({ data, nameData }: DisplayPropsType) {
    */
   const handleSeeMore = () => {
     const locationStr = `${lat},${lon}`;
-    navigate(`/location?location=${locationStr}`);
+    navigate(`/location/current?location=${locationStr}`);
   };
 
   return (
     <div style={tempStylesA}>
-      <ul>
-        {nameData.map(({ label, value }) => (
-          <li key={label} style={tempStylesB}>
-            <span>{label}:&nbsp;</span>
-            <b>{value}</b>
-          </li>
-        ))}
-        {dataArr.map(({ label, value }) => (
-          <li key={label}>
-            <span>{label}:&nbsp;</span>
-            <b>{value}</b>
-          </li>
-        ))}
-      </ul>
+      <div><b>{name}</b></div>
       <div>
         <WeatherSvg id={weather[0].id} isDayTime={isDayTime} size={120} />
       </div>
+      <div><b>{day}, {timeStandard}</b></div>
+      <br />
+      <ul>
+        {dataArr.map(({ label, value }) => (
+          <li key={label}>
+            <span style={tempStylesB}>{label}:&nbsp;</span>
+            <span>{value}</span>
+          </li>
+        ))}
+      </ul>
+      <br />
       <div>
         <button onClick={handleSeeMore}>see more</button>
       </div>

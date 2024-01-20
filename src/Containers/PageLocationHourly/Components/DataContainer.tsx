@@ -1,29 +1,35 @@
 import { useEffect, useState } from "react";
 
 import { useGlobalState } from "../../../context";
-import { getLocationNameData } from "../../../utils/helpers";
+import { useUpdateRecentLocations } from "../../../utils/customHooks/localStorage";
+import { getFormattedLocationName } from "../../../utils/helpers";
 import { locationDataEmpty } from "../../../utils/constants";
-import { NameDataType } from "../../../utils/types/geocoder";
-import LocationCurrent from "../../LocationCurrent";
-import LocationDaily from "../../LocationDaily";
-import LocationHourly from "../../LocationHourly";
-import TabNav from "./TabNav";
+import { TabNav } from "../../../SharedComponentsAux";
+import WeatherDisplayContainer from "./WeatherDisplayContainer";
 import Error from "./Error";
 import Skeleton from "./Skeleton";
 
-type DisplayPropsType = {
+type DataContainerPropsType = {
   location: string;
 };
 
-function Display({ location }: DisplayPropsType) {
+function DataContainer({ location }: DataContainerPropsType) {
   const [data, setData] = useState(locationDataEmpty);
   const [error, setError] = useState("");
   const [isFetchingData, setIsFetchingData] = useState(true);
   const [isFetchingName, setIsFetchingName] = useState(true);
-  const [nameData, setNameData] = useState<NameDataType[]>([]);
-  const [activeTab, setActiveTab] = useState("current");
+  const [name, setName] = useState('');
 
-  const { googleMaps, unitType } = useGlobalState();
+  const { googleMaps, recentLocations, unitType } = useGlobalState();
+
+  const updateRecentLocations = useUpdateRecentLocations();
+
+  useEffect(() => {
+    const isRecent = recentLocations.some((loc) => loc === location);
+    if (!isRecent) {
+      updateRecentLocations([location, ...recentLocations.slice(0, 2)]);
+    }
+  }, []);
 
   /*
    *
@@ -82,7 +88,7 @@ function Display({ location }: DisplayPropsType) {
         );
       })
         .then((results: google.maps.GeocoderResult[]) => {
-          setNameData(getLocationNameData(results));
+          setName(getFormattedLocationName(results));
           setIsFetchingName(false);
         })
         .catch((error: any) => {
@@ -101,30 +107,19 @@ function Display({ location }: DisplayPropsType) {
     return <Error error={error} />;
   }
 
-  const { current, daily, hourly, timezone_offset } = data;
+  const { hourly, timezone_offset } = data;
 
   return (
     <>
-      <ul>
-        {nameData.map(({ label, value }) => (
-          <li key={label}>
-            <span>{label}:&nbsp;</span>
-            <b>{value}</b>
-          </li>
-        ))}
-      </ul>
-      <TabNav activeTab={activeTab} setActiveTab={setActiveTab} />
-      {activeTab === "current" && (
-        <LocationCurrent data={current} timezoneOffset={timezone_offset} />
-      )}
-      {activeTab === "hourly" && (
-        <LocationHourly data={hourly} timezoneOffset={timezone_offset} />
-      )}
-      {activeTab === "daily" && (
-        <LocationDaily data={daily} timezoneOffset={timezone_offset} />
-      )}
+      <div>{name}</div>
+      <br />
+      <TabNav location={location} />
+      <br />
+      <h3>hourly</h3>
+      <br />
+      <WeatherDisplayContainer data={hourly} timezoneOffset={timezone_offset} />
     </>
   );
 }
 
-export default Display;
+export default DataContainer;
