@@ -111,7 +111,8 @@ function DataContainer({ location }: DataContainerPropsType) {
 
   return (
     <>
-      <div>{name}</div>
+      <br />
+      <h1>{name}</h1>
       <br />
       <TabNav location={location} />
       <br />

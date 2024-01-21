@@ -13,9 +13,10 @@ const tempStyles: CSSProperties = {
 type WeatherDisplayPropsType = {
   data: DailyType;
   timezoneOffset: number;
+  isToday: boolean;
 };
 
-function WeatherDisplay({ data, timezoneOffset }: WeatherDisplayPropsType) {
+function WeatherDisplay({ data, timezoneOffset, isToday }: WeatherDisplayPropsType) {
   const {
     dt,
     temp,
@@ -33,7 +34,6 @@ function WeatherDisplay({ data, timezoneOffset }: WeatherDisplayPropsType) {
   const { high: feelsLikeHigh, low: feelsLikeLow } = getHighLow(feels_like);
 
   const dataArr = [
-    { label: "Day", value: day },
     { label: "Summary", value: summary },
     { label: "Temperature (high)", value: temp.max },
     { label: "Temperature (low)", value: temp.min },
@@ -54,6 +54,7 @@ function WeatherDisplay({ data, timezoneOffset }: WeatherDisplayPropsType) {
 
   return (
     <div style={tempStyles}>
+      <h3>{isToday ? 'Today' : day}</h3>
       <ul>
         {dataArr.map(({ label, value }) => (
           <li key={label}>

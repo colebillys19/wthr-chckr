@@ -23,6 +23,7 @@ function UserLocationDisplay() {
         name={name}
       />
       <div>
+        <br />
         <button onClick={handleChangeLocation}>change location</button>
       </div>
     </>

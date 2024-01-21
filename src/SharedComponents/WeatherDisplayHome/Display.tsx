@@ -1,6 +1,7 @@
 import { CSSProperties } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { useGlobalState } from "../../context";
 import { WeatherSvg } from "../../SharedComponentsAux";
 import { OpenWeatherMapDataType } from "../../utils/types/openWeatherMap";
 import { getTimeData } from "../../utils/helpers";
@@ -25,17 +26,22 @@ type DisplayPropsType = {
 function Display({ data, name }: DisplayPropsType) {
   const navigate = useNavigate();
 
+  const { unitType } = useGlobalState();
+
   const { current, timezone_offset, lat, lon } = data;
   const { dt, temp, feels_like, weather, humidity, wind_speed } = current;
 
   const { day, isDayTime, timeStandard } = getTimeData(dt, timezone_offset);
 
+  const tempUnit = unitType === "imperial" ? "°F" : "°C";
+  const windUnit = unitType === "imperial" ? "mph" : "m/s";
+
   const dataArr = [
-    { label: "Temperature", value: temp },
-    { label: "Feels like", value: feels_like },
+    { label: "Temperature", value: `${Math.round(temp)}${tempUnit}` },
+    { label: "Feels like", value: `${Math.round(feels_like)}${tempUnit}` },
     { label: "Weather", value: weather[0].main },
-    { label: "Humidity", value: humidity },
-    { label: "Wind speed", value: wind_speed },
+    { label: "Humidity", value: `${humidity}%` },
+    { label: "Wind speed", value: `${Math.round(wind_speed)}${windUnit}` },
   ];
 
   /*

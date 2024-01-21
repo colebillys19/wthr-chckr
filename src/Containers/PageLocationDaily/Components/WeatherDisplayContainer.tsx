@@ -18,13 +18,12 @@ function WeatherDisplayContainer({
   data,
   timezoneOffset,
 }: WeatherDisplayContainerPropsType) {
-  const dataToUse = data.slice(1);
 
   return (
     <ul style={tempStyles}>
-      {dataToUse.map((dailyData) => (
+      {data.map((dailyData, i) => (
         <li key={uuidv4()}>
-          <WeatherDisplay data={dailyData} timezoneOffset={timezoneOffset} />
+          <WeatherDisplay data={dailyData} timezoneOffset={timezoneOffset} isToday={i === 0} />
         </li>
       ))}
     </ul>

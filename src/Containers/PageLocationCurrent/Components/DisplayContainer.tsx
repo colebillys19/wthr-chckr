@@ -5,20 +5,20 @@ import { useUpdateRecentLocations } from "../../../utils/customHooks/localStorag
 import { getFormattedLocationName } from "../../../utils/helpers";
 import { locationDataEmpty } from "../../../utils/constants";
 import { TabNav } from "../../../SharedComponentsAux";
-import WeatherDisplayContainer from "./WeatherDisplayContainer";
+import Display from "./Display";
 import Error from "./Error";
 import Skeleton from "./Skeleton";
 
-type DataContainerPropsType = {
+type DisplayContainerPropsType = {
   location: string;
 };
 
-function DataContainer({ location }: DataContainerPropsType) {
+function DisplayContainer({ location }: DisplayContainerPropsType) {
   const [data, setData] = useState(locationDataEmpty);
   const [error, setError] = useState("");
   const [isFetchingData, setIsFetchingData] = useState(true);
   const [isFetchingName, setIsFetchingName] = useState(true);
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
 
   const { googleMaps, recentLocations, unitType } = useGlobalState();
 
@@ -107,22 +107,22 @@ function DataContainer({ location }: DataContainerPropsType) {
     return <Error error={error} />;
   }
 
-  const { current, timezone_offset } = data;
+  const { current, daily, timezone_offset } = data;
 
   return (
     <>
-      <div>{name}</div>
+      <br />
+      <h1>{name}</h1>
       <br />
       <TabNav location={location} />
       <br />
-      <h3>current</h3>
-      <br />
-      <WeatherDisplayContainer
-        data={current}
+      <Display
+        currentData={current}
+        todayData={daily[0]}
         timezoneOffset={timezone_offset}
       />
     </>
   );
 }
 
-export default DataContainer;
+export default DisplayContainer;
