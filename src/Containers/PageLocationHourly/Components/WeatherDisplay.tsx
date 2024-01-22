@@ -5,9 +5,11 @@ import { HourlyType } from "../../../utils/types/openWeatherMap";
 import { getTimeData } from "../../../utils/helpers";
 
 const tempStyles: CSSProperties = {
-  outline: "3px solid orange",
-  padding: "16px",
+  border: "1px solid black",
   display: "inline-block",
+  width: "200px",
+  height: "272px",
+  padding: "16px",
 };
 
 type WeatherDisplayPropsType = {

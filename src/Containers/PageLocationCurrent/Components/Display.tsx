@@ -1,7 +1,21 @@
+import { CSSProperties } from "react";
+
 import { useGlobalState } from "../../../context";
 import { WeatherSvg } from "../../../SharedComponentsAux";
 import { CurrentType, DailyType } from "../../../utils/types/openWeatherMap";
 import { getTimeData, getHighLow } from "../../../utils/helpers";
+
+const tempStylesA: CSSProperties = {
+  border: '1px solid black',
+  display: 'inline-block',
+  padding: '16px',
+};
+
+const tempStylesB: CSSProperties = {
+  backgroundColor: '#eeeeee',
+  display: 'inline-block',
+  padding: '16px',
+};
 
 type DisplayPropsType = {
   currentData: CurrentType;
@@ -29,17 +43,17 @@ function Display({ currentData, todayData, timezoneOffset }: DisplayPropsType) {
   const windUnit = unitType === "imperial" ? "mph" : "m/s";
 
   const currentDataArr = [
+    { label: "Weather", value: currentWeather[0].main },
     { label: "Temperature", value: `${Math.round(currentTemp)}${tempUnit}` },
     {
       label: "Feels like",
       value: `${Math.round(currentFeelsLike)}${tempUnit}`,
     },
-    { label: "Weather", value: currentWeather[0].main },
-    { label: "Humidity", value: `${currentHumidity}%` },
     {
       label: "Wind speed",
       value: `${Math.round(currentWindSpeed)}${windUnit}`,
     },
+    { label: "Humidity", value: `${currentHumidity}%` },
   ];
 
   const {
@@ -66,7 +80,6 @@ function Display({ currentData, todayData, timezoneOffset }: DisplayPropsType) {
   const todayDataArr = [
     { label: "sunrise", value: todaySunriseTimeStandard },
     { label: "sunset", value: todaySunsetTimeStandard },
-    { label: "summary", value: todaySummary },
     {
       label: "Temperature (high)",
       value: `${Math.round(todayTemp.max)}${tempUnit}`,
@@ -90,34 +103,41 @@ function Display({ currentData, todayData, timezoneOffset }: DisplayPropsType) {
 
   return (
     <div>
-      <h3>current</h3>
+      <h2>Current</h2>
       <br />
-      <div>
-        {day}, {currentTimeStandard}
+      <div style={tempStylesA}>
+        <h3>{currentTimeStandard}</h3>
+        <div>
+          <WeatherSvg
+            id={currentWeather[0].id}
+            isDayTime={isDayTime}
+            size={120}
+          />
+        </div>
+        <ul>
+          {currentDataArr.map(({ label, value }) => (
+            <li key={label}>
+              <span>{label}:&nbsp;</span>
+              <b>{value}</b>
+            </li>
+          ))}
+        </ul>
       </div>
       <br />
-      <ul>
-        {currentDataArr.map(({ label, value }) => (
-          <li key={label}>
-            <span>{label}:&nbsp;</span>
-            <b>{value}</b>
-          </li>
-        ))}
-      </ul>
-      <div>
-        <WeatherSvg id={currentWeather[0].id} isDayTime={isDayTime} size={120} />
+      <div style={tempStylesB}>
+        <h3>{day} Summary</h3>
+        <br />
+        <ul>
+          {todayDataArr.map(({ label, value }) => (
+            <li key={label}>
+              <span>{label}:&nbsp;</span>
+              <b>{value}</b>
+            </li>
+          ))}
+        </ul>
+        <br />
+        <div>{todaySummary}</div>
       </div>
-      <br />
-      <h3>today</h3>
-      <br />
-      <ul>
-        {todayDataArr.map(({ label, value }) => (
-          <li key={label}>
-            <span>{label}:&nbsp;</span>
-            <b>{value}</b>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }

@@ -6,7 +6,7 @@ import WeatherDisplay from "./WeatherDisplay";
 
 const tempStyles: CSSProperties = {
   display: "flex",
-  flexWrap: "wrap",
+  flexDirection: "column",
 };
 
 type WeatherDisplayContainerPropsType = {

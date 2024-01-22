@@ -116,7 +116,7 @@ function DataContainer({ location }: DataContainerPropsType) {
       <br />
       <TabNav location={location} />
       <br />
-      <h3>hourly</h3>
+      <h2>Hourly</h2>
       <br />
       <WeatherDisplayContainer data={hourly} timezoneOffset={timezone_offset} />
     </>

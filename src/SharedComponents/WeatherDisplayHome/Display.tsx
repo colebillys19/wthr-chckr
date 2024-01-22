@@ -31,7 +31,7 @@ function Display({ data, name }: DisplayPropsType) {
   const { current, timezone_offset, lat, lon } = data;
   const { dt, temp, feels_like, weather, humidity, wind_speed } = current;
 
-  const { day, isDayTime, timeStandard } = getTimeData(dt, timezone_offset);
+  const { isDayTime, timeStandard } = getTimeData(dt, timezone_offset);
 
   const tempUnit = unitType === "imperial" ? "°F" : "°C";
   const windUnit = unitType === "imperial" ? "mph" : "m/s";
@@ -39,9 +39,8 @@ function Display({ data, name }: DisplayPropsType) {
   const dataArr = [
     { label: "Temperature", value: `${Math.round(temp)}${tempUnit}` },
     { label: "Feels like", value: `${Math.round(feels_like)}${tempUnit}` },
-    { label: "Weather", value: weather[0].main },
-    { label: "Humidity", value: `${humidity}%` },
     { label: "Wind speed", value: `${Math.round(wind_speed)}${windUnit}` },
+    { label: "Humidity", value: `${humidity}%` },
   ];
 
   /*
@@ -55,10 +54,12 @@ function Display({ data, name }: DisplayPropsType) {
   return (
     <div style={tempStylesA}>
       <div><b>{name}</b></div>
+      <div>{timeStandard}</div>
+      <br />
       <div>
         <WeatherSvg id={weather[0].id} isDayTime={isDayTime} size={120} />
       </div>
-      <div><b>{day}, {timeStandard}</b></div>
+      <div>{weather[0].main}</div>
       <br />
       <ul>
         {dataArr.map(({ label, value }) => (

@@ -4,10 +4,14 @@ import { WeatherSvg } from "../../../SharedComponentsAux";
 import { DailyType } from "../../../utils/types/openWeatherMap";
 import { getHighLow, getTimeData } from "../../../utils/helpers";
 
-const tempStyles: CSSProperties = {
-  outline: "3px solid orange",
+const tempStylesA: CSSProperties = {
   padding: "16px",
-  display: "inline-block",
+  borderBottom: "1px solid black",
+  display: 'inline-block',
+};
+
+const tempStylesB: CSSProperties = {
+  fontWeight: "bold",
 };
 
 type WeatherDisplayPropsType = {
@@ -34,7 +38,6 @@ function WeatherDisplay({ data, timezoneOffset, isToday }: WeatherDisplayPropsTy
   const { high: feelsLikeHigh, low: feelsLikeLow } = getHighLow(feels_like);
 
   const dataArr = [
-    { label: "Summary", value: summary },
     { label: "Temperature (high)", value: temp.max },
     { label: "Temperature (low)", value: temp.min },
     { label: "Feels like (high)", value: feelsLikeHigh },
@@ -53,8 +56,9 @@ function WeatherDisplay({ data, timezoneOffset, isToday }: WeatherDisplayPropsTy
   }
 
   return (
-    <div style={tempStyles}>
-      <h3>{isToday ? 'Today' : day}</h3>
+    <div style={tempStylesA}>
+      <h3 style={tempStylesB}>{isToday ? 'Today' : day}</h3>
+      <br />
       <ul>
         {dataArr.map(({ label, value }) => (
           <li key={label}>
@@ -66,6 +70,8 @@ function WeatherDisplay({ data, timezoneOffset, isToday }: WeatherDisplayPropsTy
       <div>
         <WeatherSvg id={weather[0].id} isDayTime={isDayTime} size={120} />
       </div>
+      <br />
+      <div>{summary}</div>
     </div>
   );
 }
