@@ -1,5 +1,6 @@
 import { CSSProperties } from "react";
 
+import { useGlobalState } from "../../../context";
 import { WeatherSvg } from "../../../SharedComponentsAux";
 import { DailyType } from "../../../utils/types/openWeatherMap";
 import { getHighLow, getTimeData } from "../../../utils/helpers";
@@ -21,6 +22,8 @@ type WeatherDisplayPropsType = {
 };
 
 function WeatherDisplay({ data, timezoneOffset, isToday }: WeatherDisplayPropsType) {
+  const { unitType } = useGlobalState();
+
   const {
     dt,
     temp,
@@ -37,27 +40,36 @@ function WeatherDisplay({ data, timezoneOffset, isToday }: WeatherDisplayPropsTy
 
   const { high: feelsLikeHigh, low: feelsLikeLow } = getHighLow(feels_like);
 
+  const tempUnit = unitType === "imperial" ? "°F" : "°C";
+  const windUnit = unitType === "imperial" ? "mph" : "m/s";
+
   const dataArr = [
-    { label: "Temperature (high)", value: temp.max },
-    { label: "Temperature (low)", value: temp.min },
-    { label: "Feels like (high)", value: feelsLikeHigh },
-    { label: "Feels like (low)", value: feelsLikeLow },
-    { label: "Weather", value: weather[0].main },
-    { label: "Humidity", value: humidity },
-    { label: "Wind speed", value: wind_speed },
+    // { label: "Weather", value: weather[0].main },
+    { label: "Temperature (high)", value: `${Math.round(temp.max)}${tempUnit}` },
+    { label: "Temperature (low)", value: `${Math.round(temp.min)}${tempUnit}` },
+    { label: "Feels like (high)", value: `${Math.round(feelsLikeHigh)}${tempUnit}` },
+    { label: "Feels like (low)", value: `${Math.round(feelsLikeLow)}${tempUnit}` },
+    { label: "Wind speed", value: `${Math.round(wind_speed)}${windUnit}` },
+    { label: "Humidity", value: `${humidity}%` },
   ];
 
   if (typeof rain === "number" && rain > 0) {
-    dataArr.push({ label: "Rain (inches)", value: rain });
+    dataArr.push({ label: "Rain (inches)", value: `${rain}` });
   }
 
   if (typeof snow === "number" && snow > 0) {
-    dataArr.push({ label: "Snow (inches)", value: snow });
+    dataArr.push({ label: "Snow (inches)", value: `${snow}` });
   }
 
   return (
     <div style={tempStylesA}>
       <h3 style={tempStylesB}>{isToday ? 'Today' : day}</h3>
+      <br />
+      <div>
+        <WeatherSvg id={weather[0].id} isDayTime={isDayTime} size={120} />
+      </div>
+      <br />
+      <div>{summary}</div>
       <br />
       <ul>
         {dataArr.map(({ label, value }) => (
@@ -67,11 +79,6 @@ function WeatherDisplay({ data, timezoneOffset, isToday }: WeatherDisplayPropsTy
           </li>
         ))}
       </ul>
-      <div>
-        <WeatherSvg id={weather[0].id} isDayTime={isDayTime} size={120} />
-      </div>
-      <br />
-      <div>{summary}</div>
     </div>
   );
 }

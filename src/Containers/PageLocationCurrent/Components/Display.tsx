@@ -43,7 +43,6 @@ function Display({ currentData, todayData, timezoneOffset }: DisplayPropsType) {
   const windUnit = unitType === "imperial" ? "mph" : "m/s";
 
   const currentDataArr = [
-    { label: "Weather", value: currentWeather[0].main },
     { label: "Temperature", value: `${Math.round(currentTemp)}${tempUnit}` },
     {
       label: "Feels like",
@@ -62,7 +61,7 @@ function Display({ currentData, todayData, timezoneOffset }: DisplayPropsType) {
     summary: todaySummary,
     feels_like: todayFeelsLike,
     temp: todayTemp,
-    weather: todayWeather,
+    // weather: todayWeather,
     humidity: todayHumidity,
     wind_speed: todayWindSpeed,
   } = todayData;
@@ -96,9 +95,9 @@ function Display({ currentData, todayData, timezoneOffset }: DisplayPropsType) {
       label: "Feels like (low)",
       value: `${Math.round(todayFeelsLikeLow)}${tempUnit}`,
     },
-    { label: "Weather", value: todayWeather[0].main },
-    { label: "Humidity", value: `${todayHumidity}%` },
     { label: "Wind speed", value: `${Math.round(todayWindSpeed)}${windUnit}` },
+    { label: "Humidity", value: `${todayHumidity}%` },
+    // { label: "Weather", value: todayWeather[0].main },
   ];
 
   return (
@@ -114,6 +113,8 @@ function Display({ currentData, todayData, timezoneOffset }: DisplayPropsType) {
             size={120}
           />
         </div>
+        <div>{currentWeather[0].main}</div>
+        <br />
         <ul>
           {currentDataArr.map(({ label, value }) => (
             <li key={label}>
@@ -127,6 +128,8 @@ function Display({ currentData, todayData, timezoneOffset }: DisplayPropsType) {
       <div style={tempStylesB}>
         <h3>{day} Summary</h3>
         <br />
+        <div>{todaySummary}</div>
+        <br />
         <ul>
           {todayDataArr.map(({ label, value }) => (
             <li key={label}>
@@ -135,8 +138,6 @@ function Display({ currentData, todayData, timezoneOffset }: DisplayPropsType) {
             </li>
           ))}
         </ul>
-        <br />
-        <div>{todaySummary}</div>
       </div>
     </div>
   );
