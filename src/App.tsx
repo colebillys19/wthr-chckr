@@ -6,6 +6,7 @@ import {
   PageLocationCurrent,
   PageLocationHourly,
   PageLocationDaily,
+  PageNotFound,
 } from "./Containers";
 import { Modal } from "./SharedComponents";
 import GlobalStateProvider from "./context";
@@ -24,6 +25,7 @@ function App() {
             <Route path="/location/current" element={<PageLocationCurrent />} />
             <Route path="/location/hourly" element={<PageLocationHourly />} />
             <Route path="/location/daily" element={<PageLocationDaily />} />
+            <Route path='*' element={<PageNotFound />}/>
           </Routes>
           <Modal />
         </div>

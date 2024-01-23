@@ -8,6 +8,7 @@ import PageHome from "./PageHome";
 import PageLocationCurrent from "./PageLocationCurrent";
 import PageLocationHourly from "./PageLocationHourly";
 import PageLocationDaily from "./PageLocationDaily";
+import PageNotFound from "./PageNotFound";
 
 export {
   Header,
@@ -20,4 +21,5 @@ export {
   PageLocationCurrent,
   PageLocationHourly,
   PageLocationDaily,
+  PageNotFound,
 };
