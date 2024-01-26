@@ -24,9 +24,9 @@ function RecentLocations() {
 
   return (
     <>
-      <br />
+      <div className="spacer" />
       <h3>recently viewed</h3>
-      <br />
+      <div className="spacer" />
       <ul style={tempStyles}>
         {recentLocations.map((location) => (
           <li key={location}>
@@ -34,7 +34,7 @@ function RecentLocations() {
           </li>
         ))}
       </ul>
-      <br />
+      <div className="spacer" />
       <button onClick={handleClearRecent}>clear recent</button>
     </>
   );

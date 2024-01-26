@@ -113,7 +113,7 @@ function Display({ currentData, todayData, timezoneOffset }: DisplayPropsType) {
   return (
     <div>
       <h2>Current</h2>
-      <br />
+      <div className="spacer" />
       <div style={tempStylesA}>
         <h3>{currentTime}</h3>
         <div>
@@ -124,7 +124,7 @@ function Display({ currentData, todayData, timezoneOffset }: DisplayPropsType) {
           />
         </div>
         <div>{currentWeather[0].main}</div>
-        <br />
+        <div className="spacer" />
         <ul>
           {currentDataArr.map(({ label, value }) => (
             <li key={label}>
@@ -134,12 +134,12 @@ function Display({ currentData, todayData, timezoneOffset }: DisplayPropsType) {
           ))}
         </ul>
       </div>
-      <br />
+      <div className="spacer" />
       <div style={tempStylesB}>
         <h3>{day} Summary</h3>
-        <br />
+        <div className="spacer" />
         <div>{todaySummary}</div>
-        <br />
+        <div className="spacer" />
         <ul>
           {todayDataArr.map(({ label, value }) => (
             <li key={label}>

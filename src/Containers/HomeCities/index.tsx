@@ -15,7 +15,7 @@ function HomeCities() {
   return (
     <HomeSectionContainer>
       <h3>major cities</h3>
-      <br />
+      <div className="spacer" />
       <ul style={tempStyles}>
         {homeCities.map((location) => (
           <li key={location}>

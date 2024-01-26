@@ -64,13 +64,13 @@ function WeatherDisplay({ data, timezoneOffset, isToday }: WeatherDisplayPropsTy
   return (
     <div style={tempStylesA}>
       <h3 style={tempStylesB}>{isToday ? 'Today' : day}</h3>
-      <br />
+      <div className="spacer" />
       <div>
         <WeatherSvg id={weather[0].id} isDayTime={true} size={120} />
       </div>
-      <br />
+      <div className="spacer" />
       <div>{summary}</div>
-      <br />
+      <div className="spacer" />
       <ul>
         {dataArr.map(({ label, value }) => (
           <li key={label}>

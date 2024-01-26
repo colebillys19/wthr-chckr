@@ -111,11 +111,11 @@ function DisplayContainer({ location }: DisplayContainerPropsType) {
 
   return (
     <>
-      <br />
+      <div className="spacer" />
       <h1>{name}</h1>
-      <br />
+      <div className="spacer" />
       <TabNav location={location} />
-      <br />
+      <div className="spacer" />
       <Display
         currentData={current}
         todayData={daily[0]}

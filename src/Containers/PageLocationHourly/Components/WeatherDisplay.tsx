@@ -62,13 +62,13 @@ function WeatherDisplay({
       <div>
         <b>{time}</b>
       </div>
-      <br />
+      <div className="spacer" />
       <div>
         <WeatherSvg id={weather[0].id} isDayTime={isDayTime} size={120} />
       </div>
-      <br />
+      <div className="spacer" />
       <div>{weather[0].main}</div>
-      <br />
+      <div className="spacer" />
       <ul>
         {dataArr.map(({ label, value }) => (
           <li key={label}>

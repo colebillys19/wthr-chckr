@@ -23,7 +23,7 @@ function UserLocationDisplay() {
         name={name}
       />
       <div>
-        <br />
+        <div className="spacer" />
         <button onClick={handleChangeLocation}>change location</button>
       </div>
     </>

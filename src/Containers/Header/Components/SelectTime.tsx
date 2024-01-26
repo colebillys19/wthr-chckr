@@ -13,7 +13,7 @@ function SelectTime() {
   return (
     <>
       <span>
-        Units:&nbsp;
+        Time Type:&nbsp;
         <button
           onClick={() => handleTimeClick("standard")}
           disabled={timeType === "standard"}
@@ -22,8 +22,8 @@ function SelectTime() {
         </button>
         &nbsp;|&nbsp;
         <button
-          onClick={() => handleTimeClick("Military")}
-          disabled={timeType === "Military"}
+          onClick={() => handleTimeClick("military")}
+          disabled={timeType === "military"}
         >
           Military
         </button>

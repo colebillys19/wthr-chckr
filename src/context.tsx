@@ -87,7 +87,7 @@ const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
     }
     const storageTimeType = localStorage.getItem("timeType");
     if (storageTimeType) {
-      setUnitType(storageTimeType);
+      setTimeType(storageTimeType);
     }
   }, []);
 
