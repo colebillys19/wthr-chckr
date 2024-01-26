@@ -13,6 +13,7 @@ import WeatherSvgL from "./L";
 import WeatherSvgM from "./M";
 import WeatherSvgN from "./N";
 import WeatherSvgO from "./O";
+import WeatherSvgP from "./P";
 
 export {
   WeatherSvgA,
@@ -30,4 +31,5 @@ export {
   WeatherSvgM,
   WeatherSvgN,
   WeatherSvgO,
+  WeatherSvgP,
 };

@@ -4,11 +4,13 @@ import { useGlobalState } from "../../../context";
 import { WeatherSvg } from "../../../SharedComponentsAux";
 import { CurrentType, DailyType } from "../../../utils/types/openWeatherMap";
 import { getTimeData, getHighLow } from "../../../utils/helpers";
+import WindDisplay from "./WindDisplay";
 
 const tempStylesA: CSSProperties = {
   border: "1px solid black",
   display: "inline-block",
   padding: "16px",
+  width: "240px",
 };
 
 const tempStylesB: CSSProperties = {
@@ -31,10 +33,12 @@ function Display({ currentData, todayData, timezoneOffset }: DisplayPropsType) {
     feels_like: currentFeelsLike,
     weather: currentWeather,
     humidity: currentHumidity,
+    wind_deg,
     wind_speed: currentWindSpeed,
     sunrise,
     sunset,
   } = currentData;
+  console.log(currentData);
   const {
     day,
     isDayTime,
@@ -49,19 +53,6 @@ function Display({ currentData, todayData, timezoneOffset }: DisplayPropsType) {
 
   const tempUnit = unitType === "imperial" ? "°F" : "°C";
   const windUnit = unitType === "imperial" ? "mph" : "m/s";
-
-  const currentDataArr = [
-    { label: "Temperature", value: `${Math.round(currentTemp)}${tempUnit}` },
-    {
-      label: "Feels like",
-      value: `${Math.round(currentFeelsLike)}${tempUnit}`,
-    },
-    {
-      label: "Wind speed",
-      value: `${Math.round(currentWindSpeed)}${windUnit}`,
-    },
-    { label: "Humidity", value: `${currentHumidity}%` },
-  ];
 
   const {
     sunrise: todaySunrise,
@@ -125,14 +116,15 @@ function Display({ currentData, todayData, timezoneOffset }: DisplayPropsType) {
         </div>
         <div>{currentWeather[0].main}</div>
         <div className="spacer" />
-        <ul>
-          {currentDataArr.map(({ label, value }) => (
-            <li key={label}>
-              <span>{label}:&nbsp;</span>
-              <b>{value}</b>
-            </li>
-          ))}
-        </ul>
+        <div>Temperature: <b>{`${Math.round(currentTemp)}${tempUnit}`}</b></div>
+        <div>Feels like: <b>{`${Math.round(currentFeelsLike)}${tempUnit}`}</b></div>
+        <div className="spacer" />
+        <WindDisplay
+          speedStr={`${Math.round(currentWindSpeed)}${windUnit}`}
+          deg={wind_deg}
+        />
+        <div className="spacer" />
+        <div>Humidity: <b>{`${currentHumidity}%`}</b></div>
       </div>
       <div className="spacer" />
       <div style={tempStylesB}>

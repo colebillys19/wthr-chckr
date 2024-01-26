@@ -12,6 +12,7 @@ const tempStyles: CSSProperties = {
 
 function HomeCities() {
   //
+
   return (
     <HomeSectionContainer>
       <h3>major cities</h3>
