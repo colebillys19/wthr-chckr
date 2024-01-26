@@ -12,6 +12,7 @@ type GlobalStatePropsType = {
   googleMaps: typeof google.maps | null;
   isDarkMode: boolean;
   recentLocations: string[];
+  timeType: string;
   unitType: string;
   userLocation: string;
   userPrefersNoLocation: boolean;
@@ -19,6 +20,7 @@ type GlobalStatePropsType = {
   setGoogleMaps: (value: typeof google.maps | null) => void;
   setIsDarkMode: (value: boolean) => void;
   setRecentLocations: (value: string[]) => void;
+  setTimeType: (value: string) => void;
   setUnitType: (value: string) => void;
   setUserLocation: (value: string) => void;
   setUserPrefersNoLocation: (value: boolean) => void;
@@ -39,6 +41,7 @@ const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
   const [googleMaps, setGoogleMaps] = useState<typeof google.maps | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [recentLocations, setRecentLocations] = useState<string[]>([]);
+  const [timeType, setTimeType] = useState("standard");
   const [unitType, setUnitType] = useState("imperial");
   const [userLocation, setUserLocation] = useState("");
   const [userPrefersNoLocation, setUserPrefersNoLocation] = useState(false);
@@ -82,6 +85,10 @@ const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
     if (storageUnitType) {
       setUnitType(storageUnitType);
     }
+    const storageTimeType = localStorage.getItem("timeType");
+    if (storageTimeType) {
+      setUnitType(storageTimeType);
+    }
   }, []);
 
   const value = {
@@ -89,12 +96,14 @@ const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
     googleMaps,
     isDarkMode,
     recentLocations,
+    timeType,
     unitType,
     userLocation,
     userPrefersNoLocation,
     setActiveModal,
     setIsDarkMode,
     setRecentLocations,
+    setTimeType,
     setUnitType,
     setUserLocation,
     setUserPrefersNoLocation,

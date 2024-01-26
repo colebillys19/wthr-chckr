@@ -20,13 +20,24 @@ type WeatherDisplayPropsType = {
   sunset: number;
 };
 
-function WeatherDisplay({ data, timezoneOffset, sunrise, sunset }: WeatherDisplayPropsType) {
-  const { unitType } = useGlobalState();
+function WeatherDisplay({
+  data,
+  timezoneOffset,
+  sunrise,
+  sunset,
+}: WeatherDisplayPropsType) {
+  const { unitType, timeType } = useGlobalState();
 
   const { dt, temp, feels_like, weather, humidity, wind_speed, rain, snow } =
     data;
 
-  const { timeStandard, isDayTime } = getTimeData(dt, timezoneOffset, sunrise, sunset);
+  const { time, isDayTime } = getTimeData({
+    dtSec: dt,
+    apiTimezoneOffsetSec: timezoneOffset,
+    sunriseSec: sunrise,
+    sunsetSec: sunset,
+    timeType,
+  });
 
   const tempUnit = unitType === "imperial" ? "°F" : "°C";
   const windUnit = unitType === "imperial" ? "mph" : "m/s";
@@ -49,7 +60,7 @@ function WeatherDisplay({ data, timezoneOffset, sunrise, sunset }: WeatherDispla
   return (
     <div style={tempStyles}>
       <div>
-        <b>{timeStandard}</b>
+        <b>{time}</b>
       </div>
       <br />
       <div>

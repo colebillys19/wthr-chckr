@@ -6,15 +6,15 @@ import { CurrentType, DailyType } from "../../../utils/types/openWeatherMap";
 import { getTimeData, getHighLow } from "../../../utils/helpers";
 
 const tempStylesA: CSSProperties = {
-  border: '1px solid black',
-  display: 'inline-block',
-  padding: '16px',
+  border: "1px solid black",
+  display: "inline-block",
+  padding: "16px",
 };
 
 const tempStylesB: CSSProperties = {
-  backgroundColor: '#eeeeee',
-  display: 'inline-block',
-  padding: '16px',
+  backgroundColor: "#eeeeee",
+  display: "inline-block",
+  padding: "16px",
 };
 
 type DisplayPropsType = {
@@ -24,7 +24,7 @@ type DisplayPropsType = {
 };
 
 function Display({ currentData, todayData, timezoneOffset }: DisplayPropsType) {
-  const { unitType } = useGlobalState();
+  const { unitType, timeType } = useGlobalState();
   const {
     dt: currentDt,
     temp: currentTemp,
@@ -38,8 +38,14 @@ function Display({ currentData, todayData, timezoneOffset }: DisplayPropsType) {
   const {
     day,
     isDayTime,
-    timeStandard: currentTimeStandard,
-  } = getTimeData(currentDt, timezoneOffset, sunrise, sunset);
+    time: currentTime,
+  } = getTimeData({
+    dtSec: currentDt,
+    apiTimezoneOffsetSec: timezoneOffset,
+    sunriseSec: sunrise,
+    sunsetSec: sunset,
+    timeType,
+  });
 
   const tempUnit = unitType === "imperial" ? "°F" : "°C";
   const windUnit = unitType === "imperial" ? "mph" : "m/s";
@@ -67,20 +73,22 @@ function Display({ currentData, todayData, timezoneOffset }: DisplayPropsType) {
     humidity: todayHumidity,
     wind_speed: todayWindSpeed,
   } = todayData;
-  const { timeStandard: todaySunriseTimeStandard } = getTimeData(
-    todaySunrise,
-    timezoneOffset
-  );
-  const { timeStandard: todaySunsetTimeStandard } = getTimeData(
-    todaySunset,
-    timezoneOffset
-  );
+  const { time: todaySunriseTime } = getTimeData({
+    dtSec: todaySunrise,
+    apiTimezoneOffsetSec: timezoneOffset,
+    timeType,
+  });
+  const { time: todaySunsetTime } = getTimeData({
+    dtSec: todaySunset,
+    apiTimezoneOffsetSec: timezoneOffset,
+    timeType,
+  });
   const { high: todayFeelsLikeHigh, low: todayFeelsLikeLow } =
     getHighLow(todayFeelsLike);
 
   const todayDataArr = [
-    { label: "sunrise", value: todaySunriseTimeStandard },
-    { label: "sunset", value: todaySunsetTimeStandard },
+    { label: "sunrise", value: todaySunriseTime },
+    { label: "sunset", value: todaySunsetTime },
     {
       label: "Temperature (high)",
       value: `${Math.round(todayTemp.max)}${tempUnit}`,
@@ -107,7 +115,7 @@ function Display({ currentData, todayData, timezoneOffset }: DisplayPropsType) {
       <h2>Current</h2>
       <br />
       <div style={tempStylesA}>
-        <h3>{currentTimeStandard}</h3>
+        <h3>{currentTime}</h3>
         <div>
           <WeatherSvg
             id={currentWeather[0].id}

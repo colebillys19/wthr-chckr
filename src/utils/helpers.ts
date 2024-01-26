@@ -5,7 +5,7 @@ import {
   getTimeStandard,
   getTimeMilitary,
 } from "./helperHelpers";
-import { NumObjType } from './types/helpers';
+import { NumObjType, GetTimeDataPropsType } from "./types/helpers";
 
 /*
  *
@@ -68,16 +68,19 @@ export const getHighLow = (
 /*
  *
  */
-export const getTimeData = (
-  dtSec: number,
-  apiTimezoneOffsetSec: number,
-  sunriseSec?: number,
-  sunsetSec?: number
-) => {
+export const getTimeData = ({
+  dtSec,
+  apiTimezoneOffsetSec,
+  sunriseSec,
+  sunsetSec,
+  timeType,
+}: GetTimeDataPropsType) => {
   const localTimeMs = getLocalTimeMs(dtSec, apiTimezoneOffsetSec);
   const { day, hours, minutes } = getDayHoursMinutes(localTimeMs);
-  const timeStandard = getTimeStandard(hours, minutes);
-  const timeMilitary = getTimeMilitary(hours, minutes);
+  const time =
+    timeType === "standard"
+      ? getTimeStandard(hours, minutes)
+      : getTimeMilitary(hours, minutes);
   //
   let isDayTime = true;
   if (sunriseSec && sunsetSec) {
@@ -85,5 +88,5 @@ export const getTimeData = (
       isDayTime = false;
     }
   }
-  return { day, timeStandard, timeMilitary, isDayTime };
+  return { day, time, isDayTime };
 };

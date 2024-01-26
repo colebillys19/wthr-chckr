@@ -3,6 +3,7 @@ import { CSSProperties } from "react";
 
 // import { useGlobalState } from "../../context";
 import Nav from "./Components/Nav";
+import SelectTime from "./Components/SelectTime";
 import SelectUnits from "./Components/SelectUnits";
 // import UserLocation from "./Components/UserLocation";
 
@@ -21,6 +22,7 @@ function Header() {
     <header style={tempStyles}>
       <Nav />
       {/* {location.pathname === "/location" && !userPrefersNoLocation && <UserLocation />} */}
+      <SelectTime />
       <SelectUnits />
     </header>
   );

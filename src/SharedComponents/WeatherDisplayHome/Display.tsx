@@ -15,7 +15,7 @@ const tempStylesA: CSSProperties = {
 };
 
 const tempStylesB: CSSProperties = {
-  color: 'grey',
+  color: "grey",
 };
 
 type DisplayPropsType = {
@@ -26,12 +26,27 @@ type DisplayPropsType = {
 function Display({ data, name }: DisplayPropsType) {
   const navigate = useNavigate();
 
-  const { unitType } = useGlobalState();
+  const { unitType, timeType } = useGlobalState();
 
   const { current, timezone_offset, lat, lon } = data;
-  const { dt, temp, feels_like, weather, humidity, wind_speed, sunrise, sunset } = current;
+  const {
+    dt,
+    temp,
+    feels_like,
+    weather,
+    humidity,
+    wind_speed,
+    sunrise,
+    sunset,
+  } = current;
 
-  const { isDayTime, timeStandard } = getTimeData(dt, timezone_offset, sunrise, sunset);
+  const { isDayTime, time } = getTimeData({
+    dtSec: dt,
+    apiTimezoneOffsetSec: timezone_offset,
+    sunriseSec: sunrise,
+    sunsetSec: sunset,
+    timeType,
+  });
 
   const tempUnit = unitType === "imperial" ? "°F" : "°C";
   const windUnit = unitType === "imperial" ? "mph" : "m/s";
@@ -53,8 +68,10 @@ function Display({ data, name }: DisplayPropsType) {
 
   return (
     <div style={tempStylesA}>
-      <div><b>{name}</b></div>
-      <div>{timeStandard}</div>
+      <div>
+        <b>{name}</b>
+      </div>
+      <div>{time}</div>
       <br />
       <div>
         <WeatherSvg id={weather[0].id} isDayTime={isDayTime} size={120} />

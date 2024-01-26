@@ -22,7 +22,7 @@ type WeatherDisplayPropsType = {
 };
 
 function WeatherDisplay({ data, timezoneOffset, isToday }: WeatherDisplayPropsType) {
-  const { unitType } = useGlobalState();
+  const { unitType, timeType } = useGlobalState();
 
   const {
     dt,
@@ -36,7 +36,7 @@ function WeatherDisplay({ data, timezoneOffset, isToday }: WeatherDisplayPropsTy
     wind_speed,
   } = data;
 
-  const { day } = getTimeData(dt, timezoneOffset);
+  const { day } = getTimeData({ dtSec: dt, apiTimezoneOffsetSec: timezoneOffset, timeType });
 
   const { high: feelsLikeHigh, low: feelsLikeLow } = getHighLow(feels_like);
 

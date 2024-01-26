@@ -67,3 +67,21 @@ export const useUpdateUnitType = () => {
 
   return updateUnitType;
 };
+
+/*
+ *
+ */
+export const useUpdateTimeType = () => {
+  const { setTimeType } = useGlobalState();
+
+  const updateTimeType = (timeType: string) => {
+    setTimeType(timeType);
+    if (timeType === "") {
+      localStorage.removeItem("timeType");
+    } else {
+      localStorage.setItem("timeType", timeType);
+    }
+  };
+
+  return updateTimeType;
+};
