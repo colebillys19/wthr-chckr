@@ -12,9 +12,11 @@ const tempStyles: CSSProperties = {
 type LocationHourlyPropsType = {
   data: HourlyType[];
   timezoneOffset: number;
+  sunrise: number;
+  sunset: number;
 };
 
-function LocationHourly({ data, timezoneOffset }: LocationHourlyPropsType) {
+function LocationHourly({ data, timezoneOffset, sunrise, sunset }: LocationHourlyPropsType) {
   const dataToUse = data.slice(1, 13);
 
   return (
@@ -22,7 +24,12 @@ function LocationHourly({ data, timezoneOffset }: LocationHourlyPropsType) {
       <ul style={tempStyles}>
         {dataToUse.map((hourlyData) => (
           <li key={uuidv4()}>
-            <WeatherDisplay data={hourlyData} timezoneOffset={timezoneOffset} />
+            <WeatherDisplay
+              data={hourlyData}
+              timezoneOffset={timezoneOffset}
+              sunrise={sunrise}
+              sunset={sunset}
+            />
           </li>
         ))}
       </ul>

@@ -36,7 +36,7 @@ function WeatherDisplay({ data, timezoneOffset, isToday }: WeatherDisplayPropsTy
     wind_speed,
   } = data;
 
-  const { day, isDayTime } = getTimeData(dt, timezoneOffset);
+  const { day } = getTimeData(dt, timezoneOffset);
 
   const { high: feelsLikeHigh, low: feelsLikeLow } = getHighLow(feels_like);
 
@@ -66,7 +66,7 @@ function WeatherDisplay({ data, timezoneOffset, isToday }: WeatherDisplayPropsTy
       <h3 style={tempStylesB}>{isToday ? 'Today' : day}</h3>
       <br />
       <div>
-        <WeatherSvg id={weather[0].id} isDayTime={isDayTime} size={120} />
+        <WeatherSvg id={weather[0].id} isDayTime={true} size={120} />
       </div>
       <br />
       <div>{summary}</div>

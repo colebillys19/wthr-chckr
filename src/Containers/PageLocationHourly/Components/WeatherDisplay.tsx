@@ -16,15 +16,17 @@ const tempStyles: CSSProperties = {
 type WeatherDisplayPropsType = {
   data: HourlyType;
   timezoneOffset: number;
+  sunrise: number;
+  sunset: number;
 };
 
-function WeatherDisplay({ data, timezoneOffset }: WeatherDisplayPropsType) {
+function WeatherDisplay({ data, timezoneOffset, sunrise, sunset }: WeatherDisplayPropsType) {
   const { unitType } = useGlobalState();
 
   const { dt, temp, feels_like, weather, humidity, wind_speed, rain, snow } =
     data;
 
-  const { timeStandard, isDayTime } = getTimeData(dt, timezoneOffset);
+  const { timeStandard, isDayTime } = getTimeData(dt, timezoneOffset, sunrise, sunset);
 
   const tempUnit = unitType === "imperial" ? "°F" : "°C";
   const windUnit = unitType === "imperial" ? "mph" : "m/s";

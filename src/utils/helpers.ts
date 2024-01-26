@@ -1,22 +1,15 @@
-import { geocoderLocationTypes, daysOfWeek } from "./constants";
+import {
+  getPreferredLocationNameData,
+  getLocalTimeMs,
+  getDayHoursMinutes,
+  getTimeStandard,
+  getTimeMilitary,
+} from "./helperHelpers";
+import { NumObjType } from './types/helpers';
 
-const getPreferredLocationNameData = (
-  results: google.maps.GeocoderResult[]
-) => {
-  const data: Record<string, string> = {};
-
-  geocoderLocationTypes.forEach((locationType) => {
-    const res = results.find((result) => result.types.includes(locationType));
-    const obj = res?.address_components.find((result) =>
-      result.types.includes(locationType)
-    );
-    if (obj?.short_name) {
-      data[locationType] = obj?.short_name;
-    }
-  });
-  return data;
-};
-
+/*
+ *
+ */
 export const getFormattedLocationName = (
   results: google.maps.GeocoderResult[]
 ) => {
@@ -39,6 +32,9 @@ export const getFormattedLocationName = (
   return `${administrative_area_level_1}, ${country}`;
 };
 
+/*
+ *
+ */
 export const getIsValidCoordinatesStr = (coordsStr: string) => {
   if (!coordsStr.includes(",")) {
     return false;
@@ -55,28 +51,9 @@ export const getIsValidCoordinatesStr = (coordsStr: string) => {
   return true;
 };
 
-export const getTimeData = (unixTime: number, timezoneOffset: number) => {
-  const utcMs = (unixTime + 18000) * 1000; // TODO
-  const offsetMs = timezoneOffset * 1000;
-  const localTimeMs = utcMs + offsetMs;
-  const date = new Date(localTimeMs);
-  const day = daysOfWeek[date.getDay()];
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-  const timeStandard = `${hours % 12 || 12}:${
-    minutes < 10 ? "0" : ""
-  }${minutes} ${hours < 12 ? "AM" : "PM"}`;
-  const timeMilitary = `${hours < 10 ? "0" : ""}${hours}:${
-    minutes < 10 ? "0" : ""
-  }${minutes}`;
-  const isDayTime = hours > 6 && hours < 18;
-  return { day, timeStandard, timeMilitary, isDayTime };
-};
-
-type NumObjType = {
-  [key: string]: number;
-};
-
+/*
+ *
+ */
 export const getHighLow = (
   numObj: NumObjType
 ): { high: number; low: number } => {
@@ -86,4 +63,27 @@ export const getHighLow = (
   const low = values.reduce((a, b) => Math.min(a, b));
 
   return { high, low };
+};
+
+/*
+ *
+ */
+export const getTimeData = (
+  dtSec: number,
+  apiTimezoneOffsetSec: number,
+  sunriseSec?: number,
+  sunsetSec?: number
+) => {
+  const localTimeMs = getLocalTimeMs(dtSec, apiTimezoneOffsetSec);
+  const { day, hours, minutes } = getDayHoursMinutes(localTimeMs);
+  const timeStandard = getTimeStandard(hours, minutes);
+  const timeMilitary = getTimeMilitary(hours, minutes);
+  //
+  let isDayTime = true;
+  if (sunriseSec && sunsetSec) {
+    if (dtSec < sunriseSec || dtSec > sunsetSec) {
+      isDayTime = false;
+    }
+  }
+  return { day, timeStandard, timeMilitary, isDayTime };
 };

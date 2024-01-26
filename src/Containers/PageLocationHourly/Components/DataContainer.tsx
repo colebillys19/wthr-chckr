@@ -18,7 +18,7 @@ function DataContainer({ location }: DataContainerPropsType) {
   const [error, setError] = useState("");
   const [isFetchingData, setIsFetchingData] = useState(true);
   const [isFetchingName, setIsFetchingName] = useState(true);
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
 
   const { googleMaps, recentLocations, unitType } = useGlobalState();
 
@@ -107,7 +107,8 @@ function DataContainer({ location }: DataContainerPropsType) {
     return <Error error={error} />;
   }
 
-  const { hourly, timezone_offset } = data;
+  const { current, hourly, timezone_offset } = data;
+  const { sunrise, sunset } = current;
 
   return (
     <>
@@ -118,7 +119,12 @@ function DataContainer({ location }: DataContainerPropsType) {
       <br />
       <h2>Hourly</h2>
       <br />
-      <WeatherDisplayContainer data={hourly} timezoneOffset={timezone_offset} />
+      <WeatherDisplayContainer
+        data={hourly}
+        timezoneOffset={timezone_offset}
+        sunrise={sunrise}
+        sunset={sunset}
+      />
     </>
   );
 }

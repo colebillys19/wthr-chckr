@@ -29,9 +29,9 @@ function Display({ data, name }: DisplayPropsType) {
   const { unitType } = useGlobalState();
 
   const { current, timezone_offset, lat, lon } = data;
-  const { dt, temp, feels_like, weather, humidity, wind_speed } = current;
+  const { dt, temp, feels_like, weather, humidity, wind_speed, sunrise, sunset } = current;
 
-  const { isDayTime, timeStandard } = getTimeData(dt, timezone_offset);
+  const { isDayTime, timeStandard } = getTimeData(dt, timezone_offset, sunrise, sunset);
 
   const tempUnit = unitType === "imperial" ? "°F" : "°C";
   const windUnit = unitType === "imperial" ? "mph" : "m/s";

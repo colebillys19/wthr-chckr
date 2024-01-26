@@ -32,12 +32,14 @@ function Display({ currentData, todayData, timezoneOffset }: DisplayPropsType) {
     weather: currentWeather,
     humidity: currentHumidity,
     wind_speed: currentWindSpeed,
+    sunrise,
+    sunset,
   } = currentData;
   const {
     day,
     isDayTime,
     timeStandard: currentTimeStandard,
-  } = getTimeData(currentDt, timezoneOffset);
+  } = getTimeData(currentDt, timezoneOffset, sunrise, sunset);
 
   const tempUnit = unitType === "imperial" ? "°F" : "°C";
   const windUnit = unitType === "imperial" ? "mph" : "m/s";
