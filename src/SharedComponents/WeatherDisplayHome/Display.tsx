@@ -9,8 +9,8 @@ import { getTimeData } from "../../utils/helpers";
 const tempStylesA: CSSProperties = {
   border: "1px solid black",
   display: "inline-block",
-  width: "240px",
-  height: "360px",
+  minWidth: "240px",
+  minHeight: "360px",
   padding: "16px",
 };
 

@@ -8,8 +8,8 @@ import { getTimeData } from "../../../utils/helpers";
 const tempStyles: CSSProperties = {
   border: "1px solid black",
   display: "inline-block",
-  width: "200px",
-  height: "340px",
+  minWidth: "200px",
+  minHeight: "340px",
   padding: "16px",
 };
 

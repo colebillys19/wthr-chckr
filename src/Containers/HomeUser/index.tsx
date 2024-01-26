@@ -5,12 +5,11 @@ import UserLocationOff from "./Components/UserLocationOff";
 import RecentLocations from "./Components/RecentLocations";
 
 function HomeUser() {
-  const { userPrefersNoLocation, recentLocations, unitType } = useGlobalState();
+  const { userPrefersNoLocation, recentLocations } = useGlobalState();
 
   return (
     <HomeSectionContainer>
       <h3>my location</h3>
-      <h4>{unitType}</h4>
       <div className="spacer" />
       {userPrefersNoLocation ? (
         <UserLocationOff />

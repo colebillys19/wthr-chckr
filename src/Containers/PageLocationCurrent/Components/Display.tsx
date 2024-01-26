@@ -38,7 +38,6 @@ function Display({ currentData, todayData, timezoneOffset }: DisplayPropsType) {
     sunrise,
     sunset,
   } = currentData;
-  console.log(currentData);
   const {
     day,
     isDayTime,
