@@ -29,6 +29,7 @@ function Display({ data, name }: DisplayPropsType) {
   const { unitType, timeType } = useGlobalState();
 
   const { current, timezone_offset, lat, lon } = data;
+
   const {
     dt,
     temp,
