@@ -1,7 +1,7 @@
 import { CSSProperties } from "react";
 
 import { HomeSectionContainer } from "../../SharedComponentsAux";
-import { homeCities } from "../../utils/constants";
+import { homeCitiesShort } from "../../utils/constants";
 import CityDisplay from "./Components/CityDisplay";
 
 const tempStyles: CSSProperties = {
@@ -18,7 +18,7 @@ function HomeCities() {
       <h3>major cities</h3>
       <div className="spacer" />
       <ul style={tempStyles}>
-        {homeCities.map((location) => (
+        {homeCitiesShort.map((location) => (
           <li key={location}>
             <CityDisplay location={location} />
           </li>
