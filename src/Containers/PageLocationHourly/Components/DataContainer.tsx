@@ -24,7 +24,7 @@ function DataContainer({ location }: DataContainerPropsType) {
     if (!isRecent) {
       updateRecentLocations([location, ...recentLocations.slice(0, 2)]);
     }
-  }, []);
+  }, [location, recentLocations, updateRecentLocations]);
 
   if (isLoading) {
     return <Skeleton />;

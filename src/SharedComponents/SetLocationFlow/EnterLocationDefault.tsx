@@ -1,11 +1,4 @@
-import {
-  CSSProperties,
-  FormEvent,
-  MouseEvent,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { CSSProperties, FormEvent, useEffect, useRef, useState } from "react";
 
 import { useGlobalState } from "../../context";
 import { useUpdateUserLocation } from "../../utils/customHooks/localStorage";
@@ -44,7 +37,7 @@ function EnterLocationDefault({
       autoCompleteRef.current.addListener("place_changed", () => {
         if (inputErrorRef.current !== "") {
           inputErrorRef.current = "";
-          setInputError('');
+          setInputError("");
         }
       });
     }
@@ -61,7 +54,7 @@ function EnterLocationDefault({
   const handleChange = () => {
     if (inputErrorRef.current !== "") {
       inputErrorRef.current = "";
-      setInputError('');
+      setInputError("");
     }
     setIsSubmitDisabled(!inputRef.current || inputRef.current.value === "");
   };
@@ -108,16 +101,14 @@ function EnterLocationDefault({
   /*
    *
    */
-  const handleEnterCoords = (e: MouseEvent) => {
-    e.preventDefault();
+  const handleEnterCoords = () => {
     setIsCoordsEntry(true);
   };
 
   /*
    *
    */
-  const handleBack = (e: MouseEvent) => {
-    e.preventDefault();
+  const handleBack = () => {
     setIsEnteringLocation(false);
   };
 
@@ -146,14 +137,10 @@ function EnterLocationDefault({
         </div>
       </form>
       <div>
-        <a onClick={handleEnterCoords} href="#">
-          enter exact coordinates
-        </a>
+        <button onClick={handleEnterCoords}>enter exact coordinates</button>
       </div>
       <div>
-        <a onClick={handleBack} href="#">
-          back
-        </a>
+        <button onClick={handleBack}>back</button>
       </div>
     </>
   );

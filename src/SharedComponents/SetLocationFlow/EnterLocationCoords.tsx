@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 import { useGlobalState } from "../../context";
 import { useUpdateUserLocation } from "../../utils/customHooks/localStorage";
@@ -81,8 +81,7 @@ function EnterLocationCoords({
   /*
    *
    */
-  const handleBack = (e: MouseEvent) => {
-    e.preventDefault();
+  const handleBack = () => {
     setIsCoordsEntry(false);
   };
 
@@ -119,9 +118,7 @@ function EnterLocationCoords({
         </div>
       </form>
       <div>
-        <a onClick={handleBack} href="#">
-          back
-        </a>
+        <button onClick={handleBack}>back</button>
       </div>
     </>
   );
