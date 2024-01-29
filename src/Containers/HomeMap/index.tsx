@@ -54,15 +54,23 @@ const getDateString = (date: Date) => {
  *
  */
 function HomeMap() {
-  let map: google.maps.Map;
+  // let map: google.maps.Map;
 
-  const mapRef = useRef(null);
+  const mapRef = useRef<google.maps.Map | null>(null);
+  const mapDivRef = useRef(null);
 
   const { googleMaps } = useGlobalState();
 
   useEffect(() => {
-    if (googleMaps !== null && mapRef.current !== null) {
-      map = new googleMaps.Map(mapRef.current, {
+    const refreshWeatherLayer = () => {
+      if (mapRef.current !== null) {
+        mapRef.current.overlayMapTypes.clear();
+        addWeatherFrame(0, getDateString(new Date()), 1);
+      }
+    };
+
+    if (googleMaps !== null && mapDivRef.current !== null) {
+      mapRef.current = new googleMaps.Map(mapDivRef.current, {
         center: { lat: 39.7, lng: -96.2 },
         zoom: 5,
       });
@@ -77,14 +85,6 @@ function HomeMap() {
       }, msUntilNextFive + 10 * 100);
     }
   }, [googleMaps]);
-
-  //
-  //
-  //
-  const refreshWeatherLayer = () => {
-    map.overlayMapTypes.clear();
-    addWeatherFrame(0, getDateString(new Date()), 1);
-  };
 
   //
   //
@@ -112,13 +112,15 @@ function HomeMap() {
         tileSize: new googleMaps.Size(256, 256),
         opacity: frameOpacity,
       });
-      map.overlayMapTypes.setAt(index, frame);
+      if (mapRef.current !== null) {
+        mapRef.current.overlayMapTypes.setAt(index, frame);
+      }
     }
   };
 
   return (
     <HomeSectionContainer>
-      <div ref={mapRef} style={tempStyles}></div>
+      <div ref={mapDivRef} style={tempStyles}></div>
     </HomeSectionContainer>
   );
 }
