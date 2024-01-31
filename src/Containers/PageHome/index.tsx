@@ -1,19 +1,19 @@
-// import HomeCities from "../HomeCities";
+import HomeCities from "../HomeCities";
 import HomeMap from "../HomeMap";
-// import HomeNews from "../HomeNews";
-// import HomeSearch from "../HomeSearch";
-// import HomeUser from "../HomeUser";
+import HomeNews from "../HomeNews";
+import HomeSearch from "../HomeSearch";
+import HomeUser from "../HomeUser";
 
 function PageHome() {
   //
 
   return (
     <main>
-      {/* <HomeSearch /> */}
-      {/* <HomeUser /> */}
+      <HomeSearch />
+      <HomeUser />
       <HomeMap />
-      {/* <HomeCities /> */}
-      {/* <HomeNews /> */}
+      <HomeCities />
+      <HomeNews />
     </main>
   );
 }

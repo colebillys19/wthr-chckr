@@ -1,6 +1,7 @@
 import { CSSProperties } from "react";
 
 import { useGlobalState } from "../../../context";
+import { WeatherMap } from "../../../SharedComponents";
 import { WeatherSvg } from "../../../SharedComponentsAux";
 import { CurrentType, DailyType } from "../../../utils/types/openWeatherMap";
 import { getTimeData, getHighLow } from "../../../utils/helpers";
@@ -11,21 +12,29 @@ const tempStylesA: CSSProperties = {
   display: "inline-block",
   padding: "16px",
   width: "240px",
+  verticalAlign: "top",
 };
 
 const tempStylesB: CSSProperties = {
   backgroundColor: "#eeeeee",
   display: "inline-block",
   padding: "16px",
+  verticalAlign: "top",
 };
 
 type DisplayPropsType = {
+  location: string;
   currentData: CurrentType;
   todayData: DailyType;
   timezoneOffset: number;
 };
 
-function Display({ currentData, todayData, timezoneOffset }: DisplayPropsType) {
+function Display({
+  location,
+  currentData,
+  todayData,
+  timezoneOffset,
+}: DisplayPropsType) {
   const { unitType, timeType } = useGlobalState();
 
   const {
@@ -134,7 +143,6 @@ function Display({ currentData, todayData, timezoneOffset }: DisplayPropsType) {
           Humidity: <b>{`${currentHumidity}%`}</b>
         </div>
       </div>
-      <div className="spacer" />
       <div style={tempStylesB}>
         <h3>{day} Summary</h3>
         <div className="spacer" />
@@ -148,6 +156,12 @@ function Display({ currentData, todayData, timezoneOffset }: DisplayPropsType) {
             </li>
           ))}
         </ul>
+      </div>
+      <div className="spacer" />
+      <div>
+        <h2>Map</h2>
+        <div className="spacer" />
+        <WeatherMap location={location} zoom={8} />
       </div>
     </div>
   );

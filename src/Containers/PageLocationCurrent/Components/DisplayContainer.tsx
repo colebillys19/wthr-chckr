@@ -44,6 +44,7 @@ function DisplayContainer({ location }: DisplayContainerPropsType) {
       <TabNav location={location} />
       <div className="spacer" />
       <Display
+        location={location}
         currentData={current}
         todayData={daily[0]}
         timezoneOffset={timezone_offset}
