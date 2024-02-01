@@ -26,8 +26,7 @@ export const useFetchLocationData = (location: string) => {
     )
       .then((res) => {
         if (!res.ok) {
-          setError("Issue fetching location data.");
-          setIsFetchingData(false);
+          throw new Error("Issue fetching location data.");
         }
         return res.json();
       })
@@ -37,7 +36,7 @@ export const useFetchLocationData = (location: string) => {
       })
       .catch((error) => {
         console.error(error);
-        setError("Issue fetching location data.");
+        setError(error.message);
         setIsFetchingData(false);
       });
   }, [unitType, location]);

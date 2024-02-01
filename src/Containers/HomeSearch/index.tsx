@@ -79,17 +79,16 @@ function HomeSearch() {
               const locationStr = `${location.lat()},${location.lng()}`;
               navigate(`/location/current?location=${locationStr}`);
               resolve(true);
+              setIsVerifyingAddress(false);
             } else {
-              inputErrorRef.current = "Invalid location";
-              setInputError("Invalid location");
-              console.error("Promise rejected:", status);
-              reject(false);
+              throw new Error("Invalid location");
             }
-            setIsVerifyingAddress(false);
           }
         );
       }).catch((error) => {
         console.error(error);
+        inputErrorRef.current = error.message;
+        setInputError(error.message);
         setIsVerifyingAddress(false);
       });
     }

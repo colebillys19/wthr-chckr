@@ -62,17 +62,16 @@ function EnterLocationCoords({
               if (activeModal === "setLocation") {
                 setActiveModal("");
               }
+              setIsVerifyingAddress(false);
               resolve(true);
             } else {
-              setInputError("Invalid coordinates");
-              console.error("Promise rejected:", status);
-              reject(false);
+              throw new Error("Invalid coordinates");
             }
-            setIsVerifyingAddress(false);
           }
         );
       }).catch((error) => {
         console.error(error);
+        setInputError(error.message);
         setIsVerifyingAddress(false);
       });
     }

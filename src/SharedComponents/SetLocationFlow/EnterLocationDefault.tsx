@@ -81,18 +81,16 @@ function EnterLocationDefault({
               if (activeModal === "setLocation") {
                 setActiveModal("");
               }
+              setIsVerifyingAddress(false);
               resolve(true);
             } else {
-              inputErrorRef.current = "Invalid location";
-              setInputError("Invalid location");
-              console.error("Promise rejected:", status);
-              reject(false);
+              throw new Error("Invalid location");
             }
-            setIsVerifyingAddress(false);
           }
         );
       }).catch((error) => {
         console.error(error);
+        setInputError(error.message);
         setIsVerifyingAddress(false);
       });
     }
