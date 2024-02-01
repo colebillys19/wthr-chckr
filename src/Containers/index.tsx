@@ -1,6 +1,5 @@
 import Header from "./Header";
 import HomeCities from "./HomeCities";
-import HomeMap from "./HomeMap";
 import HomeNews from "./HomeNews";
 import HomeSearch from "./HomeSearch";
 import HomeUser from "./HomeUser";
@@ -13,7 +12,6 @@ import PageNotFound from "./PageNotFound";
 export {
   Header,
   HomeCities,
-  HomeMap,
   HomeNews,
   HomeSearch,
   HomeUser,
