@@ -108,8 +108,8 @@ function Display({
       label: "Feels like (low)",
       value: `${Math.round(todayFeelsLikeLow)}${tempUnit}`,
     },
-    { label: "Wind speed", value: `${Math.round(todayWindSpeed)}${windUnit}` },
-    { label: "Humidity", value: `${todayHumidity}%` },
+    { label: "Avg. wind speed", value: `${Math.round(todayWindSpeed)}${windUnit}` },
+    { label: "Avg. humidity", value: `${todayHumidity}%` },
   ];
 
   return (
@@ -161,7 +161,7 @@ function Display({
       <div>
         <h2>Map</h2>
         <div className="spacer" />
-        <WeatherMap location={location} zoom={8} />
+        <WeatherMap location={location} zoom={8} timezoneOffset={timezoneOffset} />
       </div>
     </div>
   );

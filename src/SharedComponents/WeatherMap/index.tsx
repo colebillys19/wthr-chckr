@@ -1,7 +1,7 @@
 import { CSSProperties, useEffect, useRef, useState } from "react";
 
 import { useGlobalState } from "../../context";
-import { getTimeStandard } from "../../utils/helperHelpers";
+import { getMapTime } from "../../utils/helpers";
 import { FrameType } from "./types";
 
 const tempStyles: CSSProperties = {
@@ -12,10 +12,11 @@ const tempStyles: CSSProperties = {
 type WeatherMapPropsType = {
   location: string;
   zoom: number;
+  timezoneOffset: number;
 };
 
-function WeatherMap({ location, zoom }: WeatherMapPropsType) {
-  const [radarLayerTime, setRadarLayerTime] = useState("");
+function WeatherMap({ location, zoom, timezoneOffset }: WeatherMapPropsType) {
+  const [radarLayerTime, setRadarLayerTime] = useState(0);
   const [error, setError] = useState("");
 
   const mapRef = useRef<google.maps.Map | null>(null);
@@ -24,7 +25,7 @@ function WeatherMap({ location, zoom }: WeatherMapPropsType) {
   const timestampArrRef = useRef([]);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const { googleMaps } = useGlobalState();
+  const { googleMaps, timeType } = useGlobalState();
 
   useEffect(() => {
     if (googleMaps !== null && mapDivRef.current !== null) {
@@ -53,15 +54,12 @@ function WeatherMap({ location, zoom }: WeatherMapPropsType) {
         const { host, radar } = resData;
         const { past, nowcast } = radar;
         const framesArr = nowcast ? past.concat(nowcast) : past;
-        //
-        timestampArrRef.current = framesArr.map((frame: FrameType) => {
-          const dateObj = new Date(frame.time * 1000);
-          const hours = dateObj.getHours();
-          const minutes = dateObj.getMinutes();
-          return getTimeStandard(hours, minutes);
-        });
+        timestampArrRef.current = framesArr.map(
+          (frame: FrameType) => frame.time
+        );
         //
         if (googleMaps !== null) {
+          mapRef.current?.overlayMapTypes.clear();
           framesArr.forEach((frame: FrameType, i: number) => {
             if (mapRef.current !== null) {
               const layer = new googleMaps.ImageMapType({
@@ -115,6 +113,7 @@ function WeatherMap({ location, zoom }: WeatherMapPropsType) {
    */
   const handlePlayPauseClick = () => {
     if (intervalRef.current === null) {
+      iterateLayer();
       play();
     } else {
       stop();
@@ -181,7 +180,7 @@ function WeatherMap({ location, zoom }: WeatherMapPropsType) {
   return (
     <>
       {currentLayerIndexRef.current === -1 && <div>Loading...</div>}
-      <div>{radarLayerTime}</div>
+      <div>{getMapTime(radarLayerTime, timezoneOffset, timeType)}</div>
       <div>
         <button onClick={handlePrevClick}>prev</button>
         <button onClick={handlePlayPauseClick}>play/stop</button>

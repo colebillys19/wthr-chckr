@@ -65,8 +65,8 @@ function WeatherDisplay({
       label: "Feels like (low)",
       value: `${Math.round(feelsLikeLow)}${tempUnit}`,
     },
-    { label: "Wind speed", value: `${Math.round(wind_speed)}${windUnit}` },
-    { label: "Humidity", value: `${humidity}%` },
+    { label: "Avg. wind speed", value: `${Math.round(wind_speed)}${windUnit}` },
+    { label: "Avg. humidity", value: `${humidity}%` },
   ];
 
   if (typeof rain === "number" && rain > 0) {
