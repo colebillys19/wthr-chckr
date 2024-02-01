@@ -1,7 +1,8 @@
 import { CSSProperties, useEffect, useRef, useState } from "react";
 
 import { useGlobalState } from "../../context";
-import { getMapTime } from "../../utils/helpers";
+import { getMapTime } from "./helpers";
+import { mapStyles } from "./constants";
 import { FrameType } from "./types";
 
 const tempStyles: CSSProperties = {
@@ -33,6 +34,7 @@ function WeatherMap({ location, zoom, timezoneOffset }: WeatherMapPropsType) {
       mapRef.current = new googleMaps.Map(mapDivRef.current, {
         center: { lat: Number(lat), lng: Number(lng) },
         zoom,
+        styles: mapStyles,
       });
     }
   }, [googleMaps, location, zoom]);
@@ -50,14 +52,12 @@ function WeatherMap({ location, zoom, timezoneOffset }: WeatherMapPropsType) {
         return res.json();
       })
       .then((resData) => {
-        //
         const { host, radar } = resData;
         const { past, nowcast } = radar;
         const framesArr = nowcast ? past.concat(nowcast) : past;
         timestampArrRef.current = framesArr.map(
           (frame: FrameType) => frame.time
         );
-        //
         if (googleMaps !== null) {
           mapRef.current?.overlayMapTypes.clear();
           framesArr.forEach((frame: FrameType, i: number) => {
@@ -80,7 +80,6 @@ function WeatherMap({ location, zoom, timezoneOffset }: WeatherMapPropsType) {
               mapRef.current.overlayMapTypes.push(layer);
             }
           });
-          //
           currentLayerIndexRef.current = past.length - 1;
           setRadarLayerTime(
             timestampArrRef.current[currentLayerIndexRef.current]
@@ -92,6 +91,33 @@ function WeatherMap({ location, zoom, timezoneOffset }: WeatherMapPropsType) {
         setError(error.message);
       });
   }, [googleMaps]);
+
+  /*
+   *
+   */
+  const updateLayerOpacities = (newLayerIndex: number) => {
+    const imageMapOld = mapRef.current?.overlayMapTypes.getAt(
+      currentLayerIndexRef.current
+    ) as google.maps.ImageMapType;
+    const imageMapNew = mapRef.current?.overlayMapTypes.getAt(
+      newLayerIndex
+    ) as google.maps.ImageMapType;
+    imageMapOld.setOpacity(0);
+    imageMapNew.setOpacity(0.7);
+    currentLayerIndexRef.current = newLayerIndex;
+    setRadarLayerTime(timestampArrRef.current[newLayerIndex]);
+  };
+
+  /*
+   *
+   */
+  const iterateLayer = () => {
+    const newLayerIndex =
+      currentLayerIndexRef.current === timestampArrRef.current.length - 1
+        ? 0
+        : currentLayerIndexRef.current + 1;
+    updateLayerOpacities(newLayerIndex);
+  };
 
   /*
    *
@@ -131,16 +157,7 @@ function WeatherMap({ location, zoom, timezoneOffset }: WeatherMapPropsType) {
       currentLayerIndexRef.current > 0
         ? currentLayerIndexRef.current - 1
         : timestampArrRef.current.length - 1;
-    const imageMapOld = mapRef.current?.overlayMapTypes.getAt(
-      currentLayerIndexRef.current
-    ) as google.maps.ImageMapType;
-    const imageMapNew = mapRef.current?.overlayMapTypes.getAt(
-      newLayerIndex
-    ) as google.maps.ImageMapType;
-    imageMapOld.setOpacity(0);
-    imageMapNew.setOpacity(0.7);
-    currentLayerIndexRef.current = newLayerIndex;
-    setRadarLayerTime(timestampArrRef.current[newLayerIndex]);
+    updateLayerOpacities(newLayerIndex);
   };
 
   /*
@@ -151,26 +168,6 @@ function WeatherMap({ location, zoom, timezoneOffset }: WeatherMapPropsType) {
       stop();
     }
     iterateLayer();
-  };
-
-  /*
-   *
-   */
-  const iterateLayer = () => {
-    const newLayerIndex =
-      currentLayerIndexRef.current === timestampArrRef.current.length - 1
-        ? 0
-        : currentLayerIndexRef.current + 1;
-    const imageMapOld = mapRef.current?.overlayMapTypes.getAt(
-      currentLayerIndexRef.current
-    ) as google.maps.ImageMapType;
-    const imageMapNew = mapRef.current?.overlayMapTypes.getAt(
-      newLayerIndex
-    ) as google.maps.ImageMapType;
-    imageMapOld.setOpacity(0);
-    imageMapNew.setOpacity(0.7);
-    currentLayerIndexRef.current = newLayerIndex;
-    setRadarLayerTime(timestampArrRef.current[newLayerIndex]);
   };
 
   if (error) {
