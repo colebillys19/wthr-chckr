@@ -22,7 +22,7 @@ export const useFetchLocationData = (location: string) => {
     }
     const [lat, lon] = location.split(",");
     fetch(
-      `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=${unitType}&appid=${process.env.REACT_APP_OWM_KEY}`
+      `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=${unitType}&appid=${process.env.REACT_APP_OPENWEATHER_KEY}`
     )
       .then((res) => {
         if (!res.ok) {
