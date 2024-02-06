@@ -32,7 +32,7 @@ function ModalDisplay() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [setActiveModal]);
 
   const handleBackdropClick = (e: MouseEvent) => {
     if (e.target === e.currentTarget) {
