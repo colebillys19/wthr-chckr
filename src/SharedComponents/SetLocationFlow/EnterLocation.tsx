@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from "react";
+import { useState } from "react";
 
 import EnterLocationDefault from "./EnterLocationDefault";
 import EnterLocationCoords from "./EnterLocationCoords";
