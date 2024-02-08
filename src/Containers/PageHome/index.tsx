@@ -2,6 +2,7 @@ import HomeCities from "../HomeCities";
 import HomeNews from "../HomeNews";
 import HomeSearch from "../HomeSearch";
 import HomeUser from "../HomeUser";
+import HomeMap from "../HomeMap";
 
 function PageHome() {
   //
@@ -10,6 +11,7 @@ function PageHome() {
     <main>
       <HomeSearch />
       <HomeUser />
+      <HomeMap />
       <HomeCities />
       <HomeNews />
     </main>

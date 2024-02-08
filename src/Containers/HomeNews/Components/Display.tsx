@@ -28,7 +28,7 @@ const tempStylesD: CSSProperties = {
   width: "calc(100% - 228px)",
 };
 
-function HomeNews({ data }: any) {
+function Display({ data }: any) {
   const { timeType } = useGlobalState();
 
   if (!data.length) {
@@ -58,4 +58,4 @@ function HomeNews({ data }: any) {
   );
 }
 
-export default HomeNews;
+export default Display;

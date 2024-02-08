@@ -161,7 +161,7 @@ function Display({
       <div>
         <h2>Map</h2>
         <div className="spacer" />
-        <WeatherMap location={location} zoom={8} timezoneOffset={timezoneOffset} />
+        <WeatherMap location={location} zoom={8} />
       </div>
     </div>
   );

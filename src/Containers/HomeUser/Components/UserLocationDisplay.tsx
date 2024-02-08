@@ -1,5 +1,5 @@
 import { useGlobalState } from "../../../context";
-import { WeatherDisplayHome, WeatherMap } from "../../../SharedComponents";
+import { WeatherDisplayHome } from "../../../SharedComponents";
 import { useUpdateUserLocation } from "../../../utils/customHooks/localStorage";
 import { useFetchLocationData } from "../../../utils/customHooks/locationData";
 
@@ -13,8 +13,6 @@ function UserLocationDisplay() {
     updateUserLocation("");
   };
 
-  const { timezone_offset } = data;
-
   return (
     <>
       <WeatherDisplayHome
@@ -24,7 +22,6 @@ function UserLocationDisplay() {
         name={name}
       />
       <div className="spacer" />
-      <WeatherMap location={userLocation} zoom={9} timezoneOffset={timezone_offset} />
       <div className="spacer" />
       <button onClick={handleChangeLocation}>clear location</button>
     </>

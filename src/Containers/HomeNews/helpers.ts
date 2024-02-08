@@ -45,7 +45,6 @@ export const parseXmlData = (data: any) => {
         }
       }
     });
-    console.log(item.querySelector("description"));
     return {
       title: item.querySelector("title")?.textContent,
       date: item.querySelector("pubDate")?.textContent,

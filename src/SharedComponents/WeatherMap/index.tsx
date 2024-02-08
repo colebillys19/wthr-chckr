@@ -1,8 +1,8 @@
 import { CSSProperties, useEffect, useRef, useState } from "react";
 
 import { useGlobalState } from "../../context";
-import { getMapTime } from "./helpers";
 import { mapStyles } from "./constants";
+import { tempGetTime } from './helpers';
 import { FrameType } from "./types";
 
 const tempStyles: CSSProperties = {
@@ -13,10 +13,9 @@ const tempStyles: CSSProperties = {
 type WeatherMapPropsType = {
   location: string;
   zoom: number;
-  timezoneOffset: number;
 };
 
-function WeatherMap({ location, zoom, timezoneOffset }: WeatherMapPropsType) {
+function WeatherMap({ location, zoom }: WeatherMapPropsType) {
   const [radarLayerTime, setRadarLayerTime] = useState(0);
   const [error, setError] = useState("");
 
@@ -26,7 +25,7 @@ function WeatherMap({ location, zoom, timezoneOffset }: WeatherMapPropsType) {
   const timestampArrRef = useRef([]);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const { googleMaps, timeType } = useGlobalState();
+  const { googleMaps } = useGlobalState();
 
   useEffect(() => {
     if (googleMaps !== null && mapDivRef.current !== null) {
@@ -90,7 +89,7 @@ function WeatherMap({ location, zoom, timezoneOffset }: WeatherMapPropsType) {
         console.error(error);
         setError(error.message);
       });
-  }, [googleMaps]);
+  }, [googleMaps, location]);
 
   /*
    *
@@ -177,7 +176,7 @@ function WeatherMap({ location, zoom, timezoneOffset }: WeatherMapPropsType) {
   return (
     <>
       {currentLayerIndexRef.current === -1 && <div>Loading...</div>}
-      <div>{getMapTime(radarLayerTime, timezoneOffset, timeType)}</div>
+      <div>{tempGetTime(radarLayerTime)}</div>
       <div>
         <button onClick={handlePrevClick}>prev</button>
         <button onClick={handlePlayPauseClick}>play/stop</button>
