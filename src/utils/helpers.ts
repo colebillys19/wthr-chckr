@@ -1,6 +1,6 @@
 import {
   getPreferredLocationNameData,
-  getLocalTimeMs,
+  getOffsetTimeMs,
   getDayHoursMinutes,
   getTimeStandard,
   getTimeMilitary,
@@ -75,7 +75,7 @@ export const getTimeData = ({
   sunsetSec,
   timeType,
 }: GetTimeDataPropsType) => {
-  const localTimeMs = getLocalTimeMs(dtSec, apiTimezoneOffsetSec);
+  const localTimeMs = getOffsetTimeMs(dtSec, apiTimezoneOffsetSec);
   const { day, hours, minutes } = getDayHoursMinutes(localTimeMs);
   const time =
     timeType === "standard"

@@ -96,7 +96,8 @@ function HomeSearch() {
 
   return (
     <HomeSectionContainer>
-      <div>HomeSearch</div>
+      <div>search by location</div>
+      <div className="spacer" />
       <form
         onSubmit={handleSubmit}
         style={isVerifyingAddress ? tempStylesA : {}}

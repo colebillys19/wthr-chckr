@@ -2,7 +2,7 @@ import { CSSProperties, useEffect, useRef, useState } from "react";
 
 import { useGlobalState } from "../../context";
 import { mapStyles } from "./constants";
-import { tempGetTime } from './helpers';
+import { getMapTime } from "./helpers";
 import { FrameType } from "./types";
 
 const tempStyles: CSSProperties = {
@@ -13,10 +13,13 @@ const tempStyles: CSSProperties = {
 type WeatherMapPropsType = {
   location: string;
   zoom: number;
+  useDeviceTime?: boolean;
 };
 
-function WeatherMap({ location, zoom }: WeatherMapPropsType) {
+function WeatherMap({ location, zoom, useDeviceTime }: WeatherMapPropsType) {
   const [radarLayerTime, setRadarLayerTime] = useState(0);
+  const [timezoneOffsetSec, setTimezoneOffsetSec] = useState(0);
+  const [timezoneName, setTimezoneName] = useState("");
   const [error, setError] = useState("");
 
   const mapRef = useRef<google.maps.Map | null>(null);
@@ -25,7 +28,7 @@ function WeatherMap({ location, zoom }: WeatherMapPropsType) {
   const timestampArrRef = useRef([]);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const { googleMaps } = useGlobalState();
+  const { googleMaps, timeType } = useGlobalState();
 
   useEffect(() => {
     if (googleMaps !== null && mapDivRef.current !== null) {
@@ -42,7 +45,6 @@ function WeatherMap({ location, zoom }: WeatherMapPropsType) {
     if (googleMaps === null || mapRef.current === null) {
       return;
     }
-    //
     fetch("https://api.rainviewer.com/public/weather-maps.json")
       .then((res) => {
         if (!res.ok) {
@@ -90,6 +92,33 @@ function WeatherMap({ location, zoom }: WeatherMapPropsType) {
         setError(error.message);
       });
   }, [googleMaps, location]);
+
+  /*
+   *
+   */
+  useEffect(() => {
+    if (useDeviceTime) {
+      return;
+    }
+    const nowSec = Math.round(Date.now() / 1000);
+    fetch(
+      `https://maps.googleapis.com/maps/api/timezone/json?location=${location}&timestamp=${nowSec}&key=${process.env.REACT_APP_GOOGLE_MAPS_KEY}`
+    )
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Issue fetching timezone data.");
+        }
+        return res.json();
+      })
+      .then((resData) => {
+        setTimezoneOffsetSec(resData.rawOffset);
+        setTimezoneName(resData.timeZoneName);
+      })
+      .catch((error) => {
+        console.error(error);
+        setError(error.message);
+      });
+  }, [location]);
 
   /*
    *
@@ -173,16 +202,30 @@ function WeatherMap({ location, zoom }: WeatherMapPropsType) {
     return <div>{error}</div>;
   }
 
+  const isLoading = currentLayerIndexRef.current === -1;
+
   return (
     <>
-      {currentLayerIndexRef.current === -1 && <div>Loading...</div>}
-      <div>{tempGetTime(radarLayerTime)}</div>
-      <div>
-        <button onClick={handlePrevClick}>prev</button>
-        <button onClick={handlePlayPauseClick}>play/stop</button>
-        <button onClick={handleNextClick}>next</button>
+      {isLoading && <div>Loading...</div>}
+      <div style={isLoading ? { display: "none" } : {}}>
+        <div>
+          <span>
+            {getMapTime({
+              radarLayerTime,
+              timezoneOffsetSec,
+              timeType,
+              useDeviceTime,
+            })}
+          </span>
+          {timezoneName && <span>{` (${timezoneName})`}</span>}
+        </div>
+        <div>
+          <button onClick={handlePrevClick}>prev</button>
+          <button onClick={handlePlayPauseClick}>play/stop</button>
+          <button onClick={handleNextClick}>next</button>
+        </div>
+        <div ref={mapDivRef} style={tempStyles} />
       </div>
-      <div ref={mapDivRef} style={tempStyles} />
     </>
   );
 }

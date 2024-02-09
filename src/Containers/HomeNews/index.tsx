@@ -32,8 +32,6 @@ function HomeNews() {
 
   return (
     <HomeSectionContainer>
-      <h3>recent news</h3>
-      <div className="spacer" />
       <DisplayContainer isLoading={isLoading} error={error} data={data}  />
     </HomeSectionContainer>
   );

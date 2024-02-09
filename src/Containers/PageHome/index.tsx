@@ -11,8 +11,8 @@ function PageHome() {
     <main>
       <HomeSearch />
       <HomeUser />
-      <HomeMap />
       <HomeCities />
+      <HomeMap />
       <HomeNews />
     </main>
   );

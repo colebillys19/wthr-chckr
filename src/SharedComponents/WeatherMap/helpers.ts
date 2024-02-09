@@ -1,37 +1,33 @@
 import {
-  getLocalTimeMs,
+  getOffsetTimeMs,
   getDayHoursMinutes,
   getTimeStandard,
   getTimeMilitary,
 } from "../../utils/helperHelpers";
 
-/*
- *
- */
-export const getMapTime = (
-  timestampSec: number,
-  timezoneOffsetSec: number,
-  timeType: string
-) => {
-  const localTimeMs = getLocalTimeMs(timestampSec, timezoneOffsetSec);
-  const { hours, minutes } = getDayHoursMinutes(localTimeMs);
-  const time =
-    timeType === "standard"
-      ? getTimeStandard(hours, minutes)
-      : getTimeMilitary(hours, minutes);
-  return time;
+type GetMapTimePropsType = {
+  radarLayerTime: number;
+  timezoneOffsetSec: number;
+  timeType: string;
+  useDeviceTime?: boolean;
 };
 
 /*
  *
  */
-export const tempGetTime = (timeSec: number) => {
-  const date = new Date(timeSec * 1000);
-  const timeString = new Intl.DateTimeFormat("en-US", {
-    hour: "numeric",
-    minute: "numeric",
-    hour12: true,
-    timeZoneName: "short",
-  }).format(date);
-  return timeString;
+export const getMapTime = ({
+  radarLayerTime,
+  timezoneOffsetSec,
+  timeType,
+  useDeviceTime,
+}: GetMapTimePropsType) => {
+  const timeToUse = useDeviceTime
+    ? radarLayerTime * 1000
+    : getOffsetTimeMs(radarLayerTime, timezoneOffsetSec);
+  const { hours, minutes } = getDayHoursMinutes(timeToUse);
+  const time =
+    timeType === "standard"
+      ? getTimeStandard(hours, minutes)
+      : getTimeMilitary(hours, minutes);
+  return time;
 };

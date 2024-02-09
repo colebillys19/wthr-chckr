@@ -25,7 +25,7 @@ function RecentLocations() {
   return (
     <>
       <div className="spacer" />
-      <h3>recently viewed</h3>
+      <div>recently viewed</div>
       <div className="spacer" />
       <ul style={tempStyles}>
         {recentLocations.map((location) => (

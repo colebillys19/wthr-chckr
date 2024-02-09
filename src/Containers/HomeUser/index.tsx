@@ -9,7 +9,7 @@ function HomeUser() {
 
   return (
     <HomeSectionContainer>
-      <h3>my location</h3>
+      <div>my location</div>
       <div className="spacer" />
       {userPrefersNoLocation ? (
         <UserLocationOff />

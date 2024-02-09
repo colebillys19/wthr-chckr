@@ -23,7 +23,7 @@ export const getPreferredLocationNameData = (
 /*
  *
  */
-export const getLocalTimeMs = (dtSec: number, apiTimezoneOffsetSec: number) => {
+export const getOffsetTimeMs = (dtSec: number, apiTimezoneOffsetSec: number) => {
   const systemTimezoneOffsetSec = new Date().getTimezoneOffset() * 60;
   const utcMs = (dtSec + systemTimezoneOffsetSec) * 1000;
   const apiOffsetMs = apiTimezoneOffsetSec * 1000;

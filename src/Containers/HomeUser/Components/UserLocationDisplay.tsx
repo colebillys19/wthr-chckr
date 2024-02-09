@@ -1,5 +1,5 @@
 import { useGlobalState } from "../../../context";
-import { WeatherDisplayHome } from "../../../SharedComponents";
+import { WeatherDisplayHome, WeatherMap } from "../../../SharedComponents";
 import { useUpdateUserLocation } from "../../../utils/customHooks/localStorage";
 import { useFetchLocationData } from "../../../utils/customHooks/locationData";
 
@@ -22,6 +22,7 @@ function UserLocationDisplay() {
         name={name}
       />
       <div className="spacer" />
+      <WeatherMap location={userLocation} zoom={8} />
       <div className="spacer" />
       <button onClick={handleChangeLocation}>clear location</button>
     </>
