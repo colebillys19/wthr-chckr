@@ -2,6 +2,7 @@ import { CSSProperties } from "react";
 
 import { useGlobalState } from "../../../context";
 import { getNewsTime } from "../helpers";
+import { NewsDataType } from '../types';
 
 const tempStylesA: CSSProperties = {
   display: "flex",
@@ -28,7 +29,11 @@ const tempStylesD: CSSProperties = {
   width: "calc(100% - 228px)",
 };
 
-function Display({ data }: any) {
+type DisplayPropsType = {
+  data: NewsDataType[];
+};
+
+function Display({ data }: DisplayPropsType) {
   const { timeType } = useGlobalState();
 
   if (!data.length) {
@@ -37,7 +42,7 @@ function Display({ data }: any) {
 
   return (
     <ul style={tempStylesA}>
-      {data.map((item: any) => (
+      {data.map((item: NewsDataType) => (
         <li key={item.title} style={tempStylesB}>
           <div
             style={{ ...tempStylesC, backgroundImage: `url(${item.imgUrl})` }}

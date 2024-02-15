@@ -1,4 +1,5 @@
 import { getTimeStandard, getTimeMilitary } from "../../utils/helperHelpers";
+import { NewsDataType } from './types';
 
 /*
  *
@@ -15,7 +16,7 @@ const decodeHtmlEntities = (str: string) => {
 /*
  *
  */
-export const parseXmlData = (data: any) => {
+export const parseXmlData = (data: Document) => {
   const rssElement = data.documentElement;
   // const contentNamespace = rssElement.getAttributeNS(
   //   "http://www.w3.org/2000/xmlns/",

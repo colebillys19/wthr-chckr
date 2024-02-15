@@ -3,11 +3,12 @@ import { useEffect, useState } from "react";
 import { HomeSectionContainer } from "../../SharedComponentsAux";
 import DisplayContainer from './Components/DisplayContainer';
 import { parseXmlData } from './helpers';
+import { NewsDataType } from './types';
 
 function HomeNews() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<NewsDataType[]>([]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -19,7 +20,7 @@ function HomeNews() {
         return response.text();
       })
       .then((str) => new window.DOMParser().parseFromString(str, "text/xml"))
-      .then((data: any) => {
+      .then((data: Document) => {
         setData(parseXmlData(data));
         setIsLoading(false);
       })
