@@ -7,24 +7,7 @@ import {
 } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
 
-type GlobalStatePropsType = {
-  activeModal: string;
-  googleMaps: typeof google.maps | null;
-  isDarkMode: boolean;
-  recentLocations: string[];
-  timeType: string;
-  unitType: string;
-  userLocation: string;
-  userPrefersNoLocation: boolean;
-  setActiveModal: (value: string) => void;
-  setGoogleMaps: (value: typeof google.maps | null) => void;
-  setIsDarkMode: (value: boolean) => void;
-  setRecentLocations: (value: string[]) => void;
-  setTimeType: (value: string) => void;
-  setUnitType: (value: string) => void;
-  setUserLocation: (value: string) => void;
-  setUserPrefersNoLocation: (value: boolean) => void;
-};
+import { GlobalStatePropsType, RecentLocationType } from "./utils/types/context";
 
 const GlobalState = createContext<Partial<GlobalStatePropsType>>({});
 
@@ -40,7 +23,7 @@ const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
   const [activeModal, setActiveModal] = useState("");
   const [googleMaps, setGoogleMaps] = useState<typeof google.maps | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [recentLocations, setRecentLocations] = useState<string[]>([]);
+  const [recentLocations, setRecentLocations] = useState<RecentLocationType[]>([]);
   const [timeType, setTimeType] = useState("standard");
   const [unitType, setUnitType] = useState("imperial");
   const [userLocation, setUserLocation] = useState("");

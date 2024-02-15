@@ -28,9 +28,9 @@ function RecentLocations() {
       <div>recently viewed</div>
       <div className="spacer" />
       <ul style={tempStyles}>
-        {recentLocations.map((location) => (
+        {recentLocations.map(({ location, name }) => (
           <li key={location}>
-            <RecentLocationDisplay location={location} />
+            <RecentLocationDisplay location={location} name={name} />
           </li>
         ))}
       </ul>

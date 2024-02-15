@@ -1,9 +1,8 @@
-import { useEffect } from "react";
-
-import { useGlobalState } from "../../../context";
-import { useFetchLocationData } from "../../../utils/customHooks/locationData";
-import { useUpdateRecentLocations } from "../../../utils/customHooks/localStorage";
-import { TabNav } from '../../../SharedComponentsAux';
+import {
+  useFetchLocationData,
+  useHandleRecentLocation,
+} from "../../../utils/customHooks/locationData";
+import { TabNav } from "../../../SharedComponentsAux";
 import WeatherDisplayContainer from "./WeatherDisplayContainer";
 import Error from "./Error";
 import Skeleton from "./Skeleton";
@@ -13,18 +12,9 @@ type DataContainerPropsType = {
 };
 
 function DataContainer({ location }: DataContainerPropsType) {
-  const { recentLocations } = useGlobalState();
-
   const { data, error, isLoading, name } = useFetchLocationData(location);
 
-  const updateRecentLocations = useUpdateRecentLocations();
-
-  useEffect(() => {
-    const isRecent = recentLocations.some((loc) => loc === location);
-    if (!isRecent) {
-      updateRecentLocations([location, ...recentLocations.slice(0, 2)]);
-    }
-  }, []);
+  useHandleRecentLocation(location, name);
 
   if (isLoading) {
     return <Skeleton />;

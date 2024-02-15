@@ -1,4 +1,5 @@
 import { useGlobalState } from "../../context";
+import { RecentLocationType } from "../../utils/types/context";
 
 /*
  *
@@ -24,7 +25,7 @@ export const useUpdateUserLocation = () => {
 export const useUpdateRecentLocations = () => {
   const { setRecentLocations } = useGlobalState();
 
-  const updateRecentLocations = (recentLocations: string[]) => {
+  const updateRecentLocations = (recentLocations: RecentLocationType[]) => {
     setRecentLocations(recentLocations);
     localStorage.setItem("recentLocations", JSON.stringify(recentLocations));
   };
