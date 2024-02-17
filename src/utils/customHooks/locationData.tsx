@@ -40,7 +40,7 @@ export const useFetchLocationData = (location: string) => {
         setError(error.message);
         setIsFetchingData(false);
       });
-  }, [unitType, location]);
+  }, [unitType]);
 
   /*
    *
@@ -76,7 +76,7 @@ export const useFetchLocationData = (location: string) => {
           setIsFetchingName(false);
         });
     }
-  }, [googleMaps, location]);
+  }, [googleMaps]);
 
   return { data, error, isLoading: isFetchingData || isFetchingName, name };
 };
@@ -114,7 +114,7 @@ export const useFetchRecentLocationData = (location: string) => {
         setError(error.message);
         setIsLoading(false);
       });
-  }, [unitType, location]);
+  }, [unitType]);
 
   return { data, error, isLoading: isLoading };
 };

@@ -157,12 +157,6 @@ function Display({
           ))}
         </ul>
       </div>
-      <div className="spacer" />
-      <div>
-        <h2>Map</h2>
-        <div className="spacer" />
-        <WeatherMap location={location} zoom={8} />
-      </div>
     </div>
   );
 }
