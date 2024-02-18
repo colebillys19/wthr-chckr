@@ -4,73 +4,31 @@ export const mapStyles: google.maps.MapTypeStyle[] = [
     elementType: "all",
     stylers: [
       {
-        visibility: "on",
+        saturation: -100,
       },
+    ],
+  },
+  {
+    featureType: "administrative.province",
+    elementType: "all",
+    stylers: [
+      {
+        visibility: "off",
+      },
+    ],
+  },
+  {
+    featureType: "landscape",
+    elementType: "all",
+    stylers: [
       {
         saturation: -100,
       },
       {
-        lightness: 20,
+        lightness: 65,
       },
-    ],
-  },
-  {
-    featureType: "road",
-    elementType: "all",
-    stylers: [
       {
         visibility: "on",
-      },
-      {
-        saturation: -100,
-      },
-      {
-        lightness: 40,
-      },
-    ],
-  },
-  {
-    featureType: "water",
-    elementType: "all",
-    stylers: [
-      {
-        visibility: "on",
-      },
-      {
-        saturation: -10,
-      },
-      {
-        lightness: 30,
-      },
-    ],
-  },
-  {
-    featureType: "landscape.man_made",
-    elementType: "all",
-    stylers: [
-      {
-        visibility: "simplified",
-      },
-      {
-        saturation: -60,
-      },
-      {
-        lightness: 10,
-      },
-    ],
-  },
-  {
-    featureType: "landscape.natural",
-    elementType: "all",
-    stylers: [
-      {
-        visibility: "simplified",
-      },
-      {
-        saturation: -60,
-      },
-      {
-        lightness: 60,
       },
     ],
   },
@@ -79,13 +37,49 @@ export const mapStyles: google.maps.MapTypeStyle[] = [
     elementType: "all",
     stylers: [
       {
-        visibility: "off",
-      },
-      {
         saturation: -100,
       },
       {
-        lightness: 60,
+        lightness: 50,
+      },
+      {
+        visibility: "simplified",
+      },
+    ],
+  },
+  {
+    featureType: "road",
+    elementType: "all",
+    stylers: [
+      {
+        saturation: -100,
+      },
+    ],
+  },
+  {
+    featureType: "road.highway",
+    elementType: "all",
+    stylers: [
+      {
+        visibility: "simplified",
+      },
+    ],
+  },
+  {
+    featureType: "road.arterial",
+    elementType: "all",
+    stylers: [
+      {
+        lightness: 30,
+      },
+    ],
+  },
+  {
+    featureType: "road.local",
+    elementType: "all",
+    stylers: [
+      {
+        lightness: 40,
       },
     ],
   },
@@ -94,13 +88,37 @@ export const mapStyles: google.maps.MapTypeStyle[] = [
     elementType: "all",
     stylers: [
       {
-        visibility: "off",
-      },
-      {
         saturation: -100,
       },
       {
-        lightness: 60,
+        visibility: "simplified",
+      },
+    ],
+  },
+  {
+    featureType: "water",
+    elementType: "geometry",
+    stylers: [
+      {
+        hue: "#ffff00",
+      },
+      {
+        lightness: -25,
+      },
+      {
+        saturation: -97,
+      },
+    ],
+  },
+  {
+    featureType: "water",
+    elementType: "labels",
+    stylers: [
+      {
+        lightness: -25,
+      },
+      {
+        saturation: -100,
       },
     ],
   },
