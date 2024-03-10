@@ -12,11 +12,9 @@ function DisplayContainerContainer({
 
   return (
     <>
-      <div className="spacer" />
       <DisplayContainer location={location} />
       <div>
         <h2>Map</h2>
-        <div className="spacer" />
         <WeatherMap location={location} zoom={8} />
       </div>
     </>

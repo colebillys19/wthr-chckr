@@ -28,11 +28,8 @@ function DisplayContainer({ location }: DisplayContainerPropsType) {
 
   return (
     <>
-      <div className="spacer" />
       <h1>{name}</h1>
-      <div className="spacer" />
       <TabNav location={location} />
-      <div className="spacer" />
       <Display
         location={location}
         currentData={current}

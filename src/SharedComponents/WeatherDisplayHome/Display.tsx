@@ -60,12 +60,10 @@ function Display({ data, name }: DisplayPropsType) {
         <b>{name}</b>
       </div>
       <div>{time}</div>
-      <div className="spacer" />
       <div>
         <WeatherSvg id={weather[0].id} isDayTime={isDayTime} size={120} />
       </div>
       <div>{weather[0].main}</div>
-      <div className="spacer" />
       <ul>
         {dataArr.map(({ label, value }) => (
           <li key={label}>
@@ -74,7 +72,6 @@ function Display({ data, name }: DisplayPropsType) {
           </li>
         ))}
       </ul>
-      <div className="spacer" />
       <div>
         <button onClick={handleSeeMore}>see more</button>
       </div>

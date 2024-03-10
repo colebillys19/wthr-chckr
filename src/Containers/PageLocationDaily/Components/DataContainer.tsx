@@ -28,13 +28,9 @@ function DataContainer({ location }: DataContainerPropsType) {
 
   return (
     <>
-      <div className="spacer" />
       <h1>{name}</h1>
-      <div className="spacer" />
       <TabNav location={location} />
-      <div className="spacer" />
       <h2>Daily</h2>
-      <div className="spacer" />
       <WeatherDisplayContainer data={daily} timezoneOffset={timezone_offset} />
     </>
   );

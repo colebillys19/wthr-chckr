@@ -98,7 +98,6 @@ function Display({
   return (
     <div>
       <h2>Current</h2>
-      <div className="spacer" />
       <div>
         <h3>{currentTime}</h3>
         <div>
@@ -109,28 +108,23 @@ function Display({
           />
         </div>
         <div>{currentWeather[0].main}</div>
-        <div className="spacer" />
         <div>
           Temperature: <b>{`${Math.round(currentTemp)}${tempUnit}`}</b>
         </div>
         <div>
           Feels like: <b>{`${Math.round(currentFeelsLike)}${tempUnit}`}</b>
         </div>
-        <div className="spacer" />
         <WindDisplay
           speedStr={`${Math.round(currentWindSpeed)}${windUnit}`}
           deg={wind_deg}
         />
-        <div className="spacer" />
         <div>
           Humidity: <b>{`${currentHumidity}%`}</b>
         </div>
       </div>
       <div>
         <h3>{day} Summary</h3>
-        <div className="spacer" />
         <div>{todaySummary}</div>
-        <div className="spacer" />
         <ul>
           {todayDataArr.map(({ label, value }) => (
             <li key={label}>

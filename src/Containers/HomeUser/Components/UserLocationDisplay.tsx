@@ -21,9 +21,7 @@ function UserLocationDisplay() {
         isLoading={isLoading}
         name={name}
       />
-      <div className="spacer" />
       <WeatherMap location={userLocation} zoom={8} />
-      <div className="spacer" />
       <button onClick={handleChangeLocation}>clear location</button>
     </>
   );

@@ -68,13 +68,10 @@ function WeatherDisplay({
   return (
     <div>
       <h3>{isToday ? "Today" : day}</h3>
-      <div className="spacer" />
       <div>
         <WeatherSvg id={weather[0].id} isDayTime size={120} />
       </div>
-      <div className="spacer" />
       <div>{summary}</div>
-      <div className="spacer" />
       <ul>
         {dataArr.map(({ label, value }) => (
           <li key={label}>

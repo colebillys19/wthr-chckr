@@ -87,7 +87,6 @@ function HomeSearch() {
   return (
     <HomeSectionContainer>
       <div>search by location</div>
-      <div className="spacer" />
       <form onSubmit={handleSubmit}>
         <label htmlFor="search">
           Search
