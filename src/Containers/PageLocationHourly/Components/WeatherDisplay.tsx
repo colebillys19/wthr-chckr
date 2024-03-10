@@ -1,17 +1,7 @@
-import { CSSProperties } from "react";
-
 import { useGlobalState } from "../../../context";
 import { WeatherSvg } from "../../../SharedComponentsAux";
 import { HourlyType } from "../../../utils/types/openWeatherMap";
 import { getTimeData } from "../../../utils/helpers";
-
-const tempStyles: CSSProperties = {
-  border: "1px solid black",
-  display: "inline-block",
-  minWidth: "200px",
-  minHeight: "340px",
-  padding: "16px",
-};
 
 type WeatherDisplayPropsType = {
   data: HourlyType;
@@ -58,7 +48,7 @@ function WeatherDisplay({
   }
 
   return (
-    <div style={tempStyles}>
+    <div>
       <div>
         <b>{time}</b>
       </div>

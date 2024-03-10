@@ -1,13 +1,7 @@
-import { CSSProperties } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import { DailyType } from "../../../utils/types/openWeatherMap";
 import WeatherDisplay from "./WeatherDisplay";
-
-const tempStyles: CSSProperties = {
-  display: "flex",
-  flexDirection: "column",
-};
 
 type WeatherDisplayContainerPropsType = {
   data: DailyType[];
@@ -20,7 +14,7 @@ function WeatherDisplayContainer({
 }: WeatherDisplayContainerPropsType) {
 
   return (
-    <ul style={tempStyles}>
+    <ul>
       {data.map((dailyData, i) => (
         <li key={uuidv4()}>
           <WeatherDisplay data={dailyData} timezoneOffset={timezoneOffset} isToday={i === 0} />

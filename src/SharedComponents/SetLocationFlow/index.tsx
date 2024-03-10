@@ -1,21 +1,27 @@
-import { CSSProperties, useState } from "react";
+import { useState } from "react";
 
 import EnterLocation from "./EnterLocation";
 import SetLocationOptions from "./SetLocationOptions";
-
-const tempStyles: CSSProperties = { opacity: 0.1 };
 
 function SetLocationFlow() {
   const [isEnteringLocation, setIsEnteringLocation] = useState(false);
   const [isGeolocating, setIsGeolocating] = useState(false);
   const [isVerifyingAddress, setIsVerifyingAddress] = useState(false);
 
+  // isGeolocating || isVerifyingAddress ? tempStyles : {}
+
   return (
-    <div style={isGeolocating || isVerifyingAddress ? tempStyles : {}}>
+    <div>
       {isEnteringLocation ? (
-        <EnterLocation setIsEnteringLocation={setIsEnteringLocation} setIsVerifyingAddress={setIsVerifyingAddress} />
+        <EnterLocation
+          setIsEnteringLocation={setIsEnteringLocation}
+          setIsVerifyingAddress={setIsVerifyingAddress}
+        />
       ) : (
-        <SetLocationOptions setIsEnteringLocation={setIsEnteringLocation} setIsGeolocating={setIsGeolocating} />
+        <SetLocationOptions
+          setIsEnteringLocation={setIsEnteringLocation}
+          setIsGeolocating={setIsGeolocating}
+        />
       )}
     </div>
   );

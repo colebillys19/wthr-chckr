@@ -12,6 +12,8 @@ import { Modal } from "./SharedComponents";
 import GlobalStateProvider from "./context";
 import "./App.css";
 
+import BaseUiTest from "./Containers/BaseUiTest";
+
 function App() {
   //
 
@@ -25,6 +27,7 @@ function App() {
             <Route path="/location/current" element={<PageLocationCurrent />} />
             <Route path="/location/hourly" element={<PageLocationHourly />} />
             <Route path="/location/daily" element={<PageLocationDaily />} />
+            <Route path="/test" element={<BaseUiTest />} />
             <Route path='*' element={<PageNotFound />}/>
           </Routes>
           <Modal />

@@ -1,14 +1,6 @@
-import { CSSProperties } from "react";
-
 import { useGlobalState } from "../../context";
 import { ModalContainer } from "../../SharedComponentsAux";
 import SetLocationFlow from "../SetLocationFlow";
-
-const tempStyles: CSSProperties = {
-  position: 'absolute',
-  right: 0,
-  top: 0,
-};
 
 function ModalSetLocation() {
   const { setActiveModal } = useGlobalState();
@@ -19,7 +11,7 @@ function ModalSetLocation() {
 
   return (
     <ModalContainer>
-      <button onClick={handleClose} style={tempStyles}>x</button>
+      <button onClick={handleClose}>x</button>
       <div>
         <SetLocationFlow />
       </div>

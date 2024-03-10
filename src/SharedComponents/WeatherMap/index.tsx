@@ -1,14 +1,9 @@
-import { CSSProperties, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { useGlobalState } from "../../context";
 import { mapStyles } from "./constants";
 import { getMapTime } from "./helpers";
 import { FrameType } from "./types";
-
-const tempStyles: CSSProperties = {
-  width: "60%",
-  height: "500px",
-};
 
 type WeatherMapPropsType = {
   location: string;
@@ -224,7 +219,7 @@ function WeatherMap({ location, zoom, useDeviceTime }: WeatherMapPropsType) {
           <button onClick={handlePlayPauseClick}>play/stop</button>
           <button onClick={handleNextClick}>next</button>
         </div>
-        <div ref={mapDivRef} style={tempStyles} />
+        <div ref={mapDivRef} />
       </div>
     </>
   );

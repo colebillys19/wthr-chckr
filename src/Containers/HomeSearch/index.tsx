@@ -1,20 +1,8 @@
-import { CSSProperties, FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useGlobalState } from "../../context";
 import { HomeSectionContainer } from "../../SharedComponentsAux";
-
-const tempStylesA: CSSProperties = {
-  opacity: 0.1,
-};
-
-const tempStylesB: CSSProperties = {
-  display: "none",
-};
-
-const tempStylesC: CSSProperties = {
-  minWidth: "360px",
-};
 
 function HomeSearch() {
   const [inputError, setInputError] = useState("");
@@ -94,15 +82,14 @@ function HomeSearch() {
     }
   };
 
+  // isVerifyingAddress ? tempStylesA : {}
+
   return (
     <HomeSectionContainer>
       <div>search by location</div>
       <div className="spacer" />
-      <form
-        onSubmit={handleSubmit}
-        style={isVerifyingAddress ? tempStylesA : {}}
-      >
-        <label htmlFor="search" style={tempStylesB}>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="search">
           Search
         </label>
         <input
@@ -111,7 +98,6 @@ function HomeSearch() {
           placeholder=""
           ref={inputRef}
           required
-          style={tempStylesC}
           type="text"
         />
         <input type="submit" value="Go" disabled={isSubmitDisabled} />

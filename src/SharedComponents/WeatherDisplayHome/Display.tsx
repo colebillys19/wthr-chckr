@@ -1,22 +1,9 @@
-import { CSSProperties } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useGlobalState } from "../../context";
 import { WeatherSvg } from "../../SharedComponentsAux";
 import { OpenWeatherMapDataType } from "../../utils/types/openWeatherMap";
 import { getTimeData } from "../../utils/helpers";
-
-const tempStylesA: CSSProperties = {
-  border: "1px solid black",
-  display: "inline-block",
-  minWidth: "240px",
-  minHeight: "360px",
-  padding: "16px",
-};
-
-const tempStylesB: CSSProperties = {
-  color: "grey",
-};
 
 type DisplayPropsType = {
   data: OpenWeatherMapDataType;
@@ -68,7 +55,7 @@ function Display({ data, name }: DisplayPropsType) {
   };
 
   return (
-    <div style={tempStylesA}>
+    <div>
       <div>
         <b>{name}</b>
       </div>
@@ -82,7 +69,7 @@ function Display({ data, name }: DisplayPropsType) {
       <ul>
         {dataArr.map(({ label, value }) => (
           <li key={label}>
-            <span style={tempStylesB}>{label}:&nbsp;</span>
+            <span>{label}:&nbsp;</span>
             <span>{value}</span>
           </li>
         ))}

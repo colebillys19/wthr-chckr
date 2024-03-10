@@ -1,19 +1,7 @@
-import { CSSProperties } from "react";
-
 import { useGlobalState } from "../../../context";
 import { WeatherSvg } from "../../../SharedComponentsAux";
 import { DailyType } from "../../../utils/types/openWeatherMap";
 import { getHighLow, getTimeData } from "../../../utils/helpers";
-
-const tempStylesA: CSSProperties = {
-  padding: "16px",
-  borderBottom: "1px solid black",
-  display: "inline-block",
-};
-
-const tempStylesB: CSSProperties = {
-  fontWeight: "bold",
-};
 
 type WeatherDisplayPropsType = {
   data: DailyType;
@@ -78,8 +66,8 @@ function WeatherDisplay({
   }
 
   return (
-    <div style={tempStylesA}>
-      <h3 style={tempStylesB}>{isToday ? "Today" : day}</h3>
+    <div>
+      <h3>{isToday ? "Today" : day}</h3>
       <div className="spacer" />
       <div>
         <WeatherSvg id={weather[0].id} isDayTime size={120} />

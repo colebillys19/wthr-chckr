@@ -1,10 +1,4 @@
-import { CSSProperties, ReactNode } from "react";
-
-const tempStyles: CSSProperties = {
-  margin: "20px",
-  outline: "3px solid purple",
-  padding: "20px",
-};
+import { ReactNode } from "react";
 
 type HomeSectionContainerPropsType = {
   children: ReactNode;
@@ -13,7 +7,7 @@ type HomeSectionContainerPropsType = {
 function HomeSectionContainer({ children }: HomeSectionContainerPropsType) {
   //
 
-  return <div style={tempStyles}>{children}</div>;
+  return <div>{children}</div>;
 }
 
 export default HomeSectionContainer;

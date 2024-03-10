@@ -1,26 +1,9 @@
-import { CSSProperties } from "react";
-
 import { useGlobalState } from "../../../context";
 // import { WeatherMap } from "../../../SharedComponents";
 import { WeatherSvg } from "../../../SharedComponentsAux";
 import { CurrentType, DailyType } from "../../../utils/types/openWeatherMap";
 import { getTimeData, getHighLow } from "../../../utils/helpers";
 import WindDisplay from "./WindDisplay";
-
-const tempStylesA: CSSProperties = {
-  border: "1px solid black",
-  display: "inline-block",
-  padding: "16px",
-  width: "240px",
-  verticalAlign: "top",
-};
-
-const tempStylesB: CSSProperties = {
-  backgroundColor: "#eeeeee",
-  display: "inline-block",
-  padding: "16px",
-  verticalAlign: "top",
-};
 
 type DisplayPropsType = {
   location: string;
@@ -116,7 +99,7 @@ function Display({
     <div>
       <h2>Current</h2>
       <div className="spacer" />
-      <div style={tempStylesA}>
+      <div>
         <h3>{currentTime}</h3>
         <div>
           <WeatherSvg
@@ -143,7 +126,7 @@ function Display({
           Humidity: <b>{`${currentHumidity}%`}</b>
         </div>
       </div>
-      <div style={tempStylesB}>
+      <div>
         <h3>{day} Summary</h3>
         <div className="spacer" />
         <div>{todaySummary}</div>

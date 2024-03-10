@@ -1,11 +1,7 @@
-import { CSSProperties, FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 
 import { useGlobalState } from "../../context";
 import { useUpdateUserLocation } from "../../utils/customHooks/localStorage";
-
-const tempStyles: CSSProperties = {
-  minWidth: "240px",
-};
 
 type EnterLocationDefaultPropsType = {
   setIsCoordsEntry: (value: boolean) => void;
@@ -121,7 +117,6 @@ function EnterLocationDefault({
             placeholder=""
             ref={inputRef}
             required
-            style={tempStyles}
             type="text"
           />
         </div>
