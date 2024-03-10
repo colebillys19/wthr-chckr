@@ -56,9 +56,7 @@ function Display({ data, name }: DisplayPropsType) {
 
   return (
     <div>
-      <div>
-        <b>{name}</b>
-      </div>
+      <div>{name}</div>
       <div>{time}</div>
       <div>
         <WeatherSvg id={weather[0].id} isDayTime={isDayTime} size={120} />

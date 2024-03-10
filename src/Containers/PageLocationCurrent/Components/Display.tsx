@@ -91,7 +91,10 @@ function Display({
       label: "Feels like (low)",
       value: `${Math.round(todayFeelsLikeLow)}${tempUnit}`,
     },
-    { label: "Avg. wind speed", value: `${Math.round(todayWindSpeed)}${windUnit}` },
+    {
+      label: "Avg. wind speed",
+      value: `${Math.round(todayWindSpeed)}${windUnit}`,
+    },
     { label: "Avg. humidity", value: `${todayHumidity}%` },
   ];
 
@@ -108,19 +111,13 @@ function Display({
           />
         </div>
         <div>{currentWeather[0].main}</div>
-        <div>
-          Temperature: <b>{`${Math.round(currentTemp)}${tempUnit}`}</b>
-        </div>
-        <div>
-          Feels like: <b>{`${Math.round(currentFeelsLike)}${tempUnit}`}</b>
-        </div>
+        <div>Temperature: {`${Math.round(currentTemp)}${tempUnit}`}</div>
+        <div>Feels like: {`${Math.round(currentFeelsLike)}${tempUnit}`}</div>
         <WindDisplay
           speedStr={`${Math.round(currentWindSpeed)}${windUnit}`}
           deg={wind_deg}
         />
-        <div>
-          Humidity: <b>{`${currentHumidity}%`}</b>
-        </div>
+        <div>Humidity: {`${currentHumidity}%`}</div>
       </div>
       <div>
         <h3>{day} Summary</h3>
@@ -129,7 +126,7 @@ function Display({
           {todayDataArr.map(({ label, value }) => (
             <li key={label}>
               <span>{label}:&nbsp;</span>
-              <b>{value}</b>
+              {value}
             </li>
           ))}
         </ul>

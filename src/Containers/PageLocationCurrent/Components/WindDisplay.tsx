@@ -11,7 +11,7 @@ function WindDisplay({ speedStr, deg }: WindDisplayPropsType) {
   return (
     <div>
       <div>Wind</div>
-      <div><b>{speedStr}</b></div>
+      <div>{speedStr}</div>
       <WeatherSvgP size={60} rotation={deg} />
     </div>
   );

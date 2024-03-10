@@ -1,6 +1,6 @@
 import { useGlobalState } from "../../../context";
 import { getNewsTime } from "../helpers";
-import { NewsDataType } from '../types';
+import { NewsDataType } from "../types";
 
 type DisplayPropsType = {
   data: NewsDataType[];
@@ -20,9 +20,7 @@ function Display({ data }: DisplayPropsType) {
           <div style={{ backgroundImage: `url(${item.imgUrl})` }}></div>
           <div>
             <span>{getNewsTime(item.date, timeType)}</span>
-            <h4>
-              <b>{item.title}</b>
-            </h4>
+            <h4>{item.title}</h4>
             <p>{item.description}</p>
             <a href={item.link} target="_blank" rel="noreferrer">
               Read more

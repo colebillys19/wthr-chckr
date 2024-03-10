@@ -76,7 +76,7 @@ function WeatherDisplay({
         {dataArr.map(({ label, value }) => (
           <li key={label}>
             <span>{label}:&nbsp;</span>
-            <b>{value}</b>
+            {value}
           </li>
         ))}
       </ul>

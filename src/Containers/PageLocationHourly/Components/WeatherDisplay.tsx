@@ -49,9 +49,7 @@ function WeatherDisplay({
 
   return (
     <div>
-      <div>
-        <b>{time}</b>
-      </div>
+      <div>{time}</div>
       <div>
         <WeatherSvg id={weather[0].id} isDayTime={isDayTime} size={120} />
       </div>
@@ -60,7 +58,7 @@ function WeatherDisplay({
         {dataArr.map(({ label, value }) => (
           <li key={label}>
             <span>{label}:&nbsp;</span>
-            <b>{value}</b>
+            {value}
           </li>
         ))}
       </ul>
