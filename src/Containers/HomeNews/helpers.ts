@@ -1,5 +1,5 @@
 import { getTimeStandard, getTimeMilitary } from "../../utils/helperHelpers";
-import { NewsDataType } from './types';
+// import { NewsDataType } from './types';
 
 /*
  *

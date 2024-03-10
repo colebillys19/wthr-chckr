@@ -1,7 +1,7 @@
 import { CSSProperties } from "react";
 
 import { useGlobalState } from "../../../context";
-import { WeatherMap } from "../../../SharedComponents";
+// import { WeatherMap } from "../../../SharedComponents";
 import { WeatherSvg } from "../../../SharedComponentsAux";
 import { CurrentType, DailyType } from "../../../utils/types/openWeatherMap";
 import { getTimeData, getHighLow } from "../../../utils/helpers";
