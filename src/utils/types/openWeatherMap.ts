@@ -22,6 +22,8 @@ export type CurrentType = {
   clouds: number;
   visibility: number;
   wind_speed: number;
+  rain?: NumObjType;
+  snow?: NumObjType;
   wind_deg: number;
   weather: WeatherType[];
 };

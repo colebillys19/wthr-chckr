@@ -22,6 +22,7 @@ function WeatherDisplay({
     feels_like,
     weather,
     humidity,
+    pop,
     rain,
     snow,
     summary,
@@ -53,16 +54,17 @@ function WeatherDisplay({
       label: "Feels like (low)",
       value: `${Math.round(feelsLikeLow)}${tempUnit}`,
     },
+    { label: "Likelihood of precipitation", value: `${pop * 100}%` },
     { label: "Avg. wind speed", value: `${Math.round(wind_speed)}${windUnit}` },
     { label: "Avg. humidity", value: `${humidity}%` },
   ];
 
   if (typeof rain === "number" && rain > 0) {
-    dataArr.push({ label: "Rain (inches)", value: `${rain}` });
+    dataArr.push({ label: "Rain", value: `${rain} mm` });
   }
 
   if (typeof snow === "number" && snow > 0) {
-    dataArr.push({ label: "Snow (inches)", value: `${snow}` });
+    dataArr.push({ label: "Snow", value: `${snow} mm` });
   }
 
   return (

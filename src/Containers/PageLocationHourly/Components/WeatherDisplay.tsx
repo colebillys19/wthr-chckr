@@ -18,8 +18,17 @@ function WeatherDisplay({
 }: WeatherDisplayPropsType) {
   const { unitType, timeType } = useGlobalState();
 
-  const { dt, temp, feels_like, weather, humidity, wind_speed, rain, snow } =
-    data;
+  const {
+    dt,
+    temp,
+    feels_like,
+    weather,
+    humidity,
+    pop,
+    wind_speed,
+    rain,
+    snow,
+  } = data;
 
   const { time, isDayTime } = getTimeData({
     dtSec: dt,
@@ -37,14 +46,15 @@ function WeatherDisplay({
     { label: "Feels like", value: `${Math.round(feels_like)}${tempUnit}` },
     { label: "Wind speed", value: `${Math.round(wind_speed)}${windUnit}` },
     { label: "Humidity", value: `${humidity}%` },
+    { label: "Likelihood of precipitation", value: `${pop * 100}%` },
   ];
 
   if (rain && rain["1h"]) {
-    dataArr.push({ label: "Rain (inches)", value: `${rain["1h"]}` });
+    dataArr.push({ label: "Rain", value: `${rain["1h"]} mm/h` });
   }
 
   if (snow && snow["1h"]) {
-    dataArr.push({ label: "Snow (inches)", value: `${snow["1h"]}` });
+    dataArr.push({ label: "Snow", value: `${snow["1h"]} mm/h` });
   }
 
   return (

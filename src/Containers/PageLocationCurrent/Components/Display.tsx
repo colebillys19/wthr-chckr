@@ -30,7 +30,19 @@ function Display({
     wind_speed: currentWindSpeed,
     sunrise,
     sunset,
+    rain: currentRain,
+    snow: currentSnow,
   } = currentData;
+
+  let currentRainStr = '';
+  if (currentRain && currentRain["1h"]) {
+    currentRainStr = `${currentRain["1h"]} mm/h`;
+  }
+
+  let currentSnowStr = '';
+  if (currentSnow && currentSnow["1h"]) {
+    currentSnowStr = `${currentSnow["1h"]} mm/h`;
+  }
 
   const {
     day,
@@ -118,6 +130,8 @@ function Display({
           deg={wind_deg}
         />
         <div>Humidity: {`${currentHumidity}%`}</div>
+        {!!currentRainStr && <div>Rain: {currentRainStr}</div>}
+        {!!currentSnowStr && <div>Snow: {currentSnowStr}</div>}
       </div>
       <div>
         <h3>{day} Summary</h3>
