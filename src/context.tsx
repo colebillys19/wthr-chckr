@@ -3,6 +3,7 @@ import {
   ReactNode,
   useContext,
   useEffect,
+  useRef,
   useState,
 } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
@@ -21,13 +22,15 @@ export const useGlobalState = () => {
 
 const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
   const [activeModal, setActiveModal] = useState("");
-  const [googleMaps, setGoogleMaps] = useState<typeof google.maps | null>(null);
+  const [isGoogleMapsReady, setIsGoogleMapsReady] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [recentLocations, setRecentLocations] = useState<RecentLocationType[]>([]);
   const [timeType, setTimeType] = useState("standard");
   const [unitType, setUnitType] = useState("imperial");
   const [userLocation, setUserLocation] = useState("");
   const [userPrefersNoLocation, setUserPrefersNoLocation] = useState(false);
+
+  const googleMapsRef = useRef<typeof google.maps | null>(null);
 
   /*
    *
@@ -40,7 +43,8 @@ const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
       });
       try {
         const google = await loader.load();
-        setGoogleMaps(google.maps);
+        googleMapsRef.current = google.maps;
+        setIsGoogleMapsReady(true);
       } catch (error) {
         console.error(error);
       }
@@ -76,8 +80,9 @@ const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
 
   const value = {
     activeModal,
-    googleMaps,
+    googleMaps: googleMapsRef.current,
     isDarkMode,
+    isGoogleMapsReady,
     recentLocations,
     timeType,
     unitType,

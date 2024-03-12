@@ -78,7 +78,7 @@ function CityDisplay({ location }: CityDisplayPropsType) {
           setIsFetchingName(0);
         });
     }
-  }, [googleMaps]);
+  }, []);
 
   const isLoading = isFetchingData !== 0 || isFetchingName !== 0;
 

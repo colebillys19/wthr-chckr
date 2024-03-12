@@ -4,6 +4,7 @@ export type GlobalStatePropsType = {
   activeModal: string;
   googleMaps: typeof google.maps | null;
   isDarkMode: boolean;
+  isGoogleMapsReady: boolean;
   recentLocations: RecentLocationType[];
   timeType: string;
   unitType: string;

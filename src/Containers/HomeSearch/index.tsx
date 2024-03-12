@@ -34,7 +34,7 @@ function HomeSearch() {
         googleMaps.event.clearInstanceListeners(autoCompleteRef.current);
       }
     };
-  }, [googleMaps]);
+  }, []);
 
   /*
    *

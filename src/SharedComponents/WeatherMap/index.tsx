@@ -34,7 +34,7 @@ function WeatherMap({ location, zoom, useDeviceTime }: WeatherMapPropsType) {
         styles: mapStyles,
       });
     }
-  }, [googleMaps, location, zoom]);
+  }, [location, zoom]);
 
   useEffect(() => {
     if (googleMaps === null || mapRef.current === null) {
@@ -86,7 +86,7 @@ function WeatherMap({ location, zoom, useDeviceTime }: WeatherMapPropsType) {
         console.error(error);
         setError(error.message);
       });
-  }, [googleMaps, location]);
+  }, [location]);
 
   /*
    *

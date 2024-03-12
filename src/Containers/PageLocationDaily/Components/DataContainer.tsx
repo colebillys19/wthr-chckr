@@ -84,7 +84,7 @@ function DataContainer({ location }: DataContainerPropsType) {
           setIsFetchingName(0);
         });
     }
-  }, [googleMaps]);
+  }, []);
 
   const isLoading = isFetchingData !== 0 || isFetchingData !== 0;
 
