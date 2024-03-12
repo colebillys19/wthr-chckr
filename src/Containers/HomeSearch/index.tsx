@@ -53,7 +53,9 @@ function HomeSearch() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (googleMaps !== null) {
-      setIsVerifyingAddress(true);
+      if (!isVerifyingAddress) {
+        setIsVerifyingAddress(true);
+      }
       const geocoder = new googleMaps.Geocoder();
       new Promise((resolve, reject) => {
         geocoder.geocode(
@@ -82,8 +84,6 @@ function HomeSearch() {
     }
   };
 
-  // isVerifyingAddress ? tempStylesA : {}
-
   return (
     <HomeSectionContainer>
       <div>search by location</div>
@@ -102,6 +102,7 @@ function HomeSearch() {
         <input type="submit" value="Go" disabled={isSubmitDisabled} />
       </form>
       {inputError && <div>{inputError}</div>}
+      {!!isVerifyingAddress && <div>loading</div>}
     </HomeSectionContainer>
   );
 }

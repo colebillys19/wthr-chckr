@@ -2,7 +2,7 @@ function BaseUiTest() {
   //
 
   return (
-    <div style={{ outline: '1px solid orange' }}>test</div>
+    <div>test</div>
   );
 }
 

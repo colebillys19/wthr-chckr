@@ -4,11 +4,13 @@ import { useGlobalState } from "../../context";
 import { useUpdateUserLocation } from "../../utils/customHooks/localStorage";
 
 type EnterLocationCoordsPropsType = {
+  isVerifyingAddress: boolean;
   setIsCoordsEntry: (value: boolean) => void;
   setIsVerifyingAddress: (value: boolean) => void;
 };
 
 function EnterLocationCoords({
+  isVerifyingAddress,
   setIsCoordsEntry,
   setIsVerifyingAddress,
 }: EnterLocationCoordsPropsType) {
@@ -46,7 +48,9 @@ function EnterLocationCoords({
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (googleMaps !== null) {
-      setIsVerifyingAddress(true);
+      if (!isVerifyingAddress) {
+        setIsVerifyingAddress(true);
+      }
       const geocoder = new googleMaps.Geocoder();
       new Promise((resolve, reject) => {
         geocoder.geocode(

@@ -1,6 +1,6 @@
 import { getIsValidCoordinatesStr } from "../../utils/helpers";
 import DataContainer from "./Components/DataContainer";
-import Error from "./Components/Error";
+import ErrorComponent from "./Components/ErrorComponent";
 
 function PageLocationHourly() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -11,7 +11,7 @@ function PageLocationHourly() {
       {!!location && location !== null && getIsValidCoordinatesStr(location) ? (
         <DataContainer location={location} />
       ) : (
-        <Error error="Invalid query parameter." />
+        <ErrorComponent error="Invalid query parameter." />
       )}
     </main>
   );

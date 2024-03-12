@@ -1,6 +1,6 @@
 import { getIsValidCoordinatesStr } from "../../utils/helpers";
 import DisplayContainerContainer from "./Components/DisplayContainerContainer";
-import Error from "./Components/Error";
+import ErrorComponent from "./Components/ErrorComponent";
 
 function PageLocationCurrent() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -11,7 +11,7 @@ function PageLocationCurrent() {
       {!!location && location !== null && getIsValidCoordinatesStr(location) ? (
         <DisplayContainerContainer location={location} />
       ) : (
-        <Error error="Invalid query parameter." />
+        <ErrorComponent error="Invalid query parameter." />
       )}
     </main>
   );

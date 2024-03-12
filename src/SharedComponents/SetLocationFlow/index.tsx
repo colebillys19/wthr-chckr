@@ -8,21 +8,23 @@ function SetLocationFlow() {
   const [isGeolocating, setIsGeolocating] = useState(false);
   const [isVerifyingAddress, setIsVerifyingAddress] = useState(false);
 
-  // isGeolocating || isVerifyingAddress ? tempStyles : {}
-
   return (
     <div>
       {isEnteringLocation ? (
         <EnterLocation
+          isVerifyingAddress={isVerifyingAddress}
           setIsEnteringLocation={setIsEnteringLocation}
           setIsVerifyingAddress={setIsVerifyingAddress}
         />
       ) : (
         <SetLocationOptions
+          isGeolocating={isGeolocating}
           setIsEnteringLocation={setIsEnteringLocation}
           setIsGeolocating={setIsGeolocating}
         />
       )}
+      {!!isGeolocating && <div>geolocating</div>}
+      {!!isVerifyingAddress && <div>verifying address</div>}
     </div>
   );
 }

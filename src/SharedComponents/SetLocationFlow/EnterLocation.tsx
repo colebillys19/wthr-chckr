@@ -4,11 +4,13 @@ import EnterLocationDefault from "./EnterLocationDefault";
 import EnterLocationCoords from "./EnterLocationCoords";
 
 type EnterLocationPropsType = {
+  isVerifyingAddress: boolean;
   setIsEnteringLocation: (value: boolean) => void;
   setIsVerifyingAddress: (value: boolean) => void;
 };
 
 function EnterLocation({
+  isVerifyingAddress,
   setIsEnteringLocation,
   setIsVerifyingAddress,
 }: EnterLocationPropsType) {
@@ -18,11 +20,13 @@ function EnterLocation({
     <>
       {isCoordsEntry ? (
         <EnterLocationCoords
+          isVerifyingAddress={isVerifyingAddress}
           setIsCoordsEntry={setIsCoordsEntry}
           setIsVerifyingAddress={setIsVerifyingAddress}
         />
       ) : (
         <EnterLocationDefault
+          isVerifyingAddress={isVerifyingAddress}
           setIsCoordsEntry={setIsCoordsEntry}
           setIsEnteringLocation={setIsEnteringLocation}
           setIsVerifyingAddress={setIsVerifyingAddress}

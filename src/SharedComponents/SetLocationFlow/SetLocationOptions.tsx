@@ -7,11 +7,13 @@ import {
 } from "../../utils/customHooks/localStorage";
 
 type SetLocationOptionsPropsType = {
+  isGeolocating: boolean;
   setIsEnteringLocation: (value: boolean) => void;
   setIsGeolocating: (value: boolean) => void;
 };
 
 function SetLocationOptions({
+  isGeolocating,
   setIsEnteringLocation,
   setIsGeolocating,
 }: SetLocationOptionsPropsType) {
@@ -23,7 +25,9 @@ function SetLocationOptions({
   const updateUserPrefersNoLocation = useUpdateUserPrefersNoLocation();
 
   const handleGetLocation = () => {
-    setIsGeolocating(true);
+    if (!isGeolocating) {
+      setIsGeolocating(true);
+    }
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const locationStr = `${position.coords.latitude},${position.coords.longitude}`;

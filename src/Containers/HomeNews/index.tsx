@@ -6,12 +6,14 @@ import { parseXmlData } from './helpers';
 import { NewsDataType } from './types';
 
 function HomeNews() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(-1);
   const [error, setError] = useState("");
   const [data, setData] = useState<NewsDataType[]>([]);
 
   useEffect(() => {
-    setIsLoading(true);
+    if (isLoading !== 1) {
+      setIsLoading(1);
+    }
     fetch("https://moxie.foxweather.com/google-publisher/weather-news.xml")
       .then((response) => {
         if (!response.ok) {
@@ -22,18 +24,18 @@ function HomeNews() {
       .then((str) => new window.DOMParser().parseFromString(str, "text/xml"))
       .then((data: Document) => {
         setData(parseXmlData(data));
-        setIsLoading(false);
+        setIsLoading(0);
       })
       .catch((error) => {
         console.error(error);
         setError(error.message);
-        setIsLoading(false);
+        setIsLoading(0);
       });
   }, []);
 
   return (
     <HomeSectionContainer>
-      <DisplayContainer isLoading={isLoading} error={error} data={data}  />
+      <DisplayContainer isLoading={isLoading !== 0} error={error} data={data}  />
     </HomeSectionContainer>
   );
 }
