@@ -5,11 +5,11 @@ import UserLocationNotSet from "./UserLocationNotSet";
 function UserLocation() {
   const { userLocation } = useGlobalState();
 
-  return userLocation ? (
-    <UserLocationSet />
-  ) : (
-    <UserLocationNotSet />
-  );
+  if (!!userLocation) {
+    return <UserLocationSet />;
+  }
+
+  return <UserLocationNotSet />;
 }
 
 export default UserLocation;

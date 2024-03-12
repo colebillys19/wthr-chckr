@@ -4,7 +4,11 @@ import ModalDisplay from "./ModalDisplay";
 function Modal() {
   const { activeModal } = useGlobalState();
 
-  return !!activeModal ? <ModalDisplay /> : <div />;
+  if (!!activeModal) {
+    return <ModalDisplay />;
+  }
+
+  return <div></div>;
 }
 
 export default Modal;

@@ -1,15 +1,15 @@
 import { useGlobalState } from "../../../context";
 import { SetLocationFlow } from "../../../SharedComponents";
-import UserLocationDisplay from './UserLocationDisplay';
+import UserLocationDisplay from "./UserLocationDisplay";
 
 function UserLocation() {
   const { userLocation } = useGlobalState();
 
-  return userLocation ? (
-    <UserLocationDisplay />
-  ) : (
-    <SetLocationFlow />
-  );
+  if (!!userLocation) {
+    return <UserLocationDisplay />;
+  }
+
+  return <SetLocationFlow />;
 }
 
 export default UserLocation;

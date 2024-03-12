@@ -1,18 +1,11 @@
-import { getIsValidCoordinatesStr } from "../../utils/helpers";
-import DisplayContainerContainer from "./Components/DisplayContainerContainer";
-import ErrorComponent from "./Components/ErrorComponent";
+import QueryStringCheck from './Components/QueryStringCheck';
 
 function PageLocationCurrent() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const location = urlParams.get("location");
+  //
 
   return (
     <main>
-      {!!location && location !== null && getIsValidCoordinatesStr(location) ? (
-        <DisplayContainerContainer location={location} />
-      ) : (
-        <ErrorComponent error="Invalid query parameter." />
-      )}
+      <QueryStringCheck />
     </main>
   );
 }

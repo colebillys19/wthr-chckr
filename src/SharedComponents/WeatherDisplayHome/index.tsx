@@ -15,7 +15,11 @@ function WeatherDisplayHome({ data, error, isLoading, name }: WeatherDisplayHome
     return <Skeleton />;
   }
 
-  return error ? <Error /> : <Display data={data} name={name} />;
+  if (!!error) {
+    return <Error />;
+  }
+
+  return <Display data={data} name={name} />;
 }
 
 export default WeatherDisplayHome;

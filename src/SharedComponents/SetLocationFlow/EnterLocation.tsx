@@ -16,23 +16,23 @@ function EnterLocation({
 }: EnterLocationPropsType) {
   const [isCoordsEntry, setIsCoordsEntry] = useState(false);
 
+  if (!!isCoordsEntry) {
+    return (
+      <EnterLocationCoords
+        isVerifyingAddress={isVerifyingAddress}
+        setIsCoordsEntry={setIsCoordsEntry}
+        setIsVerifyingAddress={setIsVerifyingAddress}
+      />
+    );
+  }
+
   return (
-    <>
-      {isCoordsEntry ? (
-        <EnterLocationCoords
-          isVerifyingAddress={isVerifyingAddress}
-          setIsCoordsEntry={setIsCoordsEntry}
-          setIsVerifyingAddress={setIsVerifyingAddress}
-        />
-      ) : (
-        <EnterLocationDefault
-          isVerifyingAddress={isVerifyingAddress}
-          setIsCoordsEntry={setIsCoordsEntry}
-          setIsEnteringLocation={setIsEnteringLocation}
-          setIsVerifyingAddress={setIsVerifyingAddress}
-        />
-      )}
-    </>
+    <EnterLocationDefault
+      isVerifyingAddress={isVerifyingAddress}
+      setIsCoordsEntry={setIsCoordsEntry}
+      setIsEnteringLocation={setIsEnteringLocation}
+      setIsVerifyingAddress={setIsVerifyingAddress}
+    />
   );
 }
 

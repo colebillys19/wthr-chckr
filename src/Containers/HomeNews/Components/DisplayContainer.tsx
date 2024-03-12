@@ -9,7 +9,11 @@ function DisplayContainer({ isLoading, error, data }: any) {
     return <Skeleton />;
   }
 
-  return !!error ? <ErrorComponent error={error} /> : <Display data={data} />;
+  if (!!error) {
+    return <ErrorComponent error={error} />;
+  }
+
+  return <Display data={data} />;
 }
 
 export default DisplayContainer;
