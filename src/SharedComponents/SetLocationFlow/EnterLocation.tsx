@@ -16,7 +16,7 @@ function EnterLocation({
 }: EnterLocationPropsType) {
   const [isCoordsEntry, setIsCoordsEntry] = useState(false);
 
-  if (!!isCoordsEntry) {
+  if (isCoordsEntry) {
     return (
       <EnterLocationCoords
         isVerifyingAddress={isVerifyingAddress}

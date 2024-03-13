@@ -102,7 +102,7 @@ function HomeSearch() {
         <input type="submit" value="Go" disabled={isSubmitDisabled} />
       </form>
       {inputError && <div>{inputError}</div>}
-      {!!isVerifyingAddress && <div>loading</div>}
+      {isVerifyingAddress && <div>loading</div>}
     </HomeSectionContainer>
   );
 }

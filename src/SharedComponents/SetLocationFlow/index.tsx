@@ -17,8 +17,8 @@ function SetLocationFlow() {
         setIsGeolocating={setIsGeolocating}
         setIsVerifyingAddress={setIsVerifyingAddress}
       />
-      {!!isGeolocating && <div>geolocating</div>}
-      {!!isVerifyingAddress && <div>verifying address</div>}
+      {isGeolocating && <div>geolocating</div>}
+      {isVerifyingAddress && <div>verifying address</div>}
     </div>
   );
 }
