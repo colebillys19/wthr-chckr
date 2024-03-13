@@ -3,14 +3,14 @@ import { v4 as uuidv4 } from "uuid";
 import { HourlyType } from "../../../utils/types/openWeatherMap";
 import WeatherDisplay from "../Components/WeatherDisplay";
 
-type LocationHourlyPropsType = {
+type WeatherDisplayContainerPropsType = {
   data: HourlyType[];
   timezoneOffset: number;
   sunrise: number;
   sunset: number;
 };
 
-function LocationHourly({ data, timezoneOffset, sunrise, sunset }: LocationHourlyPropsType) {
+function WeatherDisplayContainer({ data, timezoneOffset, sunrise, sunset }: WeatherDisplayContainerPropsType) {
   const dataToUse = data.slice(1, 13);
 
   return (
@@ -31,4 +31,4 @@ function LocationHourly({ data, timezoneOffset, sunrise, sunset }: LocationHourl
   );
 }
 
-export default LocationHourly;
+export default WeatherDisplayContainer;

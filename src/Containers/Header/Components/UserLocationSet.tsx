@@ -1,7 +1,7 @@
 import { useGlobalState } from "../../../context";
 import { useUpdateUserLocation } from "../../../utils/customHooks/localStorage";
 
-function UserLocationEnabledSet() {
+function UserLocationSet() {
   const { setActiveModal, userLocation } = useGlobalState();
 
   const updateUserLocation = useUpdateUserLocation();
@@ -20,4 +20,4 @@ function UserLocationEnabledSet() {
   );
 }
 
-export default UserLocationEnabledSet;
+export default UserLocationSet;

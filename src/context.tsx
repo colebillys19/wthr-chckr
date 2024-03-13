@@ -23,7 +23,7 @@ export const useGlobalState = () => {
 const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
   const [activeModal, setActiveModal] = useState("");
   const [isGoogleMapsReady, setIsGoogleMapsReady] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  // const [isDarkMode, setIsDarkMode] = useState(false);
   const [recentLocations, setRecentLocations] = useState<RecentLocationType[]>([]);
   const [timeType, setTimeType] = useState("standard");
   const [unitType, setUnitType] = useState("imperial");
@@ -44,7 +44,9 @@ const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
       try {
         const google = await loader.load();
         googleMapsRef.current = google.maps;
-        setIsGoogleMapsReady(true);
+        if (!isGoogleMapsReady) {
+          setIsGoogleMapsReady(true);
+        }
       } catch (error) {
         console.error(error);
       }
@@ -81,7 +83,7 @@ const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
   const value = {
     activeModal,
     googleMaps: googleMapsRef.current,
-    isDarkMode,
+    // isDarkMode,
     isGoogleMapsReady,
     recentLocations,
     timeType,
@@ -89,7 +91,7 @@ const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
     userLocation,
     userPrefersNoLocation,
     setActiveModal,
-    setIsDarkMode,
+    // setIsDarkMode,
     setRecentLocations,
     setTimeType,
     setUnitType,

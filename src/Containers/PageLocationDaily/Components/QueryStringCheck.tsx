@@ -2,7 +2,7 @@ import { getIsValidCoordinatesStr } from "../../../utils/helpers";
 import DataContainer from "./DataContainer";
 import ErrorComponent from "./ErrorComponent";
 
-function PageLocationDaily() {
+function QueryStringCheck() {
   const urlParams = new URLSearchParams(window.location.search);
   const location = urlParams.get("location");
 
@@ -13,4 +13,4 @@ function PageLocationDaily() {
   return <ErrorComponent error="Invalid query parameter." />;
 }
 
-export default PageLocationDaily;
+export default QueryStringCheck;

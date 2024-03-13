@@ -1,6 +1,6 @@
 import { useGlobalState } from "../../../context";
 
-function UserLocationEnabledNotSet() {
+function UserLocationNotSet() {
   const { setActiveModal } = useGlobalState();
 
   const handleSetLocation = () => {
@@ -10,4 +10,4 @@ function UserLocationEnabledNotSet() {
   return <button onClick={handleSetLocation}>set location</button>;
 }
 
-export default UserLocationEnabledNotSet;
+export default UserLocationNotSet;

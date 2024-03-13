@@ -3,7 +3,7 @@ export type RecentLocationType = { location: string; name: string };
 export type GlobalStatePropsType = {
   activeModal: string;
   googleMaps: typeof google.maps | null;
-  isDarkMode: boolean;
+  // isDarkMode: boolean;
   isGoogleMapsReady: boolean;
   recentLocations: RecentLocationType[];
   timeType: string;
@@ -12,7 +12,7 @@ export type GlobalStatePropsType = {
   userPrefersNoLocation: boolean;
   setActiveModal: (value: string) => void;
   setGoogleMaps: (value: typeof google.maps | null) => void;
-  setIsDarkMode: (value: boolean) => void;
+  // setIsDarkMode: (value: boolean) => void;
   setRecentLocations: (value: RecentLocationType[]) => void;
   setTimeType: (value: string) => void;
   setUnitType: (value: string) => void;

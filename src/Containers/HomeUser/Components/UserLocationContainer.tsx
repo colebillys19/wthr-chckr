@@ -2,7 +2,7 @@ import { useGlobalState } from "../../../context";
 import UserLocation from "../Components/UserLocation";
 import UserLocationOff from "../Components/UserLocationOff";
 
-function HomeUser() {
+function UserLocationContainer() {
   const { userPrefersNoLocation } = useGlobalState();
 
   if (userPrefersNoLocation) {
@@ -12,4 +12,4 @@ function HomeUser() {
   return <UserLocation />;
 }
 
-export default HomeUser;
+export default UserLocationContainer;
