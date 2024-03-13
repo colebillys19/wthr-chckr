@@ -23,7 +23,6 @@ export const useGlobalState = () => {
 const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
   const [activeModal, setActiveModal] = useState("");
   const [isGoogleMapsReady, setIsGoogleMapsReady] = useState(false);
-  // const [isDarkMode, setIsDarkMode] = useState(false);
   const [recentLocations, setRecentLocations] = useState<RecentLocationType[]>([]);
   const [timeType, setTimeType] = useState("standard");
   const [unitType, setUnitType] = useState("imperial");
@@ -83,7 +82,6 @@ const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
   const value = {
     activeModal,
     googleMaps: googleMapsRef.current,
-    // isDarkMode,
     isGoogleMapsReady,
     recentLocations,
     timeType,
@@ -91,7 +89,6 @@ const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
     userLocation,
     userPrefersNoLocation,
     setActiveModal,
-    // setIsDarkMode,
     setRecentLocations,
     setTimeType,
     setUnitType,
