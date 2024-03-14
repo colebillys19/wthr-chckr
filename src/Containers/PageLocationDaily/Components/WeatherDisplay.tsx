@@ -1,4 +1,7 @@
-import { useGlobalState } from "../../../context";
+import { useContext } from "react";
+
+import { UnitTypeContext } from "../../../contexts/unitTypeContext";
+import { TimeTypeContext } from "../../../contexts/timeTypeContext";
 import { WeatherSvg } from "../../../SharedComponentsAux";
 import { DailyType } from "../../../utils/types/openWeatherMap";
 import { getHighLow, getTimeData } from "../../../utils/helpers";
@@ -14,7 +17,8 @@ function WeatherDisplay({
   timezoneOffset,
   isToday,
 }: WeatherDisplayPropsType) {
-  const { unitType, timeType } = useGlobalState();
+  const { unitType } = useContext(UnitTypeContext);
+  const { timeType } = useContext(TimeTypeContext);
 
   const {
     dt,

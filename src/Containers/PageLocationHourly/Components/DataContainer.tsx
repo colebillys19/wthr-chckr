@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
-import { useGlobalState } from "../../../context";
+import { GoogleMapsContext } from "../../../contexts/googleMapsContext";
+import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import { useHandleRecentLocation } from "../../../utils/customHooks/locationData";
 import { locationDataEmpty } from "../../../utils/constants";
 import { getFormattedLocationName } from "../../../utils/helpers";
@@ -20,7 +21,8 @@ function DataContainer({ location }: DataContainerPropsType) {
   const [isFetchingName, setIsFetchingName] = useState(-1);
   const [name, setName] = useState("");
 
-  const { googleMaps, unitType } = useGlobalState();
+  const { googleMaps } = useContext(GoogleMapsContext);
+  const { unitType } = useContext(UnitTypeContext);
 
   /*
    *

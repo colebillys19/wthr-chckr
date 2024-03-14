@@ -1,6 +1,7 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useState } from "react";
 
-import { useGlobalState } from "../../context";
+import { ActiveModalContext } from "../../contexts/activeModalContext";
+import { GoogleMapsContext } from "../../contexts/googleMapsContext";
 import { useUpdateUserLocation } from "../../utils/customHooks/localStorage";
 
 type EnterLocationCoordsPropsType = {
@@ -18,7 +19,8 @@ function EnterLocationCoords({
   const [latValue, setLatValue] = useState("");
   const [lonValue, setLonValue] = useState("");
 
-  const { activeModal, googleMaps, setActiveModal } = useGlobalState();
+  const { activeModal, setActiveModal } = useContext(ActiveModalContext);
+  const { googleMaps } = useContext(GoogleMapsContext);
 
   const updateUserLocation = useUpdateUserLocation();
 

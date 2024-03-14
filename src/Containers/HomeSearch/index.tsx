@@ -1,7 +1,7 @@
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useGlobalState } from "../../context";
+import { GoogleMapsContext } from "../../contexts/googleMapsContext";
 import { HomeSectionContainer } from "../../SharedComponentsAux";
 
 function HomeSearch() {
@@ -15,7 +15,7 @@ function HomeSearch() {
 
   const navigate = useNavigate();
 
-  const { googleMaps } = useGlobalState();
+  const { googleMaps } = useContext(GoogleMapsContext);
 
   useEffect(() => {
     if (googleMaps !== null && inputRef.current) {
@@ -88,9 +88,7 @@ function HomeSearch() {
     <HomeSectionContainer>
       <div>search by location</div>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="search">
-          Search
-        </label>
+        <label htmlFor="search">Search</label>
         <input
           id="search"
           onChange={handleChange}

@@ -1,4 +1,6 @@
-import { useGlobalState } from "../../../context";
+import { useContext } from "react";
+
+import { TimeTypeContext } from "../../../contexts/timeTypeContext";
 import { getNewsTime } from "../helpers";
 import { NewsDataType } from "../types";
 
@@ -7,7 +9,7 @@ type DisplayPropsType = {
 };
 
 function Display({ data }: DisplayPropsType) {
-  const { timeType } = useGlobalState();
+  const { timeType } = useContext(TimeTypeContext);
 
   if (!data.length) {
     return <div>no data</div>;

@@ -1,4 +1,7 @@
-import { useGlobalState } from "../../../context";
+import { useContext } from "react";
+
+import { UnitTypeContext } from "../../../contexts/unitTypeContext";
+import { TimeTypeContext } from "../../../contexts/timeTypeContext";
 // import { WeatherMap } from "../../../SharedComponents";
 import { WeatherSvg } from "../../../SharedComponentsAux";
 import { CurrentType, DailyType } from "../../../utils/types/openWeatherMap";
@@ -13,12 +16,13 @@ type DisplayPropsType = {
 };
 
 function Display({
-  location,
+  // location,
   currentData,
   todayData,
   timezoneOffset,
 }: DisplayPropsType) {
-  const { unitType, timeType } = useGlobalState();
+  const { unitType } = useContext(UnitTypeContext);
+  const { timeType } = useContext(TimeTypeContext);
 
   const {
     dt: currentDt,

@@ -1,10 +1,10 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 
-import { useGlobalState } from "../../context";
+import { RecentLocationsContext } from "../../contexts/recentLocationsContext";
 import { useUpdateRecentLocations } from "./localStorage";
 
 export const useHandleRecentLocation = (location: string, name: string) => {
-  const { recentLocations } = useGlobalState();
+  const { recentLocations } = useContext(RecentLocationsContext);
 
   const updateRecentLocations = useUpdateRecentLocations();
 

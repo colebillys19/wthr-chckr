@@ -1,11 +1,17 @@
-import { useGlobalState } from "../../context";
-import { RecentLocationType } from "../../utils/types/context";
+import { useContext } from 'react';
+
+import { UserLocationContext } from '../../contexts/userLocationContext';
+import { RecentLocationsContext } from '../../contexts/recentLocationsContext';
+import { UserPrefersNoLocationContext } from '../../contexts/userPrefersNoLocationContext';
+import { UnitTypeContext } from '../../contexts/unitTypeContext';
+import { TimeTypeContext } from '../../contexts/timeTypeContext';
+import { RecentLocationType } from "../../utils/types/misc";
 
 /*
  *
  */
 export const useUpdateUserLocation = () => {
-  const { setUserLocation } = useGlobalState();
+  const { setUserLocation } = useContext(UserLocationContext);
 
   const updateUserLocation = (userLocation: string) => {
     setUserLocation(userLocation);
@@ -23,7 +29,7 @@ export const useUpdateUserLocation = () => {
  *
  */
 export const useUpdateRecentLocations = () => {
-  const { setRecentLocations } = useGlobalState();
+  const { setRecentLocations } = useContext(RecentLocationsContext);
 
   const updateRecentLocations = (recentLocations: RecentLocationType[]) => {
     setRecentLocations(recentLocations);
@@ -37,7 +43,7 @@ export const useUpdateRecentLocations = () => {
  *
  */
 export const useUpdateUserPrefersNoLocation = () => {
-  const { setUserPrefersNoLocation } = useGlobalState();
+  const { setUserPrefersNoLocation } = useContext(UserPrefersNoLocationContext);
 
   const updateUserPrefersNoLocation = (value: boolean) => {
     setUserPrefersNoLocation(value);
@@ -55,7 +61,7 @@ export const useUpdateUserPrefersNoLocation = () => {
  *
  */
 export const useUpdateUnitType = () => {
-  const { setUnitType } = useGlobalState();
+  const { setUnitType } = useContext(UnitTypeContext);
 
   const updateUnitType = (unitType: string) => {
     setUnitType(unitType);
@@ -73,7 +79,7 @@ export const useUpdateUnitType = () => {
  *
  */
 export const useUpdateTimeType = () => {
-  const { setTimeType } = useGlobalState();
+  const { setTimeType } = useContext(TimeTypeContext);
 
   const updateTimeType = (timeType: string) => {
     setTimeType(timeType);

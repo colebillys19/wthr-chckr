@@ -1,6 +1,7 @@
+import { useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import { useGlobalState } from './context';
+import { GoogleMapsContext } from './contexts/googleMapsContext';
 import {
   Header,
   PageHome,
@@ -15,7 +16,7 @@ import "./App.css";
 import BaseUiTest from "./Containers/BaseUiTest";
 
 function App() {
-  const { isGoogleMapsReady } = useGlobalState();
+  const { isGoogleMapsReady } = useContext(GoogleMapsContext);
 
   if (!isGoogleMapsReady) {
     return <div>loading google maps</div>;

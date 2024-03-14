@@ -1,7 +1,9 @@
-import { useGlobalState } from "../../../context";
+import { useContext } from "react";
+
+import { ActiveModalContext } from "../../../contexts/activeModalContext";
 
 function UserLocationNotSet() {
-  const { setActiveModal } = useGlobalState();
+  const { setActiveModal } = useContext(ActiveModalContext);
 
   const handleSetLocation = () => {
     setActiveModal("setLocation");

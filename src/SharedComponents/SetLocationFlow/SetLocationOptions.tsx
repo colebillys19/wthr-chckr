@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
-import { useGlobalState } from "../../context";
+import { ActiveModalContext } from "../../contexts/activeModalContext";
 import {
   useUpdateUserLocation,
   useUpdateUserPrefersNoLocation,
@@ -19,7 +19,7 @@ function SetLocationOptions({
 }: SetLocationOptionsPropsType) {
   const [geolocateError, setGeolocateError] = useState("");
 
-  const { activeModal, setActiveModal } = useGlobalState();
+  const { activeModal, setActiveModal } = useContext(ActiveModalContext);
 
   const updateUserLocation = useUpdateUserLocation();
   const updateUserPrefersNoLocation = useUpdateUserPrefersNoLocation();

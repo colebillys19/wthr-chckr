@@ -1,8 +1,12 @@
-import { useGlobalState } from "../../../context";
+import { useContext } from "react";
+
+import { ActiveModalContext } from "../../../contexts/activeModalContext";
+import { UserLocationContext } from "../../../contexts/userLocationContext";
 import { useUpdateUserLocation } from "../../../utils/customHooks/localStorage";
 
 function UserLocationSet() {
-  const { setActiveModal, userLocation } = useGlobalState();
+  const { setActiveModal } = useContext(ActiveModalContext);
+  const { userLocation } = useContext(UserLocationContext);
 
   const updateUserLocation = useUpdateUserLocation();
 

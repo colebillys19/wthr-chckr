@@ -1,28 +1,75 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from "react";
 
-import { useGlobalState } from "../../../context";
-import { WeatherDisplayHome, WeatherMap } from "../../../SharedComponents";
+import { GoogleMapsContext } from "../../../contexts/googleMapsContext";
+import { UnitTypeContext } from "../../../contexts/unitTypeContext";
+import { UserLocationContext } from "../../../contexts/userLocationContext";
+import { WeatherDisplayHome } from "../../../SharedComponents";
 import { useUpdateUserLocation } from "../../../utils/customHooks/localStorage";
 import { getFormattedLocationName } from "../../../utils/helpers";
 import { locationDataEmpty } from "../../../utils/constants";
 
 function UserLocationDisplay() {
+  const { userLocation } = useContext(UserLocationContext);
+
+  const {
+    data,
+    error: dataError,
+    isFetching: isDataFetching,
+  } = useFetchLocationData(userLocation);
+
+  const {
+    name,
+    error: nameError,
+    isFetching: isNameFetching,
+  } = useFetchNameData(userLocation);
+
+  const updateUserLocation = useUpdateUserLocation();
+
+  const handleClearLocation = () => {
+    updateUserLocation("");
+  };
+
+  const isLoading = isDataFetching || isNameFetching;
+  const error = dataError || nameError;
+
+  return (
+    <>
+      <WeatherDisplayHome
+        data={data}
+        error={error}
+        isLoading={isLoading}
+        name={name}
+      />
+      <button onClick={handleClearLocation}>clear location</button>
+    </>
+  );
+}
+
+export default UserLocationDisplay;
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+const useFetchLocationData = (location: string) => {
   const [data, setData] = useState(locationDataEmpty);
+  const [isFetching, setIsFetching] = useState(true);
   const [error, setError] = useState("");
-  const [isFetchingData, setIsFetchingData] = useState(-1);
-  const [isFetchingName, setIsFetchingName] = useState(-1);
-  const [name, setName] = useState("");
 
-  const { googleMaps, unitType, userLocation } = useGlobalState();
+  const { unitType } = useContext(UnitTypeContext);
 
-  /*
-   *
-   */
   useEffect(() => {
-    if (isFetchingData !== 1) {
-      setIsFetchingData(1);
+    if (!isFetching) {
+      setIsFetching(true);
     }
-    const [lat, lon] = userLocation.split(",");
+    const [lat, lon] = location.split(",");
     fetch(
       `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=${unitType}&appid=${process.env.REACT_APP_OPENWEATHER_KEY}`
     )
@@ -34,24 +81,42 @@ function UserLocationDisplay() {
       })
       .then((resData) => {
         setData(resData);
-        setIsFetchingData(0);
+        setIsFetching(false);
       })
       .catch((error) => {
         console.error(error);
         setError(error.message);
-        setIsFetchingData(0);
+        setIsFetching(false);
       });
   }, [unitType]);
 
-  /*
-   *
-   */
+  return { data, error, isFetching };
+};
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+const useFetchNameData = (location: string) => {
+  const [name, setName] = useState("");
+  const [isFetching, setIsFetching] = useState(true);
+  const [error, setError] = useState("");
+    
+  const { googleMaps } = useContext(GoogleMapsContext);
+  
   useEffect(() => {
     if (googleMaps !== null) {
-      if (isFetchingName !== 1) {
-        setIsFetchingName(1);
+      if (!isFetching) {
+        setIsFetching(true);
       }
-      const [lat, lon] = userLocation.split(",");
+      const [lat, lon] = location.split(",");
       new Promise<google.maps.GeocoderResult[]>((resolve, reject) => {
         const geocoder = new googleMaps.Geocoder();
         geocoder.geocode(
@@ -69,47 +134,15 @@ function UserLocationDisplay() {
       })
         .then((results: google.maps.GeocoderResult[]) => {
           setName(getFormattedLocationName(results));
-          setIsFetchingName(0);
+          setIsFetching(false);
         })
         .catch((error: any) => {
           console.error(error);
           setError("Issue fetching location name.");
-          setIsFetchingName(0);
+          setIsFetching(false);
         });
     }
   }, []);
 
-  const isLoading = isFetchingData !== 0 || isFetchingName !== 0;
-
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-
-  const updateUserLocation = useUpdateUserLocation();
-
-  const handleChangeLocation = () => {
-    updateUserLocation("");
-  };
-
-  return (
-    <>
-      <WeatherDisplayHome
-        data={data}
-        error={error}
-        isLoading={isLoading}
-        name={name}
-      />
-      <WeatherMap location={userLocation} zoom={8} />
-      <button onClick={handleChangeLocation}>clear location</button>
-    </>
-  );
-}
-
-export default UserLocationDisplay;
+  return { name, error, isFetching };
+};

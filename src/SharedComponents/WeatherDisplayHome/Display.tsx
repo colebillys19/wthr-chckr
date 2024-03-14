@@ -1,6 +1,8 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useGlobalState } from "../../context";
+import { UnitTypeContext } from "../../contexts/unitTypeContext";
+import { TimeTypeContext } from "../../contexts/timeTypeContext";
 import { WeatherSvg } from "../../SharedComponentsAux";
 import { OpenWeatherMapDataType } from "../../utils/types/openWeatherMap";
 import { getTimeData } from "../../utils/helpers";
@@ -13,7 +15,8 @@ type DisplayPropsType = {
 function Display({ data, name }: DisplayPropsType) {
   const navigate = useNavigate();
 
-  const { unitType, timeType } = useGlobalState();
+  const { unitType } = useContext(UnitTypeContext);
+  const { timeType } = useContext(TimeTypeContext);
 
   const { current, timezone_offset, lat, lon } = data;
 

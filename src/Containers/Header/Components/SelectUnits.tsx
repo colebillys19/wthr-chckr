@@ -1,8 +1,10 @@
-import { useGlobalState } from "../../../context";
+import { useContext } from "react";
+
+import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import { useUpdateUnitType } from "../../../utils/customHooks/localStorage";
 
 function SelectUnits() {
-  const { unitType } = useGlobalState();
+  const { unitType } = useContext(UnitTypeContext);
 
   const updateUnitType = useUpdateUnitType();
 

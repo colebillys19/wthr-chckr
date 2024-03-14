@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
-import { useGlobalState } from "../../../context";
+import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import { WeatherDisplayHome } from "../../../SharedComponents";
 import { locationDataEmpty } from "../../../utils/constants";
 
@@ -14,7 +14,7 @@ function RecentLocationDisplay({
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(-1);
 
-  const { unitType } = useGlobalState();
+  const { unitType } = useContext(UnitTypeContext);
 
   /*
    *
