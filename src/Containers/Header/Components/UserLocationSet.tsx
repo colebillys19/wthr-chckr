@@ -2,7 +2,7 @@ import { useContext } from "react";
 
 import { ActiveModalContext } from "../../../contexts/activeModalContext";
 import { UserLocationContext } from "../../../contexts/userLocationContext";
-import { useUpdateUserLocation } from "../../../utils/customHooks/localStorage";
+import useUpdateUserLocation from "../../../utils/customHooks/useUpdateUserLocation";
 
 function UserLocationSet() {
   const { setActiveModal } = useContext(ActiveModalContext);

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 import { UnitTypeContext } from "../../../contexts/unitTypeContext";
-import { useUpdateUnitType } from "../../../utils/customHooks/localStorage";
+import useUpdateUnitType from "../../../utils/customHooks/useUpdateUnitType";
 
 function SelectUnits() {
   const { unitType } = useContext(UnitTypeContext);

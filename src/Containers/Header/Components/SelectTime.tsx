@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 import { TimeTypeContext } from "../../../contexts/timeTypeContext";
-import { useUpdateTimeType } from "../../../utils/customHooks/localStorage";
+import useUpdateTimeType from "../../../utils/customHooks/useUpdateTimeType";
 
 function SelectTime() {
   const { timeType } = useContext(TimeTypeContext);

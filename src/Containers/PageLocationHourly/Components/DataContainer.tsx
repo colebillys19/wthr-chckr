@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 
 import { GoogleMapsContext } from "../../../contexts/googleMapsContext";
 import { UnitTypeContext } from "../../../contexts/unitTypeContext";
-import { useHandleRecentLocation } from "../../../utils/customHooks/locationData";
+import useHandleNewRecentLocation from "../../../utils/customHooks/useHandleNewRecentLocation";
 import { locationDataEmpty } from "../../../utils/constants";
 import { getFormattedLocationName } from "../../../utils/helpers";
 import { TabNav } from "../../../SharedComponentsAux";
@@ -101,7 +101,7 @@ function DataContainer({ location }: DataContainerPropsType) {
   //
   //
 
-  useHandleRecentLocation(location, name);
+  useHandleNewRecentLocation(location, name);
 
   if (isLoading) {
     return <Skeleton />;

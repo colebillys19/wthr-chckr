@@ -11,7 +11,6 @@ function HomeSearch() {
 
   const autoCompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const inputErrorRef = useRef("");
 
   const navigate = useNavigate();
 
@@ -23,8 +22,7 @@ function HomeSearch() {
         inputRef.current
       );
       autoCompleteRef.current.addListener("place_changed", () => {
-        if (inputErrorRef.current !== "") {
-          inputErrorRef.current = "";
+        if (inputError !== "") {
           setInputError("");
         }
       });
@@ -40,8 +38,7 @@ function HomeSearch() {
    *
    */
   const handleChange = () => {
-    if (inputErrorRef.current !== "") {
-      inputErrorRef.current = "";
+    if (inputError !== "") {
       setInputError("");
     }
     setIsSubmitDisabled(!inputRef.current || inputRef.current.value === "");
@@ -71,14 +68,13 @@ function HomeSearch() {
               resolve(true);
               setIsVerifyingAddress(false);
             } else {
-              throw new Error("Invalid location");
+              reject("Invalid location");
             }
           }
         );
       }).catch((error) => {
         console.error(error);
-        inputErrorRef.current = error.message;
-        setInputError(error.message);
+        setInputError(error);
         setIsVerifyingAddress(false);
       });
     }

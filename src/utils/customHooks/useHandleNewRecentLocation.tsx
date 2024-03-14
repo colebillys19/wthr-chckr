@@ -1,16 +1,13 @@
 import { useContext, useEffect } from "react";
 
 import { RecentLocationsContext } from "../../contexts/recentLocationsContext";
-import { useUpdateRecentLocations } from "./localStorage";
+import useUpdateRecentLocations from "./useUpdateRecentLocations";
 
-export const useHandleRecentLocation = (location: string, name: string) => {
+const useHandleNewRecentLocation = (location: string, name: string) => {
   const { recentLocations } = useContext(RecentLocationsContext);
 
   const updateRecentLocations = useUpdateRecentLocations();
 
-  /*
-   *
-   */
   useEffect(() => {
     if (name) {
       const isDuplicateName = recentLocations.some(
@@ -32,3 +29,5 @@ export const useHandleRecentLocation = (location: string, name: string) => {
     }
   }, [name]);
 };
+
+export default useHandleNewRecentLocation;

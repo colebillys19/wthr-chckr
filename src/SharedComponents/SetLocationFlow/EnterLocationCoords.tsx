@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useContext, useState } from "react";
 
 import { ActiveModalContext } from "../../contexts/activeModalContext";
 import { GoogleMapsContext } from "../../contexts/googleMapsContext";
-import { useUpdateUserLocation } from "../../utils/customHooks/localStorage";
+import useUpdateUserLocation from "../../utils/customHooks/useUpdateUserLocation";
 
 type EnterLocationCoordsPropsType = {
   isVerifyingAddress: boolean;
@@ -71,13 +71,13 @@ function EnterLocationCoords({
               setIsVerifyingAddress(false);
               resolve(true);
             } else {
-              throw new Error("Invalid coordinates");
+              reject("Invalid coordinates");
             }
           }
         );
       }).catch((error) => {
         console.error(error);
-        setInputError(error.message);
+        setInputError(error);
         setIsVerifyingAddress(false);
       });
     }

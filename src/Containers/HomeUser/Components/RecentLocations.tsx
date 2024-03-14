@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 import { RecentLocationsContext } from "../../../contexts/recentLocationsContext";
-import { useUpdateRecentLocations } from "../../../utils/customHooks/localStorage";
+import useUpdateRecentLocations from "../../../utils/customHooks/useUpdateRecentLocations";
 import RecentLocationDisplay from "./RecentLocationDisplay";
 
 function RecentLocations() {

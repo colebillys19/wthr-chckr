@@ -1,4 +1,4 @@
-import { useUpdateUserPrefersNoLocation } from "../../../utils/customHooks/localStorage";
+import useUpdateUserPrefersNoLocation from "../../../utils/customHooks/useUpdateUserPrefersNoLocation";
 
 function UserLocationOff() {
   const updateUserPrefersNoLocation = useUpdateUserPrefersNoLocation();

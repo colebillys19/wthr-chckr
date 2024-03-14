@@ -1,6 +1,8 @@
 import { useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import "./App.css";
+import useSetContextFromLocalStorage from './utils/customHooks/useSetContextFromLocalStorage';
 import { GoogleMapsContext } from './contexts/googleMapsContext';
 import {
   Header,
@@ -11,11 +13,13 @@ import {
   PageNotFound,
 } from "./Containers";
 import { Modal } from "./SharedComponents";
-import "./App.css";
 
+//
 import BaseUiTest from "./Containers/BaseUiTest";
 
 function App() {
+  useSetContextFromLocalStorage();
+
   const { isGoogleMapsReady } = useContext(GoogleMapsContext);
 
   if (!isGoogleMapsReady) {

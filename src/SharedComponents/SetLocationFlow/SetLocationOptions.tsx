@@ -1,10 +1,8 @@
 import { useContext, useState } from "react";
 
 import { ActiveModalContext } from "../../contexts/activeModalContext";
-import {
-  useUpdateUserLocation,
-  useUpdateUserPrefersNoLocation,
-} from "../../utils/customHooks/localStorage";
+import useUpdateUserLocation from "../../utils/customHooks/useUpdateUserLocation";
+import useUpdateUserPrefersNoLocation from "../../utils/customHooks/useUpdateUserPrefersNoLocation";
 
 type SetLocationOptionsPropsType = {
   isGeolocating: boolean;

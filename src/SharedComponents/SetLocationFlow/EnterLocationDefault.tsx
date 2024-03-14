@@ -2,7 +2,7 @@ import { FormEvent, useContext, useEffect, useRef, useState } from "react";
 
 import { ActiveModalContext } from "../../contexts/activeModalContext";
 import { GoogleMapsContext } from "../../contexts/googleMapsContext";
-import { useUpdateUserLocation } from "../../utils/customHooks/localStorage";
+import useUpdateUserLocation from "../../utils/customHooks/useUpdateUserLocation";
 
 type EnterLocationDefaultPropsType = {
   isVerifyingAddress: boolean;
@@ -22,7 +22,6 @@ function EnterLocationDefault({
 
   const autoCompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const inputErrorRef = useRef("");
 
   const { activeModal, setActiveModal } = useContext(ActiveModalContext);
   const { googleMaps } = useContext(GoogleMapsContext);
@@ -35,8 +34,7 @@ function EnterLocationDefault({
         inputRef.current
       );
       autoCompleteRef.current.addListener("place_changed", () => {
-        if (inputErrorRef.current !== "") {
-          inputErrorRef.current = "";
+        if (inputError !== "") {
           setInputError("");
         }
       });
@@ -52,8 +50,7 @@ function EnterLocationDefault({
    *
    */
   const handleChange = () => {
-    if (inputErrorRef.current !== "") {
-      inputErrorRef.current = "";
+    if (inputError !== "") {
       setInputError("");
     }
     setIsSubmitDisabled(!inputRef.current || inputRef.current.value === "");
@@ -86,13 +83,13 @@ function EnterLocationDefault({
               setIsVerifyingAddress(false);
               resolve(true);
             } else {
-              throw new Error("Invalid location");
+              reject('Invalid location');
             }
           }
         );
       }).catch((error) => {
         console.error(error);
-        setInputError(error.message);
+        setInputError(error);
         setIsVerifyingAddress(false);
       });
     }

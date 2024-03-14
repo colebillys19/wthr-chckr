@@ -4,7 +4,7 @@ import { GoogleMapsContext } from "../../../contexts/googleMapsContext";
 import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import { UserLocationContext } from "../../../contexts/userLocationContext";
 import { WeatherDisplayHome } from "../../../SharedComponents";
-import { useUpdateUserLocation } from "../../../utils/customHooks/localStorage";
+import useUpdateUserLocation from "../../../utils/customHooks/useUpdateUserLocation";
 import { getFormattedLocationName } from "../../../utils/helpers";
 import { locationDataEmpty } from "../../../utils/constants";
 
