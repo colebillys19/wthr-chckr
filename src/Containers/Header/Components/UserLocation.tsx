@@ -1,15 +1,17 @@
-import { useGlobalState } from "../../../context";
+import { useContext } from "react";
+
+import { UserLocationContext } from "../../../contexts/userLocationContext";
 import UserLocationSet from "./UserLocationSet";
 import UserLocationNotSet from "./UserLocationNotSet";
 
 function UserLocation() {
-  const { userLocation } = useGlobalState();
+  const { userLocation } = useContext(UserLocationContext);
 
-  return userLocation ? (
-    <UserLocationSet />
-  ) : (
-    <UserLocationNotSet />
-  );
+  if (!!userLocation) {
+    return <UserLocationSet />;
+  }
+
+  return <UserLocationNotSet />;
 }
 
 export default UserLocation;

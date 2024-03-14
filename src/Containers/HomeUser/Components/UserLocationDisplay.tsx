@@ -1,15 +1,19 @@
-import { useGlobalState } from "../../../context";
-import { WeatherDisplayHome, WeatherMap } from "../../../SharedComponents";
-import { useUpdateUserLocation } from "../../../utils/customHooks/localStorage";
-import { useFetchLocationData } from "../../../utils/customHooks/locationData";
+import { useContext } from "react";
+
+import { UserLocationContext } from "../../../contexts/userLocationContext";
+import { WeatherDisplayHome } from "../../../SharedComponents";
+import useFetchLocationDataAndName from "../../../utils/customHooks/useFetchLocationDataAndName";
+import useUpdateUserLocation from "../../../utils/customHooks/useUpdateUserLocation";
 
 function UserLocationDisplay() {
-  const { userLocation } = useGlobalState();
-  const { data, error, isLoading, name } = useFetchLocationData(userLocation);
+  const { userLocation } = useContext(UserLocationContext);
+
+  const { isFetching, error, data, name } =
+    useFetchLocationDataAndName(userLocation);
 
   const updateUserLocation = useUpdateUserLocation();
 
-  const handleChangeLocation = () => {
+  const handleClearLocation = () => {
     updateUserLocation("");
   };
 
@@ -18,11 +22,10 @@ function UserLocationDisplay() {
       <WeatherDisplayHome
         data={data}
         error={error}
-        isLoading={isLoading}
+        isLoading={isFetching}
         name={name}
       />
-      <WeatherMap location={userLocation} zoom={8} />
-      <button onClick={handleChangeLocation}>clear location</button>
+      <button onClick={handleClearLocation}>clear location</button>
     </>
   );
 }

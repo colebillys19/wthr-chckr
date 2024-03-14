@@ -1,15 +1,18 @@
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useContext, useEffect, useRef, useState } from "react";
 
-import { useGlobalState } from "../../context";
-import { useUpdateUserLocation } from "../../utils/customHooks/localStorage";
+import { ActiveModalContext } from "../../contexts/activeModalContext";
+import { GoogleMapsContext } from "../../contexts/googleMapsContext";
+import useUpdateUserLocation from "../../utils/customHooks/useUpdateUserLocation";
 
 type EnterLocationDefaultPropsType = {
+  isVerifyingAddress: boolean;
   setIsCoordsEntry: (value: boolean) => void;
   setIsEnteringLocation: (value: boolean) => void;
   setIsVerifyingAddress: (value: boolean) => void;
 };
 
 function EnterLocationDefault({
+  isVerifyingAddress,
   setIsCoordsEntry,
   setIsEnteringLocation,
   setIsVerifyingAddress,
@@ -19,9 +22,9 @@ function EnterLocationDefault({
 
   const autoCompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const inputErrorRef = useRef("");
 
-  const { activeModal, googleMaps, setActiveModal } = useGlobalState();
+  const { activeModal, setActiveModal } = useContext(ActiveModalContext);
+  const { googleMaps } = useContext(GoogleMapsContext);
 
   const updateUserLocation = useUpdateUserLocation();
 
@@ -31,8 +34,7 @@ function EnterLocationDefault({
         inputRef.current
       );
       autoCompleteRef.current.addListener("place_changed", () => {
-        if (inputErrorRef.current !== "") {
-          inputErrorRef.current = "";
+        if (inputError !== "") {
           setInputError("");
         }
       });
@@ -42,14 +44,13 @@ function EnterLocationDefault({
         googleMaps.event.clearInstanceListeners(autoCompleteRef.current);
       }
     };
-  }, [googleMaps]);
+  }, []);
 
   /*
    *
    */
   const handleChange = () => {
-    if (inputErrorRef.current !== "") {
-      inputErrorRef.current = "";
+    if (inputError !== "") {
       setInputError("");
     }
     setIsSubmitDisabled(!inputRef.current || inputRef.current.value === "");
@@ -61,7 +62,9 @@ function EnterLocationDefault({
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (googleMaps !== null) {
-      setIsVerifyingAddress(true);
+      if (!isVerifyingAddress) {
+        setIsVerifyingAddress(true);
+      }
       const geocoder = new googleMaps.Geocoder();
       new Promise((resolve, reject) => {
         geocoder.geocode(
@@ -80,13 +83,13 @@ function EnterLocationDefault({
               setIsVerifyingAddress(false);
               resolve(true);
             } else {
-              throw new Error("Invalid location");
+              reject('Invalid location');
             }
           }
         );
       }).catch((error) => {
         console.error(error);
-        setInputError(error.message);
+        setInputError(error);
         setIsVerifyingAddress(false);
       });
     }

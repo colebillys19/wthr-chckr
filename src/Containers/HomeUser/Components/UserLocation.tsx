@@ -1,15 +1,17 @@
-import { useGlobalState } from "../../../context";
+import { useContext } from "react";
+
+import { UserLocationContext } from "../../../contexts/userLocationContext";
 import { SetLocationFlow } from "../../../SharedComponents";
-import UserLocationDisplay from './UserLocationDisplay';
+import UserLocationDisplay from "./UserLocationDisplay";
 
 function UserLocation() {
-  const { userLocation } = useGlobalState();
+  const { userLocation } = useContext(UserLocationContext);
 
-  return userLocation ? (
-    <UserLocationDisplay />
-  ) : (
-    <SetLocationFlow />
-  );
+  if (!!userLocation) {
+    return <UserLocationDisplay />;
+  }
+
+  return <SetLocationFlow />;
 }
 
 export default UserLocation;

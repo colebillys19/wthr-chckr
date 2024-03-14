@@ -1,8 +1,10 @@
-import { useGlobalState } from "../../../context";
-import { useUpdateTimeType } from "../../../utils/customHooks/localStorage";
+import { useContext } from "react";
+
+import { TimeTypeContext } from "../../../contexts/timeTypeContext";
+import useUpdateTimeType from "../../../utils/customHooks/useUpdateTimeType";
 
 function SelectTime() {
-  const { timeType } = useGlobalState();
+  const { timeType } = useContext(TimeTypeContext);
 
   const updateTimeType = useUpdateTimeType();
 

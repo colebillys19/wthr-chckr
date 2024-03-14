@@ -1,10 +1,8 @@
-import {
-  useFetchLocationData,
-  useHandleRecentLocation,
-} from "../../../utils/customHooks/locationData";
+import useFetchLocationDataAndName from "../../../utils/customHooks/useFetchLocationDataAndName";
+import { RecentLocationManager } from "../../../SharedComponents";
 import { TabNav } from "../../../SharedComponentsAux";
 import WeatherDisplayContainer from "./WeatherDisplayContainer";
-import Error from "./Error";
+import ErrorComponent from "./ErrorComponent";
 import Skeleton from "./Skeleton";
 
 type DataContainerPropsType = {
@@ -12,16 +10,15 @@ type DataContainerPropsType = {
 };
 
 function DataContainer({ location }: DataContainerPropsType) {
-  const { data, error, isLoading, name } = useFetchLocationData(location);
-
-  useHandleRecentLocation(location, name);
-
-  if (isLoading) {
+  const { isFetching, error, data, name } =
+    useFetchLocationDataAndName(location);
+  
+  if (isFetching) {
     return <Skeleton />;
   }
 
   if (error !== "") {
-    return <Error error={error} />;
+    return <ErrorComponent error={error} />;
   }
 
   const { daily, timezone_offset } = data;
@@ -32,6 +29,7 @@ function DataContainer({ location }: DataContainerPropsType) {
       <TabNav location={location} />
       <h2>Daily</h2>
       <WeatherDisplayContainer data={daily} timezoneOffset={timezone_offset} />
+      <RecentLocationManager location={location} name={name} />
     </>
   );
 }

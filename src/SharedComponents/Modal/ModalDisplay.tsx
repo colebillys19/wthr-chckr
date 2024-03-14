@@ -1,11 +1,11 @@
-import { MouseEvent, useEffect } from "react";
+import { MouseEvent, useContext, useEffect } from "react";
 
-import { useGlobalState } from "../../context";
+import { ActiveModalContext } from "../../contexts/activeModalContext";
 import ModalSetLocation from "./ModalSetLocation";
 import ModalTemp from "./ModalTemp";
 
 function ModalDisplay() {
-  const { activeModal, setActiveModal } = useGlobalState();
+  const { activeModal, setActiveModal } = useContext(ActiveModalContext);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -26,6 +26,8 @@ function ModalDisplay() {
       setActiveModal("");
     }
   };
+
+  // TODO when you style this again make sure backdrop click is set up correctly
 
   return (
     <div onClick={handleBackdropClick}>

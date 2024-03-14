@@ -1,9 +1,11 @@
-import { useGlobalState } from "../../../context";
-import { useUpdateRecentLocations } from "../../../utils/customHooks/localStorage";
+import { useContext } from "react";
+
+import { RecentLocationsContext } from "../../../contexts/recentLocationsContext";
+import useUpdateRecentLocations from "../../../utils/customHooks/useUpdateRecentLocations";
 import RecentLocationDisplay from "./RecentLocationDisplay";
 
 function RecentLocations() {
-  const { recentLocations } = useGlobalState();
+  const { recentLocations } = useContext(RecentLocationsContext);
 
   const updateRecentLocations = useUpdateRecentLocations();
 

@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
-import { useGlobalState } from "../../context";
+import { GoogleMapsContext } from "../../contexts/googleMapsContext";
+import { TimeTypeContext } from "../../contexts/timeTypeContext";
 import { mapStyles } from "./constants";
 import { getMapTime } from "./helpers";
 import { FrameType } from "./types";
@@ -23,7 +24,8 @@ function WeatherMap({ location, zoom, useDeviceTime }: WeatherMapPropsType) {
   const timestampArrRef = useRef([]);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const { googleMaps, timeType } = useGlobalState();
+  const { googleMaps } = useContext(GoogleMapsContext);
+  const { timeType } = useContext(TimeTypeContext);
 
   useEffect(() => {
     if (googleMaps !== null && mapDivRef.current !== null) {
@@ -34,7 +36,7 @@ function WeatherMap({ location, zoom, useDeviceTime }: WeatherMapPropsType) {
         styles: mapStyles,
       });
     }
-  }, [googleMaps, location, zoom]);
+  }, [location, zoom]);
 
   useEffect(() => {
     if (googleMaps === null || mapRef.current === null) {
@@ -86,7 +88,7 @@ function WeatherMap({ location, zoom, useDeviceTime }: WeatherMapPropsType) {
         console.error(error);
         setError(error.message);
       });
-  }, [googleMaps, location]);
+  }, [location]);
 
   /*
    *

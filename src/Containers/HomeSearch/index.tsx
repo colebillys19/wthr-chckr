@@ -1,7 +1,7 @@
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useGlobalState } from "../../context";
+import { GoogleMapsContext } from "../../contexts/googleMapsContext";
 import { HomeSectionContainer } from "../../SharedComponentsAux";
 
 function HomeSearch() {
@@ -11,11 +11,10 @@ function HomeSearch() {
 
   const autoCompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const inputErrorRef = useRef("");
 
   const navigate = useNavigate();
 
-  const { googleMaps } = useGlobalState();
+  const { googleMaps } = useContext(GoogleMapsContext);
 
   useEffect(() => {
     if (googleMaps !== null && inputRef.current) {
@@ -23,8 +22,7 @@ function HomeSearch() {
         inputRef.current
       );
       autoCompleteRef.current.addListener("place_changed", () => {
-        if (inputErrorRef.current !== "") {
-          inputErrorRef.current = "";
+        if (inputError !== "") {
           setInputError("");
         }
       });
@@ -34,14 +32,13 @@ function HomeSearch() {
         googleMaps.event.clearInstanceListeners(autoCompleteRef.current);
       }
     };
-  }, [googleMaps]);
+  }, []);
 
   /*
    *
    */
   const handleChange = () => {
-    if (inputErrorRef.current !== "") {
-      inputErrorRef.current = "";
+    if (inputError !== "") {
       setInputError("");
     }
     setIsSubmitDisabled(!inputRef.current || inputRef.current.value === "");
@@ -53,7 +50,9 @@ function HomeSearch() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (googleMaps !== null) {
-      setIsVerifyingAddress(true);
+      if (!isVerifyingAddress) {
+        setIsVerifyingAddress(true);
+      }
       const geocoder = new googleMaps.Geocoder();
       new Promise((resolve, reject) => {
         geocoder.geocode(
@@ -69,28 +68,23 @@ function HomeSearch() {
               resolve(true);
               setIsVerifyingAddress(false);
             } else {
-              throw new Error("Invalid location");
+              reject("Invalid location");
             }
           }
         );
       }).catch((error) => {
         console.error(error);
-        inputErrorRef.current = error.message;
-        setInputError(error.message);
+        setInputError(error);
         setIsVerifyingAddress(false);
       });
     }
   };
 
-  // isVerifyingAddress ? tempStylesA : {}
-
   return (
     <HomeSectionContainer>
       <div>search by location</div>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="search">
-          Search
-        </label>
+        <label htmlFor="search">Search</label>
         <input
           id="search"
           onChange={handleChange}
@@ -102,6 +96,7 @@ function HomeSearch() {
         <input type="submit" value="Go" disabled={isSubmitDisabled} />
       </form>
       {inputError && <div>{inputError}</div>}
+      {isVerifyingAddress && <div>loading</div>}
     </HomeSectionContainer>
   );
 }

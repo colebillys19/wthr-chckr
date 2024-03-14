@@ -1,14 +1,17 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useState } from "react";
 
-import { useGlobalState } from "../../context";
-import { useUpdateUserLocation } from "../../utils/customHooks/localStorage";
+import { ActiveModalContext } from "../../contexts/activeModalContext";
+import { GoogleMapsContext } from "../../contexts/googleMapsContext";
+import useUpdateUserLocation from "../../utils/customHooks/useUpdateUserLocation";
 
 type EnterLocationCoordsPropsType = {
+  isVerifyingAddress: boolean;
   setIsCoordsEntry: (value: boolean) => void;
   setIsVerifyingAddress: (value: boolean) => void;
 };
 
 function EnterLocationCoords({
+  isVerifyingAddress,
   setIsCoordsEntry,
   setIsVerifyingAddress,
 }: EnterLocationCoordsPropsType) {
@@ -16,7 +19,8 @@ function EnterLocationCoords({
   const [latValue, setLatValue] = useState("");
   const [lonValue, setLonValue] = useState("");
 
-  const { activeModal, googleMaps, setActiveModal } = useGlobalState();
+  const { activeModal, setActiveModal } = useContext(ActiveModalContext);
+  const { googleMaps } = useContext(GoogleMapsContext);
 
   const updateUserLocation = useUpdateUserLocation();
 
@@ -46,7 +50,9 @@ function EnterLocationCoords({
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (googleMaps !== null) {
-      setIsVerifyingAddress(true);
+      if (!isVerifyingAddress) {
+        setIsVerifyingAddress(true);
+      }
       const geocoder = new googleMaps.Geocoder();
       new Promise((resolve, reject) => {
         geocoder.geocode(
@@ -65,13 +71,13 @@ function EnterLocationCoords({
               setIsVerifyingAddress(false);
               resolve(true);
             } else {
-              throw new Error("Invalid coordinates");
+              reject("Invalid coordinates");
             }
           }
         );
       }).catch((error) => {
         console.error(error);
-        setInputError(error.message);
+        setInputError(error);
         setIsVerifyingAddress(false);
       });
     }

@@ -1,13 +1,19 @@
-import { useGlobalState } from "../../../context";
+import { useContext } from "react";
 
-function UserLocationEnabledNotSet() {
-  const { setActiveModal } = useGlobalState();
+import { ActiveModalContext } from "../../../contexts/activeModalContext";
+
+function UserLocationNotSet() {
+  const { activeModal, setActiveModal } = useContext(ActiveModalContext);
 
   const handleSetLocation = () => {
-    setActiveModal("setLocation");
+    if (!activeModal) {
+      setActiveModal("setLocation");
+    }
   };
+
+  // TODO (?) disable button when modal is open
 
   return <button onClick={handleSetLocation}>set location</button>;
 }
 
-export default UserLocationEnabledNotSet;
+export default UserLocationNotSet;

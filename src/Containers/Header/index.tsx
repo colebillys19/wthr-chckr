@@ -1,23 +1,26 @@
-// import { useLocation } from "react-router-dom";
+import { useContext } from 'react';
+import { useLocation } from "react-router-dom";
 
-// import { useGlobalState } from "../../context";
+import { UserPrefersNoLocationContext } from '../../contexts/userPrefersNoLocationContext';
 import Nav from "./Components/Nav";
 import SelectTime from "./Components/SelectTime";
 import SelectUnits from "./Components/SelectUnits";
-// import UserLocation from "./Components/UserLocation";
+import UserLocationContainer from "./Components/UserLocationContainer";
 
 function Header() {
-  // const location = useLocation();
+  const routerLocation = useLocation();
 
-  // const { userPrefersNoLocation } = useGlobalState();
+  const { userPrefersNoLocation } = useContext(UserPrefersNoLocationContext);
 
   return (
+    <>
     <header>
       <Nav />
-      {/* {location.pathname === "/location" && !userPrefersNoLocation && <UserLocation />} */}
       <SelectTime />
       <SelectUnits />
     </header>
+    {routerLocation.pathname !== "/" && !userPrefersNoLocation && <UserLocationContainer />}
+    </>
   );
 }
 

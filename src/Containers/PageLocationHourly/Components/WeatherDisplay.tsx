@@ -1,4 +1,7 @@
-import { useGlobalState } from "../../../context";
+import { useContext, useMemo } from "react";
+
+import { UnitTypeContext } from "../../../contexts/unitTypeContext";
+import { TimeTypeContext } from "../../../contexts/timeTypeContext";
 import { WeatherSvg } from "../../../SharedComponentsAux";
 import { HourlyType } from "../../../utils/types/openWeatherMap";
 import { getTimeData } from "../../../utils/helpers";
@@ -16,7 +19,8 @@ function WeatherDisplay({
   sunrise,
   sunset,
 }: WeatherDisplayPropsType) {
-  const { unitType, timeType } = useGlobalState();
+  const { unitType } = useContext(UnitTypeContext);
+  const { timeType } = useContext(TimeTypeContext);
 
   const {
     dt,
@@ -38,8 +42,8 @@ function WeatherDisplay({
     timeType,
   });
 
-  const tempUnit = unitType === "imperial" ? "°F" : "°C";
-  const windUnit = unitType === "imperial" ? "mph" : "m/s";
+  const tempUnit = useMemo(() => unitType === "imperial" ? "°F" : "°C", [unitType]);
+  const windUnit = useMemo(() => unitType === "imperial" ? "mph" : "m/s", [unitType]);
 
   const dataArr = [
     { label: "Temperature", value: `${Math.round(temp)}${tempUnit}` },

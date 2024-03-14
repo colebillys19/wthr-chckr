@@ -1,5 +1,9 @@
+import { useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import "./App.css";
+import useSetContextFromLocalStorage from './utils/customHooks/useSetContextFromLocalStorage';
+import { GoogleMapsContext } from './contexts/googleMapsContext';
 import {
   Header,
   PageHome,
@@ -9,30 +13,33 @@ import {
   PageNotFound,
 } from "./Containers";
 import { Modal } from "./SharedComponents";
-import GlobalStateProvider from "./context";
-import "./App.css";
 
+//
 import BaseUiTest from "./Containers/BaseUiTest";
 
 function App() {
-  //
+  useSetContextFromLocalStorage();
+
+  const { isGoogleMapsReady } = useContext(GoogleMapsContext);
+
+  if (!isGoogleMapsReady) {
+    return <div>loading google maps</div>;
+  }
 
   return (
     <Router>
-      <GlobalStateProvider>
-        <div className="App">
-          <Header />
-          <Routes>
-            <Route path="/" element={<PageHome />} />
-            <Route path="/location/current" element={<PageLocationCurrent />} />
-            <Route path="/location/hourly" element={<PageLocationHourly />} />
-            <Route path="/location/daily" element={<PageLocationDaily />} />
-            <Route path="/test" element={<BaseUiTest />} />
-            <Route path='*' element={<PageNotFound />}/>
-          </Routes>
-          <Modal />
-        </div>
-      </GlobalStateProvider>
+      <div className="App">
+        <Header />
+        <Routes>
+          <Route path="/" element={<PageHome />} />
+          <Route path="/location/current" element={<PageLocationCurrent />} />
+          <Route path="/location/hourly" element={<PageLocationHourly />} />
+          <Route path="/location/daily" element={<PageLocationDaily />} />
+          <Route path="/test" element={<BaseUiTest />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+        <Modal />
+      </div>
     </Router>
   );
 }

@@ -1,29 +1,31 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
-import { useGlobalState } from "../../context";
-import {
-  useUpdateUserLocation,
-  useUpdateUserPrefersNoLocation,
-} from "../../utils/customHooks/localStorage";
+import { ActiveModalContext } from "../../contexts/activeModalContext";
+import useUpdateUserLocation from "../../utils/customHooks/useUpdateUserLocation";
+import useUpdateUserPrefersNoLocation from "../../utils/customHooks/useUpdateUserPrefersNoLocation";
 
 type SetLocationOptionsPropsType = {
+  isGeolocating: boolean;
   setIsEnteringLocation: (value: boolean) => void;
   setIsGeolocating: (value: boolean) => void;
 };
 
 function SetLocationOptions({
+  isGeolocating,
   setIsEnteringLocation,
   setIsGeolocating,
 }: SetLocationOptionsPropsType) {
   const [geolocateError, setGeolocateError] = useState("");
 
-  const { activeModal, setActiveModal } = useGlobalState();
+  const { activeModal, setActiveModal } = useContext(ActiveModalContext);
 
   const updateUserLocation = useUpdateUserLocation();
   const updateUserPrefersNoLocation = useUpdateUserPrefersNoLocation();
 
   const handleGetLocation = () => {
-    setIsGeolocating(true);
+    if (!isGeolocating) {
+      setIsGeolocating(true);
+    }
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const locationStr = `${position.coords.latitude},${position.coords.longitude}`;
