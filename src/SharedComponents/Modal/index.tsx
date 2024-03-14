@@ -10,7 +10,7 @@ function Modal() {
     return <ModalDisplay />;
   }
 
-  return <div></div>;
+  return null;
 }
 
 export default Modal;

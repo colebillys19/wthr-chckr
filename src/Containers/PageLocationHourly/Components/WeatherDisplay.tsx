@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 
 import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import { TimeTypeContext } from "../../../contexts/timeTypeContext";
@@ -42,8 +42,8 @@ function WeatherDisplay({
     timeType,
   });
 
-  const tempUnit = unitType === "imperial" ? "°F" : "°C";
-  const windUnit = unitType === "imperial" ? "mph" : "m/s";
+  const tempUnit = useMemo(() => unitType === "imperial" ? "°F" : "°C", [unitType]);
+  const windUnit = useMemo(() => unitType === "imperial" ? "mph" : "m/s", [unitType]);
 
   const dataArr = [
     { label: "Temperature", value: `${Math.round(temp)}${tempUnit}` },

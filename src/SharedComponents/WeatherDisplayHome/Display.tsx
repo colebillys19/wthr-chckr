@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { UnitTypeContext } from "../../contexts/unitTypeContext";
@@ -39,8 +39,8 @@ function Display({ data, name }: DisplayPropsType) {
     timeType,
   });
 
-  const tempUnit = unitType === "imperial" ? "°F" : "°C";
-  const windUnit = unitType === "imperial" ? "mph" : "m/s";
+  const tempUnit = useMemo(() => unitType === "imperial" ? "°F" : "°C", [unitType]);
+  const windUnit = useMemo(() => unitType === "imperial" ? "mph" : "m/s", [unitType]);
 
   const dataArr = [
     { label: "Temperature", value: `${Math.round(temp)}${tempUnit}` },

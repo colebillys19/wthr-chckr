@@ -27,6 +27,8 @@ function ModalDisplay() {
     }
   };
 
+  // TODO when you style this again make sure backdrop click is set up correctly
+
   return (
     <div onClick={handleBackdropClick}>
       {activeModal === "setLocation" && <ModalSetLocation />}

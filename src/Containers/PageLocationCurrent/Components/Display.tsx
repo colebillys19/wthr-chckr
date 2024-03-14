@@ -1,22 +1,19 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 
 import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import { TimeTypeContext } from "../../../contexts/timeTypeContext";
-// import { WeatherMap } from "../../../SharedComponents";
 import { WeatherSvg } from "../../../SharedComponentsAux";
 import { CurrentType, DailyType } from "../../../utils/types/openWeatherMap";
 import { getTimeData, getHighLow } from "../../../utils/helpers";
 import WindDisplay from "./WindDisplay";
 
 type DisplayPropsType = {
-  location: string;
   currentData: CurrentType;
   todayData: DailyType;
   timezoneOffset: number;
 };
 
 function Display({
-  // location,
   currentData,
   todayData,
   timezoneOffset,
@@ -60,8 +57,8 @@ function Display({
     timeType,
   });
 
-  const tempUnit = unitType === "imperial" ? "°F" : "°C";
-  const windUnit = unitType === "imperial" ? "mph" : "m/s";
+  const tempUnit = useMemo(() => unitType === "imperial" ? "°F" : "°C", [unitType]);
+  const windUnit = useMemo(() => unitType === "imperial" ? "mph" : "m/s", [unitType]);
 
   const {
     sunrise: todaySunrise,

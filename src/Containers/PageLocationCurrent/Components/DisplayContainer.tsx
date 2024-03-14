@@ -28,7 +28,6 @@ function DisplayContainer({ location }: DisplayContainerPropsType) {
       <h1>{name}</h1>
       <TabNav location={location} />
       <Display
-        location={location}
         currentData={current}
         todayData={daily[0]}
         timezoneOffset={timezone_offset}
