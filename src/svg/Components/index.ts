@@ -1,35 +1,49 @@
-import WeatherSvgA from "./A";
-import WeatherSvgB from "./B";
-import WeatherSvgC from "./C";
-import WeatherSvgD from "./D";
-import WeatherSvgE from "./E";
-import WeatherSvgF from "./F";
-import WeatherSvgG from "./G";
-import WeatherSvgH from "./H";
-import WeatherSvgI from "./I";
-import WeatherSvgJ from "./J";
-import WeatherSvgK from "./K";
-import WeatherSvgL from "./L";
-import WeatherSvgM from "./M";
-import WeatherSvgN from "./N";
-import WeatherSvgO from "./O";
-import WeatherSvgP from "./P";
+import Clouds from "./Clouds";
+import Haze from "./Haze";
+import Mist from "./Mist";
+import MoonA from "./MoonA";
+import MoonB from "./MoonB";
+import RainA from "./RainA";
+import RainB from "./RainB";
+import Sand from "./Sand";
+import SleetA from "./SleetA";
+import SleetB from "./SleetB";
+import SleetC from "./SleetC";
+import Smoke from "./Smoke";
+import SnowA from "./SnowA";
+import SnowB from "./SnowB";
+import Squall from "./Squall";
+import SunA from "./SunA";
+import SunB from "./SunB";
+import ThunderA from "./ThunderA";
+import ThunderB from "./ThunderB";
+import ThunderC from "./ThunderC";
+import ThunderD from "./ThunderD";
+import Tornado from "./Tornado";
+import Whirl from "./Whirl";
 
 export {
-  WeatherSvgA,
-  WeatherSvgB,
-  WeatherSvgC,
-  WeatherSvgD,
-  WeatherSvgE,
-  WeatherSvgF,
-  WeatherSvgG,
-  WeatherSvgH,
-  WeatherSvgI,
-  WeatherSvgJ,
-  WeatherSvgK,
-  WeatherSvgL,
-  WeatherSvgM,
-  WeatherSvgN,
-  WeatherSvgO,
-  WeatherSvgP,
+  Clouds,
+  Haze,
+  Mist,
+  MoonA,
+  MoonB,
+  RainA,
+  RainB,
+  Sand,
+  SleetA,
+  SleetB,
+  SleetC,
+  Smoke,
+  SnowA,
+  SnowB,
+  Squall,
+  SunA,
+  SunB,
+  ThunderA,
+  ThunderB,
+  ThunderC,
+  ThunderD,
+  Tornado,
+  Whirl,
 };

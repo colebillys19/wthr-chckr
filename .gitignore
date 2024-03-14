@@ -24,6 +24,7 @@ yarn-debug.log*
 yarn-error.log*
 
 todo.txt
-weather-reference.txt
+weather-reference-a.txt
+weather-reference-b.txt
 weather-rss.txt
 home-news.txt
