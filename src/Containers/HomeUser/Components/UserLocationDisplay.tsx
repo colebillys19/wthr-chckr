@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 import { GoogleMapsContext } from "../../../contexts/googleMapsContext";
 import { UnitTypeContext } from "../../../contexts/unitTypeContext";
@@ -11,17 +11,7 @@ import { locationDataEmpty } from "../../../utils/constants";
 function UserLocationDisplay() {
   const { userLocation } = useContext(UserLocationContext);
 
-  const {
-    data,
-    error: dataError,
-    isFetching: isDataFetching,
-  } = useFetchLocationData(userLocation);
-
-  const {
-    name,
-    error: nameError,
-    isFetching: isNameFetching,
-  } = useFetchNameData(userLocation);
+  const { isFetching, error, data, name } = useFetchData(userLocation);
 
   const updateUserLocation = useUpdateUserLocation();
 
@@ -29,15 +19,12 @@ function UserLocationDisplay() {
     updateUserLocation("");
   };
 
-  const isLoading = isDataFetching || isNameFetching;
-  const error = dataError || nameError;
-
   return (
     <>
       <WeatherDisplayHome
         data={data}
         error={error}
-        isLoading={isLoading}
+        isLoading={isFetching}
         name={name}
       />
       <button onClick={handleClearLocation}>clear location</button>
@@ -58,17 +45,30 @@ export default UserLocationDisplay;
 //
 //
 
-const useFetchLocationData = (location: string) => {
-  const [data, setData] = useState(locationDataEmpty);
+const useFetchData = (location: string) => {
   const [isFetching, setIsFetching] = useState(true);
-  const [error, setError] = useState("");
+
+  const errorRef = useRef("");
+  const isFetchingDataRef = useRef(true);
+  const dataRef = useRef(locationDataEmpty);
+  const isFetchingNameRef = useRef(true);
+  const nameRef = useRef("");
 
   const { unitType } = useContext(UnitTypeContext);
+  const { googleMaps } = useContext(GoogleMapsContext);
 
+  /*
+   *
+   */
   useEffect(() => {
+    // keep track of request status using both state and ref to prevent unnecessary re-renders
     if (!isFetching) {
       setIsFetching(true);
     }
+    if (isFetchingDataRef.current === false) {
+      isFetchingDataRef.current = true;
+    }
+    // fetch data logic
     const [lat, lon] = location.split(",");
     fetch(
       `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=${unitType}&appid=${process.env.REACT_APP_OPENWEATHER_KEY}`
@@ -80,42 +80,35 @@ const useFetchLocationData = (location: string) => {
         return res.json();
       })
       .then((resData) => {
-        setData(resData);
-        setIsFetching(false);
+        dataRef.current = resData;
+        isFetchingDataRef.current = false;
+        if (isFetchingNameRef.current === false) {
+          setIsFetching(false);
+        }
       })
       .catch((error) => {
         console.error(error);
-        setError(error.message);
-        setIsFetching(false);
+        errorRef.current = error.message;
+        isFetchingDataRef.current = false;
+        if (isFetchingNameRef.current === false) {
+          setIsFetching(false);
+        }
       });
   }, [unitType]);
 
-  return { data, error, isFetching };
-};
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-const useFetchNameData = (location: string) => {
-  const [name, setName] = useState("");
-  const [isFetching, setIsFetching] = useState(true);
-  const [error, setError] = useState("");
-    
-  const { googleMaps } = useContext(GoogleMapsContext);
-  
+  /*
+   *
+   */
   useEffect(() => {
     if (googleMaps !== null) {
+      // keep track of request status using both state and ref to prevent unnecessary re-renders
       if (!isFetching) {
         setIsFetching(true);
       }
+      if (isFetchingNameRef.current === false) {
+        isFetchingNameRef.current = true;
+      }
+      // fetch name logic
       const [lat, lon] = location.split(",");
       new Promise<google.maps.GeocoderResult[]>((resolve, reject) => {
         const geocoder = new googleMaps.Geocoder();
@@ -133,16 +126,27 @@ const useFetchNameData = (location: string) => {
         );
       })
         .then((results: google.maps.GeocoderResult[]) => {
-          setName(getFormattedLocationName(results));
-          setIsFetching(false);
+          nameRef.current = getFormattedLocationName(results);
+          isFetchingNameRef.current = false;
+          if (isFetchingDataRef.current === false) {
+            setIsFetching(false);
+          }
         })
-        .catch((error: any) => {
-          console.error(error);
-          setError("Issue fetching location name.");
-          setIsFetching(false);
+        .catch(() => {
+          console.error("Issue fetching location name.");
+          errorRef.current = "Issue fetching location name.";
+          isFetchingNameRef.current = false;
+          if (isFetchingDataRef.current === false) {
+            setIsFetching(false);
+          }
         });
     }
   }, []);
 
-  return { name, error, isFetching };
+  return {
+    isFetching,
+    error: errorRef.current,
+    data: dataRef.current,
+    name: nameRef.current,
+  };
 };

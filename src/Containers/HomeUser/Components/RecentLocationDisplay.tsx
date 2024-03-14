@@ -12,7 +12,7 @@ function RecentLocationDisplay({
 }: RecentLocationDisplayPropsType) {
   const [data, setData] = useState(locationDataEmpty);
   const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(-1);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { unitType } = useContext(UnitTypeContext);
 
@@ -20,8 +20,8 @@ function RecentLocationDisplay({
    *
    */
   useEffect(() => {
-    if (isLoading !== 1) {
-      setIsLoading(1);
+    if (!isLoading) {
+      setIsLoading(true);
     }
     const [lat, lon] = location.split(",");
     fetch(
@@ -35,12 +35,12 @@ function RecentLocationDisplay({
       })
       .then((resData) => {
         setData(resData);
-        setIsLoading(0);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error(error);
         setError(error.message);
-        setIsLoading(0);
+        setIsLoading(false);
       });
   }, [unitType]);
 
@@ -48,7 +48,7 @@ function RecentLocationDisplay({
     <WeatherDisplayHome
       data={data}
       error={error}
-      isLoading={isLoading !== 0}
+      isLoading={isLoading}
       name={name}
     />
   );
