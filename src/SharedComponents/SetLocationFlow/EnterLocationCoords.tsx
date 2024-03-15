@@ -4,7 +4,7 @@ import { ActiveModalContext } from "../../contexts/activeModalContext";
 import { GoogleMapsContext } from "../../contexts/googleMapsContext";
 import useUpdateUserLocation from "../../utils/customHooks/useUpdateUserLocation";
 import useUpdateUserLocationName from "../../utils/customHooks/useUpdateUserLocationName";
-import { getFormattedLocationName } from "../../utils/helpers";
+import { tempGetLocationName } from "../../utils/helpers";
 
 type EnterLocationCoordsPropsType = {
   isVerifyingAddress: boolean;
@@ -68,7 +68,7 @@ function EnterLocationCoords({
               const location = results[0].geometry.location;
               const locationStr = `${location.lat()},${location.lng()}`;
               updateUserLocation(locationStr);
-              updateUserLocationName(getFormattedLocationName(results));
+              updateUserLocationName(tempGetLocationName(results));
               if (activeModal === "setLocation") {
                 setActiveModal("");
               }

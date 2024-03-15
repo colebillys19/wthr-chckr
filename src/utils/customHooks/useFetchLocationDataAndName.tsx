@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 
 import { GoogleMapsContext } from "../../contexts/googleMapsContext";
 import { UnitTypeContext } from "../../contexts/unitTypeContext";
-import { getFormattedLocationName } from "../helpers";
+import { tempGetLocationName } from "../helpers";
 import { locationDataEmpty } from "../constants";
 
 const useFetchLocationDataAndName = (location: string) => {
@@ -86,7 +86,7 @@ const useFetchLocationDataAndName = (location: string) => {
         );
       })
         .then((results: google.maps.GeocoderResult[]) => {
-          nameRef.current = getFormattedLocationName(results);
+          nameRef.current = tempGetLocationName(results);
           isFetchingNameRef.current = false;
           if (isFetchingDataRef.current === false) {
             setIsFetching(false);
