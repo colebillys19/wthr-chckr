@@ -8,12 +8,12 @@ import { OpenWeatherMapDataType } from "../../../utils/types/openWeatherMap";
 import { getTimeData } from "../../../utils/helpers";
 import WeatherDisplayHour from "./WeatherDisplayHour";
 
-type DisplayPropsType = {
+type WeatherDisplayPropsType = {
   data: OpenWeatherMapDataType;
   name: string;
 };
 
-function Display({ data, name }: DisplayPropsType) {
+function WeatherDisplay({ data, name }: WeatherDisplayPropsType) {
   const navigate = useNavigate();
 
   const { unitType } = useContext(UnitTypeContext);
@@ -105,4 +105,4 @@ function Display({ data, name }: DisplayPropsType) {
   );
 }
 
-export default Display;
+export default WeatherDisplay;

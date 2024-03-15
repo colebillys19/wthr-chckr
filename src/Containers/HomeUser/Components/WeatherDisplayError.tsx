@@ -1,7 +1,7 @@
-function Error() {
+function WeatherDisplayError() {
   //
 
   return <div>error</div>;
 }
 
-export default Error;
+export default WeatherDisplayError;

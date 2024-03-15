@@ -3,14 +3,14 @@ import Skeleton from "./WeatherDisplaySkeleton";
 import Error from "./WeatherDisplayError";
 import { OpenWeatherMapDataType } from "../../../utils/types/openWeatherMap";
 
-type WeatherDisplayHomePropsType = {
+type WeatherDisplayContainerPropsType = {
   data: OpenWeatherMapDataType;
   error: string;
   isLoading: boolean;
   name: string;
 };
 
-function WeatherDisplayHome({ data, error, isLoading, name }: WeatherDisplayHomePropsType) {
+function WeatherDisplayContainer({ data, error, isLoading, name }: WeatherDisplayContainerPropsType) {
   if (isLoading) {
     return <Skeleton />;
   }
@@ -22,4 +22,4 @@ function WeatherDisplayHome({ data, error, isLoading, name }: WeatherDisplayHome
   return <WeatherDisplay data={data} name={name} />;
 }
 
-export default WeatherDisplayHome;
+export default WeatherDisplayContainer;

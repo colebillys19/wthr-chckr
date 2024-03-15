@@ -1,7 +1,7 @@
-function Skeleton() {
+function WeatherDisplaySkeleton() {
   //
 
   return <div>skeleton</div>;
 }
 
-export default Skeleton;
+export default WeatherDisplaySkeleton;
