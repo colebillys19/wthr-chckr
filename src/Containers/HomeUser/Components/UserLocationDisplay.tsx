@@ -1,9 +1,10 @@
 import { useContext } from "react";
 
 import { UserLocationContext } from "../../../contexts/userLocationContext";
-import { WeatherDisplayHome } from "../../../SharedComponents";
 import useFetchLocationDataAndName from "../../../utils/customHooks/useFetchLocationDataAndName";
 import useUpdateUserLocation from "../../../utils/customHooks/useUpdateUserLocation";
+import useUpdateUserLocationName from "../../../utils/customHooks/useUpdateUserLocationName";
+import WeatherDisplayContainer from "./WeatherDisplayContainer";
 
 function UserLocationDisplay() {
   const { userLocation } = useContext(UserLocationContext);
@@ -12,14 +13,17 @@ function UserLocationDisplay() {
     useFetchLocationDataAndName(userLocation);
 
   const updateUserLocation = useUpdateUserLocation();
+  const updateUserLocationName = useUpdateUserLocationName();
+  
 
   const handleClearLocation = () => {
     updateUserLocation("");
+    updateUserLocationName("");
   };
 
   return (
     <>
-      <WeatherDisplayHome
+      <WeatherDisplayContainer
         data={data}
         error={error}
         isLoading={isFetching}
