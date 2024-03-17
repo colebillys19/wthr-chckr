@@ -28,7 +28,7 @@ function App() {
 
   return (
     <Router>
-      <div className="App text-text">
+      <div className="App text-text tracking-wide">
         <Header />
         <Routes>
           <Route path="/" element={<PageHome />} />
