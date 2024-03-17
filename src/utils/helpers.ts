@@ -1,5 +1,5 @@
 import {
-  // getPreferredLocationNameData,
+  getPreferredLocationNameData,
   getOffsetTimeMs,
   getDayHoursMinutes,
   getTimeStandard,
@@ -10,27 +10,30 @@ import { NumObjType, GetTimeDataPropsType } from "./types/helpers";
 /*
  *
  */
-// export const getFormattedLocationName = (
-//   results: google.maps.GeocoderResult[]
-// ) => {
-//   const {
-//     sublocality,
-//     locality,
-//     administrative_area_level_1,
-//     administrative_area_level_2,
-//     country,
-//   } = getPreferredLocationNameData(results);
-//   if (sublocality) {
-//     return `${sublocality}, ${administrative_area_level_1}`;
-//   }
-//   if (locality) {
-//     return `${locality}, ${administrative_area_level_1}`;
-//   }
-//   if (administrative_area_level_2) {
-//     return `${administrative_area_level_2}, ${administrative_area_level_1}`;
-//   }
-//   return `${administrative_area_level_1}, ${country}`;
-// };
+export const getFormattedLocationName = (
+  results: google.maps.GeocoderResult[]
+) => {
+  const {
+    sublocality,
+    locality,
+    administrative_area_level_1,
+    administrative_area_level_2,
+    country,
+  } = getPreferredLocationNameData(results);
+  if (sublocality) {
+    return `${sublocality}, ${administrative_area_level_1}`;
+  }
+  if (locality) {
+    return `${locality}, ${administrative_area_level_1}`;
+  }
+  if (administrative_area_level_2) {
+    return `${administrative_area_level_2}, ${administrative_area_level_1}`;
+  }
+  if (administrative_area_level_1) {
+    return `${administrative_area_level_1}, ${country}`;
+  }
+  return country;
+};
 
 /*
  *
@@ -89,18 +92,4 @@ export const getTimeData = ({
     }
   }
   return { day, time, isDayTime };
-};
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-export const tempGetLocationName = (results: google.maps.GeocoderResult[]) => {
-  return results[0].formatted_address;
 };

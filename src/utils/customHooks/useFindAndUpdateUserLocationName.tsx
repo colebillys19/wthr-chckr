@@ -2,7 +2,7 @@ import { useContext } from "react";
 
 import { UserLocationNameContext } from "../../contexts/userLocationNameContext";
 import { GoogleMapsContext } from "../../contexts/googleMapsContext";
-import { tempGetLocationName } from "../helpers";
+import { getFormattedLocationName } from "../helpers";
 
 const useFindAndUpdateUserLocationName = () => {
   const { setUserLocationName } = useContext(UserLocationNameContext);
@@ -19,7 +19,7 @@ const useFindAndUpdateUserLocationName = () => {
             status: google.maps.GeocoderStatus
           ) => {
             if (status === googleMaps.GeocoderStatus.OK) {
-              const locationName = tempGetLocationName(results);
+              const locationName = getFormattedLocationName(results);
               setUserLocationName(locationName);
               localStorage.setItem("userLocationName", locationName);
               resolve(true);
