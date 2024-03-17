@@ -1,6 +1,6 @@
 import { WeatherSvg } from "../../SharedComponentsAux";
 
-type WeatherDisplayLgPropsType = {
+type WeatherDisplayLargePropsType = {
   svgId: number;
   isDayTime: boolean;
   temp: string;
@@ -10,7 +10,7 @@ type WeatherDisplayLgPropsType = {
   humidity: string;
 };
 
-function WeatherDisplayLg({
+function WeatherDisplayLarge({
   svgId,
   isDayTime,
   temp,
@@ -18,13 +18,13 @@ function WeatherDisplayLg({
   feelsLike,
   windSpeed,
   humidity,
-}: WeatherDisplayLgPropsType) {
+}: WeatherDisplayLargePropsType) {
   //
 
   return (
     <div className="inline-block" style={{ outline: "1px solid black" }}>
       <div className="flex justify-center">
-        <WeatherSvg id={svgId} isDayTime={isDayTime} size={80} />
+        <WeatherSvg id={svgId} isDayTime={isDayTime} size={100} />
         <div className="flex flex-col justify-center items-center">
           <span className="text-xl font-bold">{temp}</span>
           <span className="text-xl">{weatherName}</span>
@@ -51,4 +51,4 @@ function WeatherDisplayLg({
   );
 }
 
-export default WeatherDisplayLg;
+export default WeatherDisplayLarge;

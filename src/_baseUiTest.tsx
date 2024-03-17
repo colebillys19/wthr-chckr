@@ -1,11 +1,9 @@
-import { WeatherDisplayLg, WeatherDisplayMd, WeatherDisplaySm } from "./BaseComponents";
-
-const mockData = {
-  svgId: 802,
-  isDayTime: true,
-  temp: "57°F",
-  weatherName: "Clear",
-};
+import {
+  WeatherDisplayLarge,
+  WeatherDisplaySmallTall,
+  WeatherDisplaySmallWide,
+} from "./BaseComponents";
+import HourlyTall from "./Containers/PageLocationHourly/Components/WeatherDisplayTall";
 
 function BaseUiTest() {
   //
@@ -13,32 +11,47 @@ function BaseUiTest() {
   return (
     <>
       <div className="mt-3 ml-3">
-        <WeatherDisplayLg
-          svgId={mockData.svgId}
-          isDayTime={mockData.isDayTime}
-          temp={mockData.temp}
-          weatherName={mockData.weatherName}
+        <WeatherDisplayLarge
+          svgId={802}
+          isDayTime={false}
+          temp="57°F"
+          weatherName="Clear"
           feelsLike="54°F"
           windSpeed="5 mph"
           humidity="11%"
         />
       </div>
       <div className="mt-3 ml-3">
-        <WeatherDisplayMd
+        <WeatherDisplaySmallTall
           locationName="Winston-Salem, NC"
-          svgId={mockData.svgId}
-          isDayTime={mockData.isDayTime}
-          temp={mockData.temp}
-          weatherName={mockData.weatherName}
+          svgId={802}
+          isDayTime={true}
+          temp="57°F"
+          weatherName="Clear"
         />
       </div>
       <div className="mt-3 ml-3">
-        <WeatherDisplaySm
+        <WeatherDisplaySmallWide
           locationName="Winston-Salem, NC"
-          svgId={mockData.svgId}
-          isDayTime={mockData.isDayTime}
-          temp={mockData.temp}
-          weatherName={mockData.weatherName}
+          svgId={802}
+          isDayTime={false}
+          temp="57°F"
+          weatherName="Clear"
+        />
+      </div>
+      <div className="mt-3 ml-3">
+        <HourlyTall
+          svdId={802}
+          isDayTime={true}
+          time="2:00 PM"
+          temp="44°F"
+          weatherName="Clouds"
+          feelsLike="42°F"
+          windSpeed="4 mph"
+          precChance="9%"
+          rainVolume=""
+          snowVolume="6 mm/h"
+          humidity="1%"
         />
       </div>
     </>

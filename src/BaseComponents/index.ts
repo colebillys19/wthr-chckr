@@ -1,5 +1,5 @@
-import WeatherDisplayLg from "./WeatherDisplayLg";
-import WeatherDisplayMd from "./WeatherDisplayMd";
-import WeatherDisplaySm from "./WeatherDisplaySm";
+import WeatherDisplayLarge from "./WeatherDisplayLarge";
+import WeatherDisplaySmallTall from "./WeatherDisplaySmallTall";
+import WeatherDisplaySmallWide from "./WeatherDisplaySmallWide";
 
-export { WeatherDisplayLg, WeatherDisplayMd, WeatherDisplaySm };
+export { WeatherDisplayLarge, WeatherDisplaySmallTall, WeatherDisplaySmallWide };

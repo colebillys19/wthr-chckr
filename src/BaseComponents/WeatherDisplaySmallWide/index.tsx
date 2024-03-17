@@ -1,6 +1,6 @@
 import { WeatherSvg } from "../../SharedComponentsAux";
 
-type WeatherDisplaySmPropsType = {
+type WeatherDisplaySmallWidePropsType = {
   locationName: string;
   svgId: number;
   isDayTime: boolean;
@@ -8,13 +8,13 @@ type WeatherDisplaySmPropsType = {
   weatherName: string;
 };
 
-function WeatherDisplaySm({
+function WeatherDisplaySmallWide({
   locationName,
   svgId,
   isDayTime,
   temp,
   weatherName,
-}: WeatherDisplaySmPropsType) {
+}: WeatherDisplaySmallWidePropsType) {
   //
 
   return (
@@ -29,4 +29,4 @@ function WeatherDisplaySm({
   );
 }
 
-export default WeatherDisplaySm;
+export default WeatherDisplaySmallWide;

@@ -1,15 +1,15 @@
 import useFetchLocationDataAndName from "../../../utils/customHooks/useFetchLocationDataAndName";
 import { RecentLocationManager } from "../../../SharedComponents";
 import { TabNav } from "../../../SharedComponentsAux";
-import WeatherDisplayContainer from "./WeatherDisplayContainer";
+import ListContainer from "./ListContainer";
 import ErrorComponent from "./ErrorComponent";
 import Skeleton from "./Skeleton";
 
-type DataContainerPropsType = {
+type PageContainerPropsType = {
   location: string;
 };
 
-function DataContainer({ location }: DataContainerPropsType) {
+function PageContainer({ location }: PageContainerPropsType) {
   const { isFetching, error, data, name } =
     useFetchLocationDataAndName(location);
 
@@ -29,7 +29,7 @@ function DataContainer({ location }: DataContainerPropsType) {
       <h1>{name}</h1>
       <TabNav location={location} />
       <h2>Hourly</h2>
-      <WeatherDisplayContainer
+      <ListContainer
         data={hourly}
         timezoneOffset={timezone_offset}
         sunrise={sunrise}
@@ -40,4 +40,4 @@ function DataContainer({ location }: DataContainerPropsType) {
   );
 }
 
-export default DataContainer;
+export default PageContainer;
