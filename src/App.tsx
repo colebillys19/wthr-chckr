@@ -15,7 +15,7 @@ import {
 import { Modal } from "./SharedComponents";
 
 //
-import BaseUiTest from "./Containers/BaseUiTest";
+import BaseUiTest from "./_baseUiTest";
 
 function App() {
   useSetContextFromLocalStorage();
@@ -28,7 +28,7 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
+      <div className="App text-text">
         <Header />
         <Routes>
           <Route path="/" element={<PageHome />} />

@@ -204,27 +204,52 @@ function WeatherMap({ location, zoom, useDeviceTime }: WeatherMapPropsType) {
   return (
     <>
       {isLoading && <div>Loading...</div>}
-      <div style={isLoading ? { display: "none" } : {}}>
-        <div>
-          <span>
-            {getMapTime({
-              radarLayerTime,
-              timezoneOffsetSec,
-              timeType,
-              useDeviceTime,
-            })}
-          </span>
-          {timezoneName && <span>{` (${timezoneName})`}</span>}
-        </div>
-        <div>
-          <button onClick={handlePrevClick}>prev</button>
-          <button onClick={handlePlayPauseClick}>play/stop</button>
-          <button onClick={handleNextClick}>next</button>
-        </div>
-        <div ref={mapDivRef} />
+      <div>
+        <span>
+          {getMapTime({
+            radarLayerTime,
+            timezoneOffsetSec,
+            timeType,
+            useDeviceTime,
+          })}
+        </span>
+        {timezoneName && <span>{` (${timezoneName})`}</span>}
       </div>
+      <div>
+        <button onClick={handlePrevClick}>prev</button>
+        <button onClick={handlePlayPauseClick}>play/stop</button>
+        <button onClick={handleNextClick}>next</button>
+      </div>
+      <div ref={mapDivRef} />
     </>
   );
 }
 
 export default WeatherMap;
+
+/*
+
+<>
+  {isLoading && <div>Loading...</div>}
+  <div style={isLoading ? { display: "none" } : {}}>
+    <div>
+      <span>
+        {getMapTime({
+          radarLayerTime,
+          timezoneOffsetSec,
+          timeType,
+          useDeviceTime,
+        })}
+      </span>
+      {timezoneName && <span>{` (${timezoneName})`}</span>}
+    </div>
+    <div>
+      <button onClick={handlePrevClick}>prev</button>
+      <button onClick={handlePlayPauseClick}>play/stop</button>
+      <button onClick={handleNextClick}>next</button>
+    </div>
+    <div ref={mapDivRef} />
+  </div>
+</>
+
+*/

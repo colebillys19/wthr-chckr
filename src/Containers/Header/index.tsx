@@ -13,14 +13,14 @@ function Header() {
   const { userPrefersNoLocation } = useContext(UserPrefersNoLocationContext);
 
   return (
-    <>
+    <div className='bg-grey-b'>
     <header>
       <Nav />
       <SelectTime />
       <SelectUnits />
     </header>
     {routerLocation.pathname !== "/" && !userPrefersNoLocation && <UserLocationContainer />}
-    </>
+    </div>
   );
 }
 

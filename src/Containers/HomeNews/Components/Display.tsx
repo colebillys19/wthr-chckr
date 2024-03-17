@@ -19,7 +19,7 @@ function Display({ data }: DisplayPropsType) {
     <ul>
       {data.map((item: NewsDataType) => (
         <li key={item.title}>
-          <div style={{ backgroundImage: `url(${item.imgUrl})` }}></div>
+          {/* <div style={{ backgroundImage: `url(${item.imgUrl})` }}></div> */}
           <div>
             <span>{getNewsTime(item.date, timeType)}</span>
             <h4>{item.title}</h4>

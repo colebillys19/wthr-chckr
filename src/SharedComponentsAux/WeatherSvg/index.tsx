@@ -12,7 +12,11 @@ function WeatherSvg({ id, isDayTime, size }: WeatherSvgPropsType) {
     idToUse = `${id}${isDayTime ? "d" : "n"}`;
   }
   const SvgComponent = weatherSvgDict[idToUse];
-  return <SvgComponent size={size} />;
+  return (
+    <div className="border-r border-b border-grey-b">
+      <SvgComponent size={size} />
+    </div>
+  );
 }
 
 export default WeatherSvg;

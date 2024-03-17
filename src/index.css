@@ -4,31 +4,31 @@
 
 @layer base {
   @font-face {
-    font-family: 'Ubuntu';
+    font-family: "Ubuntu";
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url(./fonts/Ubuntu-Regular.ttf) format('truetype');
+    src: url(./fonts/Ubuntu-Regular.ttf) format("truetype");
   }
   @font-face {
-    font-family: 'Ubuntu';
+    font-family: "Ubuntu";
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url(./fonts/Ubuntu-Bold.ttf) format('truetype');
+    src: url(./fonts/Ubuntu-Bold.ttf) format("truetype");
   }
   @font-face {
-    font-family: 'Ubuntu';
+    font-family: "Ubuntu";
     font-style: italic;
     font-weight: 400;
     font-display: swap;
-    src: url(./fonts/Ubuntu-Italic.ttf) format('truetype');
+    src: url(./fonts/Ubuntu-Italic.ttf) format("truetype");
   }
   @font-face {
-    font-family: 'Ubuntu';
+    font-family: "Ubuntu";
     font-style: italic;
     font-weight: 700;
     font-display: swap;
-    src: url(./fonts/Ubuntu-BoldItalic.ttf) format('truetype');
+    src: url(./fonts/Ubuntu-BoldItalic.ttf) format("truetype");
   }
 }
