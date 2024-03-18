@@ -1,5 +1,7 @@
 import ArrowIcon from "./svg/iconSvgs/Components/Arrow";
-import BackIcon from "./svg/iconSvgs/Components/Back";
+// import BackIconA from "./svg/iconSvgs/Components/BackA";
+// import BackIconB from "./svg/iconSvgs/Components/BackB";
+import BackIconC from "./svg/iconSvgs/Components/BackC";
 import BurgerIcon from "./svg/iconSvgs/Components/Burger";
 import CloseIcon from "./svg/iconSvgs/Components/Close";
 import MagIcon from "./svg/iconSvgs/Components/Mag";
@@ -27,12 +29,15 @@ function BaseUiTest() {
 
   return (
     <div className="m-8">
+      <div>
+        <input type="text" />
+      </div>
       <h2 className="text-3xl font-bold my-8">Icons</h2>
-      <div className="inline-grid grid-cols-4 grid-rows-2 gap-8 mb-8 justify-center items-center">
-        <ArrowIcon />
-        <BackIcon />
+      <div className="inline-grid grid-cols-3 grid-rows-3 gap-8 mb-8 justify-center items-center">
+        <BackIconC />
         <BurgerIcon />
         <CloseIcon />
+        <ArrowIcon />
         <MagIcon />
         <NextIcon />
         <PlayIcon />
@@ -41,10 +46,6 @@ function BaseUiTest() {
       <div>
         <SpinnerBIcon />
       </div>
-      <h2 className="text-3xl font-bold my-8">Misc</h2>
-      <div>test</div>
-      <hr className="my-8 max-w-96" />
-      <div>test</div>
       <h2 className="text-3xl font-bold my-8">Weather Displays</h2>
       <WeatherDisplayLarge
         svgId={802}
