@@ -1,3 +1,5 @@
+import { useRef } from "react";
+
 import ArrowIcon from "./svg/iconSvgs/Components/Arrow";
 // import BackIconA from "./svg/iconSvgs/Components/BackA";
 // import BackIconB from "./svg/iconSvgs/Components/BackB";
@@ -9,6 +11,9 @@ import NextIcon from "./svg/iconSvgs/Components/Next";
 import PlayIcon from "./svg/iconSvgs/Components/Play";
 import PrevIcon from "./svg/iconSvgs/Components/Prev";
 import SpinnerBIcon from "./svg/iconSvgs/Components/SpinnerB";
+
+import SearchFormA from "./Containers/HomeSearch/SearchFormA";
+import SearchFormB from "./Containers/HomeSearch/SearchFormB";
 
 import {
   WeatherDisplayLarge,
@@ -25,12 +30,42 @@ import HomeUserWide from "./Containers/HomeUser/Components/WeatherDisplayWide";
 import { mockHourlyData } from "./_baseUiMockData";
 
 function BaseUiTest() {
-  //
+  const inputRefA = useRef<HTMLInputElement | null>(null);
+  const inputRefB = useRef<HTMLInputElement | null>(null);
+
+  const handleChangeA = () => {
+    console.log("handleChange");
+  };
+
+  const handleSubmitA = () => {
+    console.log("handleSubmit");
+  };
+
+  const handleChangeB = () => {
+    console.log("handleChange");
+  };
+
+  const handleSubmitB = () => {
+    console.log("handleSubmit");
+  };
 
   return (
     <div className="m-8">
+      <div className="mb-8">
+        <SearchFormA
+          handleChange={handleChangeA}
+          handleSubmit={handleSubmitA}
+          isSubmitDisabled={false}
+          ref={inputRefA}
+        />
+      </div>
       <div>
-        <input type="text" />
+        <SearchFormB
+          handleChange={handleChangeB}
+          handleSubmit={handleSubmitB}
+          isSubmitDisabled={false}
+          ref={inputRefB}
+        />
       </div>
       <h2 className="text-3xl font-bold my-8">Icons</h2>
       <div className="inline-grid grid-cols-3 grid-rows-3 gap-8 mb-8 justify-center items-center">

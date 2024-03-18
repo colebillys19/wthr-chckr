@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { GoogleMapsContext } from "../../contexts/googleMapsContext";
 import { HomeSectionContainer } from "../../SharedComponentsAux";
+import SearchFormA from "./SearchFormA";
 
 function HomeSearch() {
   const [inputError, setInputError] = useState("");
@@ -83,18 +84,12 @@ function HomeSearch() {
   return (
     <HomeSectionContainer>
       <div>search by location</div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="search">Search</label>
-        <input
-          id="search"
-          onChange={handleChange}
-          placeholder=""
-          ref={inputRef}
-          required
-          type="text"
-        />
-        <input type="submit" value="Go" disabled={isSubmitDisabled} />
-      </form>
+      <SearchFormA
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        isSubmitDisabled={isSubmitDisabled}
+        ref={inputRef}
+      />
       {inputError && <div>{inputError}</div>}
       {isVerifyingAddress && <div>loading</div>}
     </HomeSectionContainer>

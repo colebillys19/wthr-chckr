@@ -71,13 +71,6 @@ function WeatherDisplayContainer({
     navigate(`/location/current?location=${locationStr}`);
   };
 
-  console.log({
-    hourlyDataToUse,
-    timezone_offset,
-    sunrise,
-    sunset,
-  });
-
   return (
     <>
       <WeatherDisplayTall
