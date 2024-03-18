@@ -1,12 +1,10 @@
-import { useRef } from "react";
+import { useRef, FormEvent } from "react";
 
 import ArrowIcon from "./svg/iconSvgs/Components/Arrow";
-// import BackIconA from "./svg/iconSvgs/Components/BackA";
-// import BackIconB from "./svg/iconSvgs/Components/BackB";
 import BackIconC from "./svg/iconSvgs/Components/BackC";
 import BurgerIcon from "./svg/iconSvgs/Components/Burger";
 import CloseIcon from "./svg/iconSvgs/Components/Close";
-import MagIcon from "./svg/iconSvgs/Components/Mag";
+import MagIconB from "./svg/iconSvgs/Components/MagB";
 import NextIcon from "./svg/iconSvgs/Components/Next";
 import PlayIcon from "./svg/iconSvgs/Components/Play";
 import PrevIcon from "./svg/iconSvgs/Components/Prev";
@@ -37,7 +35,8 @@ function BaseUiTest() {
     console.log("handleChange");
   };
 
-  const handleSubmitA = () => {
+  const handleSubmitA = (e: FormEvent) => {
+    e.preventDefault();
     console.log("handleSubmit");
   };
 
@@ -45,7 +44,8 @@ function BaseUiTest() {
     console.log("handleChange");
   };
 
-  const handleSubmitB = () => {
+  const handleSubmitB = (e: FormEvent) => {
+    e.preventDefault();
     console.log("handleSubmit");
   };
 
@@ -73,7 +73,7 @@ function BaseUiTest() {
         <BurgerIcon />
         <CloseIcon />
         <ArrowIcon />
-        <MagIcon />
+        <MagIconB />
         <NextIcon />
         <PlayIcon />
         <PrevIcon />

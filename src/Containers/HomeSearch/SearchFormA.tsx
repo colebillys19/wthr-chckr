@@ -1,26 +1,6 @@
-import { forwardRef, ChangeEvent, FormEvent, CSSProperties } from "react";
+import { forwardRef, ChangeEvent, FormEvent } from "react";
 
-import MagIcon from "../../svg/iconSvgs/Components/Mag";
-
-const stylesA: CSSProperties = {
-  outline: "1px solid #A7A7A7",
-  display: "inline-flex",
-  borderRadius: "20px",
-  overflow: "hidden",
-};
-
-const stylesB: CSSProperties = {
-  display: "none",
-};
-
-const stylesC: CSSProperties = {
-  padding: "8px 0 8px 18px",
-  outline: "none",
-};
-
-const stylesD: CSSProperties = {
-  padding: "8px 16px 8px 8px",
-};
+import MagIconB from "../../svg/iconSvgs/Components/MagB";
 
 type SearchFormAPropsType = {
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -30,8 +10,11 @@ type SearchFormAPropsType = {
 
 const SearchFormA = forwardRef<HTMLInputElement, SearchFormAPropsType>(
   ({ handleChange, handleSubmit, isSubmitDisabled }, ref) => (
-    <form onSubmit={handleSubmit} style={stylesA}>
-      <label htmlFor="search" style={stylesB}>
+    <form
+      onSubmit={handleSubmit}
+      className="w-full inline-flex overflow-hidden rounded-full border border-grey-a"
+    >
+      <label htmlFor="search" className="hidden">
         Search
       </label>
       <input
@@ -39,11 +22,12 @@ const SearchFormA = forwardRef<HTMLInputElement, SearchFormAPropsType>(
         onChange={handleChange}
         ref={ref}
         required
+        placeholder="Search location"
         type="text"
-        style={stylesC}
+        className="w-full pt-2 pr-1 pb-2 pl-4 outline-0"
       />
-      <button disabled={isSubmitDisabled} style={stylesD}>
-        <MagIcon />
+      <button disabled={isSubmitDisabled} className="pt-2 pr-4 pb-2 pl-2">
+        <MagIconB />
       </button>
     </form>
   )

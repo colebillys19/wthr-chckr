@@ -1,25 +1,4 @@
-import { forwardRef, ChangeEvent, FormEvent, CSSProperties } from "react";
-
-const stylesA: CSSProperties = {
-  outline: "1px solid #A7A7A7",
-  display: "inline-flex",
-  borderRadius: "20px",
-  overflow: "hidden",
-};
-
-const stylesB: CSSProperties = {
-  display: "none",
-};
-
-const stylesC: CSSProperties = {
-  padding: "8px 8px 8px 18px",
-  outline: "none",
-};
-
-const stylesD: CSSProperties = {
-  padding: "8px 18px 8px 16px",
-  backgroundColor: "#f3f3f3",
-};
+import { forwardRef, ChangeEvent, FormEvent } from "react";
 
 type SearchFormBPropsType = {
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -29,8 +8,11 @@ type SearchFormBPropsType = {
 
 const SearchFormB = forwardRef<HTMLInputElement, SearchFormBPropsType>(
   ({ handleChange, handleSubmit, isSubmitDisabled }, ref) => (
-    <form onSubmit={handleSubmit} style={stylesA}>
-      <label htmlFor="search" style={stylesB}>
+    <form
+      onSubmit={handleSubmit}
+      className="w-full inline-flex overflow-hidden rounded-full border border-grey-a"
+    >
+      <label htmlFor="search" className="hidden">
         Search
       </label>
       <input
@@ -38,10 +20,13 @@ const SearchFormB = forwardRef<HTMLInputElement, SearchFormBPropsType>(
         onChange={handleChange}
         ref={ref}
         required
+        placeholder="Search location"
         type="text"
-        style={stylesC}
+        className="w-full pt-2 pr-1 pb-2 pl-4 outline-0"
       />
-      <button disabled={isSubmitDisabled} style={stylesD}>Search</button>
+      <button disabled={isSubmitDisabled} className="py-2 px-5 bg-grey-b">
+        Search
+      </button>
     </form>
   )
 );
