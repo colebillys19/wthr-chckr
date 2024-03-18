@@ -1,4 +1,4 @@
-import { WeatherSvg } from "../../../SharedComponentsAux";
+import { LabelValueText, WeatherSvg } from "../../../SharedComponentsAux";
 
 type WeatherDisplayTallPropsType = {
   dayName: string;
@@ -36,55 +36,19 @@ function WeatherDisplayTall({
       <span className="text-xl font-bold">{dayName}</span>
       <WeatherSvg id={svgId} isDayTime={true} size={60} />
       <span>{summary}</span>
-      <span>
-        <span className="text-grey-a">Temperature (high):</span>
-        &nbsp;
-        <span>{tempMax}</span>
-      </span>
-      <span>
-        <span className="text-grey-a">Temperature (low):</span>
-        &nbsp;
-        <span>{tempMin}</span>
-      </span>
-      <span>
-        <span className="text-grey-a">Feels like (high):</span>
-        &nbsp;
-        <span>{feelsLikeMax}</span>
-      </span>
-      <span>
-        <span className="text-grey-a">Feels like (low):</span>
-        &nbsp;
-        <span>{feelsLikeMin}</span>
-      </span>
-      <span>
-        <span className="text-grey-a">Average wind speed:</span>
-        &nbsp;
-        <span>{windSpeed}</span>
-      </span>
-      <span>
-        <span className="text-grey-a">Chance of precipitation:</span>
-        &nbsp;
-        <span>{precChance}</span>
-      </span>
+      <LabelValueText label="Temperature (high):" value={tempMax} />
+      <LabelValueText label="Temperature (low):" value={tempMin} />
+      <LabelValueText label="Feels like (high):" value={feelsLikeMax} />
+      <LabelValueText label="Feels like (low):" value={feelsLikeMin} />
+      <LabelValueText label="Average wind speed:" value={windSpeed} />
+      <LabelValueText label="Chance of precipitation:" value={precChance} />
       {!!rainVolume && (
-        <span>
-          <span className="text-grey-a">Rain volume:</span>
-          &nbsp;
-          <span>{rainVolume}</span>
-        </span>
+        <LabelValueText label="Rain volume:" value={rainVolume} />
       )}
       {!!snowVolume && (
-        <span>
-          <span className="text-grey-a">Snow volume:</span>
-          &nbsp;
-          <span>{snowVolume}</span>
-        </span>
+        <LabelValueText label="Snow volume:" value={snowVolume} />
       )}
-      <span>
-        <span className="text-grey-a">Average humidity:</span>
-        &nbsp;
-        <span>{humidity}</span>
-      </span>
+      <LabelValueText label="Average humidity:" value={humidity} />
     </div>
   );
 }

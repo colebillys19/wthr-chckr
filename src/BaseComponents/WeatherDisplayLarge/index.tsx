@@ -1,4 +1,4 @@
-import { WeatherSvg } from "../../SharedComponentsAux";
+import { LabelValueText, WeatherSvg } from "../../SharedComponentsAux";
 
 type WeatherDisplayLargePropsType = {
   svgId: number;
@@ -31,21 +31,9 @@ function WeatherDisplayLarge({
         </div>
       </div>
       <div className="flex flex-col items-center">
-        <span>
-          <span className="text-grey-a">Feels like:</span>
-          &nbsp;
-          <span>{feelsLike}</span>
-        </span>
-        <span>
-          <span className="text-grey-a">Wind speed:</span>
-          &nbsp;
-          <span>{windSpeed}</span>
-        </span>
-        <span>
-          <span className="text-grey-a">Humidity:</span>
-          &nbsp;
-          <span>{humidity}</span>
-        </span>
+        <LabelValueText label="Feels like:" value={feelsLike} />
+        <LabelValueText label="Wind speed:" value={windSpeed} />
+        <LabelValueText label="Humidity:" value={humidity} />
       </div>
     </div>
   );

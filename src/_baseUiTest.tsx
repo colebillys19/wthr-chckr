@@ -7,7 +7,8 @@ import HourlyTall from "./Containers/PageLocationHourly/Components/WeatherDispla
 import HourlyWide from "./Containers/PageLocationHourly/Components/WeatherDisplayWide";
 import DailyTall from "./Containers/PageLocationDaily/Components/WeatherDisplayTall";
 import DailyWide from "./Containers/PageLocationDaily/Components/WeatherDisplayWide";
-import HomeUser from './Containers/HomeUser/Components/WeatherDisplay';
+import HomeUserTall from './Containers/HomeUser/Components/WeatherDisplayTall';
+import HomeUserWide from './Containers/HomeUser/Components/WeatherDisplayWide';
 
 const mockHourlyData = [
   {
@@ -191,7 +192,25 @@ function BaseUiTest() {
       </div>
       <hr className="my-5" />
       <div className="ml-5">
-        <HomeUser
+        <HomeUserTall
+          locationName="St. Petersburg, FL"
+          currentTime="11:11 PM"
+          svgId={802}
+          isDayTime={false}
+          temp="66°F"
+          weatherName="Clouds"
+          feelsLike="66°F"
+          windSpeed="13 mph"
+          humidity="19%"
+          hourlyDataArr={mockHourlyData}
+          timezoneOffset={-14400}
+          sunrise={1710761769}
+          sunset={1710805246}
+        />
+      </div>
+      <hr className="my-5" />
+      <div className="ml-5">
+        <HomeUserWide
           locationName="St. Petersburg, FL"
           currentTime="11:11 PM"
           svgId={802}

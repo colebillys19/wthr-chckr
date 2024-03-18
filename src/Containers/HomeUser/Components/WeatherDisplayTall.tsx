@@ -1,9 +1,8 @@
-import { WeatherSvg } from "../../../SharedComponentsAux";
 import { HourlyType } from "../../../utils/types/openWeatherMap";
 import { WeatherDisplayLarge } from "../../../BaseComponents";
 import WeatherDisplayHourlyContainer from "./WeatherDisplayHourlyContainer";
 
-type WeatherDisplayPropsType = {
+type WeatherDisplayTallPropsType = {
   locationName: string;
   currentTime: string;
   svgId: number;
@@ -21,7 +20,7 @@ type WeatherDisplayPropsType = {
   sunset: number;
 };
 
-function WeatherDisplay({
+function WeatherDisplayTall({
   locationName,
   currentTime,
   svgId,
@@ -37,7 +36,7 @@ function WeatherDisplay({
   timezoneOffset,
   sunrise,
   sunset,
-}: WeatherDisplayPropsType) {
+}: WeatherDisplayTallPropsType) {
   //
 
   return (
@@ -69,4 +68,4 @@ function WeatherDisplay({
   );
 }
 
-export default WeatherDisplay;
+export default WeatherDisplayTall;

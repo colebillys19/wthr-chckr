@@ -5,7 +5,7 @@ import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import { TimeTypeContext } from "../../../contexts/timeTypeContext";
 import { OpenWeatherMapDataType } from "../../../utils/types/openWeatherMap";
 import { getTimeData } from "../../../utils/helpers";
-import WeatherDisplay from "./WeatherDisplay";
+import WeatherDisplayTall from "./WeatherDisplayTall";
 
 type WeatherDisplayContainerPropsType = {
   data: OpenWeatherMapDataType;
@@ -32,8 +32,8 @@ function WeatherDisplayContainer({
     wind_speed,
     sunrise,
     sunset,
-    rain,
-    snow,
+    // rain,
+    // snow,
   } = current;
 
   const { isDayTime, time } = getTimeData({
@@ -80,7 +80,7 @@ function WeatherDisplayContainer({
 
   return (
     <>
-      <WeatherDisplay
+      <WeatherDisplayTall
         locationName={name}
         currentTime={time}
         svgId={weather[0].id}

@@ -1,4 +1,4 @@
-import { WeatherSvg } from "../../../SharedComponentsAux";
+import { LabelValueText, WeatherSvg } from "../../../SharedComponentsAux";
 
 type WeatherDisplayWidePropsType = {
   svdId: number;
@@ -38,40 +38,16 @@ function WeatherDisplayWide({
         <span>{weatherName}</span>
       </div>
       <div className="flex flex-col">
-        <span>
-          <span className="text-grey-a">Feels like:</span>
-          &nbsp;
-          <span>{feelsLike}</span>
-        </span>
-        <span>
-          <span className="text-grey-a">Wind speed:</span>
-          &nbsp;
-          <span>{windSpeed}</span>
-        </span>
-        <span>
-          <span className="text-grey-a">Chance of precipitation:</span>
-          &nbsp;
-          <span>{precChance}</span>
-        </span>
+        <LabelValueText label="Feels like:" value={feelsLike} />
+        <LabelValueText label="Wind speed:" value={windSpeed} />
+        <LabelValueText label="Chance of precipitation:" value={precChance} />
         {!!rainVolume && (
-          <span>
-            <span className="text-grey-a">Rain volume:</span>
-            &nbsp;
-            <span>{rainVolume}</span>
-          </span>
+          <LabelValueText label="Rain volume:" value={rainVolume} />
         )}
         {!!snowVolume && (
-          <span>
-            <span className="text-grey-a">Snow volume:</span>
-            &nbsp;
-            <span>{snowVolume}</span>
-          </span>
+          <LabelValueText label="Snow volume:" value={snowVolume} />
         )}
-        <span>
-          <span className="text-grey-a">Humidity:</span>
-          &nbsp;
-          <span>{humidity}</span>
-        </span>
+        <LabelValueText label="Humidity:" value={humidity} />
       </div>
     </div>
   );
