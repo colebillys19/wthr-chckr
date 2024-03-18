@@ -2,22 +2,21 @@ import { useContext, useMemo } from "react";
 
 import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import { TimeTypeContext } from "../../../contexts/timeTypeContext";
-import { WeatherSvg } from "../../../SharedComponentsAux";
 import { CurrentType, DailyType } from "../../../utils/types/openWeatherMap";
 import { getTimeData, getHighLow } from "../../../utils/helpers";
-import WindDisplay from "./WindDisplay";
+import WeatherDisplay from "./WeatherDisplay";
 
-type DisplayPropsType = {
+type WeatherDisplayContainerPropsType = {
   currentData: CurrentType;
   todayData: DailyType;
   timezoneOffset: number;
 };
 
-function Display({
+function WeatherDisplayContainer({
   currentData,
   todayData,
   timezoneOffset,
-}: DisplayPropsType) {
+}: WeatherDisplayContainerPropsType) {
   const { unitType } = useContext(UnitTypeContext);
   const { timeType } = useContext(TimeTypeContext);
 
@@ -27,7 +26,6 @@ function Display({
     feels_like: currentFeelsLike,
     weather: currentWeather,
     humidity: currentHumidity,
-    wind_deg,
     wind_speed: currentWindSpeed,
     sunrise,
     sunset,
@@ -35,15 +33,10 @@ function Display({
     snow: currentSnow,
   } = currentData;
 
-  let currentRainStr = '';
-  if (currentRain && currentRain["1h"]) {
-    currentRainStr = `${currentRain["1h"]} mm/h`;
-  }
-
-  let currentSnowStr = '';
-  if (currentSnow && currentSnow["1h"]) {
-    currentSnowStr = `${currentSnow["1h"]} mm/h`;
-  }
+  const tempUnit = useMemo(() => unitType === "imperial" ? "°F" : "°C", [unitType]);
+  const windUnit = useMemo(() => unitType === "imperial" ? "mph" : "m/s", [unitType]);
+  const rainVolume = useMemo(() => currentRain && currentRain["1h"] ? `${currentRain["1h"]} mm/h` : "", [currentRain]);
+  const snowVolume = useMemo(() => currentSnow && currentSnow["1h"] ? `${currentSnow["1h"]} mm/h` : "", [currentSnow]);
 
   const {
     day,
@@ -56,9 +49,6 @@ function Display({
     sunsetSec: sunset,
     timeType,
   });
-
-  const tempUnit = useMemo(() => unitType === "imperial" ? "°F" : "°C", [unitType]);
-  const windUnit = useMemo(() => unitType === "imperial" ? "mph" : "m/s", [unitType]);
 
   const {
     sunrise: todaySunrise,
@@ -112,42 +102,22 @@ function Display({
   ];
 
   return (
-    <div>
-      <h2>Current</h2>
-      <div>
-        <h3>{currentTime}</h3>
-        <div>
-          <WeatherSvg
-            id={currentWeather[0].id}
-            isDayTime={isDayTime}
-            size={120}
-          />
-        </div>
-        <div>{currentWeather[0].main}</div>
-        <div>Temperature: {`${Math.round(currentTemp)}${tempUnit}`}</div>
-        <div>Feels like: {`${Math.round(currentFeelsLike)}${tempUnit}`}</div>
-        <WindDisplay
-          speedStr={`${Math.round(currentWindSpeed)}${windUnit}`}
-          deg={wind_deg}
-        />
-        <div>Humidity: {`${currentHumidity}%`}</div>
-        {!!currentRainStr && <div>Rain: {currentRainStr}</div>}
-        {!!currentSnowStr && <div>Snow: {currentSnowStr}</div>}
-      </div>
-      <div>
-        <h3>{day} Summary</h3>
-        <div>{todaySummary}</div>
-        <ul>
-          {todayDataArr.map(({ label, value }) => (
-            <li key={label}>
-              <span>{label}:&nbsp;</span>
-              {value}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
+    <WeatherDisplay
+      currentTime={currentTime}
+      svgId={currentWeather[0].id}
+      isDayTime={isDayTime}
+      weatherName={currentWeather[0].main}
+      temp={`${Math.round(currentTemp)}${tempUnit}`}
+      feelsLike={`${Math.round(currentFeelsLike)}${tempUnit}`}
+      windSpeed={`${Math.round(currentWindSpeed)}${windUnit}`}
+      humidity={`${currentHumidity}%`}
+      rainVolume={rainVolume}
+      snowVolume={snowVolume}
+      dayName={day}
+      todaySummary={todaySummary}
+      todayDataArr={todayDataArr}
+    />
   );
 }
 
-export default Display;
+export default WeatherDisplayContainer;

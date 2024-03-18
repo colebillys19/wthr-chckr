@@ -5,14 +5,14 @@ import WeatherDisplayContainer from "./WeatherDisplayContainer";
 import ErrorComponent from "./ErrorComponent";
 import Skeleton from "./Skeleton";
 
-type DataContainerPropsType = {
+type PageTopContainerPropsType = {
   location: string;
 };
 
-function DataContainer({ location }: DataContainerPropsType) {
+function PageTopContainer({ location }: PageTopContainerPropsType) {
   const { isFetching, error, data, name } =
     useFetchLocationDataAndName(location);
-  
+
   if (isFetching) {
     return <Skeleton />;
   }
@@ -21,17 +21,20 @@ function DataContainer({ location }: DataContainerPropsType) {
     return <ErrorComponent error={error} />;
   }
 
-  const { daily, timezone_offset } = data;
+  const { current, daily, timezone_offset } = data;
 
   return (
     <>
       <h1>{name}</h1>
       <TabNav location={location} />
-      <h2>Daily</h2>
-      <WeatherDisplayContainer data={daily} timezoneOffset={timezone_offset} />
+      <WeatherDisplayContainer
+        currentData={current}
+        todayData={daily[0]}
+        timezoneOffset={timezone_offset}
+      />
       <RecentLocationManager location={location} name={name} />
     </>
   );
 }
 
-export default DataContainer;
+export default PageTopContainer;

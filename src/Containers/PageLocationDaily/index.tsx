@@ -1,11 +1,11 @@
-import QueryStringCheck from './Components/QueryStringCheck';
+import QueryStringChecker from './Components/QueryStringChecker';
 
 function PageLocationDaily() {
   //
 
   return (
     <main>
-      <QueryStringCheck />
+      <QueryStringChecker />
     </main>
   );
 }
