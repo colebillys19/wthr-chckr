@@ -30,10 +30,7 @@ function WeatherDisplayTall({
   //
 
   return (
-    <div
-      className="inline-flex items-center"
-      style={{ outline: "1px solid black" }}
-    >
+    <div className="inline-flex items-center">
       <WeatherSvg id={svdId} isDayTime={isDayTime} size={100} />
       <div className="flex flex-col">
         <span className="text-xl font-bold">{time}</span>

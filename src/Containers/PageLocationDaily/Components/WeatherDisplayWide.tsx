@@ -32,7 +32,7 @@ function WeatherDisplayWide({
   //
 
   return (
-    <div className="inline-flex" style={{ outline: "1px solid black" }}>
+    <div className="inline-flex">
       <div className="flex flex-col items-end">
         <span className="text-xl font-bold">{dayName}</span>
         <WeatherSvg id={svgId} isDayTime={true} size={60} />

@@ -22,7 +22,7 @@ function WeatherDisplayLarge({
   //
 
   return (
-    <div className="inline-block" style={{ outline: "1px solid black" }}>
+    <div className="inline-block">
       <div className="flex justify-center">
         <WeatherSvg id={svgId} isDayTime={isDayTime} size={100} />
         <div className="flex flex-col justify-center items-center">

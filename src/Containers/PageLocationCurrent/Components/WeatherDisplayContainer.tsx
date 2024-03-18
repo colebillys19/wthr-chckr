@@ -33,10 +33,22 @@ function WeatherDisplayContainer({
     snow: currentSnow,
   } = currentData;
 
-  const tempUnit = useMemo(() => unitType === "imperial" ? "°F" : "°C", [unitType]);
-  const windUnit = useMemo(() => unitType === "imperial" ? "mph" : "m/s", [unitType]);
-  const rainVolume = useMemo(() => currentRain && currentRain["1h"] ? `${currentRain["1h"]} mm/h` : "", [currentRain]);
-  const snowVolume = useMemo(() => currentSnow && currentSnow["1h"] ? `${currentSnow["1h"]} mm/h` : "", [currentSnow]);
+  const tempUnit = useMemo(
+    () => (unitType === "imperial" ? "°F" : "°C"),
+    [unitType]
+  );
+  const windUnit = useMemo(
+    () => (unitType === "imperial" ? "mph" : "m/s"),
+    [unitType]
+  );
+  const rainVolume = useMemo(
+    () => (currentRain && currentRain["1h"] ? `${currentRain["1h"]} mm/h` : ""),
+    [currentRain]
+  );
+  const snowVolume = useMemo(
+    () => (currentSnow && currentSnow["1h"] ? `${currentSnow["1h"]} mm/h` : ""),
+    [currentSnow]
+  );
 
   const {
     day,

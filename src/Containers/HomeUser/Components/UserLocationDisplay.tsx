@@ -5,7 +5,7 @@ import { UserLocationNameContext } from "../../../contexts/userLocationNameConte
 import useFetchLocationData from "../../../utils/customHooks/useFetchLocationData";
 import useUpdateUserLocation from "../../../utils/customHooks/useUpdateUserLocation";
 import useUpdateUserLocationName from "../../../utils/customHooks/useUpdateUserLocationName";
-import WeatherDisplayContainer from "./WeatherDisplayContainer";
+import WeatherDisplayAsyncContainer from "./WeatherDisplayAsyncContainer";
 
 function UserLocationDisplay() {
   const { userLocation } = useContext(UserLocationContext);
@@ -15,7 +15,6 @@ function UserLocationDisplay() {
 
   const updateUserLocation = useUpdateUserLocation();
   const updateUserLocationName = useUpdateUserLocationName();
-  
 
   const handleClearLocation = () => {
     updateUserLocation("");
@@ -24,7 +23,7 @@ function UserLocationDisplay() {
 
   return (
     <>
-      <WeatherDisplayContainer
+      <WeatherDisplayAsyncContainer
         data={data}
         error={error}
         isLoading={isLoading}

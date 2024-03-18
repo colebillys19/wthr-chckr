@@ -1,24 +1,25 @@
 import { useContext, useMemo } from "react";
 
-import { WeatherSvg } from "../../../SharedComponentsAux";
 import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import { TimeTypeContext } from "../../../contexts/timeTypeContext";
+import { WeatherDisplaySmallWide } from '../../../BaseComponents';
 import { HourlyType } from "../../../utils/types/openWeatherMap";
 import { getTimeData } from "../../../utils/helpers";
+// import WeatherDisplayHourly from './WeatherDisplayHourly';
 
-type WeatherDisplayHourPropsType = {
+type WeatherDisplayHourlyContainerPropsType = {
   data: HourlyType;
   timezoneOffset: number;
   sunrise: number;
   sunset: number;
 };
 
-function WeatherDisplayHour({
+function WeatherDisplayHourlyContainer({
   data,
   timezoneOffset,
   sunrise,
   sunset,
-}: WeatherDisplayHourPropsType) {
+}: WeatherDisplayHourlyContainerPropsType) {
   const { unitType } = useContext(UnitTypeContext);
   const { timeType } = useContext(TimeTypeContext);
 
@@ -38,13 +39,14 @@ function WeatherDisplayHour({
   );
 
   return (
-    <>
-      <div>{time}</div>
-      <WeatherSvg id={weather[0].id} isDayTime={isDayTime} size={60} />
-      <div>{`${Math.round(temp)}${tempUnit}`}</div>
-      <div>{weather[0].main}</div>
-    </>
+    <WeatherDisplaySmallWide
+      svgId={weather[0].id}
+      isDayTime={isDayTime}
+      mainText={time}
+      temp={`${Math.round(temp)}${tempUnit}`}
+      weatherName={weather[0].main}
+    />
   );
 }
 
-export default WeatherDisplayHour;
+export default WeatherDisplayHourlyContainer;
