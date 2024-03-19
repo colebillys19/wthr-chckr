@@ -26,7 +26,7 @@ const SearchFormA = forwardRef<HTMLInputElement, SearchFormAPropsType>(
         type="text"
         className="w-full py-2 pr-1 pl-4 outline-0"
       />
-      <button disabled={isSubmitDisabled} className="py-2 pr-4 pl-2">
+      <button disabled={isSubmitDisabled} className="py-2 pr-4 pl-2 outline-none focus:bg-grey-b active:opacity-50 active:bg-opacity-0">
         <MagIconB />
       </button>
     </form>

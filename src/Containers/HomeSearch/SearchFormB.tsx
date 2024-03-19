@@ -24,7 +24,7 @@ const SearchFormB = forwardRef<HTMLInputElement, SearchFormBPropsType>(
         type="text"
         className="w-full py-2 pr-2 pl-4 outline-0"
       />
-      <button disabled={isSubmitDisabled} className="py-2 px-5 bg-grey-b">
+      <button disabled={isSubmitDisabled} className="py-2 px-5 bg-grey-b outline-none focus:bg-opacity-0 active:text-grey-a">
         Search
       </button>
     </form>

@@ -20,6 +20,8 @@ import {
   TextField,
   ButtonPrimary,
   ButtonSecondary,
+  LinkButton,
+  Link,
 } from "./BaseComponents";
 import HourlyTall from "./Containers/PageLocationHourly/Components/WeatherDisplayTall";
 import HourlyWide from "./Containers/PageLocationHourly/Components/WeatherDisplayWide";
@@ -73,8 +75,14 @@ function BaseUiTest() {
       <div className="mb-8">
         <ButtonPrimary handleClick={() => null} text="Primary" />
       </div>
-      <div>
+      <div className="mb-8">
         <ButtonSecondary handleClick={() => null} text="Secondary" />
+      </div>
+      <div className="mb-8">
+        <LinkButton handleClick={() => null} text="Link button" />
+      </div>
+      <div>
+        <Link href="#" text="Link" />
       </div>
       <h2 className="text-3xl font-bold my-8">Icons</h2>
       <div className="inline-grid grid-cols-3 grid-rows-3 gap-8 mb-8 justify-center items-center">
