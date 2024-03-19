@@ -17,6 +17,7 @@ import {
   WeatherDisplayLarge,
   WeatherDisplaySmallTall,
   WeatherDisplaySmallWide,
+  TextField,
 } from "./BaseComponents";
 import HourlyTall from "./Containers/PageLocationHourly/Components/WeatherDisplayTall";
 import HourlyWide from "./Containers/PageLocationHourly/Components/WeatherDisplayWide";
@@ -31,17 +32,9 @@ function BaseUiTest() {
   const inputRefA = useRef<HTMLInputElement | null>(null);
   const inputRefB = useRef<HTMLInputElement | null>(null);
 
-  const handleChangeA = () => {
-    console.log("handleChange");
-  };
-
   const handleSubmitA = (e: FormEvent) => {
     e.preventDefault();
     console.log("handleSubmit");
-  };
-
-  const handleChangeB = () => {
-    console.log("handleChange");
   };
 
   const handleSubmitB = (e: FormEvent) => {
@@ -53,18 +46,26 @@ function BaseUiTest() {
     <div className="m-8">
       <div className="mb-8">
         <SearchFormA
-          handleChange={handleChangeA}
+          handleChange={() => null}
           handleSubmit={handleSubmitA}
           isSubmitDisabled={false}
           ref={inputRefA}
         />
       </div>
-      <div>
+      <div className="mb-8">
         <SearchFormB
-          handleChange={handleChangeB}
+          handleChange={() => null}
           handleSubmit={handleSubmitB}
           isSubmitDisabled={false}
           ref={inputRefB}
+        />
+      </div>
+      <div>
+        <TextField
+          handleChange={() => null}
+          id="textfield"
+          placeholder="Enter address, city, or zip"
+          type="text"
         />
       </div>
       <h2 className="text-3xl font-bold my-8">Icons</h2>

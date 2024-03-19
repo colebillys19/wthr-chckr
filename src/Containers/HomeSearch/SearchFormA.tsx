@@ -24,9 +24,9 @@ const SearchFormA = forwardRef<HTMLInputElement, SearchFormAPropsType>(
         required
         placeholder="Search location"
         type="text"
-        className="w-full pt-2 pr-1 pb-2 pl-4 outline-0"
+        className="w-full py-2 pr-1 pl-4 outline-0"
       />
-      <button disabled={isSubmitDisabled} className="pt-2 pr-4 pb-2 pl-2">
+      <button disabled={isSubmitDisabled} className="py-2 pr-4 pl-2">
         <MagIconB />
       </button>
     </form>

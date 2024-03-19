@@ -2,6 +2,7 @@ import { FormEvent, useContext, useEffect, useRef, useState } from "react";
 
 import { ActiveModalContext } from "../../contexts/activeModalContext";
 import { GoogleMapsContext } from "../../contexts/googleMapsContext";
+import { TextField } from "../../BaseComponents";
 import useUpdateUserLocation from "../../utils/customHooks/useUpdateUserLocation";
 import useUpdateUserLocationName from "../../utils/customHooks/useUpdateUserLocationName";
 import { getFormattedLocationName } from "../../utils/helpers";
@@ -87,7 +88,7 @@ function EnterLocationDefault({
               setIsVerifyingAddress(false);
               resolve(true);
             } else {
-              reject('Invalid location');
+              reject("Invalid location");
             }
           }
         );
@@ -118,12 +119,10 @@ function EnterLocationDefault({
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="address">Enter address, city, or zip: </label>
-          <input
-            id="address"
-            onChange={handleChange}
-            placeholder=""
+          <TextField
             ref={inputRef}
-            required
+            handleChange={handleChange}
+            id="address"
             type="text"
           />
         </div>

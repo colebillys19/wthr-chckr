@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useContext, useState } from "react";
 
 import { ActiveModalContext } from "../../contexts/activeModalContext";
 import { GoogleMapsContext } from "../../contexts/googleMapsContext";
+import { TextField } from "../../BaseComponents";
 import useUpdateUserLocation from "../../utils/customHooks/useUpdateUserLocation";
 import useUpdateUserLocationName from "../../utils/customHooks/useUpdateUserLocationName";
 import { getFormattedLocationName } from "../../utils/helpers";
@@ -99,23 +100,11 @@ function EnterLocationCoords({
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="lat">Latitude: </label>
-          <input
-            onChange={handleLatChange}
-            type="number"
-            id="lat"
-            value={latValue}
-            required
-          />
+          <TextField handleChange={handleLatChange} id="lat" type="number" />
         </div>
         <div>
           <label htmlFor="lon">Longitude: </label>
-          <input
-            onChange={handleLonChange}
-            type="number"
-            id="lon"
-            value={lonValue}
-            required
-          />
+          <TextField handleChange={handleLonChange} id="lon" type="number" />
         </div>
         {inputError && <div>{inputError}</div>}
         <div>
