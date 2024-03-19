@@ -1,4 +1,4 @@
-import { WeatherSvg } from "../../SharedComponentsAux";
+import { WeatherSvg } from "../SharedComponentsAux";
 
 type WeatherDisplaySmallTallPropsType = {
   mainText: string;

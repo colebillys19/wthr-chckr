@@ -18,6 +18,8 @@ import {
   WeatherDisplaySmallTall,
   WeatherDisplaySmallWide,
   TextField,
+  ButtonPrimary,
+  ButtonSecondary,
 } from "./BaseComponents";
 import HourlyTall from "./Containers/PageLocationHourly/Components/WeatherDisplayTall";
 import HourlyWide from "./Containers/PageLocationHourly/Components/WeatherDisplayWide";
@@ -60,13 +62,19 @@ function BaseUiTest() {
           ref={inputRefB}
         />
       </div>
-      <div>
+      <div className="mb-8">
         <TextField
           handleChange={() => null}
           id="textfield"
           placeholder="Enter address, city, or zip"
           type="text"
         />
+      </div>
+      <div className="mb-8">
+        <ButtonPrimary handleClick={() => null} text="Primary" />
+      </div>
+      <div>
+        <ButtonSecondary handleClick={() => null} text="Secondary" />
       </div>
       <h2 className="text-3xl font-bold my-8">Icons</h2>
       <div className="inline-grid grid-cols-3 grid-rows-3 gap-8 mb-8 justify-center items-center">
