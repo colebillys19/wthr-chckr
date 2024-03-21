@@ -1,6 +1,6 @@
 import { LabelValueText, WeatherSvg } from "../../../SharedComponentsAux";
 
-type WeatherDisplayWidePropsType = {
+type WeatherDisplayTallPropsType = {
   dayName: string;
   svgId: number;
   summary: string;
@@ -15,7 +15,7 @@ type WeatherDisplayWidePropsType = {
   snowVolume: string;
 };
 
-function WeatherDisplayWide({
+function WeatherDisplayTall({
   dayName,
   svgId,
   summary,
@@ -28,29 +28,33 @@ function WeatherDisplayWide({
   humidity,
   rainVolume,
   snowVolume,
-}: WeatherDisplayWidePropsType) {
+}: WeatherDisplayTallPropsType) {
   //
 
   return (
-    <div className="inline-flex">
-      <div className="flex flex-col items-end">
+    <div className="inline-flex flex-col items-center md:flex-row md:items-start">
+      <div className="flex flex-col items-center md:items-end">
         <span className="text-xl font-bold">{dayName}</span>
         <WeatherSvg id={svgId} isDayTime={true} size={60} />
-        <span>{summary}</span>
+        <span className="text-center md:text-right">{summary}</span>
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col items-center md:items-start">
         <LabelValueText label="Temperature (high):" value={tempMax} />
         <LabelValueText label="Temperature (low):" value={tempMin} />
         <LabelValueText label="Feels like (high):" value={feelsLikeMax} />
         <LabelValueText label="Feels like (low):" value={feelsLikeMin} />
         <LabelValueText label="Average wind speed:" value={windSpeed} />
         <LabelValueText label="Chance of precipitation:" value={precChance} />
-        {!!rainVolume && <LabelValueText label="Rain volume:" value={rainVolume} />}
-        {!!snowVolume && <LabelValueText label="Snow volume:" value={snowVolume} />}
+        {!!rainVolume && (
+          <LabelValueText label="Rain volume:" value={rainVolume} />
+        )}
+        {!!snowVolume && (
+          <LabelValueText label="Snow volume:" value={snowVolume} />
+        )}
         <LabelValueText label="Average humidity:" value={humidity} />
       </div>
     </div>
   );
 }
 
-export default WeatherDisplayWide;
+export default WeatherDisplayTall;

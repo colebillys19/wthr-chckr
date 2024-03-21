@@ -2,22 +2,21 @@ import { useContext, useMemo } from "react";
 
 import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import { TimeTypeContext } from "../../../contexts/timeTypeContext";
-import { WeatherSvg } from "../../../SharedComponentsAux";
 import { DailyType } from "../../../utils/types/openWeatherMap";
 import { getHighLow, getTimeData } from "../../../utils/helpers";
-import WeatherDisplayTall from './WeatherDisplayTall';
+import WeatherDisplay from './WeatherDisplay';
 
-type WeatherDisplayPropsType = {
+type WeatherDisplayContainerPropsType = {
   data: DailyType;
   timezoneOffset: number;
   isToday: boolean;
 };
 
-function WeatherDisplay({
+function WeatherDisplayContainer({
   data,
   timezoneOffset,
   isToday,
-}: WeatherDisplayPropsType) {
+}: WeatherDisplayContainerPropsType) {
   const { unitType } = useContext(UnitTypeContext);
   const { timeType } = useContext(TimeTypeContext);
 
@@ -48,7 +47,7 @@ function WeatherDisplay({
   const snowVolume = useMemo(() => typeof snow === "number" && snow > 0 ? `${snow} mm` : "", [snow]);
 
   return (
-      <WeatherDisplayTall
+      <WeatherDisplay
         dayName={isToday ? "Today" : day}
         svgId={weather[0].id}
         summary={summary}
@@ -65,4 +64,4 @@ function WeatherDisplay({
   );
 }
 
-export default WeatherDisplay;
+export default WeatherDisplayContainer;

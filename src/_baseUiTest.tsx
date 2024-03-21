@@ -10,8 +10,7 @@ import PlayIcon from "./svg/iconSvgs/Components/Play";
 import PrevIcon from "./svg/iconSvgs/Components/Prev";
 import SpinnerBIcon from "./svg/iconSvgs/Components/SpinnerB";
 
-import SearchFormA from "./Containers/HomeSearch/SearchFormA";
-import SearchFormB from "./Containers/HomeSearch/SearchFormB";
+import SearchForm from "./Containers/HomeSearch/Components/SearchForm";
 
 import {
   WeatherDisplayLarge,
@@ -23,25 +22,16 @@ import {
   LinkButton,
   Link,
 } from "./BaseComponents";
-import HourlyTall from "./Containers/PageLocationHourly/Components/WeatherDisplayTall";
-import HourlyWide from "./Containers/PageLocationHourly/Components/WeatherDisplayWide";
-import DailyTall from "./Containers/PageLocationDaily/Components/WeatherDisplayTall";
-import DailyWide from "./Containers/PageLocationDaily/Components/WeatherDisplayWide";
-import HomeUserTall from "./Containers/HomeUser/Components/WeatherDisplayTall";
-import HomeUserWide from "./Containers/HomeUser/Components/WeatherDisplayWide";
+import Hourly from "./Containers/PageLocationHourly/Components/WeatherDisplay";
+import Daily from "./Containers/PageLocationDaily/Components/WeatherDisplay";
+import HomeUser from "./Containers/HomeUser/Components/WeatherDisplay";
 
 import { mockHourlyData } from "./_baseUiMockData";
 
 function BaseUiTest() {
-  const inputRefA = useRef<HTMLInputElement | null>(null);
-  const inputRefB = useRef<HTMLInputElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const handleSubmitA = (e: FormEvent) => {
-    e.preventDefault();
-    console.log("handleSubmit");
-  };
-
-  const handleSubmitB = (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     console.log("handleSubmit");
   };
@@ -49,19 +39,11 @@ function BaseUiTest() {
   return (
     <div className="m-8">
       <div className="mb-8">
-        <SearchFormA
+        <SearchForm
           handleChange={() => null}
-          handleSubmit={handleSubmitA}
+          handleSubmit={handleSubmit}
           isSubmitDisabled={false}
-          ref={inputRefA}
-        />
-      </div>
-      <div className="mb-8">
-        <SearchFormB
-          handleChange={() => null}
-          handleSubmit={handleSubmitB}
-          isSubmitDisabled={false}
-          ref={inputRefB}
+          ref={inputRef}
         />
       </div>
       <div className="mb-8">
@@ -125,7 +107,7 @@ function BaseUiTest() {
         weatherName="Clear"
       />
       <hr className="my-8 max-w-96" />
-      <HourlyTall
+      <Hourly
         svdId={802}
         isDayTime={true}
         time="2:00 PM"
@@ -139,21 +121,7 @@ function BaseUiTest() {
         humidity="1%"
       />
       <hr className="my-8 max-w-96" />
-      <HourlyWide
-        svdId={802}
-        isDayTime={true}
-        time="2:00 PM"
-        temp="44°F"
-        weatherName="Clouds"
-        feelsLike="42°F"
-        windSpeed="4 mph"
-        precChance="9%"
-        rainVolume=""
-        snowVolume="6 mm/h"
-        humidity="1%"
-      />
-      <hr className="my-8 max-w-96" />
-      <DailyTall
+      <Daily
         dayName="Wednesday"
         svgId={802}
         summary="You can expect partly cloudy with rain in the morning, with snow in the afternoon."
@@ -168,38 +136,7 @@ function BaseUiTest() {
         snowVolume=""
       />
       <hr className="my-8 max-w-96" />
-      <DailyWide
-        dayName="Wednesday"
-        svgId={802}
-        summary="You can expect partly cloudy with rain in the morning, with snow in the afternoon."
-        tempMax="44°F"
-        tempMin="39°F"
-        feelsLikeMax="41°F"
-        feelsLikeMin="35°F"
-        precChance="27%"
-        windSpeed="13 mph"
-        humidity="19%"
-        rainVolume="1 mm/h"
-        snowVolume=""
-      />
-      <hr className="my-8 max-w-96" />
-      <HomeUserTall
-        locationName="St. Petersburg, FL"
-        currentTime="11:11 PM"
-        svgId={802}
-        isDayTime={false}
-        temp="66°F"
-        weatherName="Clouds"
-        feelsLike="66°F"
-        windSpeed="13 mph"
-        humidity="19%"
-        hourlyDataArr={mockHourlyData}
-        timezoneOffset={-14400}
-        sunrise={1710761769}
-        sunset={1710805246}
-      />
-      <hr className="my-8 max-w-96" />
-      <HomeUserWide
+      <HomeUser
         locationName="St. Petersburg, FL"
         currentTime="11:11 PM"
         svgId={802}

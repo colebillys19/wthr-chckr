@@ -4,7 +4,7 @@ import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import { TimeTypeContext } from "../../../contexts/timeTypeContext";
 import { HourlyType } from "../../../utils/types/openWeatherMap";
 import { getTimeData } from "../../../utils/helpers";
-import WeatherDisplayTall from './WeatherDisplayTall';
+import WeatherDisplay from './WeatherDisplay';
 
 type WeatherDisplayContainerPropsType = {
   data: HourlyType;
@@ -48,7 +48,7 @@ function WeatherDisplayContainer({
   const snowVolume = useMemo(() => snow && snow["1h"] ? `${snow["1h"]} mm/h` : "", [snow]);
 
   return (
-    <WeatherDisplayTall
+    <WeatherDisplay
       svdId={weather[0].id}
       isDayTime={isDayTime}
       time={time}

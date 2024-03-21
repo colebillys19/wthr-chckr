@@ -2,7 +2,7 @@ import { HourlyType } from "../../../utils/types/openWeatherMap";
 import { WeatherDisplayLarge } from "../../../BaseComponents";
 import WeatherDisplayHourlyContainer from "./WeatherDisplayHourlyContainer";
 
-type WeatherDisplayTallPropsType = {
+type WeatherDisplayPropsType = {
   locationName: string;
   currentTime: string;
   svgId: number;
@@ -20,7 +20,7 @@ type WeatherDisplayTallPropsType = {
   sunset: number;
 };
 
-function WeatherDisplayTall({
+function WeatherDisplay({
   locationName,
   currentTime,
   svgId,
@@ -36,16 +36,16 @@ function WeatherDisplayTall({
   timezoneOffset,
   sunrise,
   sunset,
-}: WeatherDisplayTallPropsType) {
+}: WeatherDisplayPropsType) {
   //
 
   return (
-    <div className="inline-flex flex-col">
-      <div className="flex items-baseline">
+    <div className="inline-flex flex-col items-center md:items-start">
+      <div className="flex flex-col items-center md:flex-row md:items-baseline">
         <span className="text-2xl font-bold">{locationName}</span>
         <span>{currentTime}</span>
       </div>
-      <div className="flex">
+      <div className="md:flex">
         <WeatherDisplayLarge
           svgId={svgId}
           isDayTime={isDayTime}
@@ -55,7 +55,7 @@ function WeatherDisplayTall({
           windSpeed={windSpeed}
           humidity={humidity}
         />
-        <div className="flex flex-col">
+        <div className="flex flex-col items-center">
           {hourlyDataArr.map((hourlyData) => {
             const { dt } = hourlyData;
             return (
@@ -74,4 +74,4 @@ function WeatherDisplayTall({
   );
 }
 
-export default WeatherDisplayTall;
+export default WeatherDisplay;

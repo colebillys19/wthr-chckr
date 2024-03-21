@@ -7,10 +7,10 @@ function LabelValueText({ label, value }: LabelValueTextPropsType) {
   //
 
   return (
-    <span>
-      <span className="text-grey-a">{label}</span>
+    <span className="whitespace-nowrap">
+      <span className="text-grey-a whitespace-nowrap">{label}</span>
       &nbsp;
-      <span>{value}</span>
+      <span className="whitespace-nowrap">{value}</span>
     </span>
   );
 }

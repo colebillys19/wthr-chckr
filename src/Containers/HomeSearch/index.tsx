@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { GoogleMapsContext } from "../../contexts/googleMapsContext";
 import { HomeSectionContainer } from "../../SharedComponentsAux";
-import SearchFormA from "./SearchFormA";
+import SearchForm from "./Components/SearchForm";
 
 function HomeSearch() {
   const [inputError, setInputError] = useState("");
@@ -83,8 +83,7 @@ function HomeSearch() {
 
   return (
     <HomeSectionContainer>
-      <div>search by location</div>
-      <SearchFormA
+      <SearchForm
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         isSubmitDisabled={isSubmitDisabled}

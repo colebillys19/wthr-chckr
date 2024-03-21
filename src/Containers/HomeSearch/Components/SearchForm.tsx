@@ -1,14 +1,19 @@
 import { forwardRef, ChangeEvent, FormEvent } from "react";
 
-import MagIconB from "../../svg/iconSvgs/Components/MagB";
+import MagIconB from "../../../svg/iconSvgs/Components/MagB";
 
-type SearchFormAPropsType = {
+type SearchFormPropsType = {
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
   isSubmitDisabled: boolean;
 };
 
-const SearchFormA = forwardRef<HTMLInputElement, SearchFormAPropsType>(
+const tailwindStylesDefault =
+  "py-2 pr-4 pl-3 outline-none focus:bg-grey-b active:opacity-50 active:bg-opacity-0";
+const tailwindStylesDesktop =
+  "md:pr-5 md:pl-5 md:bg-grey-b md:focus:bg-opacity-0 md:active:text-grey-a";
+
+const SearchForm = forwardRef<HTMLInputElement, SearchFormPropsType>(
   ({ handleChange, handleSubmit, isSubmitDisabled }, ref) => (
     <form
       onSubmit={handleSubmit}
@@ -26,11 +31,17 @@ const SearchFormA = forwardRef<HTMLInputElement, SearchFormAPropsType>(
         type="text"
         className="w-full py-2 pr-2 pl-4 outline-0"
       />
-      <button disabled={isSubmitDisabled} className="py-2 pr-4 pl-3 outline-none focus:bg-grey-b active:opacity-50 active:bg-opacity-0">
-        <MagIconB />
+      <button
+        disabled={isSubmitDisabled}
+        className={`${tailwindStylesDefault} ${tailwindStylesDesktop}`}
+      >
+        <span className="md:hidden">
+          <MagIconB />
+        </span>
+        <span className="hidden md:inline">Search</span>
       </button>
     </form>
   )
 );
 
-export default SearchFormA;
+export default SearchForm;
