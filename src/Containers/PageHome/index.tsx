@@ -1,8 +1,8 @@
-import HomeCities from "../HomeCities";
-import HomeNews from "../HomeNews";
+// import HomeCities from "../HomeCities";
+// import HomeNews from "../HomeNews";
 import HomeSearch from "../HomeSearch";
-import HomeUser from "../HomeUser";
-import HomeMap from "../HomeMap";
+// import HomeUser from "../HomeUser";
+// import HomeMap from "../HomeMap";
 
 function PageHome() {
   //
@@ -10,10 +10,10 @@ function PageHome() {
   return (
     <main>
       <HomeSearch />
-      <HomeUser />
-      <HomeCities />
-      <HomeMap />
-      <HomeNews />
+      {/* <HomeUser /> */}
+      {/* <HomeCities /> */}
+      {/* <HomeMap /> */}
+      {/* <HomeNews /> */}
     </main>
   );
 }

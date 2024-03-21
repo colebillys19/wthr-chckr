@@ -8,6 +8,8 @@ import HomeMap from "./HomeMap";
 import PageLocationCurrent from "./PageLocationCurrent";
 import PageLocationHourly from "./PageLocationHourly";
 import PageLocationDaily from "./PageLocationDaily";
+import PageCities from "./PageCities";
+import PageNews from "./PageNews";
 import PageNotFound from "./PageNotFound";
 
 export {
@@ -21,5 +23,7 @@ export {
   PageLocationCurrent,
   PageLocationHourly,
   PageLocationDaily,
+  PageCities,
+  PageNews,
   PageNotFound,
 };

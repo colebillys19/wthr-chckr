@@ -10,6 +10,8 @@ import {
   PageLocationCurrent,
   PageLocationHourly,
   PageLocationDaily,
+  PageCities,
+  PageNews,
   PageNotFound,
 } from "./Containers";
 import { Modal } from "./SharedComponents";
@@ -35,6 +37,8 @@ function App() {
           <Route path="/location/current" element={<PageLocationCurrent />} />
           <Route path="/location/hourly" element={<PageLocationHourly />} />
           <Route path="/location/daily" element={<PageLocationDaily />} />
+          <Route path="/cities" element={<PageCities />} />
+          <Route path="/news" element={<PageNews />} />
           <Route path="/test" element={<BaseUiTest />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
