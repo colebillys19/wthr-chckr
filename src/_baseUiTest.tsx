@@ -73,13 +73,13 @@ function BaseUiTest() {
         />
       </div>
       <div className="mb-8">
-        <ButtonPrimary handleClick={() => null} text="Primary" />
+        <ButtonPrimary handleClick={() => null} text="Primary" isDisabled />
       </div>
       <div className="mb-8">
         <ButtonSecondary handleClick={() => null} text="Secondary" />
       </div>
       <div className="mb-8">
-        <LinkButton handleClick={() => null} text="Link button" />
+        <LinkButton handleClick={() => null} text="Link button" isDisabled />
       </div>
       <div>
         <Link href="#" text="Link" />
