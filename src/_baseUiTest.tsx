@@ -33,7 +33,6 @@ function BaseUiTest() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log("handleSubmit");
   };
 
   return (

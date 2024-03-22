@@ -8,6 +8,7 @@ type WeatherDisplayAsyncContainerPropsType = {
   error: string;
   isLoading: boolean;
   name: string;
+  userLocation: string;
 };
 
 function WeatherDisplayAsyncContainer({
@@ -15,6 +16,7 @@ function WeatherDisplayAsyncContainer({
   error,
   isLoading,
   name,
+  userLocation,
 }: WeatherDisplayAsyncContainerPropsType) {
   if (isLoading) {
     return <Skeleton />;
@@ -24,7 +26,13 @@ function WeatherDisplayAsyncContainer({
     return <Error />;
   }
 
-  return <WeatherDisplayContainer data={data} name={name} />;
+  return (
+    <WeatherDisplayContainer
+      data={data}
+      name={name}
+      userLocation={userLocation}
+    />
+  );
 }
 
 export default WeatherDisplayAsyncContainer;

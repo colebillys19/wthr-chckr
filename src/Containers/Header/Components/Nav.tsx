@@ -15,15 +15,12 @@ function Nav() {
       <NavLink to="/" onClick={handleNavLinkClick} className="mr-6">
         <LogoPlaceholder />
       </NavLink>
-      <div className="hidden lg:flex">
+      <div className="hidden md:flex">
         <NavLink to="/cities" onClick={handleNavLinkClick} className="mr-6">
           Cities
         </NavLink>
         <NavLink to="/news" onClick={handleNavLinkClick} className="mr-6">
           News
-        </NavLink>
-        <NavLink to="/test" onClick={handleNavLinkClick}>
-          Test
         </NavLink>
       </div>
     </nav>

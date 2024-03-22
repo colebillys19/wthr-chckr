@@ -1,7 +1,7 @@
 // import HomeCities from "../HomeCities";
 // import HomeNews from "../HomeNews";
 import HomeSearch from "../HomeSearch";
-// import HomeUser from "../HomeUser";
+import HomeUser from "../HomeUser";
 // import HomeMap from "../HomeMap";
 
 function PageHome() {
@@ -10,7 +10,7 @@ function PageHome() {
   return (
     <main>
       <HomeSearch />
-      {/* <HomeUser /> */}
+      <HomeUser />
       {/* <HomeCities /> */}
       {/* <HomeMap /> */}
       {/* <HomeNews /> */}

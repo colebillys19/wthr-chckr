@@ -10,18 +10,20 @@ import WeatherDisplay from "./WeatherDisplay";
 type WeatherDisplayContainerPropsType = {
   data: OpenWeatherMapDataType;
   name: string;
+  userLocation: string;
 };
 
 function WeatherDisplayContainer({
   data,
   name,
+  userLocation,
 }: WeatherDisplayContainerPropsType) {
   const navigate = useNavigate();
 
   const { unitType } = useContext(UnitTypeContext);
   const { timeType } = useContext(TimeTypeContext);
 
-  const { current, hourly, timezone_offset, lat, lon } = data;
+  const { current, hourly, timezone_offset } = data;
 
   const {
     dt,
@@ -67,8 +69,7 @@ function WeatherDisplayContainer({
    *
    */
   const handleSeeMore = () => {
-    const locationStr = `${lat},${lon}`;
-    navigate(`/location/current?location=${locationStr}`);
+    navigate(`/location/current?location=${userLocation}`);
   };
 
   return (

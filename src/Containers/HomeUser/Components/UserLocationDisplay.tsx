@@ -28,6 +28,7 @@ function UserLocationDisplay() {
         error={error}
         isLoading={isLoading}
         name={userLocationName}
+        userLocation={userLocation}
       />
       <button onClick={handleClearLocation}>clear location</button>
     </>
