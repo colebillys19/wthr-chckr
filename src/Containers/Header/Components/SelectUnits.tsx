@@ -1,37 +1,25 @@
-import { useContext } from "react";
+import { useCallback, useContext, useMemo } from "react";
 
 import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import useUpdateUnitType from "../../../utils/customHooks/useUpdateUnitType";
+import { LinkButton } from "../../../BaseComponents";
 
-function SelectUnits() {
+function SelectTime() {
   const { unitType } = useContext(UnitTypeContext);
 
-  const updateUnitType = useUpdateUnitType();
+  const updateTimeType = useUpdateUnitType();
 
-  const handleUnitClick = (type: string) => {
-    updateUnitType(type);
-  };
+  const buttonText = useMemo(() => {
+    const otherFormat = unitType === "imperial" ? "metric" : "imperial";
+    return `Switch to ${otherFormat} units`;
+  }, [unitType]);
 
-  return (
-    <>
-      <span>
-        Units:&nbsp;
-        <button
-          onClick={() => handleUnitClick("imperial")}
-          disabled={unitType === "imperial"}
-        >
-          Imperial
-        </button>
-        &nbsp;|&nbsp;
-        <button
-          onClick={() => handleUnitClick("metric")}
-          disabled={unitType === "metric"}
-        >
-          Metric
-        </button>
-      </span>
-    </>
-  );
+  const handleClick = useCallback(() => {
+    const newType = unitType === "imperial" ? "metric" : "imperial";
+    updateTimeType(newType);
+  }, [unitType]);
+
+  return <LinkButton handleClick={() => handleClick()} text={buttonText} />;
 }
 
-export default SelectUnits;
+export default SelectTime;
