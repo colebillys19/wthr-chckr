@@ -21,18 +21,33 @@ export const getFormattedLocationName = (
     country,
   } = getPreferredLocationNameData(results);
   if (sublocality) {
-    return `${sublocality}, ${administrative_area_level_1}`;
+    if (administrative_area_level_1) {
+      return `${sublocality}, ${administrative_area_level_1}`;
+    }
+    return sublocality;
   }
   if (locality) {
-    return `${locality}, ${administrative_area_level_1}`;
+    if (administrative_area_level_1) {
+      return `${locality}, ${administrative_area_level_1}`;
+    }
+    return locality;
   }
   if (administrative_area_level_2) {
-    return `${administrative_area_level_2}, ${administrative_area_level_1}`;
+    if (administrative_area_level_1) {
+      return `${administrative_area_level_2}, ${administrative_area_level_1}`;
+    }
+    return administrative_area_level_2;
   }
   if (administrative_area_level_1) {
-    return `${administrative_area_level_1}, ${country}`;
+    if (country) {
+      return `${administrative_area_level_1}, ${country}`;
+    }
+    return administrative_area_level_1;
   }
-  return country;
+  if (country) {
+    return country;
+  }
+  return 'Location Name';
 };
 
 /*

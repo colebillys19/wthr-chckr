@@ -46,7 +46,7 @@ function LocationBar({ location }: LocationBarPropsType) {
           </NavLink>
         )}
       </div>
-      <LinkButton handleClick={() => handleClearLocation()} text="clear location" />
+      <LinkButton handleClick={() => handleClearLocation()} text="clear" />
     </div>
   );
 }

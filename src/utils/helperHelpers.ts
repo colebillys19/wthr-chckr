@@ -9,12 +9,20 @@ export const getPreferredLocationNameData = (
   const data: Record<string, string> = {};
 
   geocoderLocationTypes.forEach((locationType) => {
-    const res = results.find((result) => result.types.includes(locationType));
-    const obj = res?.address_components.find((result) =>
-      result.types.includes(locationType)
-    );
-    if (obj?.short_name) {
-      data[locationType] = obj?.short_name;
+    // const res = results.find((result) => result.types.includes(locationType));
+    if (!!results.length) {
+      const obj = results[0].address_components.find((result) =>
+        result.types.includes(locationType)
+      );
+      if (locationType === "country") {
+        if (obj?.long_name) {
+          data[locationType] = obj?.long_name;
+        }
+      } else {
+        if (obj?.short_name) {
+          data[locationType] = obj?.short_name;
+        }
+      }
     }
   });
   return data;
@@ -23,7 +31,10 @@ export const getPreferredLocationNameData = (
 /*
  *
  */
-export const getOffsetTimeMs = (dtSec: number, apiTimezoneOffsetSec: number) => {
+export const getOffsetTimeMs = (
+  dtSec: number,
+  apiTimezoneOffsetSec: number
+) => {
   const systemTimezoneOffsetSec = new Date().getTimezoneOffset() * 60;
   const utcMs = (dtSec + systemTimezoneOffsetSec) * 1000;
   const apiOffsetMs = apiTimezoneOffsetSec * 1000;
