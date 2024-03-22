@@ -1,4 +1,5 @@
-import { useContext, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
+import { throttle } from "lodash";
 import { useLocation } from "react-router-dom";
 
 import { UserLocationContext } from "../../contexts/userLocationContext";
@@ -10,8 +11,21 @@ import MenuMobile from "./Components/MenuMobile";
 
 function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   const { userLocation } = useContext(UserLocationContext);
   const { pathname } = useLocation();
+
+  useEffect(() => {
+    const handleResize = throttle(() => {
+      if (isMobileMenuOpen && window.innerWidth >= 768) {
+        setIsMobileMenuOpen(false);
+      }
+    }, 200);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [isMobileMenuOpen]);
 
   const isHomePage = useMemo(() => pathname === "/", [pathname]);
 
@@ -23,11 +37,12 @@ function Header() {
 
   return (
     <div>
-      <MenuMobile
-        isMobileMenuOpen={isMobileMenuOpen}
-        setIsMobileMenuOpen={setIsMobileMenuOpen}
-        pathname={pathname}
-      />
+      {isMobileMenuOpen && (
+        <MenuMobile
+          setIsMobileMenuOpen={setIsMobileMenuOpen}
+          pathname={pathname}
+        />
+      )}
       <header className="flex justify-between items-center px-4 py-2">
         <Nav />
         <div className="flex">

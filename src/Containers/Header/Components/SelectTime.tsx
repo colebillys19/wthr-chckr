@@ -4,7 +4,11 @@ import { TimeTypeContext } from "../../../contexts/timeTypeContext";
 import useUpdateTimeType from "../../../utils/customHooks/useUpdateTimeType";
 import { LinkButton } from "../../../BaseComponents";
 
-function SelectTime() {
+type SelectTimePropsType = {
+  handleCloseMenu: () => void;
+};
+
+function SelectTime({ handleCloseMenu }: SelectTimePropsType) {
   const { timeType } = useContext(TimeTypeContext);
 
   const updateTimeType = useUpdateTimeType();
@@ -17,6 +21,7 @@ function SelectTime() {
   const handleClick = useCallback(() => {
     const newType = timeType === "standard" ? "military" : "standard";
     updateTimeType(newType);
+    handleCloseMenu();
   }, [timeType]);
 
   return <LinkButton handleClick={() => handleClick()} text={buttonText} />;

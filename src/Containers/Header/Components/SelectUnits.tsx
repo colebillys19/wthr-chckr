@@ -4,7 +4,11 @@ import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import useUpdateUnitType from "../../../utils/customHooks/useUpdateUnitType";
 import { LinkButton } from "../../../BaseComponents";
 
-function SelectTime() {
+type SelectUnitsPropsType = {
+  handleCloseMenu: () => void;
+};
+
+function SelectTime({ handleCloseMenu }: SelectUnitsPropsType) {
   const { unitType } = useContext(UnitTypeContext);
 
   const updateTimeType = useUpdateUnitType();
@@ -17,6 +21,7 @@ function SelectTime() {
   const handleClick = useCallback(() => {
     const newType = unitType === "imperial" ? "metric" : "imperial";
     updateTimeType(newType);
+    handleCloseMenu();
   }, [unitType]);
 
   return <LinkButton handleClick={() => handleClick()} text={buttonText} />;
