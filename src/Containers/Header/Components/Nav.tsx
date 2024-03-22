@@ -1,25 +1,20 @@
-import { MouseEvent } from "react";
 import { NavLink } from "react-router-dom";
 
 import LogoPlaceholder from "../../../svg/logoPlaceholder/LogoPlaceholder";
 
 function Nav() {
-  const handleNavLinkClick = (event: MouseEvent) => {
-    if (event.currentTarget.getAttribute("aria-current") === "page") {
-      event.preventDefault();
-    }
-  };
+  //
 
   return (
     <nav className="flex items-center">
-      <NavLink to="/" onClick={handleNavLinkClick} className="mr-6">
+      <NavLink to="/" className="mr-6">
         <LogoPlaceholder />
       </NavLink>
       <div className="hidden md:flex">
-        <NavLink to="/cities" onClick={handleNavLinkClick} className="mr-6">
+        <NavLink to="/cities" className="mr-6">
           Cities
         </NavLink>
-        <NavLink to="/news" onClick={handleNavLinkClick} className="mr-6">
+        <NavLink to="/news" className="mr-6">
           News
         </NavLink>
       </div>

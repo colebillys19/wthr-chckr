@@ -10,7 +10,6 @@ function HomeUser() {
 
   return (
     <HomeSectionContainer>
-      <div>my location</div>
       <UserLocationContainer />
       {!!recentLocations.length && <RecentLocations />}
     </HomeSectionContainer>
