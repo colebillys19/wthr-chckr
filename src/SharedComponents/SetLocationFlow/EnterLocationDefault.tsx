@@ -2,7 +2,7 @@ import { FormEvent, useContext, useEffect, useRef, useState } from "react";
 
 import { ActiveModalContext } from "../../contexts/activeModalContext";
 import { GoogleMapsContext } from "../../contexts/googleMapsContext";
-import { TextField } from "../../BaseComponents";
+import { TextField, ButtonPrimary, LinkButton } from "../../BaseComponents";
 import useUpdateUserLocation from "../../utils/customHooks/useUpdateUserLocation";
 import useUpdateUserLocationName from "../../utils/customHooks/useUpdateUserLocationName";
 import { getFormattedLocationName } from "../../utils/helpers";
@@ -117,30 +117,37 @@ function EnterLocationDefault({
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="address">Enter address, city, or zip: </label>
-          <TextField
-            ref={inputRef}
-            handleChange={handleChange}
-            id="address"
-            type="text"
-          />
-        </div>
-        {inputError && <div>{inputError}</div>}
-        <div>
-          <input
-            type="submit"
-            value="Set Location"
-            disabled={isSubmitDisabled}
+        <label htmlFor="address" className="hidden">
+          Enter address, city, or zip
+        </label>
+        <TextField
+          ref={inputRef}
+          handleChange={handleChange}
+          id="address"
+          type="text"
+          placeholder="Enter address, city, or zip"
+        />
+        {inputError && <div className="mt-2">{inputError}</div>}
+        <div className="mt-2 mb-4">
+          <ButtonPrimary
+            text="Set location"
+            isDisabled={isSubmitDisabled || isVerifyingAddress}
+            isSubmit
           />
         </div>
       </form>
-      <div>
-        <button onClick={handleEnterCoords}>enter exact coordinates</button>
+      <div className="mb-2">
+        <LinkButton
+          handleClick={handleEnterCoords}
+          text="Enter coordinates"
+          isDisabled={isVerifyingAddress}
+        />
       </div>
-      <div>
-        <button onClick={handleBack}>back</button>
-      </div>
+      <LinkButton
+        handleClick={handleBack}
+        text="Back"
+        isDisabled={isVerifyingAddress}
+      />
     </>
   );
 }

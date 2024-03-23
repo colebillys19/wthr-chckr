@@ -33,7 +33,7 @@ function LocationBar({ location }: LocationBarPropsType) {
 
   return (
     <div className="relative flex justify-end px-6 py-4">
-      <div className="mr-8">
+      <div className="mr-4">
         <span>my location: </span>
         &nbsp;
         {isViewingUserLocation && <span>{userLocationName}</span>}

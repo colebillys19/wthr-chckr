@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useContext, useState } from "react";
 
 import { ActiveModalContext } from "../../contexts/activeModalContext";
 import { GoogleMapsContext } from "../../contexts/googleMapsContext";
-import { TextField } from "../../BaseComponents";
+import { TextField, ButtonPrimary, LinkButton } from "../../BaseComponents";
 import useUpdateUserLocation from "../../utils/customHooks/useUpdateUserLocation";
 import useUpdateUserLocationName from "../../utils/customHooks/useUpdateUserLocationName";
 import { getFormattedLocationName } from "../../utils/helpers";
@@ -98,26 +98,38 @@ function EnterLocationCoords({
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="lat">Latitude: </label>
-          <TextField handleChange={handleLatChange} id="lat" type="number" />
+        <div className="mb-2">
+          <label htmlFor="lat" className="hidden">
+            Latitude
+          </label>
+          <TextField
+            handleChange={handleLatChange}
+            id="lat"
+            type="number"
+            placeholder="Latitude"
+          />
         </div>
-        <div>
-          <label htmlFor="lon">Longitude: </label>
-          <TextField handleChange={handleLonChange} id="lon" type="number" />
+        <div className="mb-2">
+          <label htmlFor="lon" className="hidden">
+            Longitude
+          </label>
+          <TextField
+            handleChange={handleLonChange}
+            id="lon"
+            type="number"
+            placeholder="Longitude"
+          />
         </div>
-        {inputError && <div>{inputError}</div>}
-        <div>
-          <input
-            type="submit"
-            value="Set Location"
-            disabled={!latValue || !lonValue}
+        {inputError && <div className="mb-2">{inputError}</div>}
+        <div className="mb-4">
+          <ButtonPrimary
+            text="Set location"
+            isDisabled={!latValue || !lonValue || isVerifyingAddress}
+            isSubmit
           />
         </div>
       </form>
-      <div>
-        <button onClick={handleBack}>back</button>
-      </div>
+      <LinkButton handleClick={handleBack} text="Back" isDisabled={isVerifyingAddress} />
     </>
   );
 }

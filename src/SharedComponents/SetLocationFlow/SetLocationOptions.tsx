@@ -4,7 +4,7 @@ import { ActiveModalContext } from "../../contexts/activeModalContext";
 import useUpdateUserLocation from "../../utils/customHooks/useUpdateUserLocation";
 import useFindAndUpdateUserLocationName from "../../utils/customHooks/useFindAndUpdateUserLocationName";
 import useUpdateUserPrefersNoLocation from "../../utils/customHooks/useUpdateUserPrefersNoLocation";
-import { ButtonPrimary, LinkButton } from "../../BaseComponents";
+import { ButtonPrimary, ButtonSecondary, LinkButton } from "../../BaseComponents";
 
 type SetLocationOptionsPropsType = {
   isGeolocating: boolean;
@@ -74,16 +74,26 @@ function SetLocationOptions({
   };
 
   return (
-    <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-      <ButtonPrimary handleClick={handleEnterLocation} text="Enter location" />
-      <ButtonPrimary
-        handleClick={handleGetLocation}
-        text="Find my location"
-        isDisabled={!!geolocateError}
-      />
-      {!!geolocateError && <div>{geolocateError}</div>}
-      <LinkButton handleClick={handleDontSet} text="Don't set location" />
-    </div>
+    <>
+      <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+        <ButtonPrimary
+          handleClick={handleEnterLocation}
+          text="Enter location"
+          isDisabled={isGeolocating}
+        />
+        <ButtonSecondary
+          handleClick={handleGetLocation}
+          text="Find my location"
+          isDisabled={isGeolocating || !!geolocateError}
+        />
+        <LinkButton
+          handleClick={handleDontSet}
+          text="Don't set location"
+          isDisabled={isGeolocating}
+        />
+      </div>
+      {!!geolocateError && <div className="mt-2">{geolocateError}</div>}
+    </>
   );
 }
 

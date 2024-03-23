@@ -9,7 +9,7 @@ function HomeUser() {
   const { recentLocations } = useContext(RecentLocationsContext);
 
   return (
-    <div className="relative px-6 py-4">
+    <div className="relative px-6 py-8">
       <UserLocationContainer />
       {!!recentLocations.length && <RecentLocations />}
       <ShadowDiv />

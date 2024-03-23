@@ -1,15 +1,17 @@
 import { MouseEvent, useMemo } from "react";
 
 type ButtonPrimaryPropsType = {
-  handleClick: (event: MouseEvent<HTMLButtonElement>) => void;
+  handleClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   text: string;
   isDisabled?: boolean;
+  isSubmit?: boolean;
 };
 
 function ButtonPrimary({
   handleClick,
   text,
   isDisabled,
+  isSubmit,
 }: ButtonPrimaryPropsType) {
   const tailwindClasses = useMemo(() => {
     const classesToApply =
@@ -22,9 +24,10 @@ function ButtonPrimary({
 
   return (
     <button
-      onClick={handleClick}
+      onClick={handleClick ? handleClick : () => null}
       className={tailwindClasses}
       disabled={isDisabled}
+      type={isSubmit ? 'submit' : 'button'}
     >
       {text}
     </button>

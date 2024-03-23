@@ -6,7 +6,7 @@ import UnitTypeContextProvider from "./contexts/unitTypeContext";
 import UserLocationContextProvider from "./contexts/userLocationContext";
 import UserLocationNameContextProvider from "./contexts/userLocationNameContext";
 import UserPrefersNoLocationContextProvider from "./contexts/userPrefersNoLocationContext";
-import App from "./App";
+import AppMapsContainer from "./AppMapsContainer";
 
 function AppContextContainer() {
   //
@@ -20,7 +20,7 @@ function AppContextContainer() {
               <UserLocationContextProvider>
                 <UserLocationNameContextProvider>
                 <UserPrefersNoLocationContextProvider>
-                  <App />
+                  <AppMapsContainer />
                 </UserPrefersNoLocationContextProvider>
                 </UserLocationNameContextProvider>
               </UserLocationContextProvider>

@@ -57,7 +57,7 @@ function MenuMobile({ setIsMobileMenuOpen, pathname }: MenuMobilePropsType) {
   return (
     <div
       onClick={handleBackdropClick}
-      className="absolute top-0 left-0 w-screen h-screen z-10"
+      className="absolute top-0 left-0 w-screen h-screen z-10 bg-black bg-opacity-30"
     >
       <div className="absolute top-0 left-0 w-screen h-48 px-6 py-4 bg-white border-b z-20">
         <div className="flex justify-end mb-6">

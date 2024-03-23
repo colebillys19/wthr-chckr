@@ -1,4 +1,5 @@
 import useUpdateUserPrefersNoLocation from "../../../utils/customHooks/useUpdateUserPrefersNoLocation";
+import { LinkButton } from "../../../BaseComponents";
 
 function UserLocationOff() {
   const updateUserPrefersNoLocation = useUpdateUserPrefersNoLocation();
@@ -9,8 +10,8 @@ function UserLocationOff() {
 
   return (
     <>
-      <span>You've chosen not to set your location</span>&nbsp;
-      <button onClick={handleSetLocation}>set location</button>
+      <span className="mr-4">You've chosen not to set your location</span>
+      <LinkButton handleClick={handleSetLocation} text="Set location" />
     </>
   );
 }

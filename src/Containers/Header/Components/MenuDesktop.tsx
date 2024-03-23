@@ -40,7 +40,7 @@ function MenuDesktop({ setIsDesktopMenuOpen }: MenuDesktopPropsType) {
   return (
     <div
       onClick={handleBackdropClick}
-      className="absolute top-0 right-0 w-screen h-screen z-10"
+      className="absolute top-0 right-0 w-screen h-screen z-10 bg-black bg-opacity-30"
     >
       <div className="absolute top-0 right-0 w-72 h-48 px-6 py-4 bg-white border-b border-l z-20">
         <div className="flex flex-col items-end gap-6">

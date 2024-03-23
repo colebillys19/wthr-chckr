@@ -16,7 +16,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldPropsType>(
       required
       placeholder={placeholder}
       type={type}
-      className="w-full px-4 py-2 border border-grey-a rounded-full outline-0"
+      className="w-full max-w-screen-sm px-4 py-2 border border-grey-a rounded-full outline-0"
     />
   )
 );
