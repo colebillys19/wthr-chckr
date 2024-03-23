@@ -1,23 +1,29 @@
-import { useContext } from 'react';
+import { useContext } from "react";
 
 import { ActiveModalContext } from "../../contexts/activeModalContext";
-import { ModalContainer } from "../../SharedComponentsAux";
+import CloseIcon from "../../svg/iconSvgs/Components/Close";
 import SetLocationFlow from "../SetLocationFlow";
 
 function ModalSetLocation() {
   const { setActiveModal } = useContext(ActiveModalContext);
-  
+
   const handleClose = () => {
-    setActiveModal('');
+    setActiveModal("");
   };
 
   return (
-    <ModalContainer>
-      <button onClick={handleClose}>x</button>
-      <div>
-        <SetLocationFlow />
+    <div className="bg-white border-b z-20 w-full max-w-screen-sm px-6 pt-6 pb-12">
+      <div className="flex justify-end mb-6">
+        <div className="flex h-6 items-center">
+          <button onClick={handleClose}>
+            <CloseIcon />
+          </button>
+        </div>
       </div>
-    </ModalContainer>
+      <div>
+        <SetLocationFlow isModal />
+      </div>
+    </div>
   );
 }
 

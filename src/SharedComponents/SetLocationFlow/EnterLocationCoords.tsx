@@ -1,10 +1,12 @@
 import { ChangeEvent, FormEvent, useContext, useState } from "react";
 
 import { ActiveModalContext } from "../../contexts/activeModalContext";
+import { UserPrefersNoLocationContext } from "../../contexts/userPrefersNoLocationContext";
 import { GoogleMapsContext } from "../../contexts/googleMapsContext";
 import { TextField, ButtonPrimary, LinkButton } from "../../BaseComponents";
 import useUpdateUserLocation from "../../utils/customHooks/useUpdateUserLocation";
 import useUpdateUserLocationName from "../../utils/customHooks/useUpdateUserLocationName";
+import useUpdateUserPrefersNoLocation from "../../utils/customHooks/useUpdateUserPrefersNoLocation";
 import { getFormattedLocationName } from "../../utils/helpers";
 
 type EnterLocationCoordsPropsType = {
@@ -24,9 +26,11 @@ function EnterLocationCoords({
 
   const { activeModal, setActiveModal } = useContext(ActiveModalContext);
   const { googleMaps } = useContext(GoogleMapsContext);
+  const { userPrefersNoLocation } = useContext(UserPrefersNoLocationContext);
 
   const updateUserLocation = useUpdateUserLocation();
   const updateUserLocationName = useUpdateUserLocationName();
+  const updateUserPrefersNoLocation = useUpdateUserPrefersNoLocation();
 
   /*
    *
@@ -70,6 +74,9 @@ function EnterLocationCoords({
               const locationStr = `${location.lat()},${location.lng()}`;
               updateUserLocation(locationStr);
               updateUserLocationName(getFormattedLocationName(results));
+              if (userPrefersNoLocation) {
+                updateUserPrefersNoLocation(false);
+              }
               if (activeModal === "setLocation") {
                 setActiveModal("");
               }
@@ -129,7 +136,11 @@ function EnterLocationCoords({
           />
         </div>
       </form>
-      <LinkButton handleClick={handleBack} text="Back" isDisabled={isVerifyingAddress} />
+      <LinkButton
+        handleClick={handleBack}
+        text="Back"
+        isDisabled={isVerifyingAddress}
+      />
     </>
   );
 }

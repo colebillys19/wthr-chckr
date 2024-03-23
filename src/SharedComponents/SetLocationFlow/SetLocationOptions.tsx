@@ -1,25 +1,33 @@
 import { useContext, useState } from "react";
 
 import { ActiveModalContext } from "../../contexts/activeModalContext";
+import { UserPrefersNoLocationContext } from "../../contexts/userPrefersNoLocationContext";
 import useUpdateUserLocation from "../../utils/customHooks/useUpdateUserLocation";
 import useFindAndUpdateUserLocationName from "../../utils/customHooks/useFindAndUpdateUserLocationName";
 import useUpdateUserPrefersNoLocation from "../../utils/customHooks/useUpdateUserPrefersNoLocation";
-import { ButtonPrimary, ButtonSecondary, LinkButton } from "../../BaseComponents";
+import {
+  ButtonPrimary,
+  ButtonSecondary,
+  LinkButton,
+} from "../../BaseComponents";
 
 type SetLocationOptionsPropsType = {
   isGeolocating: boolean;
   setIsEnteringLocation: (value: boolean) => void;
   setIsGeolocating: (value: boolean) => void;
+  isModal: boolean;
 };
 
 function SetLocationOptions({
   isGeolocating,
   setIsEnteringLocation,
   setIsGeolocating,
+  isModal,
 }: SetLocationOptionsPropsType) {
   const [geolocateError, setGeolocateError] = useState("");
 
   const { activeModal, setActiveModal } = useContext(ActiveModalContext);
+  const { userPrefersNoLocation } = useContext(UserPrefersNoLocationContext);
 
   const updateUserLocation = useUpdateUserLocation();
   const findAndUpdateUserLocationName = useFindAndUpdateUserLocationName();
@@ -40,6 +48,9 @@ function SetLocationOptions({
         );
         if (userLocationNameSet) {
           updateUserLocation(locationStr);
+          if (userPrefersNoLocation) {
+            updateUserPrefersNoLocation(false);
+          }
           if (activeModal === "setLocation") {
             setActiveModal("");
           }
@@ -73,9 +84,15 @@ function SetLocationOptions({
     }
   };
 
+  const containerClasses = isModal
+    ? "flex flex-col items-center gap-4 w-full sm:flex-row sm:justify-center"
+    : "flex flex-col items-start gap-4 w-full sm:flex-row sm:items-center";
+
   return (
     <>
-      <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+      <div
+        className={containerClasses}
+      >
         <ButtonPrimary
           handleClick={handleEnterLocation}
           text="Enter location"

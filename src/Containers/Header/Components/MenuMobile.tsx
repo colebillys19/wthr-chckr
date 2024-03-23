@@ -1,16 +1,29 @@
-import { MouseEvent, useEffect } from "react";
+import { MouseEvent, useContext, useEffect, useMemo } from "react";
 import { NavLink } from "react-router-dom";
 
+import { ActiveModalContext } from "../../../contexts/activeModalContext";
+import { UserLocationContext } from "../../../contexts/userLocationContext";
+import { UserPrefersNoLocationContext } from "../../../contexts/userPrefersNoLocationContext";
 import CloseIcon from "../../../svg/iconSvgs/Components/Close";
+import { LinkButton } from "../../../BaseComponents";
 import SelectTime from "./SelectTime";
 import SelectUnits from "./SelectUnits";
 
 type MenuMobilePropsType = {
   setIsMobileMenuOpen: (value: boolean) => void;
   pathname: string;
+  isHomePage: boolean;
 };
 
-function MenuMobile({ setIsMobileMenuOpen, pathname }: MenuMobilePropsType) {
+function MenuMobile({
+  setIsMobileMenuOpen,
+  pathname,
+  isHomePage,
+}: MenuMobilePropsType) {
+  const { activeModal, setActiveModal } = useContext(ActiveModalContext);
+  const { userLocation } = useContext(UserLocationContext);
+  const { userPrefersNoLocation } = useContext(UserPrefersNoLocationContext);
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -22,6 +35,17 @@ function MenuMobile({ setIsMobileMenuOpen, pathname }: MenuMobilePropsType) {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [setIsMobileMenuOpen]);
+
+  const showSetLocationButton = useMemo(() => {
+    if (userPrefersNoLocation) {
+      return true;
+    } else {
+      if (!isHomePage && !userLocation) {
+        return true;
+      }
+    }
+    return false;
+  }, [userLocation, userPrefersNoLocation, isHomePage]);
 
   /*
    *
@@ -54,12 +78,22 @@ function MenuMobile({ setIsMobileMenuOpen, pathname }: MenuMobilePropsType) {
   const handlNavLinkClassName = ({ isActive }: { isActive: boolean }) =>
     isActive ? "pointer-events-none" : "underline";
 
+  /*
+   *
+   */
+  const handleSetLocation = () => {
+    setIsMobileMenuOpen(false);
+    if (!activeModal) {
+      setActiveModal("setLocation");
+    }
+  };
+
   return (
     <div
       onClick={handleBackdropClick}
       className="absolute top-0 left-0 w-screen h-screen z-10 bg-black bg-opacity-30"
     >
-      <div className="absolute top-0 left-0 w-screen h-48 px-6 py-4 bg-white border-b z-20">
+      <div className="absolute top-0 left-0 w-screen px-6 pt-4 pb-12 bg-white border-b z-20">
         <div className="flex justify-end mb-6">
           <div className="flex h-6 items-center">
             <button onClick={handleCloseClick}>
@@ -87,6 +121,9 @@ function MenuMobile({ setIsMobileMenuOpen, pathname }: MenuMobilePropsType) {
           <div className="flex flex-col items-end gap-6">
             <SelectTime handleCloseMenu={() => setIsMobileMenuOpen(false)} />
             <SelectUnits handleCloseMenu={() => setIsMobileMenuOpen(false)} />
+            {showSetLocationButton && (
+              <LinkButton handleClick={handleSetLocation} text="Set location" />
+            )}
           </div>
         </div>
       </div>

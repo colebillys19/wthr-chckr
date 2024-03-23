@@ -3,7 +3,11 @@ import { useMemo, useState } from "react";
 import { Spinner } from "../../SharedComponentsAux";
 import EnterLocationContainer from "./EnterLocationContainer";
 
-function SetLocationFlow() {
+type SetLocationFlowPropsType = {
+  isModal?: boolean;
+};
+
+function SetLocationFlow({ isModal = false }: SetLocationFlowPropsType) {
   const [isEnteringLocation, setIsEnteringLocation] = useState(false);
   const [isGeolocating, setIsGeolocating] = useState(false);
   const [isVerifyingAddress, setIsVerifyingAddress] = useState(false);
@@ -22,6 +26,7 @@ function SetLocationFlow() {
         setIsEnteringLocation={setIsEnteringLocation}
         setIsGeolocating={setIsGeolocating}
         setIsVerifyingAddress={setIsVerifyingAddress}
+        isModal={isModal}
       />
       {showSpinner && (
         <div className="absolute flex w-full h-full justify-center items-center top-0 left-0">

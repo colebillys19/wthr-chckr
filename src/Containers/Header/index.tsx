@@ -58,10 +58,14 @@ function Header() {
         <MenuMobile
           setIsMobileMenuOpen={setIsMobileMenuOpen}
           pathname={pathname}
+          isHomePage={isHomePage}
         />
       )}
       {isDesktopMenuOpen && (
-        <MenuDesktop setIsDesktopMenuOpen={setIsDesktopMenuOpen} />
+        <MenuDesktop
+          setIsDesktopMenuOpen={setIsDesktopMenuOpen}
+          isHomePage={isHomePage}
+        />
       )}
       <header className="relative flex justify-between items-center px-6 py-4">
         <Nav />

@@ -8,6 +8,7 @@ type EnterLocationContainerPropsType = {
   setIsEnteringLocation: (value: boolean) => void;
   setIsGeolocating: (value: boolean) => void;
   setIsVerifyingAddress: (value: boolean) => void;
+  isModal: boolean;
 };
 
 function EnterLocationContainer({
@@ -17,6 +18,7 @@ function EnterLocationContainer({
   setIsEnteringLocation,
   setIsGeolocating,
   setIsVerifyingAddress,
+  isModal,
 }: EnterLocationContainerPropsType) {
   if (isEnteringLocation) {
     return (
@@ -33,6 +35,7 @@ function EnterLocationContainer({
       isGeolocating={isGeolocating}
       setIsEnteringLocation={setIsEnteringLocation}
       setIsGeolocating={setIsGeolocating}
+      isModal={isModal}
     />
   );
 }
