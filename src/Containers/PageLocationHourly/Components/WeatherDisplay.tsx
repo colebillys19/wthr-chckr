@@ -1,84 +1,58 @@
-import { CSSProperties } from "react";
+import { LabelValueText, WeatherSvg } from "../../../SharedComponentsAux";
 
-import { useGlobalState } from "../../../context";
-import { WeatherSvg } from "../../../SharedComponentsAux";
-import { HourlyType } from "../../../utils/types/openWeatherMap";
-import { getTimeData } from "../../../utils/helpers";
-
-const tempStyles: CSSProperties = {
-  border: "1px solid black",
-  display: "inline-block",
-  minWidth: "200px",
-  minHeight: "340px",
-  padding: "16px",
+type WeatherDisplayTallPropsType = {
+  svdId: number;
+  isDayTime: boolean;
+  time: string;
+  temp: string;
+  weatherName: string;
+  feelsLike: string;
+  windSpeed: string;
+  precChance: string;
+  rainVolume: string;
+  snowVolume: string;
+  humidity: string;
 };
 
-type WeatherDisplayPropsType = {
-  data: HourlyType;
-  timezoneOffset: number;
-  sunrise: number;
-  sunset: number;
-};
-
-function WeatherDisplay({
-  data,
-  timezoneOffset,
-  sunrise,
-  sunset,
-}: WeatherDisplayPropsType) {
-  const { unitType, timeType } = useGlobalState();
-
-  const { dt, temp, feels_like, weather, humidity, wind_speed, rain, snow } =
-    data;
-
-  const { time, isDayTime } = getTimeData({
-    dtSec: dt,
-    apiTimezoneOffsetSec: timezoneOffset,
-    sunriseSec: sunrise,
-    sunsetSec: sunset,
-    timeType,
-  });
-
-  const tempUnit = unitType === "imperial" ? "°F" : "°C";
-  const windUnit = unitType === "imperial" ? "mph" : "m/s";
-
-  const dataArr = [
-    { label: "Temperature", value: `${Math.round(temp)}${tempUnit}` },
-    { label: "Feels like", value: `${Math.round(feels_like)}${tempUnit}` },
-    { label: "Wind speed", value: `${Math.round(wind_speed)}${windUnit}` },
-    { label: "Humidity", value: `${humidity}%` },
-  ];
-
-  if (rain && rain["1h"]) {
-    dataArr.push({ label: "Rain (inches)", value: `${rain["1h"]}` });
-  }
-
-  if (snow && snow["1h"]) {
-    dataArr.push({ label: "Snow (inches)", value: `${snow["1h"]}` });
-  }
+function WeatherDisplayTall({
+  svdId,
+  isDayTime,
+  time,
+  temp,
+  weatherName,
+  feelsLike,
+  windSpeed,
+  precChance,
+  rainVolume,
+  snowVolume,
+  humidity,
+}: WeatherDisplayTallPropsType) {
+  //
 
   return (
-    <div style={tempStyles}>
-      <div>
-        <b>{time}</b>
+    <div className="inline-flex items-center">
+      <WeatherSvg id={svdId} isDayTime={isDayTime} size={100} />
+      <div className="flex flex-col md:flex-row md:items-center">
+        <div className="flex flex-col">
+          <span className="text-xl font-bold">{time}</span>
+          <span>{temp}</span>
+          <span>{weatherName}</span>
+        </div>
+        <div className="flex flex-col">
+          <LabelValueText label="Feels like:" value={feelsLike} />
+          <LabelValueText label="Wind speed:" value={windSpeed} />
+          <LabelValueText label="Chance of precipitation:" value={precChance} />
+          {!!rainVolume && (
+            <LabelValueText label="Rain volume:" value={rainVolume} />
+          )}
+          {!!snowVolume && (
+            <LabelValueText label="Snow volume:" value={snowVolume} />
+          )}
+          <LabelValueText label="Humidity:" value={humidity} />
+        </div>
       </div>
-      <div className="spacer" />
-      <div>
-        <WeatherSvg id={weather[0].id} isDayTime={isDayTime} size={120} />
-      </div>
-      <div className="spacer" />
-      <div>{weather[0].main}</div>
-      <div className="spacer" />
-      <ul>
-        {dataArr.map(({ label, value }) => (
-          <li key={label}>
-            <span>{label}:&nbsp;</span>
-            <b>{value}</b>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }
 
-export default WeatherDisplay;
+export default WeatherDisplayTall;

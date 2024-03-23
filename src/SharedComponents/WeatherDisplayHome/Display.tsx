@@ -1,22 +1,11 @@
-import { CSSProperties } from "react";
+import { useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useGlobalState } from "../../context";
+import { UnitTypeContext } from "../../contexts/unitTypeContext";
+import { TimeTypeContext } from "../../contexts/timeTypeContext";
 import { WeatherSvg } from "../../SharedComponentsAux";
 import { OpenWeatherMapDataType } from "../../utils/types/openWeatherMap";
 import { getTimeData } from "../../utils/helpers";
-
-const tempStylesA: CSSProperties = {
-  border: "1px solid black",
-  display: "inline-block",
-  minWidth: "240px",
-  minHeight: "360px",
-  padding: "16px",
-};
-
-const tempStylesB: CSSProperties = {
-  color: "grey",
-};
 
 type DisplayPropsType = {
   data: OpenWeatherMapDataType;
@@ -26,7 +15,8 @@ type DisplayPropsType = {
 function Display({ data, name }: DisplayPropsType) {
   const navigate = useNavigate();
 
-  const { unitType, timeType } = useGlobalState();
+  const { unitType } = useContext(UnitTypeContext);
+  const { timeType } = useContext(TimeTypeContext);
 
   const { current, timezone_offset, lat, lon } = data;
 
@@ -49,8 +39,8 @@ function Display({ data, name }: DisplayPropsType) {
     timeType,
   });
 
-  const tempUnit = unitType === "imperial" ? "°F" : "°C";
-  const windUnit = unitType === "imperial" ? "mph" : "m/s";
+  const tempUnit = useMemo(() => unitType === "imperial" ? "°F" : "°C", [unitType]);
+  const windUnit = useMemo(() => unitType === "imperial" ? "mph" : "m/s", [unitType]);
 
   const dataArr = [
     { label: "Temperature", value: `${Math.round(temp)}${tempUnit}` },
@@ -68,26 +58,21 @@ function Display({ data, name }: DisplayPropsType) {
   };
 
   return (
-    <div style={tempStylesA}>
-      <div>
-        <b>{name}</b>
-      </div>
+    <div>
+      <div>{name}</div>
       <div>{time}</div>
-      <div className="spacer" />
       <div>
         <WeatherSvg id={weather[0].id} isDayTime={isDayTime} size={120} />
       </div>
       <div>{weather[0].main}</div>
-      <div className="spacer" />
       <ul>
         {dataArr.map(({ label, value }) => (
           <li key={label}>
-            <span style={tempStylesB}>{label}:&nbsp;</span>
+            <span>{label}:&nbsp;</span>
             <span>{value}</span>
           </li>
         ))}
       </ul>
-      <div className="spacer" />
       <div>
         <button onClick={handleSeeMore}>see more</button>
       </div>

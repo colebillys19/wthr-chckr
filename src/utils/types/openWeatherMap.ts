@@ -22,6 +22,8 @@ export type CurrentType = {
   clouds: number;
   visibility: number;
   wind_speed: number;
+  rain?: NumObjType;
+  snow?: NumObjType;
   wind_deg: number;
   weather: WeatherType[];
 };
@@ -61,8 +63,8 @@ export type DailyType = {
   weather: WeatherType[];
   clouds: number;
   pop: number;
-  rain: number;
-  snow: number;
+  rain?: number;
+  snow?: number;
   uvi: number;
 };
 
@@ -81,8 +83,8 @@ export type HourlyType = {
   wind_gust: number;
   weather: WeatherType[];
   pop: number;
-  rain: NumObjType;
-  snow: NumObjType;
+  rain?: NumObjType;
+  snow?: NumObjType;
 };
 
 export type MinutelyType = {

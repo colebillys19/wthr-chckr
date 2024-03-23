@@ -1,16 +1,11 @@
-import { CSSProperties } from "react";
+import { useContext } from "react";
 
-import { useGlobalState } from "../../../context";
-import { useUpdateRecentLocations } from "../../../utils/customHooks/localStorage";
+import { RecentLocationsContext } from "../../../contexts/recentLocationsContext";
+import useUpdateRecentLocations from "../../../utils/customHooks/useUpdateRecentLocations";
 import RecentLocationDisplay from "./RecentLocationDisplay";
 
-const tempStyles: CSSProperties = {
-  display: "flex",
-  gap: "16px",
-};
-
 function RecentLocations() {
-  const { recentLocations } = useGlobalState();
+  const { recentLocations } = useContext(RecentLocationsContext);
 
   const updateRecentLocations = useUpdateRecentLocations();
 
@@ -24,17 +19,14 @@ function RecentLocations() {
 
   return (
     <>
-      <div className="spacer" />
       <div>recently viewed</div>
-      <div className="spacer" />
-      <ul style={tempStyles}>
+      <ul>
         {recentLocations.map(({ location, name }) => (
           <li key={location}>
             <RecentLocationDisplay location={location} name={name} />
           </li>
         ))}
       </ul>
-      <div className="spacer" />
       <button onClick={handleClearRecent}>clear recent</button>
     </>
   );

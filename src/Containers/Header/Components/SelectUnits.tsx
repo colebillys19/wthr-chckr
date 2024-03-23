@@ -1,35 +1,30 @@
-import { useGlobalState } from "../../../context";
-import { useUpdateUnitType } from "../../../utils/customHooks/localStorage";
+import { useCallback, useContext, useMemo } from "react";
 
-function SelectUnits() {
-  const { unitType } = useGlobalState();
+import { UnitTypeContext } from "../../../contexts/unitTypeContext";
+import useUpdateUnitType from "../../../utils/customHooks/useUpdateUnitType";
+import { LinkButton } from "../../../BaseComponents";
 
-  const updateUnitType = useUpdateUnitType();
+type SelectUnitsPropsType = {
+  handleCloseMenu: () => void;
+};
 
-  const handleUnitClick = (type: string) => {
-    updateUnitType(type);
-  };
+function SelectTime({ handleCloseMenu }: SelectUnitsPropsType) {
+  const { unitType } = useContext(UnitTypeContext);
 
-  return (
-    <>
-      <span>
-        Units:&nbsp;
-        <button
-          onClick={() => handleUnitClick("imperial")}
-          disabled={unitType === "imperial"}
-        >
-          Imperial
-        </button>
-        &nbsp;|&nbsp;
-        <button
-          onClick={() => handleUnitClick("metric")}
-          disabled={unitType === "metric"}
-        >
-          Metric
-        </button>
-      </span>
-    </>
-  );
+  const updateTimeType = useUpdateUnitType();
+
+  const buttonText = useMemo(() => {
+    const otherFormat = unitType === "imperial" ? "metric" : "imperial";
+    return `Switch to ${otherFormat} units`;
+  }, [unitType]);
+
+  const handleClick = useCallback(() => {
+    const newType = unitType === "imperial" ? "metric" : "imperial";
+    updateTimeType(newType);
+    handleCloseMenu();
+  }, [unitType]);
+
+  return <LinkButton handleClick={() => handleClick()} text={buttonText} />;
 }
 
-export default SelectUnits;
+export default SelectTime;

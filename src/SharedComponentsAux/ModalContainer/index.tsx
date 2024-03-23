@@ -1,14 +1,4 @@
-import { CSSProperties, ReactNode } from "react";
-
-const tempStyles: CSSProperties = {
-  alignItems: 'center',
-  backgroundColor: 'white',
-  display: 'flex',
-  justifyContent: 'center',
-  minHeight: '320px',
-  minWidth: '680px',
-  position: 'relative',
-};
+import { ReactNode } from "react";
 
 type ModalContainerPropsType = {
   children: ReactNode;
@@ -17,7 +7,7 @@ type ModalContainerPropsType = {
 function ModalContainer({ children }: ModalContainerPropsType) {
   //
 
-  return <div style={tempStyles}>{children}</div>;
+  return <div>{children}</div>;
 }
 
 export default ModalContainer;

@@ -6,12 +6,11 @@ import { parseXmlData } from './helpers';
 import { NewsDataType } from './types';
 
 function HomeNews() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [data, setData] = useState<NewsDataType[]>([]);
 
   useEffect(() => {
-    setIsLoading(true);
     fetch("https://moxie.foxweather.com/google-publisher/weather-news.xml")
       .then((response) => {
         if (!response.ok) {

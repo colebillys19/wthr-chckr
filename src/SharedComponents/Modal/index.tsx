@@ -1,10 +1,16 @@
-import { useGlobalState } from "../../context";
+import { useContext } from "react";
+
+import { ActiveModalContext } from "../../contexts/activeModalContext";
 import ModalDisplay from "./ModalDisplay";
 
 function Modal() {
-  const { activeModal } = useGlobalState();
+  const { activeModal } = useContext(ActiveModalContext);
 
-  return !!activeModal ? <ModalDisplay /> : <div />;
+  if (!!activeModal) {
+    return <ModalDisplay />;
+  }
+
+  return null;
 }
 
 export default Modal;

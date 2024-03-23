@@ -1,19 +1,21 @@
-import { CSSProperties, FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useContext, useEffect, useRef, useState } from "react";
 
-import { useGlobalState } from "../../context";
-import { useUpdateUserLocation } from "../../utils/customHooks/localStorage";
-
-const tempStyles: CSSProperties = {
-  minWidth: "240px",
-};
+import { ActiveModalContext } from "../../contexts/activeModalContext";
+import { GoogleMapsContext } from "../../contexts/googleMapsContext";
+import { TextField } from "../../BaseComponents";
+import useUpdateUserLocation from "../../utils/customHooks/useUpdateUserLocation";
+import useUpdateUserLocationName from "../../utils/customHooks/useUpdateUserLocationName";
+import { getFormattedLocationName } from "../../utils/helpers";
 
 type EnterLocationDefaultPropsType = {
+  isVerifyingAddress: boolean;
   setIsCoordsEntry: (value: boolean) => void;
   setIsEnteringLocation: (value: boolean) => void;
   setIsVerifyingAddress: (value: boolean) => void;
 };
 
 function EnterLocationDefault({
+  isVerifyingAddress,
   setIsCoordsEntry,
   setIsEnteringLocation,
   setIsVerifyingAddress,
@@ -23,11 +25,12 @@ function EnterLocationDefault({
 
   const autoCompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const inputErrorRef = useRef("");
 
-  const { activeModal, googleMaps, setActiveModal } = useGlobalState();
+  const { activeModal, setActiveModal } = useContext(ActiveModalContext);
+  const { googleMaps } = useContext(GoogleMapsContext);
 
   const updateUserLocation = useUpdateUserLocation();
+  const updateUserLocationName = useUpdateUserLocationName();
 
   useEffect(() => {
     if (googleMaps !== null && inputRef.current) {
@@ -35,8 +38,7 @@ function EnterLocationDefault({
         inputRef.current
       );
       autoCompleteRef.current.addListener("place_changed", () => {
-        if (inputErrorRef.current !== "") {
-          inputErrorRef.current = "";
+        if (inputError !== "") {
           setInputError("");
         }
       });
@@ -46,14 +48,13 @@ function EnterLocationDefault({
         googleMaps.event.clearInstanceListeners(autoCompleteRef.current);
       }
     };
-  }, [googleMaps]);
+  }, []);
 
   /*
    *
    */
   const handleChange = () => {
-    if (inputErrorRef.current !== "") {
-      inputErrorRef.current = "";
+    if (inputError !== "") {
       setInputError("");
     }
     setIsSubmitDisabled(!inputRef.current || inputRef.current.value === "");
@@ -65,7 +66,9 @@ function EnterLocationDefault({
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (googleMaps !== null) {
-      setIsVerifyingAddress(true);
+      if (!isVerifyingAddress) {
+        setIsVerifyingAddress(true);
+      }
       const geocoder = new googleMaps.Geocoder();
       new Promise((resolve, reject) => {
         geocoder.geocode(
@@ -78,19 +81,20 @@ function EnterLocationDefault({
               const location = results[0].geometry.location;
               const locationStr = `${location.lat()},${location.lng()}`;
               updateUserLocation(locationStr);
+              updateUserLocationName(getFormattedLocationName(results));
               if (activeModal === "setLocation") {
                 setActiveModal("");
               }
               setIsVerifyingAddress(false);
               resolve(true);
             } else {
-              throw new Error("Invalid location");
+              reject("Invalid location");
             }
           }
         );
       }).catch((error) => {
         console.error(error);
-        setInputError(error.message);
+        setInputError(error);
         setIsVerifyingAddress(false);
       });
     }
@@ -115,13 +119,10 @@ function EnterLocationDefault({
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="address">Enter address, city, or zip: </label>
-          <input
-            id="address"
-            onChange={handleChange}
-            placeholder=""
+          <TextField
             ref={inputRef}
-            required
-            style={tempStyles}
+            handleChange={handleChange}
+            id="address"
             type="text"
           />
         </div>

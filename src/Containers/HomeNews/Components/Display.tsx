@@ -1,57 +1,28 @@
-import { CSSProperties } from "react";
+import { useContext } from "react";
 
-import { useGlobalState } from "../../../context";
+import { TimeTypeContext } from "../../../contexts/timeTypeContext";
 import { getNewsTime } from "../helpers";
-import { NewsDataType } from '../types';
-
-const tempStylesA: CSSProperties = {
-  display: "flex",
-  flexDirection: "column",
-  rowGap: "12px",
-};
-
-const tempStylesB: CSSProperties = {
-  display: "flex",
-  columnGap: "12px",
-  flexWrap: "wrap",
-};
-
-const tempStylesC: CSSProperties = {
-  display: "relative",
-  minWidth: "216px",
-  height: "144px",
-  backgroundColor: "black",
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-};
-
-const tempStylesD: CSSProperties = {
-  width: "calc(100% - 228px)",
-};
+import { NewsDataType } from "../types";
 
 type DisplayPropsType = {
   data: NewsDataType[];
 };
 
 function Display({ data }: DisplayPropsType) {
-  const { timeType } = useGlobalState();
+  const { timeType } = useContext(TimeTypeContext);
 
   if (!data.length) {
     return <div>no data</div>;
   }
 
   return (
-    <ul style={tempStylesA}>
+    <ul>
       {data.map((item: NewsDataType) => (
-        <li key={item.title} style={tempStylesB}>
-          <div
-            style={{ ...tempStylesC, backgroundImage: `url(${item.imgUrl})` }}
-          ></div>
-          <div style={tempStylesD}>
+        <li key={item.title}>
+          {/* <div style={{ backgroundImage: `url(${item.imgUrl})` }}></div> */}
+          <div>
             <span>{getNewsTime(item.date, timeType)}</span>
-            <h4>
-              <b>{item.title}</b>
-            </h4>
+            <h4>{item.title}</h4>
             <p>{item.description}</p>
             <a href={item.link} target="_blank" rel="noreferrer">
               Read more

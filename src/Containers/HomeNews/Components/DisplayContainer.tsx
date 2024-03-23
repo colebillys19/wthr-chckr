@@ -1,5 +1,5 @@
 import Skeleton from './Skeleton';
-import Error from './Error';
+import ErrorComponent from './ErrorComponent';
 import Display from './Display';
 
 function DisplayContainer({ isLoading, error, data }: any) {
@@ -9,7 +9,11 @@ function DisplayContainer({ isLoading, error, data }: any) {
     return <Skeleton />;
   }
 
-  return !!error ? <Error error={error} /> : <Display data={data} />;
+  if (!!error) {
+    return <ErrorComponent error={error} />;
+  }
+
+  return <Display data={data} />;
 }
 
 export default DisplayContainer;

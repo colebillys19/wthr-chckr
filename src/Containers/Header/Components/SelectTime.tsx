@@ -1,35 +1,30 @@
-import { useGlobalState } from "../../../context";
-import { useUpdateTimeType } from "../../../utils/customHooks/localStorage";
+import { useCallback, useContext, useMemo } from "react";
 
-function SelectTime() {
-  const { timeType } = useGlobalState();
+import { TimeTypeContext } from "../../../contexts/timeTypeContext";
+import useUpdateTimeType from "../../../utils/customHooks/useUpdateTimeType";
+import { LinkButton } from "../../../BaseComponents";
+
+type SelectTimePropsType = {
+  handleCloseMenu: () => void;
+};
+
+function SelectTime({ handleCloseMenu }: SelectTimePropsType) {
+  const { timeType } = useContext(TimeTypeContext);
 
   const updateTimeType = useUpdateTimeType();
 
-  const handleTimeClick = (type: string) => {
-    updateTimeType(type);
-  };
+  const buttonText = useMemo(() => {
+    const otherFormat = timeType === "standard" ? "24 hr" : "12 hr";
+    return `Switch to ${otherFormat} time`;
+  }, [timeType]);
 
-  return (
-    <>
-      <span>
-        Time Type:&nbsp;
-        <button
-          onClick={() => handleTimeClick("standard")}
-          disabled={timeType === "standard"}
-        >
-          Standard
-        </button>
-        &nbsp;|&nbsp;
-        <button
-          onClick={() => handleTimeClick("military")}
-          disabled={timeType === "military"}
-        >
-          Military
-        </button>
-      </span>
-    </>
-  );
+  const handleClick = useCallback(() => {
+    const newType = timeType === "standard" ? "military" : "standard";
+    updateTimeType(newType);
+    handleCloseMenu();
+  }, [timeType]);
+
+  return <LinkButton handleClick={() => handleClick()} text={buttonText} />;
 }
 
 export default SelectTime;

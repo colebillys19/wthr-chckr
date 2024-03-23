@@ -1,21 +1,16 @@
-import { useGlobalState } from "../../context";
+import { useContext } from "react";
+
+import { RecentLocationsContext } from "../../contexts/recentLocationsContext";
 import { HomeSectionContainer } from "../../SharedComponentsAux";
-import UserLocation from "./Components/UserLocation";
-import UserLocationOff from "./Components/UserLocationOff";
+import UserLocationContainer from "./Components/UserLocationContainer";
 import RecentLocations from "./Components/RecentLocations";
 
 function HomeUser() {
-  const { userPrefersNoLocation, recentLocations } = useGlobalState();
+  const { recentLocations } = useContext(RecentLocationsContext);
 
   return (
     <HomeSectionContainer>
-      <div>my location</div>
-      <div className="spacer" />
-      {userPrefersNoLocation ? (
-        <UserLocationOff />
-      ) : (
-        <UserLocation />
-      )}
+      <UserLocationContainer />
       {!!recentLocations.length && <RecentLocations />}
     </HomeSectionContainer>
   );

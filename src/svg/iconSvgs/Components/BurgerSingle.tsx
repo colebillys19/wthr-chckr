@@ -1,0 +1,22 @@
+type SvgComponentPropsType = {
+  color?: string;
+};
+
+function SvgComponent({ color = "#A7A7A7" }: SvgComponentPropsType) {
+  return (
+    <svg
+      width="25"
+      height="4"
+      viewBox="0 0 25 4"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M0 2C0 0.895431 0.895431 0 2 0H23C24.1046 0 25 0.895431 25 2C25 3.10457 24.1046 4 23 4H2C0.89543 4 0 3.10457 0 2Z"
+        fill={color}
+      />
+    </svg>
+  );
+}
+
+export default SvgComponent;

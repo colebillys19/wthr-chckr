@@ -1,24 +1,11 @@
-import { CSSProperties, MouseEvent, useEffect } from "react";
+import { MouseEvent, useContext, useEffect } from "react";
 
-import { useGlobalState } from "../../context";
+import { ActiveModalContext } from "../../contexts/activeModalContext";
 import ModalSetLocation from "./ModalSetLocation";
 import ModalTemp from "./ModalTemp";
 
-const tempStyles: CSSProperties = {
-  alignItems: "center",
-  backgroundColor: "rgba(0, 0, 0, 0.3)",
-  display: "flex",
-  height: "100vh",
-  justifyContent: "center",
-  left: 0,
-  position: "fixed",
-  top: 0,
-  width: "100vw",
-  zIndex: 1,
-};
-
 function ModalDisplay() {
-  const { activeModal, setActiveModal } = useGlobalState();
+  const { activeModal, setActiveModal } = useContext(ActiveModalContext);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -40,8 +27,10 @@ function ModalDisplay() {
     }
   };
 
+  // TODO when you style this again make sure backdrop click is set up correctly
+
   return (
-    <div onClick={handleBackdropClick} style={tempStyles}>
+    <div onClick={handleBackdropClick}>
       {activeModal === "setLocation" && <ModalSetLocation />}
       {activeModal === "temp" && <ModalTemp />}
     </div>

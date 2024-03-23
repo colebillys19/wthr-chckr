@@ -1,20 +1,9 @@
-import { CSSProperties, FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useGlobalState } from "../../context";
+import { GoogleMapsContext } from "../../contexts/googleMapsContext";
 import { HomeSectionContainer } from "../../SharedComponentsAux";
-
-const tempStylesA: CSSProperties = {
-  opacity: 0.1,
-};
-
-const tempStylesB: CSSProperties = {
-  display: "none",
-};
-
-const tempStylesC: CSSProperties = {
-  minWidth: "360px",
-};
+import SearchForm from "./Components/SearchForm";
 
 function HomeSearch() {
   const [inputError, setInputError] = useState("");
@@ -23,11 +12,10 @@ function HomeSearch() {
 
   const autoCompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const inputErrorRef = useRef("");
 
   const navigate = useNavigate();
 
-  const { googleMaps } = useGlobalState();
+  const { googleMaps } = useContext(GoogleMapsContext);
 
   useEffect(() => {
     if (googleMaps !== null && inputRef.current) {
@@ -35,8 +23,7 @@ function HomeSearch() {
         inputRef.current
       );
       autoCompleteRef.current.addListener("place_changed", () => {
-        if (inputErrorRef.current !== "") {
-          inputErrorRef.current = "";
+        if (inputError !== "") {
           setInputError("");
         }
       });
@@ -46,14 +33,13 @@ function HomeSearch() {
         googleMaps.event.clearInstanceListeners(autoCompleteRef.current);
       }
     };
-  }, [googleMaps]);
+  }, []);
 
   /*
    *
    */
   const handleChange = () => {
-    if (inputErrorRef.current !== "") {
-      inputErrorRef.current = "";
+    if (inputError !== "") {
       setInputError("");
     }
     setIsSubmitDisabled(!inputRef.current || inputRef.current.value === "");
@@ -65,7 +51,9 @@ function HomeSearch() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (googleMaps !== null) {
-      setIsVerifyingAddress(true);
+      if (!isVerifyingAddress) {
+        setIsVerifyingAddress(true);
+      }
       const geocoder = new googleMaps.Geocoder();
       new Promise((resolve, reject) => {
         geocoder.geocode(
@@ -81,14 +69,13 @@ function HomeSearch() {
               resolve(true);
               setIsVerifyingAddress(false);
             } else {
-              throw new Error("Invalid location");
+              reject("Invalid location");
             }
           }
         );
       }).catch((error) => {
         console.error(error);
-        inputErrorRef.current = error.message;
-        setInputError(error.message);
+        setInputError(error);
         setIsVerifyingAddress(false);
       });
     }
@@ -96,27 +83,17 @@ function HomeSearch() {
 
   return (
     <HomeSectionContainer>
-      <div>search by location</div>
-      <div className="spacer" />
-      <form
-        onSubmit={handleSubmit}
-        style={isVerifyingAddress ? tempStylesA : {}}
-      >
-        <label htmlFor="search" style={tempStylesB}>
-          Search
-        </label>
-        <input
-          id="search"
-          onChange={handleChange}
-          placeholder=""
+      <div className="relative flex px-6 pb-4 justify-center">
+        <SearchForm
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          isSubmitDisabled={isSubmitDisabled}
           ref={inputRef}
-          required
-          style={tempStylesC}
-          type="text"
         />
-        <input type="submit" value="Go" disabled={isSubmitDisabled} />
-      </form>
-      {inputError && <div>{inputError}</div>}
+        {inputError && <div>{inputError}</div>}
+        {isVerifyingAddress && <div>loading</div>}
+        <div className="absolute -bottom-2 left-0 w-full h-2 bg-gradient-to-b from-grey-b to-transparent"></div>
+      </div>
     </HomeSectionContainer>
   );
 }

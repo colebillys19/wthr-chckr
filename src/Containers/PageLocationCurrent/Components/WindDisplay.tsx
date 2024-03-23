@@ -1,4 +1,4 @@
-import { WeatherSvgP } from "../../../svg/Components";
+// import { WeatherSvgP } from "../../../svg/Components";
 
 type WindDisplayPropsType = {
   speedStr: string;
@@ -11,8 +11,8 @@ function WindDisplay({ speedStr, deg }: WindDisplayPropsType) {
   return (
     <div>
       <div>Wind</div>
-      <div><b>{speedStr}</b></div>
-      <WeatherSvgP size={60} rotation={deg} />
+      <div>{speedStr}</div>
+      {/* <WeatherSvgP size={60} rotation={deg} /> */}
     </div>
   );
 }

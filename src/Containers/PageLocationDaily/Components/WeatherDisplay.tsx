@@ -1,102 +1,60 @@
-import { CSSProperties } from "react";
+import { LabelValueText, WeatherSvg } from "../../../SharedComponentsAux";
 
-import { useGlobalState } from "../../../context";
-import { WeatherSvg } from "../../../SharedComponentsAux";
-import { DailyType } from "../../../utils/types/openWeatherMap";
-import { getHighLow, getTimeData } from "../../../utils/helpers";
-
-const tempStylesA: CSSProperties = {
-  padding: "16px",
-  borderBottom: "1px solid black",
-  display: "inline-block",
+type WeatherDisplayTallPropsType = {
+  dayName: string;
+  svgId: number;
+  summary: string;
+  tempMax: string;
+  tempMin: string;
+  feelsLikeMax: string;
+  feelsLikeMin: string;
+  precChance: string;
+  windSpeed: string;
+  humidity: string;
+  rainVolume: string;
+  snowVolume: string;
 };
 
-const tempStylesB: CSSProperties = {
-  fontWeight: "bold",
-};
-
-type WeatherDisplayPropsType = {
-  data: DailyType;
-  timezoneOffset: number;
-  isToday: boolean;
-};
-
-function WeatherDisplay({
-  data,
-  timezoneOffset,
-  isToday,
-}: WeatherDisplayPropsType) {
-  const { unitType, timeType } = useGlobalState();
-
-  const {
-    dt,
-    temp,
-    feels_like,
-    weather,
-    humidity,
-    rain,
-    snow,
-    summary,
-    wind_speed,
-  } = data;
-
-  const { day } = getTimeData({
-    dtSec: dt,
-    apiTimezoneOffsetSec: timezoneOffset,
-    timeType,
-  });
-
-  const { high: feelsLikeHigh, low: feelsLikeLow } = getHighLow(feels_like);
-
-  const tempUnit = unitType === "imperial" ? "°F" : "°C";
-  const windUnit = unitType === "imperial" ? "mph" : "m/s";
-
-  const dataArr = [
-    {
-      label: "Temperature (high)",
-      value: `${Math.round(temp.max)}${tempUnit}`,
-    },
-    { label: "Temperature (low)", value: `${Math.round(temp.min)}${tempUnit}` },
-    {
-      label: "Feels like (high)",
-      value: `${Math.round(feelsLikeHigh)}${tempUnit}`,
-    },
-    {
-      label: "Feels like (low)",
-      value: `${Math.round(feelsLikeLow)}${tempUnit}`,
-    },
-    { label: "Avg. wind speed", value: `${Math.round(wind_speed)}${windUnit}` },
-    { label: "Avg. humidity", value: `${humidity}%` },
-  ];
-
-  if (typeof rain === "number" && rain > 0) {
-    dataArr.push({ label: "Rain (inches)", value: `${rain}` });
-  }
-
-  if (typeof snow === "number" && snow > 0) {
-    dataArr.push({ label: "Snow (inches)", value: `${snow}` });
-  }
+function WeatherDisplayTall({
+  dayName,
+  svgId,
+  summary,
+  tempMax,
+  tempMin,
+  feelsLikeMax,
+  feelsLikeMin,
+  precChance,
+  windSpeed,
+  humidity,
+  rainVolume,
+  snowVolume,
+}: WeatherDisplayTallPropsType) {
+  //
 
   return (
-    <div style={tempStylesA}>
-      <h3 style={tempStylesB}>{isToday ? "Today" : day}</h3>
-      <div className="spacer" />
-      <div>
-        <WeatherSvg id={weather[0].id} isDayTime size={120} />
+    <div className="inline-flex flex-col items-center md:flex-row md:items-start">
+      <div className="flex flex-col items-center md:items-end">
+        <span className="text-xl font-bold">{dayName}</span>
+        <WeatherSvg id={svgId} isDayTime={true} size={60} />
+        <span className="text-center md:text-right">{summary}</span>
       </div>
-      <div className="spacer" />
-      <div>{summary}</div>
-      <div className="spacer" />
-      <ul>
-        {dataArr.map(({ label, value }) => (
-          <li key={label}>
-            <span>{label}:&nbsp;</span>
-            <b>{value}</b>
-          </li>
-        ))}
-      </ul>
+      <div className="flex flex-col items-center md:items-start">
+        <LabelValueText label="Temperature (high):" value={tempMax} />
+        <LabelValueText label="Temperature (low):" value={tempMin} />
+        <LabelValueText label="Feels like (high):" value={feelsLikeMax} />
+        <LabelValueText label="Feels like (low):" value={feelsLikeMin} />
+        <LabelValueText label="Average wind speed:" value={windSpeed} />
+        <LabelValueText label="Chance of precipitation:" value={precChance} />
+        {!!rainVolume && (
+          <LabelValueText label="Rain volume:" value={rainVolume} />
+        )}
+        {!!snowVolume && (
+          <LabelValueText label="Snow volume:" value={snowVolume} />
+        )}
+        <LabelValueText label="Average humidity:" value={humidity} />
+      </div>
     </div>
   );
 }
 
-export default WeatherDisplay;
+export default WeatherDisplayTall;

@@ -1,14 +1,10 @@
-import { CSSProperties, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
-import { useGlobalState } from "../../context";
+import { GoogleMapsContext } from "../../contexts/googleMapsContext";
+import { TimeTypeContext } from "../../contexts/timeTypeContext";
 import { mapStyles } from "./constants";
 import { getMapTime } from "./helpers";
 import { FrameType } from "./types";
-
-const tempStyles: CSSProperties = {
-  width: "60%",
-  height: "500px",
-};
 
 type WeatherMapPropsType = {
   location: string;
@@ -28,7 +24,8 @@ function WeatherMap({ location, zoom, useDeviceTime }: WeatherMapPropsType) {
   const timestampArrRef = useRef([]);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const { googleMaps, timeType } = useGlobalState();
+  const { googleMaps } = useContext(GoogleMapsContext);
+  const { timeType } = useContext(TimeTypeContext);
 
   useEffect(() => {
     if (googleMaps !== null && mapDivRef.current !== null) {
@@ -39,7 +36,7 @@ function WeatherMap({ location, zoom, useDeviceTime }: WeatherMapPropsType) {
         styles: mapStyles,
       });
     }
-  }, [googleMaps, location, zoom]);
+  }, [location, zoom]);
 
   useEffect(() => {
     if (googleMaps === null || mapRef.current === null) {
@@ -91,7 +88,7 @@ function WeatherMap({ location, zoom, useDeviceTime }: WeatherMapPropsType) {
         console.error(error);
         setError(error.message);
       });
-  }, [googleMaps, location]);
+  }, [location]);
 
   /*
    *
@@ -207,27 +204,52 @@ function WeatherMap({ location, zoom, useDeviceTime }: WeatherMapPropsType) {
   return (
     <>
       {isLoading && <div>Loading...</div>}
-      <div style={isLoading ? { display: "none" } : {}}>
-        <div>
-          <span>
-            {getMapTime({
-              radarLayerTime,
-              timezoneOffsetSec,
-              timeType,
-              useDeviceTime,
-            })}
-          </span>
-          {timezoneName && <span>{` (${timezoneName})`}</span>}
-        </div>
-        <div>
-          <button onClick={handlePrevClick}>prev</button>
-          <button onClick={handlePlayPauseClick}>play/stop</button>
-          <button onClick={handleNextClick}>next</button>
-        </div>
-        <div ref={mapDivRef} style={tempStyles} />
+      <div>
+        <span>
+          {getMapTime({
+            radarLayerTime,
+            timezoneOffsetSec,
+            timeType,
+            useDeviceTime,
+          })}
+        </span>
+        {timezoneName && <span>{` (${timezoneName})`}</span>}
       </div>
+      <div>
+        <button onClick={handlePrevClick}>prev</button>
+        <button onClick={handlePlayPauseClick}>play/stop</button>
+        <button onClick={handleNextClick}>next</button>
+      </div>
+      <div ref={mapDivRef} />
     </>
   );
 }
 
 export default WeatherMap;
+
+/*
+
+<>
+  {isLoading && <div>Loading...</div>}
+  <div style={isLoading ? { display: "none" } : {}}>
+    <div>
+      <span>
+        {getMapTime({
+          radarLayerTime,
+          timezoneOffsetSec,
+          timeType,
+          useDeviceTime,
+        })}
+      </span>
+      {timezoneName && <span>{` (${timezoneName})`}</span>}
+    </div>
+    <div>
+      <button onClick={handlePrevClick}>prev</button>
+      <button onClick={handlePlayPauseClick}>play/stop</button>
+      <button onClick={handleNextClick}>next</button>
+    </div>
+    <div ref={mapDivRef} />
+  </div>
+</>
+
+*/
