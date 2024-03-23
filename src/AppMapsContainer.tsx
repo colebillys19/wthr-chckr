@@ -11,7 +11,11 @@ function AppMapsContainer() {
   const { isGoogleMapsReady } = useContext(GoogleMapsContext);
 
   if (!isGoogleMapsReady) {
-    return <Spinner />;
+    return (
+      <div className="w-full h-screen flex justify-center items-center">
+        <Spinner />
+      </div>
+    );
   }
 
   return <AppRouter />;
