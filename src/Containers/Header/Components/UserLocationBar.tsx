@@ -4,6 +4,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { UserLocationNameContext } from "../../../contexts/userLocationNameContext";
 import useUpdateUserLocation from "../../../utils/customHooks/useUpdateUserLocation";
 import useUpdateUserLocationName from "../../../utils/customHooks/useUpdateUserLocationName";
+import { ShadowDiv } from "../../../SharedComponentsAux";
 import { LinkButton } from "../../../BaseComponents";
 
 type LocationBarPropsType = {
@@ -46,7 +47,7 @@ function LocationBar({ location }: LocationBarPropsType) {
         )}
       </div>
       <LinkButton handleClick={() => handleClearLocation()} text="clear" />
-      <div className="absolute -bottom-2 left-0 w-full h-2 bg-gradient-to-b from-grey-b to-transparent"></div>
+      <ShadowDiv />
     </div>
   );
 }

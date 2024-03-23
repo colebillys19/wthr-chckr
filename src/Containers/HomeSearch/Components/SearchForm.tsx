@@ -17,7 +17,7 @@ const SearchForm = forwardRef<HTMLInputElement, SearchFormPropsType>(
   ({ handleChange, handleSubmit, isSubmitDisabled }, ref) => (
     <form
       onSubmit={handleSubmit}
-      className="w-full inline-flex overflow-hidden rounded-full border border-grey-a"
+      className="w-full max-w-screen-sm inline-flex overflow-hidden rounded-full border border-grey-a"
     >
       <label htmlFor="search" className="hidden">
         Search

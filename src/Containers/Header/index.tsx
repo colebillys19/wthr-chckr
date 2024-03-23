@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import { UserLocationContext } from "../../contexts/userLocationContext";
 import BurgerIcon from "../../svg/iconSvgs/Components/Burger";
 import GearIcon from "../../svg/iconSvgs/Components/Gear";
+import { ShadowDiv } from "../../SharedComponentsAux";
 import Nav from "./Components/Nav";
 import UserLocationBar from "./Components/UserLocationBar";
 import MenuMobile from "./Components/MenuMobile";
@@ -72,9 +73,7 @@ function Header() {
             <GearIcon />
           </button>
         </div>
-        {!isHomePage && (
-          <div className="absolute -bottom-2 left-0 w-full h-2 bg-gradient-to-b from-grey-b to-transparent"></div>
-        )}
+        {!isHomePage && <ShadowDiv />}
       </header>
       {!!userLocation && !isHomePage && (
         <UserLocationBar location={userLocation} />

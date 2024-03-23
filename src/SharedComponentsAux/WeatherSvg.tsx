@@ -1,4 +1,4 @@
-import weatherSvgDict from "../../svg/weatherSvgs/weatherSvgDict";
+import weatherSvgDict from "../svg/weatherSvgs/weatherSvgDict";
 
 type WeatherSvgPropsType = {
   id: number;

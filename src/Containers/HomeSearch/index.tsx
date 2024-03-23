@@ -2,7 +2,7 @@ import { FormEvent, useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { GoogleMapsContext } from "../../contexts/googleMapsContext";
-import { HomeSectionContainer } from "../../SharedComponentsAux";
+import { ShadowDiv } from "../../SharedComponentsAux";
 import SearchForm from "./Components/SearchForm";
 
 function HomeSearch() {
@@ -82,19 +82,17 @@ function HomeSearch() {
   };
 
   return (
-    <HomeSectionContainer>
-      <div className="relative flex px-6 pb-4 justify-center">
-        <SearchForm
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          isSubmitDisabled={isSubmitDisabled}
-          ref={inputRef}
-        />
-        {inputError && <div>{inputError}</div>}
-        {isVerifyingAddress && <div>loading</div>}
-        <div className="absolute -bottom-2 left-0 w-full h-2 bg-gradient-to-b from-grey-b to-transparent"></div>
-      </div>
-    </HomeSectionContainer>
+    <div className="relative flex px-6 pb-4">
+      <SearchForm
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        isSubmitDisabled={isSubmitDisabled}
+        ref={inputRef}
+      />
+      {inputError && <div>{inputError}</div>}
+      {isVerifyingAddress && <div>loading</div>}
+      <ShadowDiv />
+    </div>
   );
 }
 

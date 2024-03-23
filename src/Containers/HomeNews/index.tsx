@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 
-import { HomeSectionContainer } from "../../SharedComponentsAux";
-import DisplayContainer from './Components/DisplayContainer';
-import { parseXmlData } from './helpers';
-import { NewsDataType } from './types';
+import DisplayContainer from "./Components/DisplayContainer";
+import { parseXmlData } from "./helpers";
+import { NewsDataType } from "./types";
 
 function HomeNews() {
   const [isLoading, setIsLoading] = useState(true);
@@ -30,11 +29,7 @@ function HomeNews() {
       });
   }, []);
 
-  return (
-    <HomeSectionContainer>
-      <DisplayContainer isLoading={isLoading} error={error} data={data}  />
-    </HomeSectionContainer>
-  );
+  return <DisplayContainer isLoading={isLoading} error={error} data={data} />;
 }
 
 export default HomeNews;

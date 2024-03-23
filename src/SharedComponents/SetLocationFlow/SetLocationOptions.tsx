@@ -4,6 +4,7 @@ import { ActiveModalContext } from "../../contexts/activeModalContext";
 import useUpdateUserLocation from "../../utils/customHooks/useUpdateUserLocation";
 import useFindAndUpdateUserLocationName from "../../utils/customHooks/useFindAndUpdateUserLocationName";
 import useUpdateUserPrefersNoLocation from "../../utils/customHooks/useUpdateUserPrefersNoLocation";
+import { ButtonPrimary, LinkButton } from "../../BaseComponents";
 
 type SetLocationOptionsPropsType = {
   isGeolocating: boolean;
@@ -33,7 +34,10 @@ function SetLocationOptions({
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
         const locationStr = `${lat},${lon}`;
-        const userLocationNameSet = await findAndUpdateUserLocationName(lat, lon);
+        const userLocationNameSet = await findAndUpdateUserLocationName(
+          lat,
+          lon
+        );
         if (userLocationNameSet) {
           updateUserLocation(locationStr);
           if (activeModal === "setLocation") {
@@ -70,20 +74,16 @@ function SetLocationOptions({
   };
 
   return (
-    <>
-      <div>
-        <button onClick={handleGetLocation} disabled={!!geolocateError}>
-          find my location
-        </button>
-      </div>
+    <div className="flex flex-col items-start gap-4 md:flex-row md:items-center">
+      <ButtonPrimary handleClick={handleEnterLocation} text="Enter location" />
+      <ButtonPrimary
+        handleClick={handleGetLocation}
+        text="Find my location"
+        isDisabled={!!geolocateError}
+      />
       {!!geolocateError && <div>{geolocateError}</div>}
-      <div>
-        <button onClick={handleEnterLocation}>enter location</button>
-      </div>
-      <div>
-        <button onClick={handleDontSet}>don't set location</button>
-      </div>
-    </>
+      <LinkButton handleClick={handleDontSet} text="Don't set location" />
+    </div>
   );
 }
 
