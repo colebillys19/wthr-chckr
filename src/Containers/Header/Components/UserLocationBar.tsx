@@ -4,7 +4,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { UserLocationNameContext } from "../../../contexts/userLocationNameContext";
 import useUpdateUserLocation from "../../../utils/customHooks/useUpdateUserLocation";
 import useUpdateUserLocationName from "../../../utils/customHooks/useUpdateUserLocationName";
-import { LinkButton } from '../../../BaseComponents';
+import { LinkButton } from "../../../BaseComponents";
 
 type LocationBarPropsType = {
   location: string;
@@ -16,7 +16,6 @@ function LocationBar({ location }: LocationBarPropsType) {
 
   const updateUserLocation = useUpdateUserLocation();
   const updateUserLocationName = useUpdateUserLocationName();
-
 
   const urlParams = new URLSearchParams(search);
   const locationParam = urlParams.get("location");
@@ -32,7 +31,7 @@ function LocationBar({ location }: LocationBarPropsType) {
   };
 
   return (
-    <div className="flex justify-end px-4">
+    <div className="relative flex justify-end px-6 py-4">
       <div className="mr-8">
         <span>my location: </span>
         &nbsp;
@@ -47,6 +46,7 @@ function LocationBar({ location }: LocationBarPropsType) {
         )}
       </div>
       <LinkButton handleClick={() => handleClearLocation()} text="clear" />
+      <div className="absolute -bottom-2 left-0 w-full h-2 bg-gradient-to-b from-grey-b to-transparent"></div>
     </div>
   );
 }

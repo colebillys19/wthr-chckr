@@ -83,14 +83,17 @@ function HomeSearch() {
 
   return (
     <HomeSectionContainer>
-      <SearchForm
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        isSubmitDisabled={isSubmitDisabled}
-        ref={inputRef}
-      />
-      {inputError && <div>{inputError}</div>}
-      {isVerifyingAddress && <div>loading</div>}
+      <div className="relative flex px-6 pb-4 justify-center">
+        <SearchForm
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          isSubmitDisabled={isSubmitDisabled}
+          ref={inputRef}
+        />
+        {inputError && <div>{inputError}</div>}
+        {isVerifyingAddress && <div>loading</div>}
+        <div className="absolute -bottom-2 left-0 w-full h-2 bg-gradient-to-b from-grey-b to-transparent"></div>
+      </div>
     </HomeSectionContainer>
   );
 }

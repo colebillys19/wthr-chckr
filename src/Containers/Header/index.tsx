@@ -8,24 +8,38 @@ import GearIcon from "../../svg/iconSvgs/Components/Gear";
 import Nav from "./Components/Nav";
 import UserLocationBar from "./Components/UserLocationBar";
 import MenuMobile from "./Components/MenuMobile";
+import MenuDesktop from "./Components/MenuDesktop";
 
 function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false);
 
   const { userLocation } = useContext(UserLocationContext);
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const handleResize = throttle(() => {
+    const handleResizeMobile = throttle(() => {
       if (isMobileMenuOpen && window.innerWidth >= 768) {
         setIsMobileMenuOpen(false);
       }
     }, 200);
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", handleResizeMobile);
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", handleResizeMobile);
     };
   }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    const handleResizeDesktop = throttle(() => {
+      if (isDesktopMenuOpen && window.innerWidth < 768) {
+        setIsDesktopMenuOpen(false);
+      }
+    }, 200);
+    window.addEventListener("resize", handleResizeDesktop);
+    return () => {
+      window.removeEventListener("resize", handleResizeDesktop);
+    };
+  }, [isDesktopMenuOpen]);
 
   const isHomePage = useMemo(() => pathname === "/", [pathname]);
 
@@ -33,7 +47,9 @@ function Header() {
     setIsMobileMenuOpen(true);
   };
 
-  const handleGearClick = () => null;
+  const handleGearClick = () => {
+    setIsDesktopMenuOpen(true);
+  };
 
   return (
     <div>
@@ -43,9 +59,12 @@ function Header() {
           pathname={pathname}
         />
       )}
-      <header className="flex justify-between items-center px-4 py-2">
+      {isDesktopMenuOpen && (
+        <MenuDesktop setIsDesktopMenuOpen={setIsDesktopMenuOpen} />
+      )}
+      <header className="relative flex justify-between items-center px-6 py-4">
         <Nav />
-        <div className="flex">
+        <div className="flex h-6 items-center">
           <button onClick={handleBurgerClick} className="md:hidden">
             <BurgerIcon />
           </button>
@@ -53,6 +72,9 @@ function Header() {
             <GearIcon />
           </button>
         </div>
+        {!isHomePage && (
+          <div className="absolute -bottom-2 left-0 w-full h-2 bg-gradient-to-b from-grey-b to-transparent"></div>
+        )}
       </header>
       {!!userLocation && !isHomePage && (
         <UserLocationBar location={userLocation} />

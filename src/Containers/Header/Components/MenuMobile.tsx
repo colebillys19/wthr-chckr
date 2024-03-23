@@ -57,13 +57,15 @@ function MenuMobile({ setIsMobileMenuOpen, pathname }: MenuMobilePropsType) {
   return (
     <div
       onClick={handleBackdropClick}
-      className="absolute top-0 left-0 w-screen h-screen"
+      className="absolute top-0 left-0 w-screen h-screen z-10"
     >
-      <div className="absolute top-0 left-0 w-screen h-48 px-6 py-4 bg-tertiary">
+      <div className="absolute top-0 left-0 w-screen h-48 px-6 py-4 bg-white border-b z-20">
         <div className="flex justify-end mb-6">
-          <button onClick={handleCloseClick}>
-            <CloseIcon />
-          </button>
+          <div className="flex h-6 items-center">
+            <button onClick={handleCloseClick}>
+              <CloseIcon />
+            </button>
+          </div>
         </div>
         <div className="flex justify-between">
           <nav className="flex flex-col gap-6">
