@@ -40,12 +40,12 @@ function WeatherDisplay({
   //
 
   return (
-    <div className="inline-flex flex-col items-center md:items-start">
-      <div className="flex flex-col items-center md:flex-row md:items-baseline">
+    <div className="inline-flex flex-col items-center sm:items-start">
+      <div className="flex flex-col items-center sm:flex-row sm:items-baseline">
         <span className="text-2xl font-bold">{locationName}</span>
         <span>{currentTime}</span>
       </div>
-      <div className="md:flex">
+      <div className="sm:flex">
         <WeatherDisplayLarge
           svgId={svgId}
           isDayTime={isDayTime}

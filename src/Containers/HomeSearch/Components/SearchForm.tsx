@@ -11,7 +11,7 @@ type SearchFormPropsType = {
 const tailwindStylesDefault =
   "py-2 pr-4 pl-3 outline-none focus:bg-grey-b active:opacity-50 active:bg-opacity-0";
 const tailwindStylesDesktop =
-  "md:pr-5 md:pl-5 md:bg-grey-b md:focus:bg-opacity-0 md:active:text-grey-a";
+  "sm:pr-5 sm:pl-5 sm:bg-grey-b sm:focus:bg-opacity-0 sm:active:text-grey-a";
 
 const SearchForm = forwardRef<HTMLInputElement, SearchFormPropsType>(
   ({ handleChange, handleSubmit, isSubmitDisabled }, ref) => (
@@ -35,10 +35,10 @@ const SearchForm = forwardRef<HTMLInputElement, SearchFormPropsType>(
         disabled={isSubmitDisabled}
         className={`${tailwindStylesDefault} ${tailwindStylesDesktop}`}
       >
-        <span className="md:hidden">
+        <span className="sm:hidden">
           <MagIconB />
         </span>
-        <span className="hidden md:inline">Search</span>
+        <span className="hidden sm:inline">Search</span>
       </button>
     </form>
   )

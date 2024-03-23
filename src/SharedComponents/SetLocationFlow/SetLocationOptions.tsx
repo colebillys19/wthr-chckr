@@ -74,7 +74,7 @@ function SetLocationOptions({
   };
 
   return (
-    <div className="flex flex-col items-start gap-4 md:flex-row md:items-center">
+    <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
       <ButtonPrimary handleClick={handleEnterLocation} text="Enter location" />
       <ButtonPrimary
         handleClick={handleGetLocation}

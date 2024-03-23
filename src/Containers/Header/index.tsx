@@ -66,10 +66,10 @@ function Header() {
       <header className="relative flex justify-between items-center px-6 py-4">
         <Nav />
         <div className="flex h-6 items-center">
-          <button onClick={handleBurgerClick} className="md:hidden">
+          <button onClick={handleBurgerClick} className="sm:hidden">
             <BurgerIcon />
           </button>
-          <button onClick={handleGearClick} className="hidden md:inline">
+          <button onClick={handleGearClick} className="hidden sm:inline">
             <GearIcon />
           </button>
         </div>

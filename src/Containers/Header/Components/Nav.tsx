@@ -15,7 +15,7 @@ function Nav() {
       <NavLink to="/" className={navLinkClassName}>
         <LogoPlaceholder />
       </NavLink>
-      <div className="hidden md:flex">
+      <div className="hidden sm:flex">
         <NavLink to="/cities" className={navLinkClassName}>
           Cities
         </NavLink>
