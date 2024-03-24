@@ -40,22 +40,24 @@ function WeatherDisplay({
   //
 
   return (
-    <div className="inline-flex flex-col items-center sm:items-start">
-      <div className="flex flex-col items-center sm:flex-row sm:items-baseline">
+    <div className="inline-flex flex-col items-center w-full mb-8 sm:items-start sm:w-auto sm:mb-4 sm:px-16 sm:py-12 sm:border-r sm:border-b sm:border-grey-b">
+      <div className="flex flex-col items-center w-full mb-4 sm:flex-row sm:justify-center sm:items-baseline sm:gap-3">
         <span className="text-2xl font-bold">{locationName}</span>
         <span>{currentTime}</span>
       </div>
-      <div className="sm:flex">
-        <WeatherDisplayLarge
-          svgId={svgId}
-          isDayTime={isDayTime}
-          temp={temp}
-          weatherName={weatherName}
-          feelsLike={feelsLike}
-          windSpeed={windSpeed}
-          humidity={humidity}
-        />
-        <div className="flex flex-col items-center">
+      <div className="gap-10 sm:flex">
+        <div className="mb-8">
+          <WeatherDisplayLarge
+            svgId={svgId}
+            isDayTime={isDayTime}
+            temp={temp}
+            weatherName={weatherName}
+            feelsLike={feelsLike}
+            windSpeed={windSpeed}
+            humidity={humidity}
+          />
+        </div>
+        <div className="flex flex-col items-center gap-4">
           {hourlyDataArr.map((hourlyData) => {
             const { dt } = hourlyData;
             return (

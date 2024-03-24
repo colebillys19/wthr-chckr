@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import { TimeTypeContext } from "../../../contexts/timeTypeContext";
+import { LinkButton } from "../../../BaseComponents";
 import { OpenWeatherMapDataType } from "../../../utils/types/openWeatherMap";
 import { getTimeData } from "../../../utils/helpers";
 import WeatherDisplay from "./WeatherDisplay";
@@ -73,7 +74,7 @@ function WeatherDisplayContainer({
   };
 
   return (
-    <>
+    <div className="mb-2">
       <WeatherDisplay
         locationName={name}
         currentTime={time}
@@ -92,9 +93,9 @@ function WeatherDisplayContainer({
         sunset={sunset}
       />
       <div>
-        <button onClick={handleSeeMore}>see more</button>
+        <LinkButton handleClick={handleSeeMore} text="See more" />
       </div>
-    </>
+    </div>
   );
 }
 

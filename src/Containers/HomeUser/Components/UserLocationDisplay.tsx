@@ -5,6 +5,7 @@ import { UserLocationNameContext } from "../../../contexts/userLocationNameConte
 import useFetchLocationData from "../../../utils/customHooks/useFetchLocationData";
 import useUpdateUserLocation from "../../../utils/customHooks/useUpdateUserLocation";
 import useUpdateUserLocationName from "../../../utils/customHooks/useUpdateUserLocationName";
+import { LinkButton } from "../../../BaseComponents";
 import WeatherDisplayAsyncContainer from "./WeatherDisplayAsyncContainer";
 
 function UserLocationDisplay() {
@@ -22,7 +23,8 @@ function UserLocationDisplay() {
   };
 
   return (
-    <>
+    <div className="mb-8">
+      <h2 className="mb-4 text-xl">My Location</h2>
       <WeatherDisplayAsyncContainer
         data={data}
         error={error}
@@ -30,8 +32,8 @@ function UserLocationDisplay() {
         name={userLocationName}
         userLocation={userLocation}
       />
-      <button onClick={handleClearLocation}>clear location</button>
-    </>
+      <LinkButton handleClick={handleClearLocation} text="Clear location" />
+    </div>
   );
 }
 

@@ -18,7 +18,7 @@ function WeatherDisplaySmallWide({
   //
 
   return (
-    <div className="inline-flex items-center">
+    <div className="inline-flex items-center gap-4">
       <WeatherSvg id={svgId} isDayTime={isDayTime} size={60} />
       <div className="flex flex-col">
         <span>{mainText}</span>
