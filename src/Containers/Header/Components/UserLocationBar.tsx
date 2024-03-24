@@ -1,11 +1,11 @@
 import { useContext, useMemo } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import { UserLocationNameContext } from "../../../contexts/userLocationNameContext";
 import useUpdateUserLocation from "../../../utils/customHooks/useUpdateUserLocation";
 import useUpdateUserLocationName from "../../../utils/customHooks/useUpdateUserLocationName";
 import { ShadowDiv } from "../../../SharedComponentsAux";
-import { LinkButton } from "../../../BaseComponents";
+import { LinkButton, InternalLink } from "../../../BaseComponents";
 
 type LocationBarPropsType = {
   location: string;
@@ -38,12 +38,9 @@ function LocationBar({ location }: LocationBarPropsType) {
         &nbsp;
         {isViewingUserLocation && <span>{userLocationName}</span>}
         {!isViewingUserLocation && (
-          <NavLink
-            to={`/location/current?location=${location}`}
-            className="underline"
-          >
+          <InternalLink href={`/location/current?location=${location}`}>
             {userLocationName}
-          </NavLink>
+          </InternalLink>
         )}
       </div>
       <LinkButton handleClick={() => handleClearLocation()} text="clear" />

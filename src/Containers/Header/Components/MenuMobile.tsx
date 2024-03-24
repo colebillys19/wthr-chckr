@@ -1,11 +1,10 @@
 import { MouseEvent, useContext, useEffect, useMemo } from "react";
-import { NavLink } from "react-router-dom";
 
 import { ActiveModalContext } from "../../../contexts/activeModalContext";
 import { UserLocationContext } from "../../../contexts/userLocationContext";
 import { UserPrefersNoLocationContext } from "../../../contexts/userPrefersNoLocationContext";
 import CloseIcon from "../../../svg/iconSvgs/Components/Close";
-import { LinkButton } from "../../../BaseComponents";
+import { LinkButton, InternalLink } from "../../../BaseComponents";
 import SelectTime from "./SelectTime";
 import SelectUnits from "./SelectUnits";
 
@@ -75,12 +74,6 @@ function MenuMobile({
   /*
    *
    */
-  const handlNavLinkClassName = ({ isActive }: { isActive: boolean }) =>
-    isActive ? "pointer-events-none" : "underline";
-
-  /*
-   *
-   */
   const handleSetLocation = () => {
     setIsMobileMenuOpen(false);
     if (!activeModal) {
@@ -103,20 +96,18 @@ function MenuMobile({
         </div>
         <div className="flex justify-between">
           <nav className="flex flex-col gap-6">
-            <NavLink
-              to="/cities"
-              onClick={() => handleNavLinkClick("/cities")}
-              className={handlNavLinkClassName}
+            <InternalLink
+              href="/cities"
+              handleClick={() => handleNavLinkClick("/cities")}
             >
               Cities
-            </NavLink>
-            <NavLink
-              to="/news"
-              onClick={() => handleNavLinkClick("/news")}
-              className={handlNavLinkClassName}
+            </InternalLink>
+            <InternalLink
+              href="/news"
+              handleClick={() => handleNavLinkClick("/news")}
             >
               News
-            </NavLink>
+            </InternalLink>
           </nav>
           <div className="flex flex-col items-end gap-6">
             <SelectTime handleCloseMenu={() => setIsMobileMenuOpen(false)} />

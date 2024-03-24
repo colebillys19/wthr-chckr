@@ -1,27 +1,21 @@
-import { NavLink } from "react-router-dom";
-
+import { InternalLink } from "../../../BaseComponents";
 import LogoPlaceholder from "../../../svg/logoPlaceholder/LogoPlaceholder";
 
 function Nav() {
-  const navLinkClassName = ({ isActive }: { isActive: boolean }) => {
-    if (isActive) {
-      return "mr-6 pointer-events-none";
-    }
-    return "mr-6 underline";
-  };
+  //
 
   return (
-    <nav className="flex items-center">
-      <NavLink to="/" className={navLinkClassName}>
+    <nav className="flex items-center gap-8">
+      <InternalLink href="/" isTextLink={false}>
         <LogoPlaceholder />
-      </NavLink>
-      <div className="hidden sm:flex">
-        <NavLink to="/cities" className={navLinkClassName}>
+      </InternalLink>
+      <div className="hidden gap-8 sm:flex">
+        <InternalLink href="/cities">
           Cities
-        </NavLink>
-        <NavLink to="/news" className={navLinkClassName}>
+        </InternalLink>
+        <InternalLink href="/news">
           News
-        </NavLink>
+        </InternalLink>
       </div>
     </nav>
   );

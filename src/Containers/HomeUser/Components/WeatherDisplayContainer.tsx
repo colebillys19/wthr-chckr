@@ -1,9 +1,8 @@
 import { useContext, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
 
+import { InternalLink } from "../../../BaseComponents";
 import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import { TimeTypeContext } from "../../../contexts/timeTypeContext";
-import { LinkButton } from "../../../BaseComponents";
 import { OpenWeatherMapDataType } from "../../../utils/types/openWeatherMap";
 import { getTimeData } from "../../../utils/helpers";
 import WeatherDisplay from "./WeatherDisplay";
@@ -19,8 +18,6 @@ function WeatherDisplayContainer({
   name,
   userLocation,
 }: WeatherDisplayContainerPropsType) {
-  const navigate = useNavigate();
-
   const { unitType } = useContext(UnitTypeContext);
   const { timeType } = useContext(TimeTypeContext);
 
@@ -66,13 +63,6 @@ function WeatherDisplayContainer({
 
   const hourlyDataToUse = hourly.slice(1, 4);
 
-  /*
-   *
-   */
-  const handleSeeMore = () => {
-    navigate(`/location/current?location=${userLocation}`);
-  };
-
   return (
     <div className="mb-2">
       <WeatherDisplay
@@ -93,7 +83,9 @@ function WeatherDisplayContainer({
         sunset={sunset}
       />
       <div>
-        <LinkButton handleClick={handleSeeMore} text="See more" />
+        <InternalLink href={`/location/current?location=${userLocation}`}>
+          See more
+        </InternalLink>
       </div>
     </div>
   );

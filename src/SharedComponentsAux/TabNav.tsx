@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { InternalLink } from "../BaseComponents";
 
 type TabNavPropsType = {
   location: string;
@@ -9,11 +9,17 @@ function TabNav({ location }: TabNavPropsType) {
 
   return (
     <nav>
-      <NavLink to={`/location/current?location=${location}`}>Current</NavLink>
+      <InternalLink href={`/location/current?location=${location}`}>
+        Current
+      </InternalLink>
       <span>&nbsp;</span>
-      <NavLink to={`/location/hourly?location=${location}`}>Hourly</NavLink>
+      <InternalLink href={`/location/hourly?location=${location}`}>
+        Hourly
+      </InternalLink>
       <span>&nbsp;</span>
-      <NavLink to={`/location/daily?location=${location}`}>Daily</NavLink>
+      <InternalLink href={`/location/daily?location=${location}`}>
+        Daily
+      </InternalLink>
     </nav>
   );
 }

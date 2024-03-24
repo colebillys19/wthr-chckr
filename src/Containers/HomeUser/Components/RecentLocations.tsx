@@ -1,8 +1,9 @@
 import { useContext } from "react";
 
+import { LinkButton } from "../../../BaseComponents";
 import { RecentLocationsContext } from "../../../contexts/recentLocationsContext";
 import useUpdateRecentLocations from "../../../utils/customHooks/useUpdateRecentLocations";
-import RecentLocationDisplay from "./RecentLocationDisplay";
+import RecentLocationDisplayContainer from "./RecentLocationDisplayContainer";
 
 function RecentLocations() {
   const { recentLocations } = useContext(RecentLocationsContext);
@@ -20,14 +21,14 @@ function RecentLocations() {
   return (
     <>
       <h2 className="mb-4 text-xl">Recently Viewed</h2>
-      <ul>
+      <ul className="flex flex-col gap-4 mb-4 sm:flex-row">
         {recentLocations.map(({ location, name }) => (
           <li key={location}>
-            <RecentLocationDisplay location={location} name={name} />
+            <RecentLocationDisplayContainer location={location} name={name} />
           </li>
         ))}
       </ul>
-      <button onClick={handleClearRecent}>clear recent</button>
+      <LinkButton handleClick={handleClearRecent} text="Clear recent" />
     </>
   );
 }

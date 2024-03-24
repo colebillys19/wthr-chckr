@@ -1,6 +1,6 @@
 import WeatherDisplayContainer from "./WeatherDisplayContainer";
 import Skeleton from "./WeatherDisplaySkeleton";
-import Error from "./WeatherDisplayError";
+import ErrorComponent from "./WeatherDisplayError";
 import { OpenWeatherMapDataType } from "../../../utils/types/openWeatherMap";
 
 type WeatherDisplayAsyncContainerPropsType = {
@@ -23,7 +23,7 @@ function WeatherDisplayAsyncContainer({
   }
 
   if (!!error) {
-    return <Error />;
+    return <ErrorComponent />;
   }
 
   return (

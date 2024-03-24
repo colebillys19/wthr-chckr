@@ -40,7 +40,7 @@ function WeatherDisplay({
   //
 
   return (
-    <div className="inline-flex flex-col items-center w-full mb-8 sm:items-start sm:w-auto sm:mb-4 sm:px-16 sm:py-12 sm:border-r sm:border-b sm:border-grey-b">
+    <div className="inline-flex flex-col items-center w-full mb-8 sm:items-start sm:w-auto sm:mb-4 sm:px-16 sm:py-10 sm:border-r sm:border-b sm:border-grey-b">
       <div className="flex flex-col items-center w-full mb-4 sm:flex-row sm:justify-center sm:items-baseline sm:gap-3">
         <span className="text-2xl font-bold">{locationName}</span>
         <span>{currentTime}</span>

@@ -1,6 +1,6 @@
 import Display from "./Display";
 import Skeleton from "./Skeleton";
-import Error from "./Error";
+import ErrorComponent from "./Error";
 import { OpenWeatherMapDataType } from "../../utils/types/openWeatherMap";
 
 type WeatherDisplayHomePropsType = {
@@ -16,7 +16,7 @@ function WeatherDisplayHome({ data, error, isLoading, name }: WeatherDisplayHome
   }
 
   if (!!error) {
-    return <Error />;
+    return <ErrorComponent />;
   }
 
   return <Display data={data} name={name} />;
