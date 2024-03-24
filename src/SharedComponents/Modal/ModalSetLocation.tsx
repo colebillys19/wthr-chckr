@@ -12,7 +12,7 @@ function ModalSetLocation() {
   };
 
   return (
-    <div className="bg-white border-b z-20 w-full max-w-screen-sm px-6 pt-6 pb-12">
+    <div className="bg-white border-b z-20 w-full max-w-screen-sm px-8 pt-6 pb-12">
       <div className="flex justify-end mb-6">
         <div className="flex h-6 items-center">
           <button onClick={handleClose}>

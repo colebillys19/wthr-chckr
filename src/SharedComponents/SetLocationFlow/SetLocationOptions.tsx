@@ -85,7 +85,7 @@ function SetLocationOptions({
   };
 
   const containerClasses = isModal
-    ? "flex flex-col items-center gap-4 w-full sm:flex-row sm:justify-center"
+    ? "flex flex-col items-center gap-4 w-full"
     : "flex flex-col items-start gap-4 w-full sm:flex-row sm:items-center";
 
   return (
