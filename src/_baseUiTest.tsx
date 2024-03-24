@@ -20,7 +20,7 @@ import {
   ButtonPrimary,
   ButtonSecondary,
   LinkButton,
-  Link,
+  ExternalLink,
 } from "./BaseComponents";
 import Hourly from "./Containers/PageLocationHourly/Components/WeatherDisplay";
 import Daily from "./Containers/PageLocationDaily/Components/WeatherDisplay";
@@ -63,7 +63,7 @@ function BaseUiTest() {
         <LinkButton handleClick={() => null} text="Link button" isDisabled />
       </div>
       <div>
-        <Link href="#" text="Link" />
+        <ExternalLink href="#" text="Link" />
       </div>
       <h2 className="text-3xl font-bold my-8">Icons</h2>
       <div className="inline-grid grid-cols-3 grid-rows-3 gap-8 mb-8 justify-center items-center">

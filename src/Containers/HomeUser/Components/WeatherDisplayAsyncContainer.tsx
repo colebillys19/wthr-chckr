@@ -1,7 +1,7 @@
-import WeatherDisplayContainer from "./WeatherDisplayContainer";
-import Skeleton from "./WeatherDisplaySkeleton";
-import ErrorComponent from "./WeatherDisplayError";
 import { OpenWeatherMapDataType } from "../../../utils/types/openWeatherMap";
+import { Spinner } from "../../../SharedComponentsAux";
+import WeatherDisplayContainer from "./WeatherDisplayContainer";
+import ErrorComponent from "./WeatherDisplayError";
 
 type WeatherDisplayAsyncContainerPropsType = {
   data: OpenWeatherMapDataType;
@@ -19,7 +19,11 @@ function WeatherDisplayAsyncContainer({
   userLocation,
 }: WeatherDisplayAsyncContainerPropsType) {
   if (isLoading) {
-    return <Skeleton />;
+    return (
+      <div className="flex mb-4">
+        <Spinner />
+      </div>
+    );
   }
 
   if (!!error) {

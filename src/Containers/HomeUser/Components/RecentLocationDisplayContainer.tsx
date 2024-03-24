@@ -1,6 +1,6 @@
 import useFetchLocationData from "../../../utils/customHooks/useFetchLocationData";
+import { Spinner } from "../../../SharedComponentsAux";
 import RecentLocationDisplay from "./RecentLocationDisplay";
-import Skeleton from "./RecentLocationDisplaySkeleton";
 import ErrorComponent from "./RecentLocationDisplayError";
 
 type RecentLocationDisplayContainerPropsType = {
@@ -15,7 +15,11 @@ function RecentLocationDisplayContainer({
   const { isLoading, error, data } = useFetchLocationData(location);
 
   if (isLoading) {
-    return <Skeleton />;
+    return (
+      <div className="flex">
+        <Spinner />
+      </div>
+    );
   }
 
   if (!!error) {
