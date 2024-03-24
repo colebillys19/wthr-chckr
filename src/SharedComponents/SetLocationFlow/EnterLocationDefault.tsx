@@ -134,7 +134,7 @@ function EnterLocationDefault({
           type="text"
           placeholder="Enter address, city, or zip"
         />
-        {inputError && <div className="mt-2">{inputError}</div>}
+        {inputError && <div className="mt-2 text-error">{inputError}</div>}
         <div className="mt-2 mb-4">
           <ButtonPrimary
             text="Set location"

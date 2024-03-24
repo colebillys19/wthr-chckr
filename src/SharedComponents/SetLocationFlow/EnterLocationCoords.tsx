@@ -104,7 +104,7 @@ function EnterLocationCoords({
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="max-w-96">
         <div className="mb-2">
           <label htmlFor="lat" className="hidden">
             Latitude
@@ -127,7 +127,7 @@ function EnterLocationCoords({
             placeholder="Longitude"
           />
         </div>
-        {inputError && <div className="mb-2">{inputError}</div>}
+        {inputError && <div className="mb-2 text-error">{inputError}</div>}
         <div className="mb-4">
           <ButtonPrimary
             text="Set location"

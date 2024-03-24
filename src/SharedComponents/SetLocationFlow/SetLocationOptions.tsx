@@ -88,28 +88,47 @@ function SetLocationOptions({
     ? "flex flex-col items-center gap-4 w-full"
     : "flex flex-col items-start gap-4 w-full sm:flex-row sm:items-center";
 
+  const geolocateErrorAContainerClasses = isModal
+  ? "text-center"
+  : "text-left";
+  
+  const geolocateErrorAClasses = isModal
+    ? "mt-1 text-error"
+    : "mt-1 text-error sm:hidden";
+
+  const geolocateErrorBClasses = isModal
+    ? "hidden mt-2 text-center text-error sm:block"
+    : "hidden mt-2 text-error sm:block";
+
   return (
     <>
-      <div
-        className={containerClasses}
-      >
+      <div className={containerClasses}>
         <ButtonPrimary
           handleClick={handleEnterLocation}
           text="Enter location"
           isDisabled={isGeolocating}
         />
-        <ButtonSecondary
-          handleClick={handleGetLocation}
-          text="Find my location"
-          isDisabled={isGeolocating || !!geolocateError}
-        />
+        <div className={geolocateErrorAContainerClasses}>
+          <ButtonSecondary
+            handleClick={handleGetLocation}
+            text="Find my location"
+            isDisabled={isGeolocating || !!geolocateError}
+          />
+          {!!geolocateError && (
+            <div className={geolocateErrorAClasses}>{geolocateError}</div>
+          )}
+        </div>
         <LinkButton
           handleClick={handleDontSet}
           text="Don't set location"
           isDisabled={isGeolocating}
         />
       </div>
-      {!!geolocateError && <div className="mt-2">{geolocateError}</div>}
+      {!!geolocateError && !isModal && (
+        <div className={geolocateErrorBClasses}>
+          {geolocateError}
+        </div>
+      )}
     </>
   );
 }
