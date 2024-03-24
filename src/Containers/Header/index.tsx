@@ -80,7 +80,7 @@ function Header() {
         {!isHomePage && <ShadowDiv />}
       </header>
       {!!userLocation && !isHomePage && (
-        <UserLocationBar location={userLocation} />
+        <UserLocationBar userLocation={userLocation} />
       )}
     </div>
   );

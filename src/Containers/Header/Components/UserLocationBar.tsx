@@ -5,13 +5,13 @@ import { UserLocationNameContext } from "../../../contexts/userLocationNameConte
 import useUpdateUserLocation from "../../../utils/customHooks/useUpdateUserLocation";
 import useUpdateUserLocationName from "../../../utils/customHooks/useUpdateUserLocationName";
 import { ShadowDiv } from "../../../SharedComponentsAux";
-import { LinkButton, InternalLink } from "../../../BaseComponents";
+import { LinkButton } from "../../../BaseComponents";
 
 type LocationBarPropsType = {
-  location: string;
+  userLocation: string;
 };
 
-function LocationBar({ location }: LocationBarPropsType) {
+function LocationBar({ userLocation }: LocationBarPropsType) {
   const { userLocationName } = useContext(UserLocationNameContext);
   const { search } = useLocation();
 
@@ -22,13 +22,17 @@ function LocationBar({ location }: LocationBarPropsType) {
   const locationParam = urlParams.get("location");
 
   const isViewingUserLocation = useMemo(
-    () => location === locationParam,
-    [location, locationParam]
+    () => userLocation === locationParam,
+    [userLocation, locationParam]
   );
 
   const handleClearLocation = () => {
     updateUserLocation("");
     updateUserLocationName("");
+  };
+
+  const handleNavigate = () => {
+    window.location.href = `/location/current?location=${userLocation}`;
   };
 
   return (
@@ -38,9 +42,7 @@ function LocationBar({ location }: LocationBarPropsType) {
         &nbsp;
         {isViewingUserLocation && <span>{userLocationName}</span>}
         {!isViewingUserLocation && (
-          <InternalLink href={`/location/current?location=${location}`}>
-            {userLocationName}
-          </InternalLink>
+          <LinkButton handleClick={handleNavigate} text={userLocationName} />
         )}
       </div>
       <LinkButton handleClick={() => handleClearLocation()} text="clear" />
