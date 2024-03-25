@@ -8,7 +8,7 @@ function HomeCities() {
   const [showNextFive, setShowNextFive] = useState(false);
 
   const citiesFirstFive = citiesData.slice(0, 5);
-  const citiesNextFive = citiesData.slice(0, 5);
+  const citiesNextFive = citiesData.slice(5, 10);
 
   return (
     <div className="px-6 py-8">

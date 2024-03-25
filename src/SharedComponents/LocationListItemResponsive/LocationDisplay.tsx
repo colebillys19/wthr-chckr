@@ -17,11 +17,7 @@ type LocationDisplayPropsType = {
   location: string;
 };
 
-function LocationDisplay({
-  data,
-  name,
-  location,
-}: LocationDisplayPropsType) {
+function LocationDisplay({ data, name, location }: LocationDisplayPropsType) {
   const { unitType } = useContext(UnitTypeContext);
   const { timeType } = useContext(TimeTypeContext);
 
@@ -46,7 +42,7 @@ function LocationDisplay({
     <>
       <div className="sm:hidden">
         <InternalLinkContent href={`/location/current?location=${location}`}>
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center min-h-20">
             <WeatherDisplaySmallWide
               svgId={weather[0].id}
               isDayTime={isDayTime}
@@ -60,7 +56,7 @@ function LocationDisplay({
       </div>
       <div className="hidden sm:block">
         <InternalLinkContent href={`/location/current?location=${location}`}>
-          <div className="w-40 px-8 py-6 text-center border border-t-grey-b border-r-grey-a border-b-grey-a border-l-grey-b">
+          <div className="flex flex-col justify-center w-40 min-h-56 px-8 text-center border border-t-grey-b border-r-grey-a border-b-grey-a border-l-grey-b">
             <WeatherDisplaySmallTall
               svgId={weather[0].id}
               isDayTime={isDayTime}

@@ -1,7 +1,7 @@
 import useFetchLocationData from "../../utils/customHooks/useFetchLocationData";
-import { Spinner } from "../../SharedComponentsAux";
 import LocationDisplay from "./LocationDisplay";
 import ErrorComponent from "./ErrorComponent";
+import Skeleton from "./Skeleton";
 
 type LocationListItemResponsivePropsType = {
   location: string;
@@ -15,11 +15,7 @@ function LocationListItemResponsive({
   const { isLoading, error, data } = useFetchLocationData(location);
 
   if (isLoading) {
-    return (
-      <div className="flex">
-        <Spinner />
-      </div>
-    );
+    return <Skeleton />;
   }
 
   if (!!error) {
