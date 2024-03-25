@@ -9,9 +9,9 @@ type SearchFormPropsType = {
 };
 
 const tailwindStylesDefault =
-  "py-2 pr-4 pl-3 outline-none focus:bg-grey-b active:opacity-50 active:bg-opacity-0";
+  "py-2 pr-4 pl-3 outline-none hover:bg-grey-b focus:bg-grey-b active:opacity-50 active:bg-opacity-0";
 const tailwindStylesDesktop =
-  "sm:pr-5 sm:pl-5 sm:bg-grey-b sm:focus:bg-opacity-0 sm:active:text-grey-a";
+  "sm:pr-5 sm:pl-5 sm:bg-grey-b sm:hover:bg-opacity-0 sm:focus:bg-opacity-0 sm:active:text-grey-a";
 
 const SearchForm = forwardRef<HTMLInputElement, SearchFormPropsType>(
   ({ handleChange, handleSubmit, isSubmitDisabled }, ref) => (
