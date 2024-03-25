@@ -1,3 +1,4 @@
+import { ExternalLink } from "../../BaseComponents";
 import { getNewsTime } from "./helpers";
 
 type ListItemContentPropsType = {
@@ -10,6 +11,7 @@ type ListItemContentPropsType = {
 };
 
 function ListItemContent({
+  imgUrl,
   date,
   timeType,
   title,
@@ -19,17 +21,18 @@ function ListItemContent({
   //
 
   return (
-    <>
-      {/* <div style={{ backgroundImage: `url(${item.imgUrl})` }}></div> */}
-      <div>
-        <span>{getNewsTime(date, timeType)}</span>
-        <h4>{title}</h4>
-        <p>{description}</p>
-        <a href={link} target="_blank" rel="noreferrer">
-          Read more
-        </a>
+    <div className="relative flex flex-col gap-4 md:flex-row">
+      <div
+        style={{ backgroundImage: `url(${imgUrl})` }}
+        className="relative bg-black w-56 h-36 shrink-0 bg-cover bg-center"
+      ></div>
+      <div className="flex flex-col items-start grow-0">
+        <span className="mb-2 text-grey-a">{getNewsTime(date, timeType)}</span>
+        <h4 className="mb-2 font-bold line-clamp-1">{title}</h4>
+        <p className="mb-2 line-clamp-3">{description}</p>
+        <ExternalLink href={link} text="Read more" />
       </div>
-    </>
+    </div>
   );
 }
 

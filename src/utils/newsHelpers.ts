@@ -26,7 +26,7 @@ export const parseXmlData = (data: Document) => {
     "media"
   );
   const items = Array.from(data.querySelectorAll("item"));
-  return items.slice(0, 5).map((item: any) => {
+  return items.map((item: any) => {
     // const contentEncoded = item.getElementsByTagNameNS(
     //   contentNamespace,
     //   "encoded"

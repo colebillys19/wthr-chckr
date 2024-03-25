@@ -16,7 +16,7 @@ function Display({ data }: DisplayPropsType) {
   }
 
   return (
-    <ul className="max-w-screen-lg">
+    <ul className="flex flex-col gap-4 max-w-screen-lg">
       {data.map((item: NewsDataType) => {
         const { title, imgUrl, date, description, link } = item;
         return (

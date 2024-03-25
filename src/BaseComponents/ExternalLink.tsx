@@ -10,6 +10,8 @@ function ExternalLink({ href, text }: ExternalLinkPropsType) {
     <a
       href={href}
       className="tracking-normal underline hover:no-underline active:text-grey-a"
+      target="_blank"
+      rel="noreferrer"
     >
       {text}
     </a>

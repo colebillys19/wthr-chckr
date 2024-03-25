@@ -36,7 +36,9 @@ function HomeNews() {
   return (
     <div className="px-6 py-8">
       <h2 className="mb-4 text-xl">News</h2>
-      <NewsList isLoading={isLoading} error={error} data={itemsToShow} />
+      <div className="mb-4">
+        <NewsList isLoading={isLoading} error={error} data={itemsToShow} />
+      </div>
       {!isShowingFullList && (
         <LinkButton
           handleClick={() => setIsShowingFullList(true)}
