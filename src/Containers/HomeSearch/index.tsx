@@ -82,15 +82,18 @@ function HomeSearch() {
   };
 
   return (
-    <div className="relative flex px-6 pb-4">
+    <div
+      className={`relative flex flex-col px-6 pb-4${
+        isVerifyingAddress ? " opacity-50 pointer-events-none" : ""
+      }`}
+    >
       <SearchForm
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        isSubmitDisabled={isSubmitDisabled}
+        isSubmitDisabled={isSubmitDisabled || isVerifyingAddress}
         ref={inputRef}
       />
-      {inputError && <div>{inputError}</div>}
-      {isVerifyingAddress && <div>loading</div>}
+      {inputError && <div className="mt-2 text-error">{inputError}</div>}
       <ShadowDiv />
     </div>
   );
