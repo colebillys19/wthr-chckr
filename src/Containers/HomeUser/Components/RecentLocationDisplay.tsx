@@ -3,7 +3,7 @@ import { useContext, useMemo } from "react";
 import {
   WeatherDisplaySmallWide,
   WeatherDisplaySmallTall,
-  InternalLink,
+  InternalLinkContent,
 } from "../../../BaseComponents";
 import ArrowIcon from "../../../svg/iconSvgs/Components/Arrow";
 import { UnitTypeContext } from "../../../contexts/unitTypeContext";
@@ -45,10 +45,7 @@ function RecentLocationDisplay({
   return (
     <>
       <div className="sm:hidden">
-        <InternalLink
-          href={`/location/current?location=${location}`}
-          isTextLink={false}
-        >
+        <InternalLinkContent href={`/location/current?location=${location}`}>
           <div className="flex justify-between items-center">
             <WeatherDisplaySmallWide
               svgId={weather[0].id}
@@ -59,13 +56,10 @@ function RecentLocationDisplay({
             />
             <ArrowIcon />
           </div>
-        </InternalLink>
+        </InternalLinkContent>
       </div>
       <div className="hidden sm:block">
-        <InternalLink
-          href={`/location/current?location=${location}`}
-          isTextLink={false}
-        >
+        <InternalLinkContent href={`/location/current?location=${location}`}>
           <div className="w-40 px-8 py-6 text-center border border-t-grey-b border-r-grey-a border-b-grey-a border-l-grey-b">
             <WeatherDisplaySmallTall
               svgId={weather[0].id}
@@ -75,7 +69,7 @@ function RecentLocationDisplay({
               weatherName={weather[0].main}
             />
           </div>
-        </InternalLink>
+        </InternalLinkContent>
       </div>
     </>
   );

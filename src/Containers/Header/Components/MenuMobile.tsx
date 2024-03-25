@@ -4,7 +4,7 @@ import { ActiveModalContext } from "../../../contexts/activeModalContext";
 import { UserLocationContext } from "../../../contexts/userLocationContext";
 import { UserPrefersNoLocationContext } from "../../../contexts/userPrefersNoLocationContext";
 import CloseIcon from "../../../svg/iconSvgs/Components/Close";
-import { LinkButton, InternalLink } from "../../../BaseComponents";
+import { LinkButton, InternalLinkText } from "../../../BaseComponents";
 import SelectTime from "./SelectTime";
 import SelectUnits from "./SelectUnits";
 
@@ -96,18 +96,18 @@ function MenuMobile({
         </div>
         <div className="flex justify-between">
           <nav className="flex flex-col gap-6">
-            <InternalLink
+            <InternalLinkText
               href="/cities"
               handleClick={() => handleNavLinkClick("/cities")}
             >
               Cities
-            </InternalLink>
-            <InternalLink
+            </InternalLinkText>
+            <InternalLinkText
               href="/news"
               handleClick={() => handleNavLinkClick("/news")}
             >
               News
-            </InternalLink>
+            </InternalLinkText>
           </nav>
           <div className="flex flex-col items-end gap-6">
             <SelectTime handleCloseMenu={() => setIsMobileMenuOpen(false)} />

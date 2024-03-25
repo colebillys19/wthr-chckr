@@ -1,4 +1,4 @@
-import { InternalLink } from "../BaseComponents";
+import { InternalLinkText } from "../BaseComponents";
 
 type TabNavPropsType = {
   location: string;
@@ -9,17 +9,17 @@ function TabNav({ location }: TabNavPropsType) {
 
   return (
     <nav>
-      <InternalLink href={`/location/current?location=${location}`}>
+      <InternalLinkText href={`/location/current?location=${location}`}>
         Current
-      </InternalLink>
+      </InternalLinkText>
       <span>&nbsp;</span>
-      <InternalLink href={`/location/hourly?location=${location}`}>
+      <InternalLinkText href={`/location/hourly?location=${location}`}>
         Hourly
-      </InternalLink>
+      </InternalLinkText>
       <span>&nbsp;</span>
-      <InternalLink href={`/location/daily?location=${location}`}>
+      <InternalLinkText href={`/location/daily?location=${location}`}>
         Daily
-      </InternalLink>
+      </InternalLinkText>
     </nav>
   );
 }

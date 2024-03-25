@@ -1,24 +1,19 @@
 import { ReactNode } from "react";
 import { NavLink } from "react-router-dom";
 
-type InternalLinkPropsType = {
+type InternalLinkTextPropsType = {
   href: string;
   handleClick?: () => void;
   children: ReactNode;
-  isTextLink?: boolean;
 };
 
-function InternalLink({
+function InternalLinkText({
   href,
   handleClick = () => null,
   children,
-  isTextLink = true,
-}: InternalLinkPropsType) {
+}: InternalLinkTextPropsType) {
   const handleClassName = ({ isActive }: { isActive: boolean }) => {
-    if (isActive) {
-      return "pointer-events-none";
-    }
-    return isTextLink ? "underline hover:no-underline" : "";
+    return isActive ? "pointer-events-none" : "underline hover:no-underline";
   };
 
   return (
@@ -28,4 +23,4 @@ function InternalLink({
   );
 }
 
-export default InternalLink;
+export default InternalLinkText;

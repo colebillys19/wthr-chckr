@@ -6,7 +6,8 @@ import ButtonPrimary from "./ButtonPrimary";
 import ButtonSecondary from "./ButtonSecondary";
 import LinkButton from "./LinkButton";
 import ExternalLink from "./ExternalLink";
-import InternalLink from "./InternalLink";
+import InternalLinkText from "./InternalLinkText";
+import InternalLinkContent from "./InternalLinkContent";
 
 export {
   WeatherDisplayLarge,
@@ -17,5 +18,6 @@ export {
   ButtonSecondary,
   LinkButton,
   ExternalLink,
-  InternalLink,
+  InternalLinkText,
+  InternalLinkContent,
 };

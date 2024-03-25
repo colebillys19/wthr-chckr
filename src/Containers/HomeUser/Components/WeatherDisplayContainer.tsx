@@ -1,6 +1,6 @@
 import { useContext, useMemo } from "react";
 
-import { InternalLink } from "../../../BaseComponents";
+import { InternalLinkText } from "../../../BaseComponents";
 import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import { TimeTypeContext } from "../../../contexts/timeTypeContext";
 import { OpenWeatherMapDataType } from "../../../utils/types/openWeatherMap";
@@ -83,9 +83,9 @@ function WeatherDisplayContainer({
         sunset={sunset}
       />
       <div>
-        <InternalLink href={`/location/current?location=${userLocation}`}>
+        <InternalLinkText href={`/location/current?location=${userLocation}`}>
           See more
-        </InternalLink>
+        </InternalLinkText>
       </div>
     </div>
   );
