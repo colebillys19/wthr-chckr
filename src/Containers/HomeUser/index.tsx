@@ -8,12 +8,17 @@ type HomeUserPropsType = {
   recentLocations: RecentLocationType[];
 };
 
-function HomeUser({ userPrefersNoLocation, recentLocations }: HomeUserPropsType) {
+function HomeUser({
+  userPrefersNoLocation,
+  recentLocations,
+}: HomeUserPropsType) {
   //
 
   return (
     <div className="relative px-6 py-8">
-      {!userPrefersNoLocation && <UserLocation />}
+      {!userPrefersNoLocation && (
+        <UserLocation isRecentLocationsLength={!!recentLocations.length} />
+      )}
       {!!recentLocations.length && <RecentLocations />}
       <ShadowDiv />
     </div>
