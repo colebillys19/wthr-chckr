@@ -1,8 +1,8 @@
 import Skeleton from './Skeleton';
 import ErrorComponent from './ErrorComponent';
-import Display from './Display';
+import List from './List';
 
-function DisplayContainer({ isLoading, error, data }: any) {
+function NewsList({ isLoading, error, data }: any) {
   //
 
   if (isLoading) {
@@ -13,7 +13,7 @@ function DisplayContainer({ isLoading, error, data }: any) {
     return <ErrorComponent error={error} />;
   }
 
-  return <Display data={data} />;
+  return <List data={data} />;
 }
 
-export default DisplayContainer;
+export default NewsList;

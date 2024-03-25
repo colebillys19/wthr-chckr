@@ -3,6 +3,7 @@ import Modal from "./Modal";
 import RecentLocationManager from "./RecentLocationManager";
 import SetLocationFlow from "./SetLocationFlow";
 import WeatherMap from "./WeatherMap";
+import NewsList from "./NewsList";
 
 export {
   LocationListItemResponsive,
@@ -10,4 +11,5 @@ export {
   RecentLocationManager,
   SetLocationFlow,
   WeatherMap,
+  NewsList,
 };

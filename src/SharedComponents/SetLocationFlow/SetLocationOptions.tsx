@@ -105,7 +105,7 @@ function SetLocationOptions({
       <div className={containerClasses}>
         <ButtonPrimary
           handleClick={handleEnterLocation}
-          text="Enter location"
+          text="Enter my location"
           isDisabled={isGeolocating}
         />
         <div className={geolocateErrorAContainerClasses}>

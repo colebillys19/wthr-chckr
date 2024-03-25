@@ -2,8 +2,8 @@ import { useContext, useMemo } from "react";
 
 import { UserPrefersNoLocationContext } from "../../contexts/userPrefersNoLocationContext";
 import { RecentLocationsContext } from "../../contexts/recentLocationsContext";
-// import HomeCities from "../HomeCities";
-// import HomeNews from "../HomeNews";
+import HomeCities from "../HomeCities";
+import HomeNews from "../HomeNews";
 import HomeSearch from "../HomeSearch";
 import HomeUser from "../HomeUser";
 import HomeMap from "../HomeMap";
@@ -27,8 +27,8 @@ function PageHome() {
         />
       )}
       {/* <HomeCities /> */}
-      <HomeMap />
-      {/* <HomeNews /> */}
+      {/* <HomeMap /> */}
+      <HomeNews />
     </main>
   );
 }

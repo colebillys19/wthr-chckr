@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { LinkButton, InternalLinkText } from "../../BaseComponents";
 import { LocationListItemResponsive } from "../../SharedComponents";
+import { ShadowDiv } from "../../SharedComponentsAux";
 import { citiesData } from "../../utils/constants";
 
 function HomeCities() {
@@ -11,7 +12,7 @@ function HomeCities() {
   const citiesNextFive = citiesData.slice(5, 10);
 
   return (
-    <div className="px-6 py-8">
+    <div className="relative px-6 py-8">
       <h2 className="mb-4 text-xl">Major Cities</h2>
       <ul className="flex flex-col flex-wrap gap-4 mb-4 sm:flex-row">
         {citiesFirstFive.map(({ location, name }) => (
@@ -35,6 +36,7 @@ function HomeCities() {
       {showNextFive && (
         <InternalLinkText href="/cities">Go to cities page</InternalLinkText>
       )}
+      <ShadowDiv />
     </div>
   );
 }
