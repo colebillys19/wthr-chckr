@@ -30,7 +30,7 @@ function ModalDisplay() {
   return (
     <div
       onClick={handleBackdropClick}
-      className="absolute top-0 left-0 flex justify-center items-center w-screen h-screen z-10 bg-black bg-opacity-30"
+      className="absolute top-0 left-0 flex justify-center items-center w-screen h-screen z-20 bg-black bg-opacity-30"
     >
       {activeModal === "setLocation" && <ModalSetLocation />}
       {activeModal === "temp" && <ModalTemp />}

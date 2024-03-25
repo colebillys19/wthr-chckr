@@ -13,7 +13,7 @@ function WeatherSvg({ id, isDayTime, size }: WeatherSvgPropsType) {
   }
   const SvgComponent = weatherSvgDict[idToUse];
   return (
-    <div className="p-2 border-r border-b border-grey-b">
+    <div className="p-2 bg-white border-r border-b border-grey-b">
       <SvgComponent size={size} />
     </div>
   );
