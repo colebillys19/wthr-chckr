@@ -23,19 +23,20 @@ const RecentLocationManager = ({
       const isDuplicateName = recentLocations.some(
         ({ name: recentLocationName }) => name === recentLocationName
       );
-      if (!isDuplicateName) {
+      if (isDuplicateName) {
+        const filteredRecentLocations = recentLocations.filter(
+          (recentLocation) => recentLocation.name !== name
+        );
+        updateRecentLocations([
+          { location, name },
+          ...filteredRecentLocations.slice(0, 2),
+        ]);
+      } else {
         updateRecentLocations([
           { location, name },
           ...recentLocations.slice(0, 2),
         ]);
       }
-      const filteredRecentLocations = recentLocations.filter(
-        (recentLocation) => recentLocation.name !== name
-      );
-      updateRecentLocations([
-        { location, name },
-        ...filteredRecentLocations.slice(0, 2),
-      ]);
     }
   }, []);
 
