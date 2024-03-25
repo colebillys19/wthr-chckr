@@ -6,7 +6,7 @@ import BurgerIcon from "./svg/iconSvgs/Components/Burger";
 import CloseIcon from "./svg/iconSvgs/Components/Close";
 import MagIconB from "./svg/iconSvgs/Components/MagB";
 import NextIcon from "./svg/iconSvgs/Components/Next";
-import PlayIcon from "./svg/iconSvgs/Components/Play";
+import PlayPauseIcon from "./svg/iconSvgs/Components/PlayPause";
 import PrevIcon from "./svg/iconSvgs/Components/Prev";
 import SpinnerBIcon from "./svg/iconSvgs/Components/SpinnerB";
 
@@ -73,7 +73,7 @@ function BaseUiTest() {
         <ArrowIcon />
         <MagIconB />
         <NextIcon />
-        <PlayIcon />
+        <PlayPauseIcon />
         <PrevIcon />
       </div>
       <div>

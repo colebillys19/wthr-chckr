@@ -22,6 +22,7 @@ function WeatherMap({
   const [timezoneOffsetSec, setTimezoneOffsetSec] = useState(0);
   const [timezoneName, setTimezoneName] = useState("");
   const [error, setError] = useState("");
+  const [isIntervalPaused, setIsIntervalPaused] = useState(true);
 
   const mapRef = useRef<google.maps.Map | null>(null);
   const mapDivRef = useRef(null);
@@ -154,14 +155,16 @@ function WeatherMap({
    */
   const play = () => {
     intervalRef.current = setInterval(iterateLayer, 500);
+    setIsIntervalPaused(false);
   };
 
   /*
    *
    */
-  const stop = () => {
+  const pause = () => {
     clearInterval(intervalRef.current as NodeJS.Timeout);
     intervalRef.current = null;
+    setIsIntervalPaused(true);
   };
 
   /*
@@ -172,7 +175,7 @@ function WeatherMap({
       iterateLayer();
       play();
     } else {
-      stop();
+      pause();
     }
   };
 
@@ -181,7 +184,7 @@ function WeatherMap({
    */
   const handlePrevClick = () => {
     if (intervalRef.current !== null) {
-      stop();
+      pause();
     }
     const newLayerIndex =
       currentLayerIndexRef.current > 0
@@ -195,7 +198,7 @@ function WeatherMap({
    */
   const handleNextClick = () => {
     if (intervalRef.current !== null) {
-      stop();
+      pause();
     }
     iterateLayer();
   };
@@ -217,6 +220,7 @@ function WeatherMap({
         handlePrevClick={handlePrevClick}
         handlePlayPauseClick={handlePlayPauseClick}
         handleNextClick={handleNextClick}
+        isIntervalPaused={isIntervalPaused}
       />
       <div className="relative w-full max-w-3xl h-96 border border-grey-b">
         <div ref={mapDivRef} className="w-full h-full" />

@@ -2,6 +2,7 @@ import { useMemo } from "react";
 
 import PrevIcon from "../../svg/iconSvgs/Components/Prev";
 import PlayIcon from "../../svg/iconSvgs/Components/Play";
+import PauseIcon from "../../svg/iconSvgs/Components/Pause";
 import NextIcon from "../../svg/iconSvgs/Components/Next";
 import { getMapTime } from "./helpers";
 
@@ -14,6 +15,7 @@ type TimeControlsPropsType = {
   handlePrevClick: () => void;
   handlePlayPauseClick: () => void;
   handleNextClick: () => void;
+  isIntervalPaused: boolean;
 };
 
 function TimeControls({
@@ -25,6 +27,7 @@ function TimeControls({
   handlePrevClick,
   handlePlayPauseClick,
   handleNextClick,
+  isIntervalPaused,
 }: TimeControlsPropsType) {
   const mapTime = useMemo(
     () =>
@@ -47,8 +50,12 @@ function TimeControls({
         <button onClick={handlePrevClick}>
           <PrevIcon />
         </button>
-        <button onClick={handlePlayPauseClick}>
-          <PlayIcon />
+        <button
+          onClick={handlePlayPauseClick}
+          className="flex justify-center items-center w-4 h-5"
+        >
+          {!isIntervalPaused && <PauseIcon />}
+          {isIntervalPaused && <PlayIcon />}
         </button>
         <button onClick={handleNextClick}>
           <NextIcon />
