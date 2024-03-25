@@ -1,3 +1,6 @@
+import { useContext } from "react";
+
+import { UserLocationContext } from "../../contexts/userLocationContext";
 import { ShadowDiv } from "../../SharedComponentsAux";
 import { RecentLocationType } from "../../utils/types/misc";
 import UserLocation from "./Components/UserLocation";
@@ -12,10 +15,12 @@ function HomeUser({
   userPrefersNoLocation,
   recentLocations,
 }: HomeUserPropsType) {
-  //
+  const { userLocation } = useContext(UserLocationContext);
+
+  const bottomPadding = !!userLocation || !!recentLocations.length ? "pb-12" : "pb-8";
 
   return (
-    <div className="relative px-6 py-8">
+    <div className={`relative pt-8 px-6 ${bottomPadding}`}>
       {!userPrefersNoLocation && (
         <UserLocation isRecentLocationsLength={!!recentLocations.length} />
       )}

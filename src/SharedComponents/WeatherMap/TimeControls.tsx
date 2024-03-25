@@ -45,7 +45,7 @@ function TimeControls({
   }
 
   return (
-    <div className="h-11">
+    <div className="h-8">
       <div className="flex items-center gap-8">
         <button onClick={handlePrevClick}>
           <PrevIcon />

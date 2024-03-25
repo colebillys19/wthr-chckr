@@ -12,11 +12,12 @@ function UserLocation({ isRecentLocationsLength }: UserLocationPropsType) {
   const { userLocation } = useContext(UserLocationContext);
 
   if (!!userLocation) {
-    return <UserLocationDisplay />;
+    return <UserLocationDisplay isRecentLocationsLength={isRecentLocationsLength} />;
   }
 
   return (
-    <div className={isRecentLocationsLength ? "mb-8" : ""}>
+    <div>
+    {/* <div className={isRecentLocationsLength ? "mb-6" : ""}> */}
       <SetLocationFlow />
     </div>
   );

@@ -64,7 +64,7 @@ function WeatherDisplayContainer({
   const hourlyDataToUse = hourly.slice(1, 4);
 
   return (
-    <div className="mb-2">
+    <div>
       <WeatherDisplay
         locationName={name}
         currentTime={time}

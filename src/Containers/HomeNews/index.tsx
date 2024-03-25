@@ -34,9 +34,9 @@ function HomeNews() {
   const itemsToShow = isShowingFullList ? data.slice(0, 8) : data.slice(0, 3);
 
   return (
-    <div className="px-6 py-8">
-      <h2 className="mb-4 text-xl">News</h2>
-      <div className="mb-4">
+    <div className="pt-8 px-6 pb-36">
+      <h2 className="mb-6 text-xl">News</h2>
+      <div className="mb-6">
         <NewsList isLoading={isLoading} error={error} data={itemsToShow} />
       </div>
       {!isShowingFullList && (

@@ -16,11 +16,12 @@ function Display({ data }: DisplayPropsType) {
   }
 
   return (
-    <ul className="flex flex-col gap-4 max-w-screen-lg">
-      {data.map((item: NewsDataType) => {
+    <ul className="flex flex-col gap-6">
+      {data.map((item: NewsDataType, i) => {
         const { title, imgUrl, date, description, link } = item;
+        const hasBorder = i !== data.length - 1;
         return (
-          <li key={title}>
+          <li key={title} className={hasBorder ? 'pb-6 border-b border-grey-b' : ''}>
             <ListItemContent
               imgUrl={imgUrl}
               date={date}

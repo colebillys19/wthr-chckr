@@ -20,7 +20,7 @@ function WeatherDisplayAsyncContainer({
 }: WeatherDisplayAsyncContainerPropsType) {
   if (isLoading) {
     return (
-      <div className="flex mb-4">
+      <div className="flex">
         <Spinner />
       </div>
     );

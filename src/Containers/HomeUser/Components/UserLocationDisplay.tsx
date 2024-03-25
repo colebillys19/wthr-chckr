@@ -8,7 +8,13 @@ import useUpdateUserLocationName from "../../../utils/customHooks/useUpdateUserL
 import { LinkButton } from "../../../BaseComponents";
 import WeatherDisplayAsyncContainer from "./WeatherDisplayAsyncContainer";
 
-function UserLocationDisplay() {
+type UserLocationDisplayPropsType = {
+  isRecentLocationsLength: boolean;
+};
+
+function UserLocationDisplay({
+  isRecentLocationsLength,
+}: UserLocationDisplayPropsType) {
   const { userLocation } = useContext(UserLocationContext);
   const { userLocationName } = useContext(UserLocationNameContext);
 
@@ -23,8 +29,9 @@ function UserLocationDisplay() {
   };
 
   return (
-    <div className="mb-8">
-      <h2 className="mb-4 text-xl">My Location</h2>
+    // <div className={isRecentLocationsLength ? "mb-6" : ""}>
+    <div>
+      <h2 className="mb-6 text-xl">My Location</h2>
       <WeatherDisplayAsyncContainer
         data={data}
         error={error}
@@ -32,7 +39,9 @@ function UserLocationDisplay() {
         name={userLocationName}
         userLocation={userLocation}
       />
-      <LinkButton handleClick={handleClearLocation} text="Clear location" />
+      <div className="text-center sm:text-left">
+        <LinkButton handleClick={handleClearLocation} text="Clear location" />
+      </div>
     </div>
   );
 }

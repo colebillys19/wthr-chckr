@@ -20,8 +20,8 @@ function RecentLocations() {
 
   return (
     <>
-      <h2 className="mb-4 text-xl">Recently Viewed</h2>
-      <ul className="flex flex-col gap-4 mb-4 sm:flex-row">
+      <h2 className="text-xl">Recently Viewed</h2>
+      <ul className="flex flex-col gap-4 sm:flex-row">
         {recentLocations.map(({ location, name }) => (
           <li key={location}>
             <LocationListItemResponsive location={location} name={name} />
