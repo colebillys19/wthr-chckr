@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { LinkButton } from "../../../BaseComponents";
 import { RecentLocationsContext } from "../../../contexts/recentLocationsContext";
 import useUpdateRecentLocations from "../../../utils/customHooks/useUpdateRecentLocations";
-import RecentLocationDisplayContainer from "./RecentLocationDisplayContainer";
+import { LocationListItemResponsive } from "../../../SharedComponents";
 
 function RecentLocations() {
   const { recentLocations } = useContext(RecentLocationsContext);
@@ -24,7 +24,7 @@ function RecentLocations() {
       <ul className="flex flex-col gap-4 mb-4 sm:flex-row">
         {recentLocations.map(({ location, name }) => (
           <li key={location}>
-            <RecentLocationDisplayContainer location={location} name={name} />
+            <LocationListItemResponsive location={location} name={name} />
           </li>
         ))}
       </ul>

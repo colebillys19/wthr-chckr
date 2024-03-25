@@ -4,24 +4,24 @@ import {
   WeatherDisplaySmallWide,
   WeatherDisplaySmallTall,
   InternalLinkContent,
-} from "../../../BaseComponents";
-import ArrowIcon from "../../../svg/iconSvgs/Components/Arrow";
-import { UnitTypeContext } from "../../../contexts/unitTypeContext";
-import { TimeTypeContext } from "../../../contexts/timeTypeContext";
-import { OpenWeatherMapDataType } from "../../../utils/types/openWeatherMap";
-import { getTimeData } from "../../../utils/helpers";
+} from "../../BaseComponents";
+import ArrowIcon from "../../svg/iconSvgs/Components/Arrow";
+import { UnitTypeContext } from "../../contexts/unitTypeContext";
+import { TimeTypeContext } from "../../contexts/timeTypeContext";
+import { OpenWeatherMapDataType } from "../../utils/types/openWeatherMap";
+import { getTimeData } from "../../utils/helpers";
 
-type RecentLocationDisplayPropsType = {
+type LocationDisplayPropsType = {
   data: OpenWeatherMapDataType;
   name: string;
   location: string;
 };
 
-function RecentLocationDisplay({
+function LocationDisplay({
   data,
   name,
   location,
-}: RecentLocationDisplayPropsType) {
+}: LocationDisplayPropsType) {
   const { unitType } = useContext(UnitTypeContext);
   const { timeType } = useContext(TimeTypeContext);
 
@@ -75,4 +75,4 @@ function RecentLocationDisplay({
   );
 }
 
-export default RecentLocationDisplay;
+export default LocationDisplay;
