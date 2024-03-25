@@ -2,8 +2,9 @@ import { useContext, useEffect, useRef, useState } from "react";
 
 import { GoogleMapsContext } from "../../contexts/googleMapsContext";
 import { TimeTypeContext } from "../../contexts/timeTypeContext";
+import { Spinner } from "../../SharedComponentsAux";
+import TimeControls from "./TimeControls";
 import { mapStyles } from "./constants";
-import { getMapTime } from "./helpers";
 import { FrameType } from "./types";
 
 type WeatherMapPropsType = {
@@ -12,8 +13,12 @@ type WeatherMapPropsType = {
   useDeviceTime?: boolean;
 };
 
-function WeatherMap({ location, zoom, useDeviceTime }: WeatherMapPropsType) {
-  const [radarLayerTime, setRadarLayerTime] = useState(0);
+function WeatherMap({
+  location,
+  zoom,
+  useDeviceTime = false,
+}: WeatherMapPropsType) {
+  const [radarLayerTime, setRadarLayerTime] = useState(-1);
   const [timezoneOffsetSec, setTimezoneOffsetSec] = useState(0);
   const [timezoneName, setTimezoneName] = useState("");
   const [error, setError] = useState("");
@@ -203,53 +208,26 @@ function WeatherMap({ location, zoom, useDeviceTime }: WeatherMapPropsType) {
 
   return (
     <>
-      {isLoading && <div>Loading...</div>}
-      <div>
-        <span>
-          {getMapTime({
-            radarLayerTime,
-            timezoneOffsetSec,
-            timeType,
-            useDeviceTime,
-          })}
-        </span>
-        {timezoneName && <span>{` (${timezoneName})`}</span>}
+      <TimeControls
+        radarLayerTime={radarLayerTime}
+        timezoneOffsetSec={timezoneOffsetSec}
+        timeType={timeType}
+        useDeviceTime={useDeviceTime}
+        timezoneName={timezoneName}
+        handlePrevClick={handlePrevClick}
+        handlePlayPauseClick={handlePlayPauseClick}
+        handleNextClick={handleNextClick}
+      />
+      <div className="relative w-full max-w-3xl h-96 border border-grey-b">
+        <div ref={mapDivRef} className="w-full h-full" />
+        {isLoading && (
+          <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full">
+            <Spinner />
+          </div>
+        )}
       </div>
-      <div>
-        <button onClick={handlePrevClick}>prev</button>
-        <button onClick={handlePlayPauseClick}>play/stop</button>
-        <button onClick={handleNextClick}>next</button>
-      </div>
-      <div ref={mapDivRef} />
     </>
   );
 }
 
 export default WeatherMap;
-
-/*
-
-<>
-  {isLoading && <div>Loading...</div>}
-  <div style={isLoading ? { display: "none" } : {}}>
-    <div>
-      <span>
-        {getMapTime({
-          radarLayerTime,
-          timezoneOffsetSec,
-          timeType,
-          useDeviceTime,
-        })}
-      </span>
-      {timezoneName && <span>{` (${timezoneName})`}</span>}
-    </div>
-    <div>
-      <button onClick={handlePrevClick}>prev</button>
-      <button onClick={handlePlayPauseClick}>play/stop</button>
-      <button onClick={handleNextClick}>next</button>
-    </div>
-    <div ref={mapDivRef} />
-  </div>
-</>
-
-*/
