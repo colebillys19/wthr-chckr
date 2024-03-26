@@ -29,8 +29,7 @@ function UserLocationDisplay({
   };
 
   return (
-    // <div className={isRecentLocationsLength ? "mb-6" : ""}>
-    <div>
+    <div className={isRecentLocationsLength ? "mb-6" : ""}>
       <h2 className="mb-6 text-xl">My Location</h2>
       <WeatherDisplayAsyncContainer
         data={data}
@@ -39,7 +38,7 @@ function UserLocationDisplay({
         name={userLocationName}
         userLocation={userLocation}
       />
-      <div className="text-center sm:text-left">
+      <div>
         <LinkButton handleClick={handleClearLocation} text="Clear location" />
       </div>
     </div>

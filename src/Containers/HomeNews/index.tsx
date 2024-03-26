@@ -42,7 +42,7 @@ function HomeNews() {
       {!isShowingFullList && (
         <LinkButton
           handleClick={() => setIsShowingFullList(true)}
-          text="Show more"
+          text="Show more stories"
         />
       )}
       {isShowingFullList && (

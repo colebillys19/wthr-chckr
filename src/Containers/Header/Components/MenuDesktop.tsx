@@ -85,7 +85,7 @@ function MenuDesktop({
           <SelectTime handleCloseMenu={() => setIsDesktopMenuOpen(false)} />
           <SelectUnits handleCloseMenu={() => setIsDesktopMenuOpen(false)} />
           {showSetLocationButton && (
-            <LinkButton handleClick={handleSetLocation} text="Set location" />
+            <LinkButton handleClick={handleSetLocation} text="Set my location" />
           )}
         </div>
       </div>

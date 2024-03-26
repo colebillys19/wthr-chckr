@@ -23,14 +23,14 @@ function WeatherDisplayLarge({
 
   return (
     <div className="inline-block">
-      <div className="flex justify-center">
+      <div className="flex justify-center gap-6 mb-4">
         <WeatherSvg id={svgId} isDayTime={isDayTime} size={100} />
         <div className="flex flex-col justify-center items-center">
           <span className="text-xl font-bold">{temp}</span>
           <span className="text-xl">{weatherName}</span>
         </div>
       </div>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center gap-1">
         <LabelValueText label="Feels like:" value={feelsLike} />
         <LabelValueText label="Wind speed:" value={windSpeed} />
         <LabelValueText label="Humidity:" value={humidity} />

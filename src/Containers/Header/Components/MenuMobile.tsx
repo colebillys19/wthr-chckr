@@ -84,9 +84,9 @@ function MenuMobile({
   return (
     <div
       onClick={handleBackdropClick}
-      className="absolute top-0 left-0 w-screen h-screen z-20 bg-black bg-opacity-30"
+      className="absolute top-0 left-0 w-full h-screen z-20 bg-black bg-opacity-30"
     >
-      <div className="absolute top-0 left-0 w-screen px-6 pt-4 pb-12 bg-white border-b z-30">
+      <div className="absolute top-0 left-0 w-full px-6 pt-4 pb-12 bg-white border-b z-30">
         <div className="flex justify-end mb-6">
           <div className="flex h-6 items-center">
             <button onClick={handleCloseClick}>
@@ -113,7 +113,7 @@ function MenuMobile({
             <SelectTime handleCloseMenu={() => setIsMobileMenuOpen(false)} />
             <SelectUnits handleCloseMenu={() => setIsMobileMenuOpen(false)} />
             {showSetLocationButton && (
-              <LinkButton handleClick={handleSetLocation} text="Set location" />
+              <LinkButton handleClick={handleSetLocation} text="Set my location" />
             )}
           </div>
         </div>
