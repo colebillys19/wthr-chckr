@@ -1,4 +1,5 @@
-import { WeatherSvg } from "../../../SharedComponentsAux";
+import { WeatherDisplayLarge } from "../../../BaseComponents";
+import { LabelValueText, ShadowDiv } from "../../../SharedComponentsAux";
 
 type WeatherDisplayPropsType = {
   currentTime: string;
@@ -9,15 +10,14 @@ type WeatherDisplayPropsType = {
   feelsLike: string;
   windSpeed: string;
   humidity: string;
-  rainVolume: string;
-  snowVolume: string;
+  // rainVolume: string;
+  // snowVolume: string;
   dayName: string;
   todaySummary: string;
   todayDataArr: { label: string; value: string }[];
 };
 
 function WeatherDisplay({
-  currentTime,
   svgId,
   isDayTime,
   weatherName,
@@ -25,8 +25,8 @@ function WeatherDisplay({
   feelsLike,
   windSpeed,
   humidity,
-  rainVolume,
-  snowVolume,
+  // rainVolume,
+  // snowVolume,
   dayName,
   todaySummary,
   todayDataArr,
@@ -35,31 +35,29 @@ function WeatherDisplay({
 
   return (
     <div>
-      <h2>Current</h2>
-      <div>
-        <h3>{currentTime}</h3>
-        <div>
-          <WeatherSvg id={svgId} isDayTime={isDayTime} size={120} />
-        </div>
-        <div>{weatherName}</div>
-        <div>Temperature: {temp}</div>
-        <div>Feels like: {feelsLike}</div>
-        <div>Wind speed: {windSpeed}</div>
-        <div>Humidity: {humidity}</div>
-        {!!rainVolume && <div>Rain: {rainVolume}</div>}
-        {!!snowVolume && <div>Snow: {snowVolume}</div>}
+      <div className="relative flex justify-center px-6 py-8">
+        <WeatherDisplayLarge
+          svgId={svgId}
+          isDayTime={isDayTime}
+          temp={temp}
+          weatherName={weatherName}
+          feelsLike={feelsLike}
+          windSpeed={windSpeed}
+          humidity={humidity}
+        />
+        <ShadowDiv />
       </div>
-      <div>
-        <h3>{dayName} Summary</h3>
-        <div>{todaySummary}</div>
+      <div className="relative px-6 py-8">
+        <h4 className="text-xl mb-2">{dayName} Summary</h4>
+        <div className="mb-2">{todaySummary}</div>
         <ul>
           {todayDataArr.map(({ label, value }) => (
             <li key={label}>
-              <span>{label}:&nbsp;</span>
-              {value}
+              <LabelValueText label={label} value={value} />
             </li>
           ))}
         </ul>
+        <ShadowDiv />
       </div>
     </div>
   );

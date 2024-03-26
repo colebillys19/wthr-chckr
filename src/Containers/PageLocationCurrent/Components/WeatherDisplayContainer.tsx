@@ -29,8 +29,8 @@ function WeatherDisplayContainer({
     wind_speed: currentWindSpeed,
     sunrise,
     sunset,
-    rain: currentRain,
-    snow: currentSnow,
+    // rain: currentRain,
+    // snow: currentSnow,
   } = currentData;
 
   const tempUnit = useMemo(
@@ -41,14 +41,14 @@ function WeatherDisplayContainer({
     () => (unitType === "imperial" ? "mph" : "m/s"),
     [unitType]
   );
-  const rainVolume = useMemo(
-    () => (currentRain && currentRain["1h"] ? `${currentRain["1h"]} mm/h` : ""),
-    [currentRain]
-  );
-  const snowVolume = useMemo(
-    () => (currentSnow && currentSnow["1h"] ? `${currentSnow["1h"]} mm/h` : ""),
-    [currentSnow]
-  );
+  // const rainVolume = useMemo(
+  //   () => (currentRain && currentRain["1h"] ? `${currentRain["1h"]} mm/h` : ""),
+  //   [currentRain]
+  // );
+  // const snowVolume = useMemo(
+  //   () => (currentSnow && currentSnow["1h"] ? `${currentSnow["1h"]} mm/h` : ""),
+  //   [currentSnow]
+  // );
 
   const {
     day,
@@ -70,6 +70,9 @@ function WeatherDisplayContainer({
     temp: todayTemp,
     humidity: todayHumidity,
     wind_speed: todayWindSpeed,
+    rain: todayRain,
+    snow: todaySnow,
+    pop: todayPop,
   } = todayData;
 
   const { time: todaySunriseTime } = getTimeData({
@@ -113,6 +116,21 @@ function WeatherDisplayContainer({
     { label: "Avg. humidity", value: `${todayHumidity}%` },
   ];
 
+  if (!!todayRain) {
+    todayDataArr.push({ label: "Rain volume", value: `${todayRain} mm` });
+  }
+
+  if (!!todaySnow) {
+    todayDataArr.push({ label: "Snow volume", value: `${todaySnow} mm` });
+  }
+
+  if (!!todayPop) {
+    todayDataArr.push({
+      label: "Chance of precipitation",
+      value: `${todayPop}%`,
+    });
+  }
+
   return (
     <WeatherDisplay
       currentTime={currentTime}
@@ -123,8 +141,8 @@ function WeatherDisplayContainer({
       feelsLike={`${Math.round(currentFeelsLike)}${tempUnit}`}
       windSpeed={`${Math.round(currentWindSpeed)}${windUnit}`}
       humidity={`${currentHumidity}%`}
-      rainVolume={rainVolume}
-      snowVolume={snowVolume}
+      // rainVolume={rainVolume}
+      // snowVolume={snowVolume}
       dayName={day}
       todaySummary={todaySummary}
       todayDataArr={todayDataArr}

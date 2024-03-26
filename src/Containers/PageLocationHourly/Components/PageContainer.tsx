@@ -1,6 +1,6 @@
 import useFetchLocationDataAndName from "../../../utils/customHooks/useFetchLocationDataAndName";
 import { RecentLocationManager } from "../../../SharedComponents";
-import { TabNav } from "../../../SharedComponentsAux";
+import { TabNav } from "../../../SharedComponents";
 import ListContainer from "./ListContainer";
 import ErrorComponent from "./ErrorComponent";
 import Skeleton from "./Skeleton";

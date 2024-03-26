@@ -1,9 +1,10 @@
 import { MouseEvent, useMemo } from "react";
 
 type ButtonSecondaryPropsType = {
-  handleClick: (event: MouseEvent<HTMLButtonElement>) => void;
+  handleClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   text: string;
   isDisabled?: boolean;
+  isSubmit?: boolean;
 };
 
 function ButtonSecondary({
@@ -22,7 +23,7 @@ function ButtonSecondary({
 
   return (
     <button
-      onClick={handleClick}
+      onClick={handleClick ? handleClick : () => null}
       className={tailwindClasses}
       disabled={isDisabled}
     >
