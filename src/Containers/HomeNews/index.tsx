@@ -39,13 +39,13 @@ function HomeNews() {
       <div className="mb-6">
         <NewsList isLoading={isLoading} error={error} data={itemsToShow} />
       </div>
-      {!isShowingFullList && (
+      {!error && !isLoading && !isShowingFullList && (
         <LinkButton
           handleClick={() => setIsShowingFullList(true)}
           text="Show more stories"
         />
       )}
-      {isShowingFullList && (
+      {!error && !isLoading && isShowingFullList && (
         <InternalLinkText href="/news">Go to news page</InternalLinkText>
       )}
     </div>

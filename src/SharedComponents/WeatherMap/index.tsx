@@ -204,7 +204,7 @@ function WeatherMap({
   };
 
   if (error) {
-    return <div>{error}</div>;
+    return <div className="text-error">{error}</div>;
   }
 
   const isLoading = currentLayerIndexRef.current === -1;

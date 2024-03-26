@@ -5,7 +5,7 @@ type ErrorComponentPropsType = {
 function ErrorComponent({ error }: ErrorComponentPropsType) {
   //
 
-  return <div>error</div>;
+  return <div className="text-error">{error}</div>;
 }
 
 export default ErrorComponent;

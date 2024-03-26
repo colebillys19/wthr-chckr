@@ -1,7 +1,13 @@
+import { Spinner } from "../../SharedComponentsAux";
+
 function Skeleton() {
   //
 
-  return <div>skeleton</div>;
+  return (
+    <div className="flex">
+      <Spinner />
+    </div>
+  );
 }
 
 export default Skeleton;

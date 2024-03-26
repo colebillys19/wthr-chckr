@@ -19,7 +19,7 @@ function LocationListItemResponsive({
   }
 
   if (!!error) {
-    return <ErrorComponent />;
+    return <ErrorComponent error={error} />;
   }
 
   return <LocationDisplay data={data} name={name} location={location} />;
