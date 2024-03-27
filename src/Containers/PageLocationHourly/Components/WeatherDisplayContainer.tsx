@@ -44,8 +44,8 @@ function WeatherDisplayContainer({
 
   const tempUnit = useMemo(() => unitType === "imperial" ? "°F" : "°C", [unitType]);
   const windUnit = useMemo(() => unitType === "imperial" ? "mph" : "m/s", [unitType]);
-  const rainVolume = useMemo(() => rain && rain["1h"] ? `${rain["1h"]} mm/h` : "", [rain]);
-  const snowVolume = useMemo(() => snow && snow["1h"] ? `${snow["1h"]} mm/h` : "", [snow]);
+  const rainVolume = rain && rain["1h"] ? `${rain["1h"]} mm/h` : "";
+  const snowVolume = snow && snow["1h"] ? `${snow["1h"]} mm/h` : "";
 
   return (
     <WeatherDisplay

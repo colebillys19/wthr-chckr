@@ -4,6 +4,7 @@ import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import { TimeTypeContext } from "../../../contexts/timeTypeContext";
 import { CurrentType, DailyType } from "../../../utils/types/openWeatherMap";
 import { getTimeData, getHighLow } from "../../../utils/helpers";
+import { getTodayDataArr } from "../helpers";
 import WeatherDisplay from "./WeatherDisplay";
 
 type WeatherDisplayContainerPropsType = {
@@ -30,8 +31,8 @@ function WeatherDisplayContainer({
     weather: currentWeather,
     humidity: currentHumidity,
     wind_speed: currentWindSpeed,
-    // rain: currentRain,
-    // snow: currentSnow,
+    rain: currentRain,
+    snow: currentSnow,
   } = currentData;
 
   const tempUnit = useMemo(
@@ -42,14 +43,11 @@ function WeatherDisplayContainer({
     () => (unitType === "imperial" ? "mph" : "m/s"),
     [unitType]
   );
-  // const rainVolume = useMemo(
-  //   () => (currentRain && currentRain["1h"] ? `${currentRain["1h"]} mm/h` : ""),
-  //   [currentRain]
-  // );
-  // const snowVolume = useMemo(
-  //   () => (currentSnow && currentSnow["1h"] ? `${currentSnow["1h"]} mm/h` : ""),
-  //   [currentSnow]
-  // );
+
+  const currentRainVolume =
+    currentRain && currentRain["1h"] ? `${currentRain["1h"]} mm/h` : "";
+  const currentSnowVolume =
+    currentSnow && currentSnow["1h"] ? `${currentSnow["1h"]} mm/h` : "";
 
   const {
     sunrise: todaySunrise,
@@ -79,46 +77,21 @@ function WeatherDisplayContainer({
   const { high: todayFeelsLikeHigh, low: todayFeelsLikeLow } =
     getHighLow(todayFeelsLike);
 
-  const todayDataArr = [
-    { label: "Sunrise", value: todaySunriseTime },
-    { label: "Sunset", value: todaySunsetTime },
-    {
-      label: "Temperature (high)",
-      value: `${Math.round(todayTemp.max)}${tempUnit}`,
-    },
-    {
-      label: "Temperature (low)",
-      value: `${Math.round(todayTemp.min)}${tempUnit}`,
-    },
-    {
-      label: "Feels like (high)",
-      value: `${Math.round(todayFeelsLikeHigh)}${tempUnit}`,
-    },
-    {
-      label: "Feels like (low)",
-      value: `${Math.round(todayFeelsLikeLow)}${tempUnit}`,
-    },
-    {
-      label: "Avg. wind speed",
-      value: `${Math.round(todayWindSpeed)}${windUnit}`,
-    },
-    { label: "Avg. humidity", value: `${todayHumidity}%` },
-  ];
-
-  if (!!todayRain) {
-    todayDataArr.push({ label: "Rain volume", value: `${todayRain} mm` });
-  }
-
-  if (!!todaySnow) {
-    todayDataArr.push({ label: "Snow volume", value: `${todaySnow} mm` });
-  }
-
-  if (!!todayPop) {
-    todayDataArr.push({
-      label: "Chance of precipitation",
-      value: `${todayPop}%`,
-    });
-  }
+  const todayDataArr = getTodayDataArr({
+    todayRain,
+    todaySnow,
+    todaySunriseTime,
+    todaySunsetTime,
+    todayTempMax: todayTemp.max,
+    todayTempMin: todayTemp.min,
+    todayFeelsLikeHigh,
+    todayFeelsLikeLow,
+    todayWindSpeed,
+    todayPop,
+    todayHumidity,
+    tempUnit,
+    windUnit,
+  });
 
   return (
     <WeatherDisplay
@@ -129,8 +102,8 @@ function WeatherDisplayContainer({
       feelsLike={`${Math.round(currentFeelsLike)}${tempUnit}`}
       windSpeed={`${Math.round(currentWindSpeed)}${windUnit}`}
       humidity={`${currentHumidity}%`}
-      // rainVolume={rainVolume}
-      // snowVolume={snowVolume}
+      rainVolume={currentRainVolume}
+      snowVolume={currentSnowVolume}
       dayName={dayName}
       todaySummary={todaySummary}
       todayDataArr={todayDataArr}
