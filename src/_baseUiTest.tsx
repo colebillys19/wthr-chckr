@@ -21,7 +21,6 @@ import {
   LinkButton,
   ExternalLink,
 } from "./BaseComponents";
-import Hourly from "./Containers/PageLocationHourly/Components/WeatherDisplay";
 import Daily from "./Containers/PageLocationDaily/Components/WeatherDisplay";
 import HomeUser from "./Containers/HomeUser/Components/WeatherDisplay";
 
@@ -94,20 +93,6 @@ function BaseUiTest() {
         isDayTime={false}
         temp="57°F"
         weatherName="Clear"
-      />
-      <hr className="my-8 max-w-96" />
-      <Hourly
-        svdId={802}
-        isDayTime={true}
-        time="2:00 PM"
-        temp="44°F"
-        weatherName="Clouds"
-        feelsLike="42°F"
-        windSpeed="4 mph"
-        precChance="9%"
-        rainVolume=""
-        snowVolume="6 mm/h"
-        humidity="1%"
       />
       <hr className="my-8 max-w-96" />
       <Daily
