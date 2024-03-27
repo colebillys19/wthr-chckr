@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext, useEffect, useMemo } from "react";
 
 import { UserPrefersNoLocationContext } from "../../contexts/userPrefersNoLocationContext";
 import { RecentLocationsContext } from "../../contexts/recentLocationsContext";
@@ -11,6 +11,10 @@ import HomeMap from "../HomeMap";
 function PageHome() {
   const { userPrefersNoLocation } = useContext(UserPrefersNoLocationContext);
   const { recentLocations } = useContext(RecentLocationsContext);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const hideHomeUser = useMemo(
     () => userPrefersNoLocation && !recentLocations.length,
