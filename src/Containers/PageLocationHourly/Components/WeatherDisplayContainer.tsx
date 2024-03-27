@@ -11,6 +11,7 @@ type WeatherDisplayContainerPropsType = {
   timezoneOffset: number;
   sunrise: number;
   sunset: number;
+  showDivider: boolean;
 };
 
 function WeatherDisplayContainer({
@@ -18,6 +19,7 @@ function WeatherDisplayContainer({
   timezoneOffset,
   sunrise,
   sunset,
+  showDivider,
 }: WeatherDisplayContainerPropsType) {
   const { unitType } = useContext(UnitTypeContext);
   const { timeType } = useContext(TimeTypeContext);
@@ -48,6 +50,7 @@ function WeatherDisplayContainer({
   const snowVolume = snow && snow["1h"] ? `${snow["1h"]} mm/h` : "";
 
   return (
+    <div className="flex flex-col items-center sm:items-start">
     <WeatherDisplay
       svdId={weather[0].id}
       isDayTime={isDayTime}
@@ -61,6 +64,12 @@ function WeatherDisplayContainer({
       snowVolume={snowVolume}
       humidity={`${humidity}%`}
     />
+    {showDivider && (
+      <div className="flex justify-center mt-8 w-screen sm:justify-start">
+        <hr className="w-1/2 border-grey-b" />
+      </div>
+    )}
+    </div>
   );
 }
 
