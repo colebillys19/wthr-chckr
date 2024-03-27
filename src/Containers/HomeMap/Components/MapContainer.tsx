@@ -9,9 +9,9 @@ function MapContainer() {
     if (window.innerWidth < 512) {
       setZoomLevel(3);
     } else if (window.innerWidth < 768) {
-      setZoomLevel(3.5);
+      setZoomLevel(3.2);
     } else {
-      setZoomLevel(4);
+      setZoomLevel(3.7);
     }
   }, []);
 

@@ -12,16 +12,20 @@ function TabNav({ location }: TabNavPropsType) {
   return (
     <nav className="inline-flex">
       <NavButton
-        toPath="/location/current"
+        toPath={`/location/current?location=${location}`}
         text="Current"
         currentPath={pathname}
       />
       <NavButton
-        toPath="/location/hourly"
+        toPath={`/location/hourly?location=${location}`}
         text="Hourly"
         currentPath={pathname}
       />
-      <NavButton toPath="/location/daily" text="Daily" currentPath={pathname} />
+      <NavButton
+        toPath={`/location/daily?location=${location}`}
+        text="Daily"
+        currentPath={pathname}
+      />
     </nav>
   );
 }
