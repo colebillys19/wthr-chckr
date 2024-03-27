@@ -33,6 +33,16 @@ function MenuDesktop({
     };
   }, [setIsDesktopMenuOpen]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      window.scrollTo(0, 0);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const showSetLocationButton = useMemo(() => {
     if (userPrefersNoLocation) {
       return true;
@@ -85,7 +95,10 @@ function MenuDesktop({
           <SelectTime handleCloseMenu={() => setIsDesktopMenuOpen(false)} />
           <SelectUnits handleCloseMenu={() => setIsDesktopMenuOpen(false)} />
           {showSetLocationButton && (
-            <LinkButton handleClick={handleSetLocation} text="Set my location" />
+            <LinkButton
+              handleClick={handleSetLocation}
+              text="Set my location"
+            />
           )}
         </div>
       </div>

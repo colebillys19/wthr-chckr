@@ -21,6 +21,16 @@ function ModalDisplay() {
     };
   }, [setActiveModal]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      window.scrollTo(0, 0);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const handleBackdropClick = (e: MouseEvent) => {
     if (e.target === e.currentTarget) {
       setActiveModal("");

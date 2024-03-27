@@ -35,6 +35,16 @@ function MenuMobile({
     };
   }, [setIsMobileMenuOpen]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      window.scrollTo(0, 0);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const showSetLocationButton = useMemo(() => {
     if (userPrefersNoLocation) {
       return true;
@@ -113,7 +123,10 @@ function MenuMobile({
             <SelectTime handleCloseMenu={() => setIsMobileMenuOpen(false)} />
             <SelectUnits handleCloseMenu={() => setIsMobileMenuOpen(false)} />
             {showSetLocationButton && (
-              <LinkButton handleClick={handleSetLocation} text="Set my location" />
+              <LinkButton
+                handleClick={handleSetLocation}
+                text="Set my location"
+              />
             )}
           </div>
         </div>
