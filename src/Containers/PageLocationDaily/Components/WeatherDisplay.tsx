@@ -32,13 +32,13 @@ function WeatherDisplayTall({
   //
 
   return (
-    <div className="inline-flex flex-col items-center sm:flex-row sm:items-start">
-      <div className="flex flex-col items-center sm:items-end">
-        <span className="text-xl font-bold">{dayName}</span>
+    <div className="inline-flex flex-col items-center sm:items-start">
+      <span className="text-xl font-bold mb-4">{dayName}</span>
+      <div className="mb-4">
         <WeatherSvg id={svgId} isDayTime={true} size={60} />
-        <span className="text-center sm:text-right">{summary}</span>
       </div>
-      <div className="flex flex-col items-center sm:items-start">
+      <span className="text-center mb-4 sm:text-right">{summary}</span>
+      <div className="flex flex-col items-center gap-1 sm:items-start">
         <LabelValueText label="Temperature (high)" value={tempMax} />
         <LabelValueText label="Temperature (low)" value={tempMin} />
         <LabelValueText label="Feels like (high)" value={feelsLikeMax} />

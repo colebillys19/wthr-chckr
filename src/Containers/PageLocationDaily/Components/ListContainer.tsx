@@ -10,7 +10,7 @@ type ListContainerPropsType = {
 
 function ListContainer({ data, timezoneOffset }: ListContainerPropsType) {
   return (
-    <ul>
+    <ul className="flex flex-col items-center gap-8 mt-8 sm:items-start">
       {data.map((dailyData, i) => (
         <li key={uuidv4()}>
           <WeatherDisplayContainer
