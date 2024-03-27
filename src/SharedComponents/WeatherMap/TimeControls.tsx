@@ -60,7 +60,7 @@ function TimeControls({
         <button onClick={handleNextClick}>
           <NextIcon />
         </button>
-        <div>
+        <div className="line-clamp-1">
           <span>{mapTime}</span>
           {timezoneName && <span>{` (${timezoneName})`}</span>}
         </div>

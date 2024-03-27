@@ -39,16 +39,16 @@ function WeatherDisplayTall({
           <span>{weatherName}</span>
         </div>
         <div className="flex flex-col">
-          <LabelValueText label="Feels like:" value={feelsLike} />
-          <LabelValueText label="Wind speed:" value={windSpeed} />
-          <LabelValueText label="Chance of precipitation:" value={precChance} />
+          <LabelValueText label="Feels like" value={feelsLike} />
+          <LabelValueText label="Wind speed" value={windSpeed} />
+          <LabelValueText label="Chance of precipitation" value={precChance} />
           {!!rainVolume && (
-            <LabelValueText label="Rain volume:" value={rainVolume} />
+            <LabelValueText label="Rain volume" value={rainVolume} />
           )}
           {!!snowVolume && (
-            <LabelValueText label="Snow volume:" value={snowVolume} />
+            <LabelValueText label="Snow volume" value={snowVolume} />
           )}
-          <LabelValueText label="Humidity:" value={humidity} />
+          <LabelValueText label="Humidity" value={humidity} />
         </div>
       </div>
     </div>

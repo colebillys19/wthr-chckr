@@ -39,19 +39,19 @@ function WeatherDisplayTall({
         <span className="text-center sm:text-right">{summary}</span>
       </div>
       <div className="flex flex-col items-center sm:items-start">
-        <LabelValueText label="Temperature (high):" value={tempMax} />
-        <LabelValueText label="Temperature (low):" value={tempMin} />
-        <LabelValueText label="Feels like (high):" value={feelsLikeMax} />
-        <LabelValueText label="Feels like (low):" value={feelsLikeMin} />
-        <LabelValueText label="Average wind speed:" value={windSpeed} />
-        <LabelValueText label="Chance of precipitation:" value={precChance} />
+        <LabelValueText label="Temperature (high)" value={tempMax} />
+        <LabelValueText label="Temperature (low)" value={tempMin} />
+        <LabelValueText label="Feels like (high)" value={feelsLikeMax} />
+        <LabelValueText label="Feels like (low)" value={feelsLikeMin} />
+        <LabelValueText label="Average wind speed" value={windSpeed} />
+        <LabelValueText label="Chance of precipitation" value={precChance} />
         {!!rainVolume && (
-          <LabelValueText label="Rain volume:" value={rainVolume} />
+          <LabelValueText label="Rain volume" value={rainVolume} />
         )}
         {!!snowVolume && (
-          <LabelValueText label="Snow volume:" value={snowVolume} />
+          <LabelValueText label="Snow volume" value={snowVolume} />
         )}
-        <LabelValueText label="Average humidity:" value={humidity} />
+        <LabelValueText label="Average humidity" value={humidity} />
       </div>
     </div>
   );

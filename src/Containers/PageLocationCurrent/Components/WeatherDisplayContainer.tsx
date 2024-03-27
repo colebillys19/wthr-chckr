@@ -10,25 +10,26 @@ type WeatherDisplayContainerPropsType = {
   currentData: CurrentType;
   todayData: DailyType;
   timezoneOffset: number;
+  dayName: string;
+  isDayTime: boolean;
 };
 
 function WeatherDisplayContainer({
   currentData,
   todayData,
   timezoneOffset,
+  dayName,
+  isDayTime,
 }: WeatherDisplayContainerPropsType) {
   const { unitType } = useContext(UnitTypeContext);
   const { timeType } = useContext(TimeTypeContext);
 
   const {
-    dt: currentDt,
     temp: currentTemp,
     feels_like: currentFeelsLike,
     weather: currentWeather,
     humidity: currentHumidity,
     wind_speed: currentWindSpeed,
-    sunrise,
-    sunset,
     // rain: currentRain,
     // snow: currentSnow,
   } = currentData;
@@ -49,18 +50,6 @@ function WeatherDisplayContainer({
   //   () => (currentSnow && currentSnow["1h"] ? `${currentSnow["1h"]} mm/h` : ""),
   //   [currentSnow]
   // );
-
-  const {
-    day,
-    isDayTime,
-    time: currentTime,
-  } = getTimeData({
-    dtSec: currentDt,
-    apiTimezoneOffsetSec: timezoneOffset,
-    sunriseSec: sunrise,
-    sunsetSec: sunset,
-    timeType,
-  });
 
   const {
     sunrise: todaySunrise,
@@ -91,8 +80,8 @@ function WeatherDisplayContainer({
     getHighLow(todayFeelsLike);
 
   const todayDataArr = [
-    { label: "sunrise", value: todaySunriseTime },
-    { label: "sunset", value: todaySunsetTime },
+    { label: "Sunrise", value: todaySunriseTime },
+    { label: "Sunset", value: todaySunsetTime },
     {
       label: "Temperature (high)",
       value: `${Math.round(todayTemp.max)}${tempUnit}`,
@@ -133,7 +122,6 @@ function WeatherDisplayContainer({
 
   return (
     <WeatherDisplay
-      currentTime={currentTime}
       svgId={currentWeather[0].id}
       isDayTime={isDayTime}
       weatherName={currentWeather[0].main}
@@ -143,7 +131,7 @@ function WeatherDisplayContainer({
       humidity={`${currentHumidity}%`}
       // rainVolume={rainVolume}
       // snowVolume={snowVolume}
-      dayName={day}
+      dayName={dayName}
       todaySummary={todaySummary}
       todayDataArr={todayDataArr}
     />

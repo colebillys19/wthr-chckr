@@ -1,5 +1,5 @@
 import { HourlyType } from "../../../utils/types/openWeatherMap";
-import { WeatherDisplayLarge } from "../../../BaseComponents";
+import { LabelValueText, WeatherSvg } from "../../../SharedComponentsAux";
 import WeatherDisplayHourlyContainer from "./WeatherDisplayHourlyContainer";
 
 type WeatherDisplayPropsType = {
@@ -48,16 +48,19 @@ function WeatherDisplay({
         <span className="shrink-0">{currentTime}</span>
       </div>
       <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-start sm:gap-8">
-        <div>
-          <WeatherDisplayLarge
-            svgId={svgId}
-            isDayTime={isDayTime}
-            temp={temp}
-            weatherName={weatherName}
-            feelsLike={feelsLike}
-            windSpeed={windSpeed}
-            humidity={humidity}
-          />
+        <div className="inline-block">
+          <div className="flex justify-center gap-6 mb-4">
+            <WeatherSvg id={svgId} isDayTime={isDayTime} size={100} />
+            <div className="flex flex-col justify-center items-center gap-1">
+              <span className="text-xl font-bold">{temp}</span>
+              <span className="text-xl">{weatherName}</span>
+            </div>
+          </div>
+          <div className="flex flex-col items-center gap-1">
+            <LabelValueText label="Feels like" value={feelsLike} />
+            <LabelValueText label="Wind speed" value={windSpeed} />
+            <LabelValueText label="Humidity" value={humidity} />
+          </div>
         </div>
         <div className="flex flex-col gap-4">
           {hourlyDataArr.map((hourlyData) => {

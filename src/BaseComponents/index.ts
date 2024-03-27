@@ -1,4 +1,3 @@
-import WeatherDisplayLarge from "./WeatherDisplayLarge";
 import WeatherDisplaySmallTall from "./WeatherDisplaySmallTall";
 import WeatherDisplaySmallWide from "./WeatherDisplaySmallWide";
 import TextField from "./TextField";
@@ -10,7 +9,6 @@ import InternalLinkText from "./InternalLinkText";
 import InternalLinkContent from "./InternalLinkContent";
 
 export {
-  WeatherDisplayLarge,
   WeatherDisplaySmallTall,
   WeatherDisplaySmallWide,
   TextField,

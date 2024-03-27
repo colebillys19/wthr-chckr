@@ -13,7 +13,6 @@ import SpinnerBIcon from "./svg/iconSvgs/Components/SpinnerB";
 import SearchForm from "./Containers/HomeSearch/Components/SearchForm";
 
 import {
-  WeatherDisplayLarge,
   WeatherDisplaySmallTall,
   WeatherDisplaySmallWide,
   TextField,
@@ -80,15 +79,6 @@ function BaseUiTest() {
         <SpinnerBIcon />
       </div>
       <h2 className="text-3xl font-bold my-8">Weather Displays</h2>
-      <WeatherDisplayLarge
-        svgId={802}
-        isDayTime={false}
-        temp="57°F"
-        weatherName="Clear"
-        feelsLike="54°F"
-        windSpeed="5 mph"
-        humidity="11%"
-      />
       <hr className="my-8 max-w-96" />
       <WeatherDisplaySmallTall
         mainText="Winston-Salem, NC"
