@@ -17,6 +17,7 @@ function ListContainer({ data, timezoneOffset }: ListContainerPropsType) {
             data={dailyData}
             timezoneOffset={timezoneOffset}
             isToday={i === 0}
+            showDivider={i !== data.length - 1}
           />
         </li>
       ))}

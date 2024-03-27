@@ -64,7 +64,7 @@ export const getTodayDataArr = ({
     },
     {
       label: "Chance of precipitation",
-      value: `${todayPop * 100}%`,
+      value: `${Math.round(todayPop * 100)}%`,
     },
   ];
 

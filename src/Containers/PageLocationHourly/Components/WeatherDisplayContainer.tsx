@@ -4,7 +4,6 @@ import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import { TimeTypeContext } from "../../../contexts/timeTypeContext";
 import { HourlyType } from "../../../utils/types/openWeatherMap";
 import { getTimeData } from "../../../utils/helpers";
-// import WeatherDisplay from "./WeatherDisplay";
 import WeatherDisplayTall from "./WeatherDisplayTall";
 import WeatherDisplayWide from "./WeatherDisplayWide";
 
@@ -83,7 +82,7 @@ function WeatherDisplayContainer({
           weatherName={weather[0].main}
           feelsLike={`${Math.round(feels_like)}${tempUnit}`}
           windSpeed={`${Math.round(wind_speed)}${windUnit}`}
-          precChance={`${pop * 100}%`}
+          precChance={`${Math.round(pop * 100)}%`}
           rainVolume={rainVolume}
           snowVolume={snowVolume}
           humidity={`${humidity}%`}
