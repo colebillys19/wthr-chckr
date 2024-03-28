@@ -10,10 +10,6 @@ import {
   PageNews,
   PageNotFound,
 } from "./Containers";
-import { Modal } from "./SharedComponents";
-
-//
-import BaseUiTest from "./_baseUiTest";
 
 function AppRouter() {
   //
@@ -28,10 +24,8 @@ function AppRouter() {
         <Route path="/location/daily" element={<PageLocationDaily />} />
         <Route path="/cities" element={<PageCities />} />
         <Route path="/news" element={<PageNews />} />
-        <Route path="/test" element={<BaseUiTest />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
-      <Modal />
     </Router>
   );
 }

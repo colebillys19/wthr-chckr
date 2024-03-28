@@ -1,8 +1,7 @@
 import { MouseEvent, useContext, useEffect } from "react";
 
-import { ActiveModalContext } from "../../contexts/activeModalContext";
+import { ActiveModalContext } from "../contexts/activeModalContext";
 import ModalSetLocation from "./ModalSetLocation";
-import ModalTemp from "./ModalTemp";
 
 function ModalDisplay() {
   const { activeModal, setActiveModal } = useContext(ActiveModalContext);
@@ -43,7 +42,6 @@ function ModalDisplay() {
       className="absolute top-0 left-0 flex justify-center items-center w-screen h-screen z-20 bg-black bg-opacity-30"
     >
       {activeModal === "setLocation" && <ModalSetLocation />}
-      {activeModal === "temp" && <ModalTemp />}
     </div>
   );
 }

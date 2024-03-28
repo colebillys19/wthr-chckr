@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import { ActiveModalContext } from "../../contexts/activeModalContext";
+import { ActiveModalContext } from "../contexts/activeModalContext";
 import ModalDisplay from "./ModalDisplay";
 
 function Modal() {

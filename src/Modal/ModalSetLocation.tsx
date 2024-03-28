@@ -1,8 +1,8 @@
 import { useContext } from "react";
 
-import { ActiveModalContext } from "../../contexts/activeModalContext";
-import CloseIcon from "../../svg/iconSvgs/Components/Close";
-import SetLocationFlow from "../SetLocationFlow";
+import { ActiveModalContext } from "../contexts/activeModalContext";
+import CloseIcon from "../svg/iconSvgs/Components/Close";
+import SetLocationFlow from "../SharedComponents/SetLocationFlow";
 
 function ModalSetLocation() {
   const { setActiveModal } = useContext(ActiveModalContext);
