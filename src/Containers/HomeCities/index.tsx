@@ -13,7 +13,7 @@ function HomeCities() {
 
   return (
     <div className="relative pt-8 px-6 pb-12">
-      <h2 className="mb-6 text-xl">Major Cities</h2>
+      <h2 className="mb-6 text-xl">Cities</h2>
       <ul className="flex flex-col flex-wrap gap-4 mb-6 sm:flex-row">
         {citiesFirstFive.map(({ location, name }) => (
           <li key={location}>
