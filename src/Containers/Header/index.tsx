@@ -1,7 +1,8 @@
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import { throttle } from "lodash";
 import { useLocation } from "react-router-dom";
 
+import { ActiveModalContext } from "../../contexts/activeModalContext";
 import { UserLocationContext } from "../../contexts/userLocationContext";
 import BurgerIcon from "../../svg/iconSvgs/Components/Burger";
 import GearIcon from "../../svg/iconSvgs/Components/Gear";
@@ -12,61 +13,49 @@ import MenuMobile from "./Components/MenuMobile";
 import MenuDesktop from "./Components/MenuDesktop";
 
 function Header() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false);
-
+  const { activeModal, setActiveModal } = useContext(ActiveModalContext);
   const { userLocation } = useContext(UserLocationContext);
   const { pathname } = useLocation();
 
   useEffect(() => {
     const handleResizeMobile = throttle(() => {
-      if (isMobileMenuOpen && window.innerWidth >= 768) {
-        setIsMobileMenuOpen(false);
+      if (activeModal === "headerMenuMobile" && window.innerWidth >= 768) {
+        setActiveModal("headerMenuDesktop");
+      }
+      if (activeModal === "headerMenuDesktop" && window.innerWidth < 768) {
+        setActiveModal("headerMenuMobile");
       }
     }, 200);
     window.addEventListener("resize", handleResizeMobile);
     return () => {
       window.removeEventListener("resize", handleResizeMobile);
     };
-  }, [isMobileMenuOpen]);
+  }, [activeModal]);
 
-  useEffect(() => {
-    const handleResizeDesktop = throttle(() => {
-      if (isDesktopMenuOpen && window.innerWidth < 768) {
-        setIsDesktopMenuOpen(false);
-      }
-    }, 200);
-    window.addEventListener("resize", handleResizeDesktop);
-    return () => {
-      window.removeEventListener("resize", handleResizeDesktop);
-    };
-  }, [isDesktopMenuOpen]);
-
+  const isMobileMenuOpen = useMemo(
+    () => activeModal === "headerMenuMobile",
+    [activeModal]
+  );
+  const isDesktopMenuOpen = useMemo(
+    () => activeModal === "headerMenuDesktop",
+    [activeModal]
+  );
   const isHomePage = useMemo(() => pathname === "/", [pathname]);
 
   const handleBurgerClick = () => {
-    setIsMobileMenuOpen(true);
+    setActiveModal("headerMenuMobile");
   };
 
   const handleGearClick = () => {
-    setIsDesktopMenuOpen(true);
+    setActiveModal("headerMenuDesktop");
   };
 
   return (
     <div>
       {isMobileMenuOpen && (
-        <MenuMobile
-          setIsMobileMenuOpen={setIsMobileMenuOpen}
-          pathname={pathname}
-          isHomePage={isHomePage}
-        />
+        <MenuMobile pathname={pathname} isHomePage={isHomePage} />
       )}
-      {isDesktopMenuOpen && (
-        <MenuDesktop
-          setIsDesktopMenuOpen={setIsDesktopMenuOpen}
-          isHomePage={isHomePage}
-        />
-      )}
+      {isDesktopMenuOpen && <MenuDesktop isHomePage={isHomePage} />}
       <header className="relative flex justify-between items-center px-6 py-4">
         <Nav />
         <div className="flex h-6 items-center">

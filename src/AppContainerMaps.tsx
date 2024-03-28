@@ -2,7 +2,7 @@ import { useContext } from "react";
 
 import useSetContextFromLocalStorage from "./utils/customHooks/useSetContextFromLocalStorage";
 import { GoogleMapsContext } from "./contexts/googleMapsContext";
-import AppContainerRouter from "./AppContainerRouter";
+import AppContainerModal from "./AppContainerModal";
 import { Spinner } from "./SharedComponentsAux";
 
 function AppMapsContainer() {
@@ -11,10 +11,14 @@ function AppMapsContainer() {
   const { isGoogleMapsReady } = useContext(GoogleMapsContext);
 
   if (!isGoogleMapsReady) {
-    return <Spinner />;
+    return (
+      <div className="flex justify-center items-center w-screen h-screen">
+        <Spinner />
+      </div>
+    );
   }
 
-  return <AppContainerRouter />;
+  return <AppContainerModal />;
 }
 
 export default AppMapsContainer;
