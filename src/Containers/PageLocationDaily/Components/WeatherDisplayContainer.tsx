@@ -72,7 +72,7 @@ function WeatherDisplayContainer({
       />
       {showDivider && (
         <div className="flex justify-center mt-8 w-screen sm:justify-start">
-          <hr className="w-1/2 border-grey-b" />
+          <hr className="w-1/3 border-grey-b" />
         </div>
       )}
     </div>

@@ -38,15 +38,15 @@ function WeatherDisplay({
   return (
     <div>
       <div className="relative flex justify-center px-6 py-8 sm:justify-start">
-        <div>
-          <div className="flex justify-center gap-6 mb-4 sm:flex-col sm:items-start">
+        <div className="flex flex-col sm:flex-row sm:gap-8">
+          <div className="flex justify-center gap-6 mb-6 sm:gap-8 sm:mb-0">
             <WeatherSvg id={svgId} isDayTime={isDayTime} size={100} />
             <div className="flex flex-col justify-center items-center gap-1 sm:items-start">
               <span className="text-xl font-bold">{temp}</span>
               <span className="text-xl">{weatherName}</span>
             </div>
           </div>
-          <div className="flex flex-col items-center gap-1 sm:items-start">
+          <div className="flex flex-col justify-center items-center gap-1 sm:items-start">
             <LabelValueText label="Feels like" value={feelsLike} />
             <LabelValueText label="Wind speed" value={windSpeed} />
             <LabelValueText label="Humidity" value={humidity} />

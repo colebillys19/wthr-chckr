@@ -67,7 +67,7 @@ function WeatherDisplayContainer({
           weatherName={weather[0].main}
           feelsLike={`${Math.round(feels_like)}${tempUnit}`}
           windSpeed={`${Math.round(wind_speed)}${windUnit}`}
-          precChance={`${pop * 100}%`}
+          precChance={`${Math.round(pop * 100)}%`}
           rainVolume={rainVolume}
           snowVolume={snowVolume}
           humidity={`${humidity}%`}
@@ -90,7 +90,7 @@ function WeatherDisplayContainer({
       </div>
       {showDivider && (
         <div className="flex justify-center mt-8 w-screen sm:justify-start">
-          <hr className="w-1/2 border-grey-b" />
+          <hr className="w-1/3 border-grey-b sm:w-2/3" />
         </div>
       )}
     </div>
