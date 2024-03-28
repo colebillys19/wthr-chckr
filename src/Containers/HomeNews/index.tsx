@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 
 import { NewsDataType } from "../../utils/types/news";
 import { parseXmlData } from "../../utils/newsHelpers";
-import { NewsList } from "../../SharedComponents";
-import { InternalLinkText, LinkButton } from "../../BaseComponents";
+import { NewsList } from "../../ComponentsShared";
+import { InternalLinkText, LinkButton } from "../../ComponentsBase";
 
 function HomeNews() {
   const [isLoading, setIsLoading] = useState(true);

@@ -1,5 +1,5 @@
 import { HourlyType } from "../../../utils/types/openWeatherMap";
-import { LabelValueText, WeatherSvg } from "../../../SharedComponentsAux";
+import { LabelValueText, WeatherSvg } from "../../../ComponentsBase";
 import WeatherDisplayHourlyContainer from "./WeatherDisplayHourlyContainer";
 
 type WeatherDisplayPropsType = {

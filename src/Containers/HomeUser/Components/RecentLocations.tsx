@@ -1,9 +1,9 @@
 import { useContext } from "react";
 
-import { LinkButton } from "../../../BaseComponents";
+import { LinkButton } from "../../../ComponentsBase";
 import { RecentLocationsContext } from "../../../contexts/recentLocationsContext";
 import useUpdateRecentLocations from "../../../utils/customHooks/useUpdateRecentLocations";
-import { LocationListItemResponsive } from "../../../SharedComponents";
+import { LocationListItemResponsive } from "../../../ComponentsShared";
 
 function RecentLocations() {
   const { recentLocations } = useContext(RecentLocationsContext);

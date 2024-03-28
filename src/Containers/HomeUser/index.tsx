@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 import { UserLocationContext } from "../../contexts/userLocationContext";
-import { ShadowDiv } from "../../SharedComponentsAux";
+import { ShadowDiv } from "../../ComponentsBase";
 import { RecentLocationType } from "../../utils/types/misc";
 import UserLocation from "./Components/UserLocation";
 import RecentLocations from "./Components/RecentLocations";

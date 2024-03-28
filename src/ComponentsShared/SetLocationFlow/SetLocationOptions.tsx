@@ -9,7 +9,7 @@ import {
   ButtonPrimary,
   ButtonSecondary,
   LinkButton,
-} from "../../BaseComponents";
+} from "../../ComponentsBase";
 
 type SetLocationOptionsPropsType = {
   isGeolocating: boolean;

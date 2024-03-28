@@ -1,5 +1,5 @@
-import { InternalLinkContent } from "../../../BaseComponents";
-import { LabelValueText, WeatherSvg } from "../../../SharedComponentsAux";
+import { InternalLinkContent } from "../../../ComponentsBase";
+import { LabelValueText, WeatherSvg } from "../../../ComponentsBase";
 
 type CityDisplayDesktopPropsType = {
   name: string;

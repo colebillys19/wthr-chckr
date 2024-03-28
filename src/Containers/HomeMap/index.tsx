@@ -1,4 +1,4 @@
-import { ShadowDiv } from "../../SharedComponentsAux";
+import { ShadowDiv } from "../../ComponentsBase";
 import MapContainer from "./Components/MapContainer";
 
 function HomeMap() {

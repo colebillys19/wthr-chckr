@@ -2,7 +2,7 @@ import { useCallback, useContext, useMemo } from "react";
 
 import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import useUpdateUnitType from "../../../utils/customHooks/useUpdateUnitType";
-import { LinkButton } from "../../../BaseComponents";
+import { LinkButton } from "../../../ComponentsBase";
 
 type SelectUnitsPropsType = {
   handleCloseMenu: () => void;

@@ -1,7 +1,7 @@
 import {
   InternalLinkContent,
   InternalLinkText,
-} from "../../../BaseComponents";
+} from "../../../ComponentsBase";
 import LogoPlaceholder from "../../../svg/logoPlaceholder/LogoPlaceholder";
 
 function Nav() {

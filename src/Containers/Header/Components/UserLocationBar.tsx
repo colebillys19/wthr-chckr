@@ -6,8 +6,8 @@ import { RecentLocationsContext } from "../../../contexts/recentLocationsContext
 import useUpdateUserLocation from "../../../utils/customHooks/useUpdateUserLocation";
 import useUpdateUserLocationName from "../../../utils/customHooks/useUpdateUserLocationName";
 import useUpdateRecentLocations from "../../../utils/customHooks/useUpdateRecentLocations";
-import { ShadowDiv } from "../../../SharedComponentsAux";
-import { LinkButton } from "../../../BaseComponents";
+import { ShadowDiv } from "../../../ComponentsBase";
+import { LinkButton } from "../../../ComponentsBase";
 
 type LocationBarPropsType = {
   userLocation: string;

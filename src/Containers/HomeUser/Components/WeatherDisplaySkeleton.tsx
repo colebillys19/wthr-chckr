@@ -1,4 +1,4 @@
-import { Spinner } from "../../../SharedComponentsAux";
+import { Spinner } from "../../../ComponentsBase";
 
 function WeatherDisplaySkeleton() {
   //

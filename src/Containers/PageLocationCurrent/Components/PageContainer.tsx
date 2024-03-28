@@ -1,4 +1,4 @@
-import { WeatherMap } from "../../../SharedComponents";
+import { WeatherMap } from "../../../ComponentsShared";
 import PageTopContainer from "./PageTopContainer";
 
 type PageContainerPropsType = {

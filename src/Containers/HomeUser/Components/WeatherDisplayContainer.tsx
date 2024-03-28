@@ -1,6 +1,6 @@
 import { useContext, useMemo } from "react";
 
-import { InternalLinkText } from "../../../BaseComponents";
+import { InternalLinkText } from "../../../ComponentsBase";
 import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import { TimeTypeContext } from "../../../contexts/timeTypeContext";
 import { OpenWeatherMapDataType } from "../../../utils/types/openWeatherMap";

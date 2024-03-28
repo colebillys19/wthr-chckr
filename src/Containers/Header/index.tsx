@@ -6,7 +6,7 @@ import { ActiveModalContext } from "../../contexts/activeModalContext";
 import { UserLocationContext } from "../../contexts/userLocationContext";
 import BurgerIcon from "../../svg/iconSvgs/Components/Burger";
 import GearIcon from "../../svg/iconSvgs/Components/Gear";
-import { ShadowDiv } from "../../SharedComponentsAux";
+import { ShadowDiv } from "../../ComponentsBase";
 import Nav from "./Components/Nav";
 import UserLocationBar from "./Components/UserLocationBar";
 import MenuMobile from "./Components/MenuMobile";

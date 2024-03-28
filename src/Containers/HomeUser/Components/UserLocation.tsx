@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 import { UserLocationContext } from "../../../contexts/userLocationContext";
-import { SetLocationFlow } from "../../../SharedComponents";
+import { SetLocationFlow } from "../../../ComponentsShared";
 import UserLocationDisplay from "./UserLocationDisplay";
 
 type UserLocationPropsType = {

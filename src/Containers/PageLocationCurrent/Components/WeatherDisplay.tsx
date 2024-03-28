@@ -2,7 +2,7 @@ import {
   LabelValueText,
   ShadowDiv,
   WeatherSvg,
-} from "../../../SharedComponentsAux";
+} from "../../../ComponentsBase";
 
 type WeatherDisplayPropsType = {
   svgId: number;

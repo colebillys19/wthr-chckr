@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import { LinkButton, InternalLinkText } from "../../BaseComponents";
-import { LocationListItemResponsive } from "../../SharedComponents";
-import { ShadowDiv } from "../../SharedComponentsAux";
+import { LinkButton, InternalLinkText } from "../../ComponentsBase";
+import { LocationListItemResponsive } from "../../ComponentsShared";
+import { ShadowDiv } from "../../ComponentsBase";
 import { citiesData } from "../../utils/constants";
 
 function HomeCities() {

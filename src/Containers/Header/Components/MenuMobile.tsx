@@ -1,10 +1,10 @@
-import { MouseEvent, useContext, useEffect, useMemo } from "react";
+import { useContext, useEffect, useMemo } from "react";
 
 import { ActiveModalContext } from "../../../contexts/activeModalContext";
 import { UserLocationContext } from "../../../contexts/userLocationContext";
 import { UserPrefersNoLocationContext } from "../../../contexts/userPrefersNoLocationContext";
 import CloseIcon from "../../../svg/iconSvgs/Components/Close";
-import { LinkButton, InternalLinkText } from "../../../BaseComponents";
+import { LinkButton, InternalLinkText } from "../../../ComponentsBase";
 import SelectTime from "./SelectTime";
 import SelectUnits from "./SelectUnits";
 

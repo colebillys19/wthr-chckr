@@ -2,7 +2,7 @@ import { useCallback, useContext, useMemo } from "react";
 
 import { TimeTypeContext } from "../../../contexts/timeTypeContext";
 import useUpdateTimeType from "../../../utils/customHooks/useUpdateTimeType";
-import { LinkButton } from "../../../BaseComponents";
+import { LinkButton } from "../../../ComponentsBase";
 
 type SelectTimePropsType = {
   handleCloseMenu: () => void;

@@ -4,7 +4,7 @@ import { ActiveModalContext } from "../../../contexts/activeModalContext";
 import { UserLocationContext } from "../../../contexts/userLocationContext";
 import { UserPrefersNoLocationContext } from "../../../contexts/userPrefersNoLocationContext";
 import CloseIcon from "../../../svg/iconSvgs/Components/Close";
-import { LinkButton } from "../../../BaseComponents";
+import { LinkButton } from "../../../ComponentsBase";
 import SelectTime from "./SelectTime";
 import SelectUnits from "./SelectUnits";
 

@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 
 import { GoogleMapsContext } from "../../contexts/googleMapsContext";
 import { TimeTypeContext } from "../../contexts/timeTypeContext";
-import { Spinner } from "../../SharedComponentsAux";
+import { Spinner } from "../../ComponentsBase";
 import TimeControls from "./TimeControls";
 import { mapStyles } from "./constants";
 import { FrameType } from "./types";

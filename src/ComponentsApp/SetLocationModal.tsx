@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
-import SetLocationFlow from "./SharedComponents/SetLocationFlow";
-import CloseIcon from "./svg/iconSvgs/Components/Close";
+import SetLocationFlow from "../ComponentsShared/SetLocationFlow";
+import CloseIcon from "../svg/iconSvgs/Components/Close";
 
 type SetLocationModalPropsType = { setActiveModal: (value: string) => void };
 

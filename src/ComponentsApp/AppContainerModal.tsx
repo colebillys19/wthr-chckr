@@ -1,6 +1,6 @@
 import { useContext, useMemo } from "react";
 
-import { ActiveModalContext } from "./contexts/activeModalContext";
+import { ActiveModalContext } from "../contexts/activeModalContext";
 import AppContainerRouter from "./AppContainerRouter";
 import SetLocationModal from "./SetLocationModal";
 import ModalBackdrop from "./ModalBackdrop";

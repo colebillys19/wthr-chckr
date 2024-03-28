@@ -1,32 +1,28 @@
-import { FormEvent, useContext, useEffect, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useState } from "react";
 
 import { ActiveModalContext } from "../../contexts/activeModalContext";
 import { UserPrefersNoLocationContext } from "../../contexts/userPrefersNoLocationContext";
 import { GoogleMapsContext } from "../../contexts/googleMapsContext";
-import { TextField, ButtonPrimary, LinkButton } from "../../BaseComponents";
+import { TextField, ButtonPrimary, LinkButton } from "../../ComponentsBase";
 import useUpdateUserLocation from "../../utils/customHooks/useUpdateUserLocation";
 import useUpdateUserLocationName from "../../utils/customHooks/useUpdateUserLocationName";
 import useUpdateUserPrefersNoLocation from "../../utils/customHooks/useUpdateUserPrefersNoLocation";
 import { getFormattedLocationName } from "../../utils/helpers";
 
-type EnterLocationDefaultPropsType = {
+type EnterLocationCoordsPropsType = {
   isVerifyingAddress: boolean;
   setIsCoordsEntry: (value: boolean) => void;
-  setIsEnteringLocation: (value: boolean) => void;
   setIsVerifyingAddress: (value: boolean) => void;
 };
 
-function EnterLocationDefault({
+function EnterLocationCoords({
   isVerifyingAddress,
   setIsCoordsEntry,
-  setIsEnteringLocation,
   setIsVerifyingAddress,
-}: EnterLocationDefaultPropsType) {
+}: EnterLocationCoordsPropsType) {
   const [inputError, setInputError] = useState("");
-  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
-
-  const autoCompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
-  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [latValue, setLatValue] = useState("");
+  const [lonValue, setLonValue] = useState("");
 
   const { activeModal, setActiveModal } = useContext(ActiveModalContext);
   const { googleMaps } = useContext(GoogleMapsContext);
@@ -36,32 +32,24 @@ function EnterLocationDefault({
   const updateUserLocationName = useUpdateUserLocationName();
   const updateUserPrefersNoLocation = useUpdateUserPrefersNoLocation();
 
-  useEffect(() => {
-    if (googleMaps !== null && inputRef.current) {
-      autoCompleteRef.current = new googleMaps.places.Autocomplete(
-        inputRef.current
-      );
-      autoCompleteRef.current.addListener("place_changed", () => {
-        if (inputError !== "") {
-          setInputError("");
-        }
-      });
+  /*
+   *
+   */
+  const handleLatChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setLatValue(e.target.value);
+    if (inputError) {
+      setInputError("");
     }
-    return () => {
-      if (googleMaps !== null && autoCompleteRef.current) {
-        googleMaps.event.clearInstanceListeners(autoCompleteRef.current);
-      }
-    };
-  }, []);
+  };
 
   /*
    *
    */
-  const handleChange = () => {
-    if (inputError !== "") {
+  const handleLonChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setLonValue(e.target.value);
+    if (inputError) {
       setInputError("");
     }
-    setIsSubmitDisabled(!inputRef.current || inputRef.current.value === "");
   };
 
   /*
@@ -76,7 +64,7 @@ function EnterLocationDefault({
       const geocoder = new googleMaps.Geocoder();
       new Promise((resolve, reject) => {
         geocoder.geocode(
-          { address: inputRef.current?.value },
+          { address: `${latValue}, ${lonValue}` },
           (
             results: google.maps.GeocoderResult[],
             status: google.maps.GeocoderStatus
@@ -95,7 +83,7 @@ function EnterLocationDefault({
               setIsVerifyingAddress(false);
               resolve(true);
             } else {
-              reject("Invalid location");
+              reject("Invalid coordinates");
             }
           }
         );
@@ -110,46 +98,44 @@ function EnterLocationDefault({
   /*
    *
    */
-  const handleEnterCoords = () => {
-    setIsCoordsEntry(true);
-  };
-
-  /*
-   *
-   */
   const handleBack = () => {
-    setIsEnteringLocation(false);
+    setIsCoordsEntry(false);
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="address" className="hidden">
-          Enter address, city, or zip
-        </label>
-        <TextField
-          ref={inputRef}
-          handleChange={handleChange}
-          id="address"
-          type="text"
-          placeholder="Enter address, city, or zip"
-        />
-        {inputError && <div className="mt-2 text-error">{inputError}</div>}
-        <div className="mt-2 mb-4">
+      <form onSubmit={handleSubmit} className="max-w-96">
+        <div className="mb-2">
+          <label htmlFor="lat" className="hidden">
+            Latitude
+          </label>
+          <TextField
+            handleChange={handleLatChange}
+            id="lat"
+            type="number"
+            placeholder="Latitude"
+          />
+        </div>
+        <div className="mb-2">
+          <label htmlFor="lon" className="hidden">
+            Longitude
+          </label>
+          <TextField
+            handleChange={handleLonChange}
+            id="lon"
+            type="number"
+            placeholder="Longitude"
+          />
+        </div>
+        {inputError && <div className="mb-2 text-error">{inputError}</div>}
+        <div className="mb-4">
           <ButtonPrimary
             text="Set location"
-            isDisabled={isSubmitDisabled || isVerifyingAddress}
+            isDisabled={!latValue || !lonValue || isVerifyingAddress}
             isSubmit
           />
         </div>
       </form>
-      <div className="mb-2">
-        <LinkButton
-          handleClick={handleEnterCoords}
-          text="Enter coordinates"
-          isDisabled={isVerifyingAddress}
-        />
-      </div>
       <LinkButton
         handleClick={handleBack}
         text="Back"
@@ -159,4 +145,4 @@ function EnterLocationDefault({
   );
 }
 
-export default EnterLocationDefault;
+export default EnterLocationCoords;

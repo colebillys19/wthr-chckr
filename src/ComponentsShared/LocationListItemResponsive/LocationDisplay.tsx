@@ -4,7 +4,7 @@ import {
   WeatherDisplaySmallWide,
   WeatherDisplaySmallTall,
   InternalLinkContent,
-} from "../../BaseComponents";
+} from "../../ComponentsBase";
 import ArrowIcon from "../../svg/iconSvgs/Components/Arrow";
 import { UnitTypeContext } from "../../contexts/unitTypeContext";
 import { TimeTypeContext } from "../../contexts/timeTypeContext";

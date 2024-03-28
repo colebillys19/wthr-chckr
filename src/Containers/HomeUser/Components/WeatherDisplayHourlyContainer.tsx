@@ -2,7 +2,7 @@ import { useContext, useMemo } from "react";
 
 import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import { TimeTypeContext } from "../../../contexts/timeTypeContext";
-import { WeatherDisplaySmallWide } from '../../../BaseComponents';
+import { WeatherDisplaySmallWide } from '../../../ComponentsBase';
 import { HourlyType } from "../../../utils/types/openWeatherMap";
 import { getTimeData } from "../../../utils/helpers";
 // import WeatherDisplayHourly from './WeatherDisplayHourly';

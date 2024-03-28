@@ -9,7 +9,7 @@ import {
   PageCities,
   PageNews,
   PageNotFound,
-} from "./Containers";
+} from "../Containers";
 
 function AppRouter() {
   //

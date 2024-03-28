@@ -1,9 +1,9 @@
 import { useContext } from "react";
 
-import useSetContextFromLocalStorage from "./utils/customHooks/useSetContextFromLocalStorage";
-import { GoogleMapsContext } from "./contexts/googleMapsContext";
+import useSetContextFromLocalStorage from "../utils/customHooks/useSetContextFromLocalStorage";
+import { GoogleMapsContext } from "../contexts/googleMapsContext";
+import { Spinner } from "../ComponentsBase";
 import AppContainerModal from "./AppContainerModal";
-import { Spinner } from "./SharedComponentsAux";
 
 function AppMapsContainer() {
   useSetContextFromLocalStorage();

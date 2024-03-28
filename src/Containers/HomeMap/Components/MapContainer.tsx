@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { WeatherMap } from "../../../SharedComponents";
+import { WeatherMap } from "../../../ComponentsShared";
 
 function MapContainer() {
   const [zoomLevel, setZoomLevel] = useState(-1);

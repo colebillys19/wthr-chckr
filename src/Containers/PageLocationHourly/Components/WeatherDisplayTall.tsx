@@ -1,4 +1,4 @@
-import { LabelValueText, WeatherSvg } from "../../../SharedComponentsAux";
+import { LabelValueText, WeatherSvg } from "../../../ComponentsBase";
 
 type WeatherDisplayTallPropsType = {
   svdId: number;

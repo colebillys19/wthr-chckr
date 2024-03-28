@@ -5,7 +5,7 @@ import { UserLocationNameContext } from "../../../contexts/userLocationNameConte
 import useFetchLocationData from "../../../utils/customHooks/useFetchLocationData";
 import useUpdateUserLocation from "../../../utils/customHooks/useUpdateUserLocation";
 import useUpdateUserLocationName from "../../../utils/customHooks/useUpdateUserLocationName";
-import { LinkButton } from "../../../BaseComponents";
+import { LinkButton } from "../../../ComponentsBase";
 import WeatherDisplayAsyncContainer from "./WeatherDisplayAsyncContainer";
 
 type UserLocationDisplayPropsType = {

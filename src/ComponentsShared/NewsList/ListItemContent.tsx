@@ -1,4 +1,4 @@
-import { ExternalLink } from "../../BaseComponents";
+import { ExternalLink } from "../../ComponentsBase";
 import { getNewsTime } from "./helpers";
 
 type ListItemContentPropsType = {

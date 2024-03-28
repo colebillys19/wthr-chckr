@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 
-import { Spinner } from "../../SharedComponentsAux";
+import { Spinner } from "../../ComponentsBase";
 import EnterLocationContainer from "./EnterLocationContainer";
 
 type SetLocationFlowPropsType = {

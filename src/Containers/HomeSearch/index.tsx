@@ -2,7 +2,7 @@ import { FormEvent, useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { GoogleMapsContext } from "../../contexts/googleMapsContext";
-import { ShadowDiv } from "../../SharedComponentsAux";
+import { ShadowDiv } from "../../ComponentsBase";
 import SearchForm from "./Components/SearchForm";
 
 function HomeSearch() {
