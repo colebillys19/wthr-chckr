@@ -16,7 +16,7 @@ function Display({ data }: DisplayPropsType) {
   }
 
   return (
-    <ul className="flex flex-col gap-6 max-w-screen-lg">
+    <ul className="flex flex-col gap-6">
       {data.map((item: NewsDataType, i) => {
         const { title, imgUrl, date, description, link } = item;
         const hasBorder = i !== data.length - 1;
