@@ -5,10 +5,10 @@ function CityDisplayMobile() {
   //
 
   return (
-    <>
-      <div className="inline-flex flex-col items-center px-12">
+    <div className="flex flex-col items-center">
+      <div className="inline-flex flex-col items-center px-12 h-64">
         <div className="flex items-baseline gap-4 mb-4">
-          <span className="text-xl font-bold line-clamp-1 ">Reno, NV</span>
+          <span className="text-xl font-bold line-clamp-1">Reno, NV</span>
           <span className="shrink-0">6:54 PM</span>
         </div>
         <div className="flex items-center gap-4 mb-4">
@@ -24,9 +24,9 @@ function CityDisplayMobile() {
           <LabelValueText label="Humidity" value="4%" />
         </div>
         <InternalLinkText href="/">See more</InternalLinkText>
-        <hr className="w-44 mt-8 border-grey-b" />
       </div>
-    </>
+      <hr className="w-44 mt-8 border-grey-b" />
+    </div>
   );
 }
 
