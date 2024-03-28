@@ -2,44 +2,41 @@ import { useContext, useMemo } from "react";
 
 import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import { TimeTypeContext } from "../../../contexts/timeTypeContext";
-import { HourlyType } from "../../../utils/types/openWeatherMap";
+import { OpenWeatherMapDataType } from "../../../utils/types/openWeatherMap";
 import { getTimeData } from "../../../utils/helpers";
-import WeatherDisplayTall from "./WeatherDisplayTall";
-import WeatherDisplayWide from "./WeatherDisplayWide";
+import CityDisplayMobile from "./CityDisplayMobile";
+import CityDisplayDesktop from "./CityDisplayDesktop";
 
-type WeatherDisplayContainerPropsType = {
-  data: HourlyType;
-  timezoneOffset: number;
-  sunrise: number;
-  sunset: number;
-  showDivider: boolean;
+type CityDisplayContainerPropsType = {
+  data: OpenWeatherMapDataType;
+  name: string;
+  location: string;
 };
 
-function WeatherDisplayContainer({
+function CityDisplayContainer({
   data,
-  timezoneOffset,
-  sunrise,
-  sunset,
-  showDivider,
-}: WeatherDisplayContainerPropsType) {
+  location,
+  name,
+}: CityDisplayContainerPropsType) {
   const { unitType } = useContext(UnitTypeContext);
   const { timeType } = useContext(TimeTypeContext);
 
+  const { current, timezone_offset } = data;
+
   const {
     dt,
-    temp,
     feels_like,
-    weather,
     humidity,
-    pop,
     wind_speed,
-    rain,
-    snow,
-  } = data;
+    temp,
+    weather,
+    sunrise,
+    sunset,
+  } = current;
 
   const { time, isDayTime } = getTimeData({
     dtSec: dt,
-    apiTimezoneOffsetSec: timezoneOffset,
+    apiTimezoneOffsetSec: timezone_offset,
     sunriseSec: sunrise,
     sunsetSec: sunset,
     timeType,
@@ -53,48 +50,39 @@ function WeatherDisplayContainer({
     () => (unitType === "imperial" ? "mph" : "m/s"),
     [unitType]
   );
-  const rainVolume = rain && rain["1h"] ? `${rain["1h"]} mm/h` : "";
-  const snowVolume = snow && snow["1h"] ? `${snow["1h"]} mm/h` : "";
 
   return (
-    <div className="flex flex-col items-center sm:items-start">
+    <>
       <div className="sm:hidden">
-        <WeatherDisplayTall
-          svdId={weather[0].id}
-          isDayTime={isDayTime}
+        <CityDisplayMobile
+          name={name}
           time={time}
+          svgId={weather[0].id}
+          isDayTime={isDayTime}
           temp={`${Math.round(temp)}${tempUnit}`}
           weatherName={weather[0].main}
           feelsLike={`${Math.round(feels_like)}${tempUnit}`}
           windSpeed={`${Math.round(wind_speed)}${windUnit}`}
-          precChance={`${Math.round(pop * 100)}%`}
-          rainVolume={rainVolume}
-          snowVolume={snowVolume}
           humidity={`${humidity}%`}
+          location={location}
         />
       </div>
       <div className="hidden sm:block">
-        <WeatherDisplayWide
-          svdId={weather[0].id}
-          isDayTime={isDayTime}
+        <CityDisplayDesktop
+          name={name}
           time={time}
+          svgId={weather[0].id}
+          isDayTime={isDayTime}
           temp={`${Math.round(temp)}${tempUnit}`}
           weatherName={weather[0].main}
           feelsLike={`${Math.round(feels_like)}${tempUnit}`}
           windSpeed={`${Math.round(wind_speed)}${windUnit}`}
-          precChance={`${Math.round(pop * 100)}%`}
-          rainVolume={rainVolume}
-          snowVolume={snowVolume}
           humidity={`${humidity}%`}
+          location={location}
         />
       </div>
-      {showDivider && (
-        <div className="flex justify-center mt-8 w-screen sm:justify-start">
-          <hr className="w-1/3 border-grey-b sm:w-2/3" />
-        </div>
-      )}
-    </div>
+    </>
   );
 }
 
-export default WeatherDisplayContainer;
+export default CityDisplayContainer;

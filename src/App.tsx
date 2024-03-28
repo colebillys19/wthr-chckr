@@ -1,14 +1,12 @@
 import "./App.css";
-import AppContextContainer from "./AppContextContainer";
+import AppContainerContext from "./AppContainerContext";
 
 function App() {
   //
 
   return (
     <div className="App">
-      <div className="text-text tracking-wide bg-white">
-        <AppContextContainer />
-      </div>
+      <AppContainerContext />
     </div>
   );
 }
