@@ -1,4 +1,13 @@
-import { MouseEvent } from "react";
+import { CSSProperties, MouseEvent } from "react";
+
+const styles: CSSProperties = {
+  position: "absolute",
+  top: 0,
+  left: 0,
+  width: "100%",
+  zIndex: 20,
+  backgroundColor: "rgba(0, 0, 0, 0.3)",
+};
 
 type ModalBackdropPropsType = {
   setActiveModal: (value: string) => void;
@@ -14,7 +23,10 @@ function ModalBackdrop({ setActiveModal }: ModalBackdropPropsType) {
   return (
     <div
       onClick={handleBackdropClick}
-      className="absolute top-0 left-0 w-screen h-screen z-20 bg-black bg-opacity-30"
+      style={{
+        ...styles,
+        height: `${document.documentElement.scrollHeight}px`,
+      }}
     ></div>
   );
 }
