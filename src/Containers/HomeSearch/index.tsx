@@ -69,7 +69,7 @@ function HomeSearch() {
               resolve(true);
               setIsVerifyingAddress(false);
             } else {
-              reject("Invalid location");
+              reject("Invalid location.");
             }
           }
         );

@@ -83,7 +83,7 @@ function EnterLocationCoords({
               setIsVerifyingAddress(false);
               resolve(true);
             } else {
-              reject("Invalid coordinates");
+              reject("Invalid coordinates.");
             }
           }
         );

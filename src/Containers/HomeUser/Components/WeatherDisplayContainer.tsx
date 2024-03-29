@@ -32,8 +32,6 @@ function WeatherDisplayContainer({
     wind_speed,
     sunrise,
     sunset,
-    // rain,
-    // snow,
   } = current;
 
   const { isDayTime, time } = getTimeData({
@@ -52,14 +50,6 @@ function WeatherDisplayContainer({
     () => (unitType === "imperial" ? "mph" : "m/s"),
     [unitType]
   );
-  // const rainVolume = useMemo(
-  //   () => (rain && rain["1h"] ? `${rain["1h"]} mm/h` : ""),
-  //   [rain]
-  // );
-  // const snowVolume = useMemo(
-  //   () => (snow && snow["1h"] ? `${snow["1h"]} mm/h` : ""),
-  //   [snow]
-  // );
 
   const hourlyDataToUse = hourly.slice(1, 4);
 
@@ -74,8 +64,6 @@ function WeatherDisplayContainer({
         weatherName={weather[0].main}
         feelsLike={`${Math.round(feels_like)}${tempUnit}`}
         windSpeed={`${Math.round(wind_speed)}${windUnit}`}
-        // rainVolume={rainVolume}
-        // snowVolume={snowVolume}
         humidity={`${humidity}%`}
         hourlyDataArr={hourlyDataToUse}
         timezoneOffset={timezone_offset}

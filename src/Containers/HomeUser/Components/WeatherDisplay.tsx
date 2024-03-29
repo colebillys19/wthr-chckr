@@ -11,8 +11,6 @@ type WeatherDisplayPropsType = {
   weatherName: string;
   feelsLike: string;
   windSpeed: string;
-  // rainVolume: string;
-  // snowVolume: string;
   humidity: string;
   hourlyDataArr: HourlyType[];
   timezoneOffset: number;
@@ -29,8 +27,6 @@ function WeatherDisplay({
   weatherName,
   feelsLike,
   windSpeed,
-  // rainVolume,
-  // snowVolume,
   humidity,
   hourlyDataArr,
   timezoneOffset,

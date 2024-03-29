@@ -77,6 +77,11 @@ function WeatherDisplayContainer({
   const { high: todayFeelsLikeHigh, low: todayFeelsLikeLow } =
     getHighLow(todayFeelsLike);
 
+  const todaySummaryHasPeriod = todaySummary[todaySummary.length - 1] === ".";
+  const todaySummaryToUse = todaySummaryHasPeriod
+    ? todaySummary
+    : `${todaySummary}.`;
+
   const todayDataArr = getTodayDataArr({
     todayRain,
     todaySnow,
@@ -105,7 +110,7 @@ function WeatherDisplayContainer({
       rainVolume={currentRainVolume}
       snowVolume={currentSnowVolume}
       dayName={dayName}
-      todaySummary={todaySummary}
+      todaySummary={todaySummaryToUse}
       todayDataArr={todayDataArr}
     />
   );

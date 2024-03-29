@@ -54,12 +54,15 @@ function WeatherDisplayContainer({
   const rainVolume = typeof rain === "number" && rain > 0 ? `${rain} mm` : "";
   const snowVolume = typeof snow === "number" && snow > 0 ? `${snow} mm` : "";
 
+  const summaryHasPeriod = summary[summary.length - 1] === ".";
+  const summaryToUse = summaryHasPeriod ? summary : `${summary}.`;
+
   return (
     <div className="flex flex-col items-center sm:items-start">
       <WeatherDisplay
         dayName={isToday ? "Today" : day}
         svgId={weather[0].id}
-        summary={summary}
+        summary={summaryToUse}
         tempMax={`${Math.round(temp.max)}${tempUnit}`}
         tempMin={`${Math.round(temp.min)}${tempUnit}`}
         feelsLikeMax={`${Math.round(feelsLikeHigh)}${tempUnit}`}

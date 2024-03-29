@@ -95,7 +95,7 @@ function EnterLocationDefault({
               setIsVerifyingAddress(false);
               resolve(true);
             } else {
-              reject("Invalid location");
+              reject("Invalid location.");
             }
           }
         );
