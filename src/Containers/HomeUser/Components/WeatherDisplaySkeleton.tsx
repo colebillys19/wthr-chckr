@@ -4,11 +4,18 @@ function WeatherDisplaySkeleton() {
   //
 
   return (
-    <div className="h-80 mb-6">
-      <div className="flex">
-        <Spinner />
+    <>
+      <div className="h-96 mb-60 sm:hidden">
+        <div className="flex">
+          <Spinner />
+        </div>
       </div>
-    </div>
+      <div className="hidden h-96 mb-12 sm:block">
+        <div className="flex">
+          <Spinner />
+        </div>
+      </div>
+    </>
   );
 }
 

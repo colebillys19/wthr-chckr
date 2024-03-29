@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 
 import { ActiveModalContext } from "../../../contexts/activeModalContext";
 import { UserLocationContext } from "../../../contexts/userLocationContext";
@@ -11,9 +11,15 @@ import SelectUnits from "./SelectUnits";
 type MenuDesktopPropsType = { isHomePage: boolean };
 
 function MenuDesktop({ isHomePage }: MenuDesktopPropsType) {
+  const [hasMounted, setHasMounted] = useState(false);
+
   const { setActiveModal } = useContext(ActiveModalContext);
   const { userLocation } = useContext(UserLocationContext);
   const { userPrefersNoLocation } = useContext(UserPrefersNoLocationContext);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -53,7 +59,10 @@ function MenuDesktop({ isHomePage }: MenuDesktopPropsType) {
   };
 
   return (
-    <div className="absolute top-0 right-0 w-72 pt-4 pr-6 pb-12 bg-white border-b border-l z-30">
+    <div
+      className="absolute -top-60 right-0 w-72 pt-4 pr-6 pb-12 bg-white border-b border-l z-30 duration-300 ease-in-out"
+      style={hasMounted ? { top: 0 } : {}}
+    >
       <div className="flex flex-col items-end gap-6">
         <div className="flex h-6 items-center">
           <button onClick={handleCloseClick}>

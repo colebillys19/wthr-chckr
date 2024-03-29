@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import SetLocationFlow from "../ComponentsShared/SetLocationFlow";
 import CloseIcon from "../svg/iconSvgs/Components/Close";
@@ -6,6 +6,12 @@ import CloseIcon from "../svg/iconSvgs/Components/Close";
 type SetLocationModalPropsType = { setActiveModal: (value: string) => void };
 
 function SetLocationModal({ setActiveModal }: SetLocationModalPropsType) {
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -24,7 +30,10 @@ function SetLocationModal({ setActiveModal }: SetLocationModalPropsType) {
 
   return (
     <div className="absolute top-0 left-0 flex justify-center items-center w-full h-screen">
-      <div className="bg-white border-b z-30 w-full max-w-screen-sm px-8 pt-6 pb-12">
+      <div
+        className="bg-white border-b z-30 w-full max-w-screen-sm px-8 pt-6 pb-12 opacity-0 duration-300 ease-in-out"
+        style={hasMounted ? { opacity: 1 } : {}}
+      >
         <div className="flex justify-end mb-6">
           <div className="flex h-6 items-center">
             <button onClick={handleClose}>
