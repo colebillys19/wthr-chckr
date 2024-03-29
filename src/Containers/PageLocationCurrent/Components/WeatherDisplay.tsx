@@ -50,8 +50,8 @@ function WeatherDisplay({
             <LabelValueText label="Feels like" value={feelsLike} />
             <LabelValueText label="Wind speed" value={windSpeed} />
             <LabelValueText label="Humidity" value={humidity} />
-            {rainVolume && <LabelValueText label="Rain volume" value={rainVolume} />}
-            {snowVolume && <LabelValueText label="Snow volume" value={snowVolume} />}
+            {!!rainVolume && <LabelValueText label="Rain volume" value={rainVolume} />}
+            {!!snowVolume && <LabelValueText label="Snow volume" value={snowVolume} />}
           </div>
         </div>
         <ShadowDiv />

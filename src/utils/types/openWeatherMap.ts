@@ -1,6 +1,4 @@
-type NumObjType = {
-  [key: string]: number;
-};
+import { NumObjType } from './helpers';
 
 export type WeatherType = {
   id: number;

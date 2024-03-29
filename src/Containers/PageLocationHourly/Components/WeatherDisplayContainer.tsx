@@ -3,7 +3,7 @@ import { useContext, useMemo } from "react";
 import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import { TimeTypeContext } from "../../../contexts/timeTypeContext";
 import { HourlyType } from "../../../utils/types/openWeatherMap";
-import { getTimeData } from "../../../utils/helpers";
+import { getTimeData, getPrecStrHourly } from "../../../utils/helpers";
 import WeatherDisplayTall from "./WeatherDisplayTall";
 import WeatherDisplayWide from "./WeatherDisplayWide";
 
@@ -53,8 +53,14 @@ function WeatherDisplayContainer({
     () => (unitType === "imperial" ? "mph" : "m/s"),
     [unitType]
   );
-  const rainVolume = rain && rain["1h"] ? `${rain["1h"]} mm/h` : "";
-  const snowVolume = snow && snow["1h"] ? `${snow["1h"]} mm/h` : "";
+  const rainVolume = useMemo(
+    () => getPrecStrHourly(unitType, rain),
+    [unitType]
+  );
+  const snowVolume = useMemo(
+    () => getPrecStrHourly(unitType, snow),
+    [unitType]
+  );
 
   return (
     <div className="flex flex-col items-center sm:items-start">

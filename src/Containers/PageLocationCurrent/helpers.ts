@@ -1,3 +1,5 @@
+import { getPrecStr } from "../../utils/helpers";
+
 type getTodayDataArrPropsType = {
   todayRain?: number;
   todaySnow?: number;
@@ -12,6 +14,7 @@ type getTodayDataArrPropsType = {
   todayHumidity: number;
   tempUnit: string;
   windUnit: string;
+  unitType: string;
 };
 
 export const getTodayDataArr = ({
@@ -28,17 +31,8 @@ export const getTodayDataArr = ({
   todayHumidity,
   tempUnit,
   windUnit,
+  unitType,
 }: getTodayDataArrPropsType) => {
-  let todayPrecDataArr = [];
-
-  if (!!todayRain) {
-    todayPrecDataArr.push({ label: "Rain volume", value: `${todayRain} mm` });
-  }
-
-  if (!!todaySnow) {
-    todayPrecDataArr.push({ label: "Snow volume", value: `${todaySnow} mm` });
-  }
-
   const todayDataArr = [
     { label: "Sunrise", value: todaySunriseTime },
     { label: "Sunset", value: todaySunsetTime },
@@ -68,8 +62,18 @@ export const getTodayDataArr = ({
     },
   ];
 
-  if (!!todayPrecDataArr.length) {
-    todayDataArr.push(...todayPrecDataArr);
+  if (!!todayRain) {
+    todayDataArr.push({
+      label: "Rain volume",
+      value: getPrecStr(todayRain, unitType),
+    });
+  }
+
+  if (!!todaySnow) {
+    todayDataArr.push({
+      label: "Snow volume",
+      value: getPrecStr(todaySnow, unitType),
+    });
   }
 
   todayDataArr.push({ label: "Avg. humidity", value: `${todayHumidity}%` });

@@ -3,7 +3,7 @@ import { useContext, useMemo } from "react";
 import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import { TimeTypeContext } from "../../../contexts/timeTypeContext";
 import { DailyType } from "../../../utils/types/openWeatherMap";
-import { getHighLow, getTimeData } from "../../../utils/helpers";
+import { getHighLow, getPrecStr, getTimeData } from "../../../utils/helpers";
 import WeatherDisplay from "./WeatherDisplay";
 
 type WeatherDisplayContainerPropsType = {
@@ -51,8 +51,16 @@ function WeatherDisplayContainer({
     () => (unitType === "imperial" ? "mph" : "m/s"),
     [unitType]
   );
-  const rainVolume = typeof rain === "number" && rain > 0 ? `${rain} mm` : "";
-  const snowVolume = typeof snow === "number" && snow > 0 ? `${snow} mm` : "";
+  const rainVolume = useMemo(
+    () =>
+      typeof rain === "number" && rain > 0 ? getPrecStr(rain, unitType) : "",
+    [unitType]
+  );
+  const snowVolume = useMemo(
+    () =>
+      typeof snow === "number" && snow > 0 ? getPrecStr(snow, unitType) : "",
+    [unitType]
+  );
 
   const summaryHasPeriod = summary[summary.length - 1] === ".";
   const summaryToUse = summaryHasPeriod ? summary : `${summary}.`;

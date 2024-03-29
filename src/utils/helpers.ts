@@ -47,7 +47,7 @@ export const getFormattedLocationName = (
   if (country) {
     return country;
   }
-  return 'Location Name';
+  return "Location Name";
 };
 
 /*
@@ -107,4 +107,32 @@ export const getTimeData = ({
     }
   }
   return { day, time, isDayTime };
+};
+
+/*
+ *
+ */
+export const getPrecStr = (precVal: number, unitType: string) => {
+  if (unitType === "imperial") {
+    const inchesValue = precVal * 0.0394;
+    return `${Number(inchesValue.toFixed(2))} in`;
+  }
+  return `${precVal} mm`;
+};
+
+/*
+ *
+ */
+export const getPrecStrHourly = (unitType: string, precObj?: NumObjType) => {
+  if (precObj) {
+    const precValue = precObj["1h"];
+    if (precValue && typeof precValue === "number") {
+      if (unitType === "imperial") {
+        const inchesValue = precValue * 0.0394;
+        return `${Number(inchesValue.toFixed(2))} in/hr`;
+      }
+      return `${precValue} mm/hr`;
+    }
+  }
+  return "";
 };
