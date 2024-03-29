@@ -9,8 +9,8 @@ import GearIcon from "../../svg/iconSvgs/Components/Gear";
 import { ShadowDiv } from "../../ComponentsBase";
 import Nav from "./Components/Nav";
 import UserLocationBar from "./Components/UserLocationBar";
-import MenuMobile from "./Components/MenuMobile";
-import MenuDesktop from "./Components/MenuDesktop";
+import MenuModalMobile from "./Components/MenuModalMobile";
+import MenuModalDesktop from "./Components/MenuModalDesktop";
 
 function Header() {
   const { activeModal, setActiveModal } = useContext(ActiveModalContext);
@@ -53,9 +53,9 @@ function Header() {
   return (
     <div>
       {isMobileMenuOpen && (
-        <MenuMobile pathname={pathname} isHomePage={isHomePage} />
+        <MenuModalMobile pathname={pathname} isHomePage={isHomePage} />
       )}
-      {isDesktopMenuOpen && <MenuDesktop isHomePage={isHomePage} />}
+      {isDesktopMenuOpen && <MenuModalDesktop isHomePage={isHomePage} />}
       <header className="relative flex justify-between items-center px-6 py-4">
         <Nav />
         <div className="flex h-6 items-center">
