@@ -70,11 +70,7 @@ function WeatherDisplayContainer({
         rainVolume={rainVolume}
         snowVolume={snowVolume}
       />
-      {showDivider && (
-        <div className="flex justify-center mt-8 w-screen sm:justify-start">
-          <hr className="w-1/3 border-grey-b" />
-        </div>
-      )}
+      {showDivider && <hr className="mt-8 w-36 border-grey-b sm:w-96" />}
     </div>
   );
 }

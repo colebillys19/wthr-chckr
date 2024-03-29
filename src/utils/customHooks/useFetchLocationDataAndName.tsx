@@ -7,8 +7,8 @@ import { locationDataEmpty } from "../constants";
 
 const useFetchLocationDataAndName = (location: string) => {
   const [isFetching, setIsFetching] = useState(true);
+  const [error, setError] = useState('');
 
-  const errorRef = useRef("");
   const isFetchingDataRef = useRef(true);
   const dataRef = useRef(locationDataEmpty);
   const isFetchingNameRef = useRef(true);
@@ -48,7 +48,7 @@ const useFetchLocationDataAndName = (location: string) => {
       })
       .catch((error) => {
         console.error(error);
-        errorRef.current = error.message;
+        setError(error.message);
         isFetchingDataRef.current = false;
         if (isFetchingNameRef.current === false) {
           setIsFetching(false);
@@ -94,7 +94,7 @@ const useFetchLocationDataAndName = (location: string) => {
         })
         .catch(() => {
           console.error("Issue fetching location name.");
-          errorRef.current = "Issue fetching location name.";
+          setError("Issue fetching location name.");
           isFetchingNameRef.current = false;
           if (isFetchingDataRef.current === false) {
             setIsFetching(false);
@@ -105,7 +105,7 @@ const useFetchLocationDataAndName = (location: string) => {
 
   return {
     isFetching,
-    error: errorRef.current,
+    error,
     data: dataRef.current,
     name: nameRef.current,
   };
