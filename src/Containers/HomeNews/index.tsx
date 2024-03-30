@@ -35,7 +35,7 @@ function HomeNews() {
 
   return (
     <div className="pt-8 px-6 pb-36">
-      <h2 className="mb-6 text-xl">News</h2>
+      <h2 className="mb-6 text-xl font-bold">News</h2>
       <div className="mb-6">
         <NewsList isLoading={isLoading} error={error} data={itemsToShow} />
       </div>

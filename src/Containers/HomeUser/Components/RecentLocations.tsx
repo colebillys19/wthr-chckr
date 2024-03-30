@@ -20,7 +20,7 @@ function RecentLocations() {
 
   return (
     <>
-      <h2 className="mb-6 text-xl">Recently Viewed</h2>
+      <h2 className="mb-6 text-xl font-bold">Recently Viewed</h2>
       <ul className="flex flex-col gap-4 mb-6 sm:flex-row">
         {recentLocations.map(({ location, name }) => (
           <li key={location}>

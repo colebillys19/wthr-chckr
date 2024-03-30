@@ -76,7 +76,7 @@ function WeatherDisplayContainer({
         feelsLikeMax={`${Math.round(feelsLikeHigh)}${tempUnit}`}
         feelsLikeMin={`${Math.round(feelsLikeLow)}${tempUnit}`}
         precChance={`${Math.round(pop * 100)}%`}
-        windSpeed={`${Math.round(wind_speed)}${windUnit}`}
+        windSpeed={`${Math.round(wind_speed)} ${windUnit}`}
         humidity={`${humidity}%`}
         rainVolume={rainVolume}
         snowVolume={snowVolume}

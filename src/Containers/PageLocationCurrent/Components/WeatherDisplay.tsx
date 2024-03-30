@@ -57,7 +57,7 @@ function WeatherDisplay({
         <ShadowDiv />
       </div>
       <div className="relative px-6 py-8">
-        <h4 className="text-xl mb-6">{dayName} Summary</h4>
+        <h4 className="text-xl mb-6 font-bold">{dayName} Summary</h4>
         <div className="mb-1">{todaySummary}</div>
         <ul className="flex flex-col gap-1">
           {todayDataArr.map(({ label, value }) => (

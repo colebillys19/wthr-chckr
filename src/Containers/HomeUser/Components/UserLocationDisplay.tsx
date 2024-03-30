@@ -30,7 +30,7 @@ function UserLocationDisplay({
 
   return (
     <div className={isRecentLocationsLength ? "mb-6" : ""}>
-      <h2 className="mb-6 text-xl">My Location</h2>
+      <h2 className="mb-6 text-xl font-bold">My Location</h2>
       <WeatherDisplayAsyncContainer
         data={data}
         error={error}

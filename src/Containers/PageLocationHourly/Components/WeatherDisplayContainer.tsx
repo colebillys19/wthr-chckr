@@ -72,7 +72,7 @@ function WeatherDisplayContainer({
           temp={`${Math.round(temp)}${tempUnit}`}
           weatherName={weather[0].main}
           feelsLike={`${Math.round(feels_like)}${tempUnit}`}
-          windSpeed={`${Math.round(wind_speed)}${windUnit}`}
+          windSpeed={`${Math.round(wind_speed)} ${windUnit}`}
           precChance={`${Math.round(pop * 100)}%`}
           rainVolume={rainVolume}
           snowVolume={snowVolume}

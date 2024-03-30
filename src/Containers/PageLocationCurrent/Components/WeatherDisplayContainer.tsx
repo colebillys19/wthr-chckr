@@ -109,7 +109,7 @@ function WeatherDisplayContainer({
       weatherName={currentWeather[0].main}
       temp={`${Math.round(currentTemp)}${tempUnit}`}
       feelsLike={`${Math.round(currentFeelsLike)}${tempUnit}`}
-      windSpeed={`${Math.round(currentWindSpeed)}${windUnit}`}
+      windSpeed={`${Math.round(currentWindSpeed)} ${windUnit}`}
       humidity={`${currentHumidity}%`}
       rainVolume={currentRainVolume}
       snowVolume={currentSnowVolume}

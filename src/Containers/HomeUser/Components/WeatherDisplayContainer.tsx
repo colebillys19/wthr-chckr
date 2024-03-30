@@ -63,7 +63,7 @@ function WeatherDisplayContainer({
         temp={`${Math.round(temp)}${tempUnit}`}
         weatherName={weather[0].main}
         feelsLike={`${Math.round(feels_like)}${tempUnit}`}
-        windSpeed={`${Math.round(wind_speed)}${windUnit}`}
+        windSpeed={`${Math.round(wind_speed)} ${windUnit}`}
         humidity={`${humidity}%`}
         hourlyDataArr={hourlyDataToUse}
         timezoneOffset={timezone_offset}
