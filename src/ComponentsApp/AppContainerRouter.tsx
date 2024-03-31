@@ -10,6 +10,7 @@ import {
   PageNews,
   PageNotFound,
 } from "../Containers";
+import { Footer } from '../ComponentsBase';
 
 function AppRouter() {
   //
@@ -26,6 +27,7 @@ function AppRouter() {
         <Route path="/news" element={<PageNews />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }

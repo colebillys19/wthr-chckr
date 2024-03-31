@@ -1,6 +1,7 @@
 import ButtonPrimary from "./ButtonPrimary";
 import ButtonSecondary from "./ButtonSecondary";
 import ExternalLink from "./ExternalLink";
+import Footer from "./Footer";
 import InternalLinkContent from "./InternalLinkContent";
 import InternalLinkText from "./InternalLinkText";
 import LabelValueText from "./LabelValueText";
@@ -16,6 +17,7 @@ export {
   ButtonPrimary,
   ButtonSecondary,
   ExternalLink,
+  Footer,
   InternalLinkContent,
   InternalLinkText,
   LabelValueText,
