@@ -8,7 +8,7 @@ function Footer() {
 
   return (
     <div className="relative flex justify-between items-center w-full h-14 px-6">
-      <ExternalLink href="https://www.google.com/" text="billycole.dev" />
+      <ExternalLink href="https://billycole.dev/" text="billycole.dev" />
       <LinkButton handleClick={handleBackToTop} text="Back to top" />
       <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-b from-grey-b to-transparent"></div>
     </div>
