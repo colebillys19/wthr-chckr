@@ -1,6 +1,6 @@
 import {
   Clouds,
-  Haze,
+  HazeB,
   Mist,
   MoonA,
   MoonB,
@@ -71,7 +71,7 @@ const weatherSvgDict: WeatherSvgDictType = {
   622: SleetC,
   701: Mist,
   711: Smoke,
-  721: Haze,
+  721: HazeB,
   731: Whirl,
   741: Mist,
   751: Sand,

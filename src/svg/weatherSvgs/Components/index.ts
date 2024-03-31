@@ -1,5 +1,6 @@
 import Clouds from "./Clouds";
-import Haze from "./Haze";
+import HazeA from "./HazeA";
+import HazeB from "./HazeB";
 import Mist from "./Mist";
 import MoonA from "./MoonA";
 import MoonB from "./MoonB";
@@ -24,7 +25,8 @@ import Whirl from "./Whirl";
 
 export {
   Clouds,
-  Haze,
+  HazeA,
+  HazeB,
   Mist,
   MoonA,
   MoonB,

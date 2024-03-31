@@ -9,7 +9,7 @@ function ExternalLink({ href, text }: ExternalLinkPropsType) {
   return (
     <a
       href={href}
-      className="tracking-normal underline hover:no-underline active:text-grey-a"
+      className="underline hover:no-underline active:text-grey-a"
       target="_blank"
       rel="noreferrer"
     >

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { NewsDataType } from "../../utils/types/news";
 import { parseXmlData } from "../../utils/newsHelpers";
 import { NewsList } from "../../ComponentsShared";
+
 function PageNews() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
