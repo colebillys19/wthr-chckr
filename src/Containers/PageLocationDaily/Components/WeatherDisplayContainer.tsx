@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext } from "react";
 
 import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import { TimeTypeContext } from "../../../contexts/timeTypeContext";
@@ -43,24 +43,12 @@ function WeatherDisplayContainer({
 
   const { high: feelsLikeHigh, low: feelsLikeLow } = getHighLow(feels_like);
 
-  const tempUnit = useMemo(
-    () => (unitType === "imperial" ? "°F" : "°C"),
-    [unitType]
-  );
-  const windUnit = useMemo(
-    () => (unitType === "imperial" ? "mph" : "m/s"),
-    [unitType]
-  );
-  const rainVolume = useMemo(
-    () =>
-      typeof rain === "number" && rain > 0 ? getPrecStr(rain, unitType) : "",
-    [unitType]
-  );
-  const snowVolume = useMemo(
-    () =>
-      typeof snow === "number" && snow > 0 ? getPrecStr(snow, unitType) : "",
-    [unitType]
-  );
+  const tempUnit = unitType === "imperial" ? "°F" : "°C";
+  const windUnit = unitType === "imperial" ? "mph" : "m/s";
+  const rainVolume =
+    typeof rain === "number" && rain > 0 ? getPrecStr(rain, unitType) : "";
+  const snowVolume =
+    typeof snow === "number" && snow > 0 ? getPrecStr(snow, unitType) : "";
 
   const summaryHasPeriod = summary[summary.length - 1] === ".";
   const summaryToUse = summaryHasPeriod ? summary : `${summary}.`;

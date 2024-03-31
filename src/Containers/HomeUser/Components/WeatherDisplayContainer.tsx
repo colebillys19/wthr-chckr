@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext } from "react";
 
 import { InternalLinkText } from "../../../ComponentsBase";
 import { UnitTypeContext } from "../../../contexts/unitTypeContext";
@@ -42,14 +42,8 @@ function WeatherDisplayContainer({
     timeType,
   });
 
-  const tempUnit = useMemo(
-    () => (unitType === "imperial" ? "°F" : "°C"),
-    [unitType]
-  );
-  const windUnit = useMemo(
-    () => (unitType === "imperial" ? "mph" : "m/s"),
-    [unitType]
-  );
+  const tempUnit = unitType === "imperial" ? "°F" : "°C";
+  const windUnit = unitType === "imperial" ? "mph" : "m/s";
 
   const hourlyDataToUse = hourly.slice(1, 4);
 

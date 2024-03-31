@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext } from "react";
 
 import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import { TimeTypeContext } from "../../../contexts/timeTypeContext";
@@ -45,22 +45,10 @@ function WeatherDisplayContainer({
     timeType,
   });
 
-  const tempUnit = useMemo(
-    () => (unitType === "imperial" ? "°F" : "°C"),
-    [unitType]
-  );
-  const windUnit = useMemo(
-    () => (unitType === "imperial" ? "mph" : "m/s"),
-    [unitType]
-  );
-  const rainVolume = useMemo(
-    () => getPrecStrHourly(unitType, rain),
-    [unitType]
-  );
-  const snowVolume = useMemo(
-    () => getPrecStrHourly(unitType, snow),
-    [unitType]
-  );
+  const tempUnit = unitType === "imperial" ? "°F" : "°C";
+  const windUnit = unitType === "imperial" ? "mph" : "m/s";
+  const rainVolume = getPrecStrHourly(unitType, rain);
+  const snowVolume = getPrecStrHourly(unitType, snow);
 
   return (
     <div className="flex flex-col items-center sm:items-start">

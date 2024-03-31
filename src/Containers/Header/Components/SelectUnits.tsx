@@ -1,4 +1,4 @@
-import { useCallback, useContext, useMemo } from "react";
+import { useCallback, useContext } from "react";
 
 import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import useUpdateUnitType from "../../../utils/customHooks/useUpdateUnitType";
@@ -13,18 +13,13 @@ function SelectTime({ handleCloseMenu }: SelectUnitsPropsType) {
 
   const updateTimeType = useUpdateUnitType();
 
-  const buttonText = useMemo(() => {
-    const otherFormat = unitType === "imperial" ? "metric" : "imperial";
-    return `Switch to ${otherFormat} units`;
-  }, [unitType]);
-
   const handleClick = useCallback(() => {
     const newType = unitType === "imperial" ? "metric" : "imperial";
     updateTimeType(newType);
     handleCloseMenu();
   }, [unitType]);
 
-  return <LinkButton handleClick={() => handleClick()} text={buttonText} />;
+  return <LinkButton handleClick={() => handleClick()} text={`Switch to ${unitType === "imperial" ? "metric" : "imperial"} units`} />;
 }
 
 export default SelectTime;

@@ -1,9 +1,13 @@
-import { useContext, useMemo } from "react";
+import { useContext } from "react";
 
 import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import { TimeTypeContext } from "../../../contexts/timeTypeContext";
 import { CurrentType, DailyType } from "../../../utils/types/openWeatherMap";
-import { getTimeData, getHighLow, getPrecStrHourly } from "../../../utils/helpers";
+import {
+  getTimeData,
+  getHighLow,
+  getPrecStrHourly,
+} from "../../../utils/helpers";
 import { getTodayDataArr } from "../helpers";
 import WeatherDisplay from "./WeatherDisplay";
 
@@ -35,22 +39,10 @@ function WeatherDisplayContainer({
     snow: currentSnow,
   } = currentData;
 
-  const tempUnit = useMemo(
-    () => (unitType === "imperial" ? "°F" : "°C"),
-    [unitType]
-  );
-  const windUnit = useMemo(
-    () => (unitType === "imperial" ? "mph" : "m/s"),
-    [unitType]
-  );
-  const currentRainVolume = useMemo(
-    () => getPrecStrHourly(unitType, currentRain),
-    [unitType]
-  );
-  const currentSnowVolume = useMemo(
-    () => getPrecStrHourly(unitType, currentSnow),
-    [unitType]
-  );
+  const tempUnit = unitType === "imperial" ? "°F" : "°C";
+  const windUnit = unitType === "imperial" ? "mph" : "m/s";
+  const currentRainVolume = getPrecStrHourly(unitType, currentRain);
+  const currentSnowVolume = getPrecStrHourly(unitType, currentSnow);
 
   const {
     sunrise: todaySunrise,

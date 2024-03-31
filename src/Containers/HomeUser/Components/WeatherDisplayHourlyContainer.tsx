@@ -1,11 +1,10 @@
-import { useContext, useMemo } from "react";
+import { useContext } from "react";
 
 import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import { TimeTypeContext } from "../../../contexts/timeTypeContext";
-import { WeatherDisplaySmallWide } from '../../../ComponentsBase';
+import { WeatherDisplaySmallWide } from "../../../ComponentsBase";
 import { HourlyType } from "../../../utils/types/openWeatherMap";
 import { getTimeData } from "../../../utils/helpers";
-// import WeatherDisplayHourly from './WeatherDisplayHourly';
 
 type WeatherDisplayHourlyContainerPropsType = {
   data: HourlyType;
@@ -33,17 +32,12 @@ function WeatherDisplayHourlyContainer({
     timeType,
   });
 
-  const tempUnit = useMemo(
-    () => (unitType === "imperial" ? "°F" : "°C"),
-    [unitType]
-  );
-
   return (
     <WeatherDisplaySmallWide
       svgId={weather[0].id}
       isDayTime={isDayTime}
       mainText={time}
-      temp={`${Math.round(temp)}${tempUnit}`}
+      temp={`${Math.round(temp)}${unitType === "imperial" ? "°F" : "°C"}`}
       weatherName={weather[0].main}
     />
   );

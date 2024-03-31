@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext } from "react";
 
 import {
   WeatherDisplaySmallWide,
@@ -33,10 +33,7 @@ function LocationDisplay({ data, name, location }: LocationDisplayPropsType) {
     timeType,
   });
 
-  const tempUnit = useMemo(
-    () => (unitType === "imperial" ? "°F" : "°C"),
-    [unitType]
-  );
+  const tempUnit = unitType === "imperial" ? "°F" : "°C";
 
   return (
     <>

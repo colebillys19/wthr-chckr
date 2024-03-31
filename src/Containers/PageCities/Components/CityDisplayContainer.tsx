@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext } from "react";
 
 import { UnitTypeContext } from "../../../contexts/unitTypeContext";
 import { TimeTypeContext } from "../../../contexts/timeTypeContext";
@@ -42,14 +42,8 @@ function CityDisplayContainer({
     timeType,
   });
 
-  const tempUnit = useMemo(
-    () => (unitType === "imperial" ? "°F" : "°C"),
-    [unitType]
-  );
-  const windUnit = useMemo(
-    () => (unitType === "imperial" ? "mph" : "m/s"),
-    [unitType]
-  );
+  const tempUnit = unitType === "imperial" ? "°F" : "°C";
+  const windUnit = unitType === "imperial" ? "mph" : "m/s";
 
   return (
     <>
