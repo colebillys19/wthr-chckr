@@ -100,6 +100,7 @@ function WeatherMap({
    *
    */
   useEffect(() => {
+    console.log('a');
     if (useDeviceTime) {
       return;
     }
@@ -108,16 +109,19 @@ function WeatherMap({
       `https://maps.googleapis.com/maps/api/timezone/json?location=${location}&timestamp=${nowSec}&key=${process.env.REACT_APP_GOOGLE_MAPS_KEY}`
     )
       .then((res) => {
+        console.log('b');
         if (!res.ok) {
           throw new Error("Issue fetching timezone data.");
         }
         return res.json();
       })
       .then((resData) => {
+        console.log('c');
         setTimezoneOffsetSec(resData.rawOffset);
         setTimezoneName(resData.timeZoneName);
       })
       .catch((error) => {
+        console.log('d');
         console.error(error);
         setError(error.message);
       });
@@ -208,6 +212,8 @@ function WeatherMap({
   }
 
   const isLoading = currentLayerIndexRef.current === -1;
+
+  console.log(radarLayerTime);
 
   return (
     <>
