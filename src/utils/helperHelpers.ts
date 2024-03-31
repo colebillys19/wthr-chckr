@@ -66,3 +66,15 @@ export const getTimeStandard = (hours: number, minutes: number) =>
  */
 export const getTimeMilitary = (hours: number, minutes: number) =>
   `${hours < 10 ? "0" : ""}${hours}:${minutes < 10 ? "0" : ""}${minutes}`;
+
+/*
+ *
+ */
+export const decodeHtmlEntities = (str: string) => {
+  const parser = new DOMParser();
+  const dom = parser.parseFromString(
+    "<!doctype html><body>" + str,
+    "text/html"
+  );
+  return dom.body.textContent;
+};

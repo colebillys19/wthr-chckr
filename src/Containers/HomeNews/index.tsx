@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { NewsDataType } from "../../utils/types/news";
-import { parseXmlData } from "../../utils/newsHelpers";
+import { parseXmlData } from "../../utils/helpers";
 import { NewsList } from "../../ComponentsShared";
 import { InternalLinkText, LinkButton } from "../../ComponentsBase";
 

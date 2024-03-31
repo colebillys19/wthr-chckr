@@ -11,7 +11,6 @@ module.exports = {
         "grey-b": "#e6e6e6",
         text: "#595959",
         error: "#f76767",
-        temp: "#f5f5f5",
       },
       fontFamily: {
         sans: [
