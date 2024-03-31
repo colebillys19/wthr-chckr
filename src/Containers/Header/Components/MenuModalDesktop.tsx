@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 
 import { ActiveModalContext } from "../../../contexts/activeModalContext";
 import { UserLocationContext } from "../../../contexts/userLocationContext";
@@ -13,12 +13,17 @@ type MenuDesktopPropsType = { isHomePage: boolean };
 function MenuDesktop({ isHomePage }: MenuDesktopPropsType) {
   const [hasMounted, setHasMounted] = useState(false);
 
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const { setActiveModal } = useContext(ActiveModalContext);
   const { userLocation } = useContext(UserLocationContext);
   const { userPrefersNoLocation } = useContext(UserPrefersNoLocationContext);
 
   useEffect(() => {
     setHasMounted(true);
+    if (containerRef.current) {
+      containerRef.current.focus();
+    }
   }, []);
 
   useEffect(() => {
@@ -60,8 +65,10 @@ function MenuDesktop({ isHomePage }: MenuDesktopPropsType) {
 
   return (
     <div
+      ref={containerRef}
       className="absolute -top-60 right-0 w-72 pt-4 pr-6 pb-12 bg-white border-b border-l z-30 duration-300 ease-in-out"
       style={hasMounted ? { top: 0 } : {}}
+      tabIndex={-1}
     >
       <div className="flex flex-col items-end gap-6">
         <div className="flex h-6 items-center">
