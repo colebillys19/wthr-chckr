@@ -18,7 +18,7 @@ function SetLocationFlow({ isModal = false }: SetLocationFlowPropsType) {
   );
 
   return (
-    <div>
+    <div className="relative">
       <EnterLocationContainer
         isEnteringLocation={isEnteringLocation}
         isGeolocating={isGeolocating}
