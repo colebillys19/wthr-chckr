@@ -23,6 +23,8 @@ function WeatherMap({
   const [timezoneName, setTimezoneName] = useState("");
   const [error, setError] = useState("");
   const [isIntervalPaused, setIsIntervalPaused] = useState(true);
+  // TODO: resolve this issue
+  const [timezoneFetchFailed, setTimezoneFetchFailed] = useState(false);
 
   const mapRef = useRef<google.maps.Map | null>(null);
   const mapDivRef = useRef(null);
@@ -114,8 +116,13 @@ function WeatherMap({
         return res.json();
       })
       .then((resData) => {
-        setTimezoneOffsetSec(resData.rawOffset);
-        setTimezoneName(resData.timeZoneName);
+        //
+        if (!!resData.errorMessage) {
+          setTimezoneFetchFailed(true);
+        } else {
+          setTimezoneOffsetSec(resData.rawOffset);
+          setTimezoneName(resData.timeZoneName);
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -203,7 +210,7 @@ function WeatherMap({
     iterateLayer();
   };
 
-  if (error) {
+  if (!!error) {
     return <div className="text-error">{error}</div>;
   }
 
@@ -221,6 +228,8 @@ function WeatherMap({
         handlePlayPauseClick={handlePlayPauseClick}
         handleNextClick={handleNextClick}
         isIntervalPaused={isIntervalPaused}
+        //
+        timezoneFetchFailed={timezoneFetchFailed}
       />
       <div className="relative w-full max-w-3xl h-96 border border-grey-b">
         <div ref={mapDivRef} className="w-full h-full" />
