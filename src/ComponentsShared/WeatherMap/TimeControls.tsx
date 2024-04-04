@@ -16,7 +16,6 @@ type TimeControlsPropsType = {
   handlePlayPauseClick: () => void;
   handleNextClick: () => void;
   isIntervalPaused: boolean;
-  //
   timezoneFetchFailed: boolean;
 };
 
@@ -30,7 +29,6 @@ function TimeControls({
   handlePlayPauseClick,
   handleNextClick,
   isIntervalPaused,
-  //
   timezoneFetchFailed,
 }: TimeControlsPropsType) {
   const mapTime = useMemo(

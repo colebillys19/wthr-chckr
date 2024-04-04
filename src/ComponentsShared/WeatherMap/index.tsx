@@ -23,7 +23,6 @@ function WeatherMap({
   const [timezoneName, setTimezoneName] = useState("");
   const [error, setError] = useState("");
   const [isIntervalPaused, setIsIntervalPaused] = useState(true);
-  // TODO: resolve this issue
   const [timezoneFetchFailed, setTimezoneFetchFailed] = useState(false);
 
   const mapRef = useRef<google.maps.Map | null>(null);
@@ -107,7 +106,7 @@ function WeatherMap({
     }
     const nowSec = Math.round(Date.now() / 1000);
     fetch(
-      `https://maps.googleapis.com/maps/api/timezone/json?location=${location}&timestamp=${nowSec}&key=${process.env.REACT_APP_GOOGLE_MAPS_KEY}`
+      `https://us-central1-total-fiber-419214.cloudfunctions.net/get-timezone?location=${location}&timestamp=${nowSec}`
     )
       .then((res) => {
         if (!res.ok) {
@@ -116,7 +115,6 @@ function WeatherMap({
         return res.json();
       })
       .then((resData) => {
-        //
         if (!!resData.errorMessage) {
           setTimezoneFetchFailed(true);
         } else {
@@ -127,6 +125,7 @@ function WeatherMap({
       .catch((error) => {
         console.error(error);
         setError(error.message);
+        setTimezoneFetchFailed(true);
       });
   }, [location]);
 
@@ -228,7 +227,6 @@ function WeatherMap({
         handlePlayPauseClick={handlePlayPauseClick}
         handleNextClick={handleNextClick}
         isIntervalPaused={isIntervalPaused}
-        //
         timezoneFetchFailed={timezoneFetchFailed}
       />
       <div className="relative w-full max-w-3xl h-96 border border-grey-b">
