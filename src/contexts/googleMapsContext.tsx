@@ -3,14 +3,14 @@ import { Loader } from "@googlemaps/js-api-loader";
 
 const initialState = {
   googleMaps: null,
-  isGoogleMapsReady: false,
+  isGoogleMapsReady: -1,
   setIsGoogleMapsReady: () => null,
 };
 
 type GoogleMapsContextPropsType = {
   googleMaps: typeof google.maps | null;
-  isGoogleMapsReady: boolean;
-  setIsGoogleMapsReady: (value: boolean) => void;
+  isGoogleMapsReady: number;
+  setIsGoogleMapsReady: (value: number) => void;
 };
 
 export const GoogleMapsContext =
@@ -21,7 +21,7 @@ type GoogleMapsContextProviderPropsType = { children: ReactNode };
 export default function GoogleMapsContextProvider({
   children,
 }: GoogleMapsContextProviderPropsType) {
-  const [isGoogleMapsReady, setIsGoogleMapsReady] = useState(false);
+  const [isGoogleMapsReady, setIsGoogleMapsReady] = useState(-1);
 
   const googleMapsRef = useRef<typeof google.maps | null>(null);
 
@@ -34,9 +34,10 @@ export default function GoogleMapsContextProvider({
       try {
         const google = await loader.load();
         googleMapsRef.current = google.maps;
-        setIsGoogleMapsReady(true);
+        setIsGoogleMapsReady(1);
       } catch (error) {
         console.error(error);
+        setIsGoogleMapsReady(0);
       }
     };
     googleApiInit();
