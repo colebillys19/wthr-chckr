@@ -7,11 +7,11 @@ function MapContainer() {
 
   useEffect(() => {
     if (window.innerWidth < 512) {
-      setZoomLevel(3);
+      setZoomLevel(2.8);
     } else if (window.innerWidth < 768) {
-      setZoomLevel(3.2);
+      setZoomLevel(3.3);
     } else {
-      setZoomLevel(3.7);
+      setZoomLevel(3.8);
     }
   }, []);
 
