@@ -1,8 +1,5 @@
-import {
-  InternalLinkContent,
-  InternalLinkText,
-} from "../../../ComponentsBase";
-import LogoPlaceholder from "../../../svg/logoPlaceholder/LogoPlaceholder";
+import { InternalLinkContent, InternalLinkText } from "../../../ComponentsBase";
+import Logo from "../../../svg/logo/Logo";
 
 function Nav() {
   //
@@ -10,7 +7,7 @@ function Nav() {
   return (
     <nav className="flex items-center gap-8">
       <InternalLinkContent href="/">
-        <LogoPlaceholder />
+        <Logo />
       </InternalLinkContent>
       <div className="hidden gap-8 sm:flex">
         <InternalLinkText href="/cities">Cities</InternalLinkText>
